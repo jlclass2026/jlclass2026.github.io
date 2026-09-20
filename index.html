@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Games</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #07101f, #18264a, #29164b);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin: 10px 0 35px;
+    opacity: 0.8;
+}
+
+.games {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.game {
+    min-height: 160px;
+    border-radius: 22px;
+    padding: 25px;
+    text-decoration: none;
+    color: white;
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.game:hover {
+    transform: scale(1.04);
+    background: rgba(255,255,255,0.2);
+}
+
+.icon {
+    font-size: 3rem;
+}
+
+.name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.description {
+    margin-top: 7px;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<h1>CLASS GAMES</h1>
+<div class="subtitle">Choose a game to begin</div>
+
+<div class="games">
+
+<a class="game" href="https://jlclass2026.github.io/space-battle/">
+    <div class="icon">🚀</div>
+    <div class="name">Space Battle</div>
+    <div class="description">Defend the fleet</div>
+</a>
+
+<a class="game" href="https://jlclass2026.github.io/sud-add/">
+    <div class="icon">➕</div>
+    <div class="name">Sud-Add</div>
+    <div class="description">Addition challenge</div>
+</a>
+
+<a class="game" href="https://jlclass2026.github.io/number-pyramid/">
+    <div class="icon">🔺</div>
+    <div class="name">Number Pyramid</div>
+    <div class="description">Crack the pyramid</div>
+</a>
+
+<a class="game" href="https://jlclass2026.github.io/word-wheel/">
+    <div class="icon">🔤</div>
+    <div class="name">Word Wheel</div>
+    <div class="description">Build your words</div>
+</a>
+
+<a class="game" href="https://jlclass2026.github.io/sudoku/">
+    <div class="icon">🧩</div>
+    <div class="name">Sudoku</div>
+    <div class="description">Logic challenge</div>
+</a>
+
+</div>
+
+</body>
+</html>
