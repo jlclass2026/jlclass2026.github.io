@@ -13,6 +13,8 @@
 <h1>Choose your challenge.</h1>
 <p id="status" role="status">Loading your game menu…</p>
 <div class="links">
+<a href="/boss-chest/">🔐 Lock X →</a>
+<a href="/lock-x-belt/">🔐 Lock X-belt →</a>
 <a href="/scorex/">＝ ScoreX →</a>
 <a href="/morpheme-checker/">🔤 Morpheme Checker →</a>
 <a href="/portal-source.html">Open the existing game portal →</a>
@@ -33,7 +35,9 @@
     if (source.split(marker).length !== 2 || source.includes('href="/scorex/"') || source.includes('href="/morpheme-checker/"')) {
       throw new Error('Portal source has changed');
     }
-    const page = source.replace(marker, marker + cards);
+    const lockX = marker.replace('<h3>Boss Chest</h3>', '<h3>Lock X</h3>');
+    const belt = '<a class="game" href="/lock-x-belt/"><div class="icon">🔐</div><div class="copy"><h3>Lock X-belt</h3><p>Crack the right-shifting number code</p></div><div class="arrow">→</div></a>';
+    const page = source.replace(marker, lockX + belt + cards);
     clearTimeout(timeout);
     document.open();
     document.write(page);
@@ -48,3 +52,4 @@
 </script>
 </body>
 </html>
+
