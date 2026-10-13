@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ScoreX</title>
+<style>
+:root {
+  --bg: #0b1120;
+  --surface: #141d32;
+  --surface2: #1c2744;
+  --border: #263354;
+  --accent: #00d4ff;
+  --accent2: #7c4dff;
+  --gold: #ffd700;
+  --gold2: #ff8c00;
+  --text: #e4e8f1;
+  --text2: #7a8599;
+  --red: #ff4757;
+  --green: #2ed573;
+  --running: #4ecdc4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  background:radial-gradient(ellipse at 50% 40%,#111b33 0%,var(--bg) 70%);
+  color:var(--text);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+}
+#app{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+
+/* ===== IDLE ===== */
+.idle{display:flex;flex-direction:column;align-items:center;gap:3vh}
+.idle-title{font-size:8vw;font-weight:800;letter-spacing:0.4vw;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.idle-sub{font-size:2vw;color:var(--text2);letter-spacing:0.3vw;text-transform:uppercase}
+.idle-actions{display:flex;gap:1.5vw;margin-top:2vh}
+
+/* ===== TOP BAR ===== */
+.top-bar{position:absolute;top:1.5vh;left:2vw;right:2vw;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.round-badge{font-size:1.3vw;color:var(--text2);letter-spacing:0.2vw;text-transform:uppercase}
+.top-right{display:flex;align-items:center;gap:1vw}
+.timer-corner{font-size:3vw;font-weight:300;font-variant-numeric:tabular-nums;color:var(--text);transition:color 0.3s}
+.timer-corner.urgent{color:var(--red);animation:pulse 1s ease-in-out infinite}
+
+/* ===== GAME ===== */
+.game{display:flex;flex-direction:column;align-items:center;height:100vh;padding:5vh 3vw 1.5vh;gap:0.3vh}
+.game.game-center{height:100%;padding-left:1vw;padding-right:1vw}
+.target-label{font-size:1.4vw;text-transform:uppercase;letter-spacing:0.5vw;color:var(--text2)}
+.target-num{font-size:9vw;font-weight:800;color:var(--accent);text-shadow:0 0 50px rgba(0,212,255,0.3);line-height:1.05;animation:targetIn 0.5s ease-out both}
+.field-label{font-size:1.2vw;text-transform:uppercase;letter-spacing:0.4vw;color:var(--text2)}
+
+/* ===== TILES ===== */
+.tiles{display:flex;gap:1vw;margin-top:0.3vh}
+.tile{
+  width:6.5vw;height:6.5vw;
+  background:var(--surface);
+  border:2px solid var(--border);
+  border-radius:0.8vw;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3vw;font-weight:700;
+  cursor:default;
+  opacity:0;animation:tileIn 0.4s ease-out forwards;
+  transition:border-color 0.15s,opacity 0.15s,background 0.15s,transform 0.15s;
+  user-select:none;
+}
+.tile.interactive{cursor:pointer}
+.tile.invalid{opacity:0.35!important;cursor:not-allowed;border-color:var(--red)}
+.tile.invalid:hover{transform:none}
+.tile.interactive:hover{border-color:var(--accent);transform:scale(1.04)}
+.tile.used{opacity:0.2;cursor:default;transform:scale(0.92);background:rgba(0,0,0,0.3);border-color:transparent;text-decoration:line-through;text-decoration-color:var(--text2)}
+.tile.used:hover{border-color:transparent;transform:scale(0.92)}
+.tile.locked{opacity:0.12;cursor:default;transform:scale(0.88);background:rgba(0,0,0,0.4);border-color:transparent;text-decoration:line-through;color:var(--text2)}
+.tile.locked:hover{border-color:transparent;transform:scale(0.88)}
+.tile.selected{border-color:var(--accent);background:rgba(0,212,255,0.1);box-shadow:0 0 20px rgba(0,212,255,0.2)}
+.tile:nth-child(1){animation-delay:.05s}
+.tile:nth-child(2){animation-delay:.1s}
+.tile:nth-child(3){animation-delay:.15s}
+.tile:nth-child(4){animation-delay:.2s}
+.tile:nth-child(5){animation-delay:.25s}
+.tile:nth-child(6){animation-delay:.3s}
+
+/* ===== OP BUTTONS ===== */
+.ops-row{display:flex;gap:0.8vw;margin-top:0.5vh}
+.op-btn{
+  width:4vw;height:4vw;
+  border-radius:50%;
+  background:var(--surface2);border:2px solid var(--border);
+  color:var(--text2);
+  font-size:2vw;font-weight:700;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-family:inherit;transition:all 0.15s;
+  user-select:none;
+}
+.op-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,0.08);cursor:pointer}
+.op-btn.active:hover{background:rgba(0,212,255,0.15);transform:scale(1.06)}
+.op-btn.chosen{border-color:var(--accent);color:var(--bg);background:var(--accent);box-shadow:0 0 15px rgba(0,212,255,0.3)}
+.op-btn.disabled{opacity:0.25;cursor:default}
+
+/* ===== BUILDER ===== */
+.builder{
+  background:var(--surface);border:1px solid var(--border);border-radius:0.6vw;
+  padding:0.8vh 1.5vw;margin-top:0.5vh;
+  min-height:4vh;width:min(90vw,800px);
+  display:flex;align-items:center;gap:1.5vw;flex-wrap:wrap;
+  position:relative;
+}
+.bld-chain{display:flex;flex-wrap:wrap;align-items:center;gap:0.3vw;flex:1}
+.bld-hint{color:var(--text2);font-size:1.2vw;padding:0.3vh 0}
+.bld-step{font-size:1.5vw;line-height:1.5;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bld-running{color:var(--running);font-weight:500}
+.bld-pending{color:var(--text2);font-style:italic}
+.bld-op{color:var(--accent);font-weight:600;margin:0 0.2vw}
+.bld-eq{color:var(--text2);margin:0 0.2vw}
+.bld-arrow{color:var(--text2);margin:0 0.3vw;font-size:1.2vw}
+.bld-total{font-size:1.5vw;font-weight:700;white-space:nowrap}
+.bld-total .val{color:var(--accent)}
+.bld-hit{
+  font-size:1.5vw;font-weight:700;color:var(--green);
+  white-space:nowrap;
+  animation:fadeUp 0.3s ease-out;
+}
+.bld-miss{font-size:1.2vw;color:var(--red);white-space:nowrap}
+.bld-actions{display:flex;gap:0.5vw}
+.bld-btn{padding:0.4vh 1vw;font-size:0.9vw;border-radius:0.3vw}
+.bld-save{background:var(--green);color:#000;border-color:var(--green);font-weight:700}
+.bld-save:hover{filter:brightness(1.1)}
+/* Saved answers wings */
+.game-wrap{display:flex;width:100%;height:100vh;overflow:hidden}
+.saved-wing{
+  flex:1;min-width:0;
+  display:flex;flex-direction:column;gap:0.6vh;
+  padding:8vh 1vw 2vh;
+  overflow-y:auto;
+  z-index:1;
+}
+.saved-wing::-webkit-scrollbar{width:0}
+.saved-card{
+  background:rgba(46,213,115,0.08);border:1px solid rgba(46,213,115,0.3);border-radius:0.5vw;
+  padding:0.6vh 1vw;
+  animation:solIn 0.3s ease-out both;
+}
+.saved-card .sc-pts{
+  font-size:1.1vw;font-weight:700;color:var(--accent);text-transform:uppercase;
+  letter-spacing:0.05vw;margin-bottom:0.2vh;
+}
+.saved-card .sc-chain{
+  font-size:1vw;color:var(--green);font-weight:600;line-height:1.4;
+  overflow-wrap:break-word;word-break:break-word;
+}
+.wing-score{
+  font-size:2.5vw;font-weight:800;color:var(--green);text-align:center;
+  padding:0.5vh 0 1vh;letter-spacing:0.1vw;
+  text-shadow:0 0 20px rgba(46,213,115,0.3);
+}
+.saved-wing-empty{flex:1}
+.game-center{flex:0 0 auto;width:min(60vw,900px)}
+
+/* ===== BOTTOM CONTROLS ===== */
+.game-controls{display:flex;gap:1vw;margin-top:auto;padding-bottom:1vh;align-items:center}
+
+/* ===== BOARDS UP ===== */
+.boards-overlay{
+  position:fixed;inset:0;
+  background:rgba(10,16,30,0.88);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:50;gap:4vh;
+}
+.boards-text{font-size:12vw;font-weight:800;color:#fff;text-shadow:0 0 60px rgba(255,255,255,0.4);animation:boardsPop 0.6s ease-out both}
+.boards-sub{font-size:2.5vw;color:var(--text2);animation:fadeUp 0.5s ease-out 0.3s both}
+.boards-actions{display:flex;gap:1.5vw;animation:fadeUp 0.5s ease-out 0.5s both}
+
+/* ===== SOLUTIONS ===== */
+.solutions{display:flex;flex-direction:column;align-items:center;height:100vh;padding:2.5vh 3vw 2vh;overflow-y:auto}
+.sol-top{display:flex;align-items:center;gap:2vw;margin-bottom:1.5vh;flex-shrink:0;flex-wrap:wrap;justify-content:center}
+.sol-target-label{font-size:1.6vw;color:var(--text2);text-transform:uppercase;letter-spacing:0.2vw}
+.sol-target-num{font-size:4vw;font-weight:800;color:var(--accent)}
+.sol-field{display:flex;gap:0.6vw;flex-shrink:0}
+.sol-tile{
+  width:3.5vw;height:3.5vw;
+  background:var(--surface);border:1px solid var(--border);border-radius:0.4vw;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6vw;font-weight:600;color:var(--text2);
+}
+
+/* Solutions grid */
+.sol-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+  gap:1.2vh 1.2vw;
+  width:100%;max-width:94vw;
+  flex-shrink:0;
+}
+.sol-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:0.8vw;
+  padding:1.5vh 1.8vw;
+  opacity:0;animation:solIn 0.4s ease-out forwards;
+  overflow:hidden;
+}
+.sol-card.perfect{
+  background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.05));
+  border:2px solid var(--gold);
+  animation:solIn 0.4s ease-out forwards,perfectGlow 2s ease-in-out 0.8s both;
+}
+.sol-score{font-size:1.3vw;font-weight:700;color:var(--accent);margin-bottom:0.8vh;text-transform:uppercase;letter-spacing:0.1vw}
+.sol-card.perfect .sol-score{
+  background:linear-gradient(90deg,var(--gold),#fff8dc,var(--gold),var(--gold2),var(--gold));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 2s ease-in-out 1s both;
+  font-size:1.6vw;
+}
+/* Chain line */
+.sol-chain{font-size:1.8vw;font-weight:700;color:var(--text);margin-bottom:0.6vh;letter-spacing:0.03vw;overflow-wrap:break-word;word-break:break-word}
+.sol-chain .ch-op{color:var(--accent);margin:0 0.2vw;font-weight:600}
+.sol-chain .ch-eq{color:var(--text2);margin:0 0.2vw}
+/* Detailed steps */
+.sol-detail{border-top:1px solid var(--border);padding-top:0.5vh;margin-top:0.4vh}
+.sol-step{font-size:1.3vw;color:var(--text);line-height:1.6;font-variant-numeric:tabular-nums}
+.sol-step .running{color:var(--running);font-weight:600}
+.sol-step .sol-op{color:var(--accent);font-weight:600;margin:0 0.2vw}
+.sol-step .sol-eq{color:var(--text2);margin:0 0.2vw}
+.sol-step .sol-final{font-weight:700}
+.sol-actions{margin-top:2vh;flex-shrink:0;padding-bottom:2vh;display:flex;gap:1vw;align-items:center}
+
+/* ===== SETTINGS ===== */
+.settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:100;animation:fadeIn 0.2s ease-out}
+.settings-panel{
+  background:var(--surface);border:1px solid var(--border);border-radius:1.2vw;
+  padding:3vh 3vw;width:min(92vw,520px);max-height:85vh;overflow-y:auto;
+  animation:scaleIn 0.25s ease-out;
+}
+.settings-title{font-size:2vw;font-weight:700;margin-bottom:2.5vh;color:var(--text)}
+.setting-group{margin-bottom:2vh}
+.setting-label{font-size:1.1vw;color:var(--text2);text-transform:uppercase;letter-spacing:0.1vw;margin-bottom:0.8vh}
+.opts{display:flex;gap:0.5vw;flex-wrap:wrap}
+.opt{
+  padding:0.7vh 1.2vw;
+  background:var(--surface2);border:2px solid transparent;border-radius:0.5vw;
+  color:var(--text2);cursor:pointer;font-size:1vw;font-weight:600;
+  font-family:inherit;transition:all 0.15s;
+}
+.opt:hover{border-color:var(--border);color:var(--text)}
+.opt.active{background:rgba(0,212,255,0.12);border-color:var(--accent);color:var(--accent)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5vh}
+.toggle-row span{font-size:1.1vw;color:var(--text)}
+.toggle{
+  width:3vw;min-width:44px;height:1.6vw;min-height:24px;
+  border-radius:1vw;background:var(--surface2);border:2px solid var(--border);
+  cursor:pointer;position:relative;transition:all 0.2s;font-size:0;font-family:inherit;
+}
+.toggle::after{
+  content:'';position:absolute;
+  width:1.1vw;min-width:18px;height:1.1vw;min-height:18px;
+  border-radius:50%;background:var(--text2);
+  top:50%;left:3px;transform:translateY(-50%);transition:all 0.2s;
+}
+.toggle.on{background:rgba(0,212,255,0.25);border-color:var(--accent)}
+.toggle.on::after{left:calc(100% - max(18px,1.1vw) - 3px);background:var(--accent)}
+.input-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5vh}
+.input-row span{font-size:1.1vw;color:var(--text)}
+.num-input{
+  width:5vw;min-width:70px;padding:0.4vh 0.6vw;
+  background:var(--surface2);border:2px solid var(--border);border-radius:0.4vw;
+  color:var(--text);font-size:1.1vw;text-align:center;font-family:inherit;
+}
+.num-input:focus{outline:none;border-color:var(--accent)}
+.settings-done{margin-top:2vh;width:100%}
+
+/* ===== BUTTONS ===== */
+.btn{
+  padding:1.2vh 2.2vw;font-size:1.4vw;font-weight:600;
+  border:none;border-radius:0.6vw;cursor:pointer;
+  text-transform:uppercase;letter-spacing:0.08vw;
+  font-family:inherit;transition:all 0.15s;
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:linear-gradient(135deg,#0096c7,var(--accent));color:#0a0f1e}
+.btn-secondary{background:var(--surface);color:var(--text);border:2px solid var(--border)}
+.btn-secondary:hover{border-color:var(--text2)}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a1000}
+.btn-icon{
+  width:3.5vw;height:3.5vw;min-width:36px;min-height:36px;
+  background:var(--surface);border:2px solid var(--border);border-radius:0.6vw;
+  color:var(--text2);cursor:pointer;font-size:1.6vw;
+  display:flex;align-items:center;justify-content:center;
+  font-family:inherit;transition:all 0.15s;
+}
+.btn-icon:hover{border-color:var(--text2);color:var(--text)}
+
+/* ===== ANIMATIONS ===== */
+@keyframes targetIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes tileIn{from{transform:translateY(15px) scale(0.85);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes boardsPop{0%{transform:scale(0.4);opacity:0}65%{transform:scale(1.06);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes fadeUp{from{transform:translateY(15px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{transform:scale(0.92);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes solIn{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes perfectGlow{0%{box-shadow:0 0 0 0 rgba(255,215,0,0.3)}50%{box-shadow:0 0 30px 10px rgba(255,215,0,0.2)}100%{box-shadow:0 0 10px 3px rgba(255,215,0,0.1)}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+
+/* ===== GENERATING ===== */
+.generating{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vh}
+.gen-text{font-size:2.5vw;color:var(--text2);animation:pulse 1.2s ease-in-out infinite}
+.gen-dots::after{content:'';animation:dots 1.5s steps(4,end) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+</style>
+<meta name="referrer" content="no-referrer">
+<style>.nw111-scorex-hero{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:1.8vw;width:min(96vw,1500px)}.nw111-scorex-hero .idle-title{font-size:clamp(48px,7vw,112px);line-height:1.2;letter-spacing:.04em}.nw111-scorex-hero .nw116-scorex-x{font-size:1.35em;line-height:0;vertical-align:baseline;display:inline-block;background:linear-gradient(135deg,#477aff,#7955ff);-webkit-background-clip:text;background-clip:text;color:transparent}.nw111-scorex-cast{display:flex;align-items:flex-end;justify-content:center;gap:.4vw;min-width:0;height:clamp(90px,20vh,220px)}.nw111-scorex-cast img{width:48%;height:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 6px 10px #0005)}@media(max-width:650px){.nw111-scorex-hero{gap:1vw}.nw111-scorex-hero .idle-title{font-size:clamp(32px,8vw,52px)}.nw111-scorex-cast{height:120px}}@media(max-height:450px){.nw111-scorex-cast{height:80px}.nw111-scorex-hero .idle-title{font-size:48px}}</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ============================================================
+   TARGET FIELD v2 - Whole-Class Mental Maths Game
+   ============================================================ */
+
+const DIFF = {
+  easy:      { pool:[1,2,3,4,5,6,7,8,9,10,11,12,15,20],                        tMin:5,  tMax:50 },
+  standard:  { pool:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,18,20,25],            tMin:10, tMax:100 },
+  challenge: { pool:[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,20,24,25,30,50],  tMin:15, tMax:150 }
+};
+
+// ========== STATE ==========
+const S = {
+  screen: 'idle',
+  paused: false,
+  target: 0,
+  field: [],
+  solutions: {},
+  maxScore: 0,
+  timeLeft: 60,
+  timerInterval: null,
+  roundNum: 0,
+  settings: {
+    difficulty: 'standard',
+    fieldSize: 6,
+    timerDuration: 60,
+    allowNeg: false,
+    maxInter: 500,
+    perfectRequired: false,
+    useOnce: false
+  },
+  settingsOpen: false
+};
+
+// ========== BUILDER STATE ==========
+const B = {
+  total: null,
+  usedMask: 0,
+  steps: [],       // [{left,op,right,result,idx}]
+  phase: 'num',    // num | op | done
+  pendingOp: null,
+  startIdx: -1,
+  hit: false,
+  miss: false,
+  score: 0,
+  saved: [],  // [{score, chain}] locked-in answers this round
+  lockedMask: 0  // permanently consumed tiles (useOnce mode)
+};
+
+function builderReset(full){
+  B.total = null; B.steps = [];
+  B.phase = 'num'; B.pendingOp = null; B.startIdx = -1;
+  B.hit = false; B.miss = false; B.score = 0;
+  if(full){
+    B.saved = [];
+    B.lockedMask = 0;
+    B.usedMask = 0;
+  } else {
+    // Keep lockedMask, reset usedMask to locked tiles only
+    B.usedMask = B.lockedMask;
+  }
+}
+function builderSave(){
+  if(!B.hit) return;
+  // Build chain string for display
+  let ch = '' + (B.steps.length ? B.steps[0].left : B.total);
+  for(const s of B.steps) ch += ' ' + s.op + ' ' + s.right;
+  ch += ' = ' + S.target;
+  // Prevent duplicate saves (same chain)
+  if(B.saved.some(a => a.chain === ch)) {
+    // Already saved this exact answer
+    builderReset(false);
+    render();
+    return;
+  }
+  B.saved.push({score:B.score, chain:ch});
+  // In useOnce mode, permanently lock the tiles used in this answer
+  if(S.settings.useOnce){
+    B.lockedMask |= B.usedMask;
+  }
+  builderReset(false);
+  render();
+}
+
+// ========== UTILITIES ==========
+function popcount(n){ let c=0; while(n){c+=n&1;n>>>=1;} return c; }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function formatTime(s){ if(s>=60){const m=Math.floor(s/60);return m+':'+(s%60).toString().padStart(2,'0');} return ''+s; }
+function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// ========== SOLVER ==========
+function solveFull(target, field, cfg){
+  const solutions = {};
+  let maxScore = 0;
+  const allowNeg = cfg.allowNeg, maxInter = cfg.maxInter;
+  const seen = {};  // dedup by chain signature
+
+  function search(total, mask, path, count){
+    if(total === target && count >= 2){
+      // Build signature to avoid storing duplicate chains
+      const sig = path.map(s=>s.left+s.op+s.right).join('|');
+      const key = count+'_'+sig;
+      if(!seen[key]){
+        seen[key] = true;
+        if(!solutions[count]) solutions[count] = [];
+        if(solutions[count].length < 6){
+          solutions[count].push(path.map(s=>({...s})));
+        }
+        if(count > maxScore) maxScore = count;
+      }
+      // An operation that reaches the target ends the builder's answer.
+      return;
+    }
+    if(count >= field.length) return;
+    for(let i=0; i<field.length; i++){
+      if(mask & (1<<i)) continue;
+      const n = field[i], m2 = mask|(1<<i);
+      for(const op of ['+','−','×']){
+        let r;
+        if(op==='+') r=total+n; else if(op==='−') r=total-n; else r=total*n;
+        if(!allowNeg && r<0) continue;
+        if(Math.abs(r)>maxInter) continue;
+        path.push({left:total,op,right:n,result:r});
+        search(r,m2,path,count+1);
+        path.pop();
+      }
+    }
+  }
+
+  for(let i=0; i<field.length; i++){
+    if(field[i]===target && !solutions[1]){ solutions[1]=[]; if(1>maxScore) maxScore=1; }
+    search(field[i], 1<<i, [], 1);
+  }
+  return {solutions, maxScore};
+}
+
+// ========== GENERATOR ==========
+function pickField(pool, size){ return shuffle([...pool]).slice(0,size).sort((a,b)=>a-b); }
+
+function findTargetProfiles(field, cfg, tMin, tMax){
+  const profiles = {};
+  const allowNeg=cfg.allowNeg, maxInter=cfg.maxInter;
+  const previousResults = [];
+  function record(val,count){
+    if(val<tMin||val>tMax||!Number.isInteger(val)||val<=0) return;
+    if(!profiles[val]) profiles[val]={max:0,levels:0,seen:{}};
+    const p=profiles[val];
+    if(!p.seen[count]){p.seen[count]=true;p.levels++;if(count>p.max)p.max=count;}
+  }
+  function search(total,mask,count){
+    // A candidate target is reachable only on its first operation-produced hit.
+    if(!previousResults.includes(total)) record(total,count);
+    if(count>=field.length) return;
+    if(count>=2) previousResults.push(total);
+    for(let i=0;i<field.length;i++){
+      if(mask&(1<<i))continue;
+      const n=field[i],m2=mask|(1<<i);
+      let r;
+      r=total+n; if(r<=maxInter) search(r,m2,count+1);
+      r=total-n; if(allowNeg||r>=0){if(Math.abs(r)<=maxInter)search(r,m2,count+1);}
+      r=total*n; if(Math.abs(r)<=maxInter) search(r,m2,count+1);
+    }
+    if(count>=2) previousResults.pop();
+  }
+  for(let i=0;i<field.length;i++) search(field[i],1<<i,1);
+  return profiles;
+}
+
+function generateChallenge(cfg){
+  const d=DIFF[cfg.difficulty];
+  for(let attempt=0;attempt<120;attempt++){
+    const field=pickField(d.pool,cfg.fieldSize);
+    const profiles=findTargetProfiles(field,cfg,d.tMin,d.tMax);
+    let bestTarget=null,bestQ=-1;
+    for(const t in profiles){
+      const p=profiles[t];
+      if(cfg.perfectRequired && p.max<cfg.fieldSize) continue;
+      const q=p.max*10+p.levels*3;
+      if(q>bestQ){bestQ=q;bestTarget=parseInt(t);}
+    }
+    if(bestTarget===null) continue;
+    const result=solveFull(bestTarget,field,cfg);
+    if(result.maxScore>=2 && (!cfg.perfectRequired || result.maxScore===field.length)) return{target:bestTarget,field,solutions:result.solutions,maxScore:result.maxScore};
+  }
+  // Adding this field reaches its target only on the final tile, within all UI limits.
+  const field=[2,3,4,6,7,8].slice(0,cfg.fieldSize);
+  const target=field.reduce((sum,n)=>sum+n,0);
+  const result=solveFull(target,field,cfg);
+  return{target,field,solutions:result.solutions,maxScore:result.maxScore};
+}
+
+// ========== BUILDER INTERACTION ==========
+function tileInvalidReason(idx){
+  if(B.total===null || !B.pendingOp) return '';
+  const n=S.field[idx];
+  const result=B.pendingOp==='+' ? B.total+n : B.pendingOp==='−' ? B.total-n : B.total*n;
+  if(!S.settings.allowNeg && result<0) return 'Negative intermediate values are turned off';
+  if(Math.abs(result)>S.settings.maxInter) return 'Maximum intermediate value is '+S.settings.maxInter;
+  return '';
+}
+
+function tileClick(idx){
+  if(S.screen!=='playing' || B.miss) return;
+  // If hit, must save or undo before continuing
+  if(B.hit) return;
+  if(B.usedMask & (1<<idx)) return;
+  if(B.phase!=='num') return;
+  if(!Number.isInteger(idx) || idx<0 || idx>=S.field.length || tileInvalidReason(idx)) return;
+
+  const n = S.field[idx];
+  B.usedMask |= (1<<idx);
+
+  if(B.total === null){
+    B.total = n;
+    B.startIdx = idx;
+    B.score = 1;
+    B.phase = 'op';
+  } else {
+    let r;
+    if(B.pendingOp==='+') r=B.total+n;
+    else if(B.pendingOp==='−') r=B.total-n;
+    else r=B.total*n;
+
+    B.steps.push({left:B.total, op:B.pendingOp, right:n, result:r, idx});
+    B.total = r;
+    B.score++;
+    B.pendingOp = null;
+
+    if(B.total === S.target){
+      B.hit = true;
+      B.phase = 'done';
+    } else if(popcount(B.usedMask) >= S.field.length){
+      B.miss = true;
+      B.phase = 'done';
+    } else {
+      B.phase = 'op';
+    }
+  }
+  render();
+}
+
+function opClick(op){
+  if(S.screen!=='playing' || B.hit || B.miss) return;
+  if(B.phase!=='op') return;
+  B.pendingOp = op;
+  B.phase = 'num';
+  render();
+}
+
+function builderUndo(){
+  if(B.steps.length > 0){
+    const last = B.steps.pop();
+    B.usedMask &= ~(1<<last.idx);
+    B.total = last.left;
+    B.score--;
+    B.hit = false; B.miss = false;
+    B.pendingOp = null;
+    B.phase = 'op';
+  } else if(B.total !== null){
+    B.usedMask &= ~(1<<B.startIdx);
+    B.total = null; B.score = 0;
+    B.startIdx = -1;
+    B.phase = 'num';
+  }
+  render();
+}
+
+function builderClear(){
+  builderReset(false);
+  render();
+}
+
+// ========== TIMER ==========
+function startTimer(){
+  clearInterval(S.timerInterval); S.timerInterval=null;
+  if(S.screen!=='playing' || S.settings.timerDuration<=0 || S.timeLeft<=0) return;
+  S.paused = false;
+  S.timerInterval = setInterval(()=>{
+    S.timeLeft--;
+    if(S.timeLeft<=0){
+      clearInterval(S.timerInterval);
+      S.timerInterval=null;
+      S.screen='boardsUp';
+      render();
+    } else {
+      updateTimerDisplay();
+    }
+  },1000);
+}
+
+function pauseTimer(){
+  clearInterval(S.timerInterval); S.timerInterval=null;
+  S.paused=true; render();
+}
+
+function resumeTimer(){ startTimer(); render(); }
+
+function updateTimerDisplay(){
+  const el=document.getElementById('timer-el');
+  if(!el)return;
+  el.textContent=formatTime(S.timeLeft);
+  el.className='timer-corner'+(S.timeLeft<=10?' urgent':'');
+}
+
+function endRound(){
+  clearInterval(S.timerInterval); S.timerInterval=null;
+  S.screen='boardsUp'; render();
+}
+
+// ========== ACTIONS ==========
+function newRound(){
+  if(S.screen==='generating') return;
+  clearInterval(S.timerInterval); S.timerInterval=null;
+  S.screen='generating'; S.settingsOpen=false;
+  builderReset(true);
+  render();
+  setTimeout(()=>{
+    const ch=generateChallenge(S.settings);
+    S.target=ch.target; S.field=ch.field;
+    S.solutions=ch.solutions; S.maxScore=ch.maxScore;
+    S.roundNum++; S.screen='playing';
+    S.paused=false; S.timeLeft=S.settings.timerDuration;
+    builderReset(true);
+    render();
+    if(S.settings.timerDuration>0) startTimer();
+  },60);
+}
+
+function showSolutions(){
+  clearInterval(S.timerInterval); S.timerInterval=null;
+  S.screen='solutions'; render();
+}
+
+function toggleSettings(){ S.settingsOpen=!S.settingsOpen; render(); }
+function refreshRoundLimits(){
+  if(!S.field.length || !['playing','boardsUp','solutions'].includes(S.screen)) return;
+  const result=solveFull(S.target,S.field,S.settings);
+  S.solutions=result.solutions; S.maxScore=result.maxScore;
+  if(B.steps.some(step=>(!S.settings.allowNeg && step.result<0) || Math.abs(step.result)>S.settings.maxInter)){
+    builderReset(false);
+  }
+}
+function updateSetting(key,val){
+  if(S.settings[key]===val) return;
+  S.settings[key]=val;
+  if(key==='maxInter') refreshRoundLimits();
+  if(key==='timerDuration' && S.screen==='playing'){
+    clearInterval(S.timerInterval); S.timerInterval=null;
+    S.timeLeft=val;
+    if(val<=0) S.paused=false;
+    else if(!S.paused) startTimer();
+  }
+  render();
+}
+function toggleSetting(key){
+  S.settings[key]=!S.settings[key];
+  if(key==='allowNeg') refreshRoundLimits();
+  render();
+}
+
+// ========== RENDER ==========
+function render(){
+  const app=document.getElementById('app');
+  let html='';
+  switch(S.screen){
+    case 'idle': html=renderIdle(); break;
+    case 'generating': html=renderGenerating(); break;
+    case 'playing': html=renderGame(); break;
+    case 'boardsUp': html=renderGame()+renderBoardsUp(); break;
+    case 'solutions': html=renderSolutions(); break;
+  }
+  if(S.settingsOpen) html+=renderSettings();
+  app.innerHTML=html;
+}
+
+function renderIdle(){
+  return `<div class="idle">
+    ${scorexHero()}
+    <div class="idle-sub">Whole-Class Mental Maths</div>
+    <div class="idle-actions">
+      <button class="btn btn-primary" onclick="newRound()">New Round</button>
+      <button class="btn-icon" onclick="toggleSettings()" title="Settings">⚙</button>
+    </div>
+  </div>`;
+}
+
+function renderGenerating(){
+  return `<div class="generating">
+    <div class="gen-text">Generating challenge<span class="gen-dots"></span></div>
+  </div>`;
+}
+
+function renderGame(){
+  // Top bar: round left, timer+gear right
+  const timerHtml = S.settings.timerDuration > 0
+    ? (S.paused
+      ? `<span id="timer-el" class="timer-corner" style="color:var(--text2)">PAUSED</span>`
+      : `<span id="timer-el" class="timer-corner${S.timeLeft<=10?' urgent':''}">${formatTime(S.timeLeft)}</span>`)
+    : '';
+
+  let topBar = `<div class="top-bar">
+    <span class="round-badge">Round ${S.roundNum}</span>
+    <div class="top-right">
+      ${timerHtml}
+      <button class="btn-icon" onclick="toggleSettings()" title="Settings">⚙</button>
+    </div>
+  </div>`;
+
+  // Tiles with interactive states
+  const tilesHtml = S.field.map((n,i) => {
+    let cls = 'tile';
+    const locked = B.lockedMask & (1<<i);
+    const used = B.usedMask & (1<<i);
+    const invalid = !locked && !used && B.phase==='num' ? tileInvalidReason(i) : '';
+    if(locked) cls += ' locked';
+    else if(used) cls += ' used';
+    else if(invalid) cls += ' invalid';
+    else if(B.phase==='num' && B.total!==null) cls += ' interactive';
+    else if(B.phase==='num' && B.total===null) cls += ' interactive';
+    if(i===B.startIdx && B.steps.length===0 && B.total!==null && !used) cls += ' selected';
+    return `<div class="${cls}" onclick="tileClick(${i})"${invalid?' aria-disabled="true" title="'+esc(invalid)+'"':''}>${n}</div>`;
+  }).join('');
+
+  // Op buttons
+  const opPhase = B.phase==='op';
+  const opCls = (op) => {
+    if(B.pendingOp===op) return 'op-btn chosen';
+    if(opPhase) return 'op-btn active';
+    return 'op-btn disabled';
+  };
+  const opsHtml = `<div class="ops-row">
+    <div class="${opCls('+')}" onclick="opClick('+')" title="Add">+</div>
+    <div class="${opCls('−')}" onclick="opClick('−')" title="Subtract">−</div>
+    <div class="${opCls('×')}" onclick="opClick('×')" title="Multiply">×</div>
+  </div>`;
+
+  // Builder area
+  const builderHtml = renderBuilder();
+
+  // Bottom controls
+  let controls = '';
+  if(S.screen==='playing'){
+    if(S.settings.timerDuration > 0){
+      controls = S.paused
+        ? `<button class="btn btn-primary" onclick="resumeTimer()">Resume</button>
+           <button class="btn btn-secondary" onclick="endRound()">End Round</button>`
+        : `<button class="btn btn-secondary" onclick="pauseTimer()">Pause</button>
+           <button class="btn btn-secondary" onclick="endRound()">End Round</button>`;
+    } else {
+      controls = `<button class="btn btn-primary" onclick="endRound()">End Round</button>`;
+    }
+  }
+
+  // Split saved answers into left and right wings
+  const totalPts = B.saved.reduce((s,a) => s + a.score, 0);
+  const leftCards = [], rightCards = [];
+  B.saved.forEach((a,i) => {
+    const card = `<div class="saved-card" style="animation-delay:${(i*0.05).toFixed(2)}s">
+      <div class="sc-pts">${a.score} pt${a.score!==1?'s':''}</div>
+      <div class="sc-chain">${esc(a.chain)}</div>
+    </div>`;
+    if(i % 2 === 0) leftCards.push(card); else rightCards.push(card);
+  });
+  const scoreHeader = B.saved.length > 0
+    ? `<div class="wing-score">${totalPts} pts</div>` : '';
+  const leftWing = B.saved.length > 0
+    ? `<div class="saved-wing">${scoreHeader}${leftCards.join('')}</div>`
+    : `<div class="saved-wing-empty"></div>`;
+  const rightWing = B.saved.length > 0
+    ? `<div class="saved-wing">${rightCards.join('')}</div>`
+    : `<div class="saved-wing-empty"></div>`;
+
+  return `${topBar}
+  <div class="game-wrap">
+    ${leftWing}
+    <div class="game game-center">
+      <div class="target-label">Target</div>
+      <div class="target-num">${S.target}</div>
+      <div class="field-label">Field</div>
+      <div class="tiles">${tilesHtml}</div>
+      ${opsHtml}
+      ${builderHtml}
+      <div class="game-controls">${controls}</div>
+    </div>
+    ${rightWing}
+  </div>`;
+}
+
+function renderBuilder(){
+  if(B.total===null && B.steps.length===0){
+    return `<div class="builder"><div class="bld-hint">Tap a number to start building</div></div>`;
+  }
+
+  // Build as horizontal chain: 6 x 8 = 48 → 48 - 10 = 38
+  let parts = [];
+  if(B.steps.length===0 && B.total!==null){
+    parts.push(`<span class="bld-step">Start: <strong>${B.total}</strong></span>`);
+  }
+  for(let i=0; i<B.steps.length; i++){
+    const s = B.steps[i];
+    const leftHtml = i>0 ? `<span class="bld-running">${s.left}</span>` : `${s.left}`;
+    parts.push(`<span class="bld-step">${leftHtml}<span class="bld-op">${s.op}</span>${s.right}<span class="bld-eq">=</span><strong>${s.result}</strong></span>`);
+  }
+  if(B.pendingOp && B.phase==='num'){
+    parts.push(`<span class="bld-step bld-pending">${B.total}<span class="bld-op">${B.pendingOp}</span>?</span>`);
+  }
+  const chainHtml = `<div class="bld-chain">${parts.join('<span class="bld-arrow">→</span>')}</div>`;
+
+  // Status: running total, hit, or miss
+  let statusHtml = '';
+  if(B.hit){
+    statusHtml = `<div class="bld-hit">✔ ${B.score} pt${B.score!==1?'s':''}</div>`;
+  } else if(B.miss){
+    statusHtml = `<div class="bld-miss">✘ Miss</div>`;
+  } else if(B.steps.length>0 && B.phase==='op'){
+    statusHtml = `<div class="bld-total">=<span class="val">${B.total}</span></div>`;
+  }
+
+  let actionsHtml = '';
+  if(B.total!==null){
+    actionsHtml = '<div class="bld-actions">';
+    if(B.hit) actionsHtml += `<button class="btn bld-btn bld-save" onclick="builderSave()">Save ✔</button>`;
+    actionsHtml += `<button class="btn btn-secondary bld-btn" onclick="builderUndo()">Undo</button>`;
+    actionsHtml += `<button class="btn btn-secondary bld-btn" onclick="builderClear()">Clear</button>`;
+    actionsHtml += '</div>';
+  }
+
+  return `<div class="builder">${chainHtml}${statusHtml}${actionsHtml}</div>`;
+}
+
+function renderBoardsUp(){
+  return `<div class="boards-overlay">
+    <div class="boards-text">ROUND OVER</div>
+    <div class="boards-sub">Show your whiteboards</div>
+    <div class="boards-actions">
+      <button class="btn btn-primary" onclick="showSolutions()">Show Solutions</button>
+      <button class="btn btn-secondary" onclick="newRound()">New Round</button>
+    </div>
+  </div>`;
+}
+
+function buildChainHtml(path, target){
+  if(!path || path.length===0) return '';
+  let h = `${path[0].left}`;
+  for(const step of path) h += `<span class="ch-op">${step.op}</span>${step.right}`;
+  h += `<span class="ch-eq">=</span><strong>${target}</strong>`;
+  return h;
+}
+function buildDetailHtml(path){
+  if(path.length < 2) return '';
+  let h = '<div class="sol-detail">';
+  path.forEach((step,i) => {
+    const leftHtml = i>0 ? `<span class="running">${step.left}</span>` : `${step.left}`;
+    const isLast = i===path.length-1;
+    const resHtml = isLast ? `<span class="sol-final">${step.result}</span>` : `<span class="running">${step.result}</span>`;
+    h += `<div class="sol-step">${leftHtml}<span class="sol-op">${step.op}</span>${step.right}<span class="sol-eq">=</span>${resHtml}</div>`;
+  });
+  return h + '</div>';
+}
+
+function renderSolutions(){
+  const scores = Object.keys(S.solutions).map(Number).filter(s=>s>=2).sort((a,b)=>a-b);
+  const isPerfect = S.maxScore === S.field.length;
+
+  let cards = '';
+  let cardIdx = 0;
+  scores.forEach(sc => {
+    const paths = S.solutions[sc]; // array of paths
+    const perfect = isPerfect && sc===S.field.length;
+    const label = perfect ? `★ PERFECT FIELD ★` : `${sc} Point${sc!==1?'s':''}`;
+
+    paths.forEach((path, pi) => {
+      const delay = (cardIdx*0.12+0.1).toFixed(2);
+      cardIdx++;
+      const sublabel = paths.length > 1 ? `${label} (${pi+1} of ${paths.length})` : label;
+      cards += `<div class="sol-card${perfect?' perfect':''}" style="animation-delay:${delay}s">
+        <div class="sol-score">${esc(sublabel)}</div>
+        <div class="sol-chain">${buildChainHtml(path, S.target)}</div>
+        ${buildDetailHtml(path)}
+      </div>`;
+    });
+  });
+
+  if(scores.length===0){
+    cards = `<div class="sol-card" style="animation-delay:0.1s">
+      <div class="sol-score">No multi-number solutions found</div>
+      <div class="sol-chain" style="color:var(--text2)">Try adjusting difficulty or field size</div>
+    </div>`;
+  }
+
+  return `<div class="solutions">
+    <div class="sol-top">
+      <span class="sol-target-label">Target</span>
+      <span class="sol-target-num">${S.target}</span>
+      <div class="sol-field">${S.field.map(n=>`<div class="sol-tile">${n}</div>`).join('')}</div>
+    </div>
+    <div class="sol-grid">${cards}</div>
+    <div class="sol-actions">
+      <button class="btn btn-primary" onclick="newRound()">New Round</button>
+      <button class="btn-icon" onclick="toggleSettings()" title="Settings">⚙</button>
+    </div>
+  </div>`;
+}
+
+function renderSettings(){
+  const c=S.settings;
+  function optBtn(key,val,label){
+    const active=c[key]===val?' active':'';
+    return `<button class="opt${active}" onclick="updateSetting('${key}',${typeof val==='string'?"'"+val+"'":val})">${esc(label)}</button>`;
+  }
+  return `<div class="settings-overlay" onclick="if(event.target===this)toggleSettings()">
+    <div class="settings-panel" onclick="event.stopPropagation()">
+      <div class="settings-title">Settings</div>
+      <div class="setting-group">
+        <div class="setting-label">Difficulty</div>
+        <div class="opts">${optBtn('difficulty','easy','Easy')}${optBtn('difficulty','standard','Standard')}${optBtn('difficulty','challenge','Challenge')}</div>
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Field Size</div>
+        <div class="opts">${optBtn('fieldSize',4,'4 Numbers')}${optBtn('fieldSize',5,'5 Numbers')}${optBtn('fieldSize',6,'6 Numbers')}</div>
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Timer</div>
+        <div class="opts">${optBtn('timerDuration',30,'30s')}${optBtn('timerDuration',45,'45s')}${optBtn('timerDuration',60,'60s')}${optBtn('timerDuration',90,'90s')}${optBtn('timerDuration',0,'Off')}</div>
+      </div>
+      <div class="setting-group" style="margin-top:2vh">
+        <div class="toggle-row"><span>Allow negative intermediates</span><button class="toggle${c.allowNeg?' on':''}" onclick="toggleSetting('allowNeg')"></button></div>
+        <div class="input-row"><span>Max intermediate number</span><input class="num-input" type="number" value="${c.maxInter}" min="50" max="9999" onchange="updateSetting('maxInter',Math.max(50,Math.min(9999,parseInt(this.value)||200)))"></div>
+        <div style="font-size:0.9em;color:var(--text2);line-height:1.4;margin:0.4em 0">Changing number limits refreshes solutions and clears any incompatible calculation.</div>
+        <div class="toggle-row"><span>Perfect Field required</span><button class="toggle${c.perfectRequired?' on':''}" onclick="toggleSetting('perfectRequired')"></button></div>
+        <div class="toggle-row"><span>Use numbers once per round</span><button class="toggle${c.useOnce?' on':''}" onclick="toggleSetting('useOnce')"></button></div>
+      </div>
+      <div style="display:flex;gap:1vw;justify-content:center">
+        <button class="btn btn-primary settings-done" onclick="toggleSettings()">Done</button>
+        <button class="btn btn-secondary settings-done" onclick="toggleSettings();newRound()">New Round</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ========== KEYBOARD ==========
+document.addEventListener('keydown', e => {
+  if(S.settingsOpen){ if(e.key==='Escape'){toggleSettings();e.preventDefault();} return; }
+  switch(e.key){
+    case ' ':
+      e.preventDefault();
+      if(S.screen==='playing' && S.settings.timerDuration>0){ S.paused ? resumeTimer() : pauseTimer(); }
+      break;
+    case 'Enter':
+      e.preventDefault();
+      if(S.screen==='idle') newRound();
+      else if(S.screen==='boardsUp') showSolutions();
+      else if(S.screen==='solutions') newRound();
+      break;
+  }
+});
+
+// ========== INIT ==========
+
+// ScoreX standalone presentation, preserving the Evo v1.17 character selection.
+const SCOREX_CAST = {"friends":[{"name":"Barkbibble","src":"assets/friends-01.webp"},{"name":"Frostwhirl","src":"assets/friends-02.webp"},{"name":"Sprucejig","src":"assets/friends-03.webp"},{"name":"Mossybop","src":"assets/friends-04.webp"},{"name":"Cindersnick","src":"assets/friends-05.webp"},{"name":"Quartzpip","src":"assets/friends-06.webp"},{"name":"Cragwomble","src":"assets/friends-07.webp"},{"name":"Meadowplod","src":"assets/friends-08.webp"},{"name":"Glimmermoss","src":"assets/friends-09.webp"},{"name":"Plumfrizzle","src":"assets/friends-10.webp"},{"name":"Coppertwirl","src":"assets/friends-11.webp"},{"name":"Fernplume","src":"assets/friends-12.webp"},{"name":"Gildencloak","src":"assets/friends-13.webp"},{"name":"Bloombelly","src":"assets/friends-14.webp"},{"name":"Plumeflick","src":"assets/friends-15.webp"},{"name":"Coralwhisp","src":"assets/friends-16.webp"},{"name":"Glowgrin","src":"assets/friends-17.webp"},{"name":"Dewdrop","src":"assets/friends-18.webp"}],"villains":[{"name":"Octoboom","src":"assets/villains-01.webp"},{"name":"Ban Joe Cluckens","src":"assets/villains-02.webp"},{"name":"Laundry Chores","src":"assets/villains-03.webp"},{"name":"Dark Energy","src":"assets/villains-04.webp"},{"name":"Goatzilla","src":"assets/villains-05.webp"},{"name":"Nightdance","src":"assets/villains-06.webp"},{"name":"Dr Shivers","src":"assets/villains-07.webp"},{"name":"Lady Scorn","src":"assets/villains-08.webp"},{"name":"Queen Fang","src":"assets/villains-09.webp"},{"name":"Professor Brainiac","src":"assets/villains-10.webp"},{"name":"Grub King","src":"assets/villains-11.webp"},{"name":"Boulder Wolf","src":"assets/villains-12.webp"},{"name":"Lord Lava","src":"assets/villains-13.webp"},{"name":"Stink Troll","src":"assets/villains-14.webp"},{"name":"Ballemeana","src":"assets/villains-15.webp"},{"name":"Sir Cumference","src":"assets/villains-16.webp"},{"name":"Russian Dolls","src":"assets/villains-17.webp"},{"name":"Impossible Test","src":"assets/villains-18.webp"},{"name":"Mummysaurus","src":"assets/villains-19.webp"},{"name":"Heidi Shriek","src":"assets/villains-20.webp"},{"name":"Ann Chovy","src":"assets/villains-21.webp"},{"name":"General Grim","src":"assets/villains-22.webp"},{"name":"Sockrates","src":"assets/villains-23.webp"},{"name":"Bad Bubbles","src":"assets/villains-24.webp"},{"name":"Yeti Spaghetti","src":"assets/villains-25.webp"},{"name":"Neblar and Zev","src":"assets/villains-26.webp"},{"name":"Hayfeverler","src":"assets/villains-27.webp"},{"name":"Cygrilla","src":"assets/villains-28.webp"},{"name":"Check Mate!","src":"assets/villains-29.webp"},{"name":"Blob Boss","src":"assets/villains-30.webp"},{"name":"MIST","src":"assets/villains-31.webp"},{"name":"Abyssmal","src":"assets/villains-32.webp"},{"name":"Candice Sticky Fingers","src":"assets/villains-33.webp"},{"name":"Dark Side of the Moon","src":"assets/villains-34.webp"},{"name":"Midnight Rider","src":"assets/villains-35.webp"},{"name":"The Puzzler","src":"assets/villains-36.webp"},{"name":"Beast of Polka Dots","src":"assets/villains-37.webp"},{"name":"Huhu Totem","src":"assets/villains-38.webp"},{"name":"McBatty","src":"assets/villains-39.webp"},{"name":"MudZombie","src":"assets/villains-40.webp"},{"name":"RiddleBoo","src":"assets/villains-41.webp"},{"name":"Scarecrow Dynamite","src":"assets/villains-42.webp"}]};
+const SCOREX_SELECTED = Object.fromEntries(Object.entries(SCOREX_CAST).map(([side,items])=>[side,shuffle(items.slice()).slice(0,2)]));
+function scorexHero(){
+  const group=side=>'<span class="nw111-scorex-cast '+side+'" aria-hidden="true">'+SCOREX_SELECTED[side].map(x=>'<img src="'+x.src+'" alt="" title="'+esc(x.name)+'" width="640" height="640">').join('')+'</span>';
+  return '<div class="nw111-scorex-hero">'+group('friends')+'<div class="idle-title" aria-label="SCOREX">SCORE<span class="nw116-scorex-x">X</span></div>'+group('villains')+'</div>';
+}
+
+render();
+</script>
+</body>
+</html>
