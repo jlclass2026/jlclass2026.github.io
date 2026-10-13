@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <meta name="description" content="A little museum of creatures and their collected Curios and Squishies.">
     <title>Creature Gallery</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="gallery.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="gallery.js?v=2" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#collection">Skip to the collection</a>
@@ -59,30 +59,35 @@
     </div>
 
     <dialog id="trophy-room" class="trophy-room" aria-labelledby="room-title" aria-describedby="room-description">
-      <div class="room-shell">
-        <header class="room-header">
-          <p class="eyebrow"><span aria-hidden="true">✧</span> The trophy room</p>
-          <button id="close-room" class="close-room" type="button" autofocus aria-label="Close trophy room"><span aria-hidden="true">×</span></button>
-        </header>
-        <div class="room-intro">
-          <div id="room-portrait" class="room-portrait"></div>
-          <div>
+      <button id="close-room" class="close-room" type="button" autofocus aria-label="Close trophy room"><span aria-hidden="true">×</span><span>Back to gallery</span></button>
+      <div class="room-ambient" aria-hidden="true"></div>
+      <div class="room-stage-set">
+        <div class="room-background" aria-hidden="true"></div>
+        <div class="room-layout">
+          <header class="room-heading">
+            <p>Trophy room</p>
             <h2 id="room-title"></h2>
-            <p id="room-stage" class="room-stage"></p>
-            <p id="room-description">A closer look at the little treasures in this collection.</p>
-          </div>
-        </div>
-        <div class="treasure-rooms">
-          <section class="treasure-section" aria-labelledby="curios-title">
-            <div class="treasure-heading"><span class="treasure-symbol" aria-hidden="true">✧</span><h3 id="curios-title">Curios</h3></div>
-            <div id="curios-content"></div>
+            <p id="room-stage" class="sr-only"></p>
+            <p id="room-description" class="sr-only">Explore this creature’s collected Curios and Squishies. This room stays open until you return to the gallery.</p>
+          </header>
+          <div id="room-portrait" class="room-portrait"></div>
+          <section class="room-collection room-curios" aria-labelledby="curios-title">
+            <header><h3 id="curios-title">Curios</h3><span id="curios-count"></span></header>
+            <div id="curios-content" class="shelf-content"></div>
+            <footer id="curios-pager"></footer>
           </section>
-          <section class="treasure-section" aria-labelledby="squishies-title">
-            <div class="treasure-heading"><span class="treasure-symbol" aria-hidden="true">☁</span><h3 id="squishies-title">Squishies</h3></div>
-            <div id="squishies-content"></div>
+          <section class="room-collection room-squishies" aria-labelledby="squishies-title">
+            <header><h3 id="squishies-title">Squishies</h3><span id="squishies-count"></span></header>
+            <div id="squishies-content" class="shelf-content"></div>
+            <footer id="squishies-pager"></footer>
           </section>
         </div>
       </div>
+    </dialog>
+    <dialog id="art-viewer" class="art-viewer" aria-labelledby="art-title">
+      <button id="close-art" class="close-art" type="button" aria-label="Close artwork">× <span>Back to room</span></button>
+      <div id="enlarged-art" class="enlarged-art"></div>
+      <h2 id="art-title"></h2>
     </dialog>
   </body>
 </html>

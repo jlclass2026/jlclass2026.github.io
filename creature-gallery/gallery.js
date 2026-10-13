@@ -55,7 +55,11 @@
   const empty = document.getElementById("empty-state");
   const dialog = document.getElementById("trophy-room");
   const closeButton = document.getElementById("close-room");
+  const artDialog = document.getElementById("art-viewer");
+  const closeArtButton = document.getElementById("close-art");
   let opener = null;
+  let artOpener = null;
+  const PAGE_SIZE = 6;
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -81,33 +85,79 @@
     return img;
   }
 
-  function treasures(items, target, label) {
+  function openArt(path, name, button) {
+    if (artDialog.open) return;
+    artOpener = button;
+    document.getElementById("art-title").textContent = name;
+    document.getElementById("enlarged-art").replaceChildren(artwork(path, name, false));
+    artDialog.showModal();
+    closeArtButton.focus({ preventScroll: true });
+  }
+
+  function artButton(path, name, className) {
+    const button = element("button", className);
+    button.type = "button";
+    button.setAttribute("aria-label", `Enlarge ${name}`);
+    button.title = name;
+    button.append(artwork(path, "", false));
+    button.addEventListener("click", () => openArt(path, name, button));
+    return button;
+  }
+
+  function treasures(items, kind, label, page = 0) {
+    const target = document.getElementById(`${kind}-content`);
+    const footer = document.getElementById(`${kind}-pager`);
+    const pages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    page = Math.max(0, Math.min(pages - 1, page));
     target.replaceChildren();
-    if (items.length === 0) {
-      target.append(element("p", "treasure-empty", `No ${label} in this collection yet.`));
-      return;
-    }
+    footer.replaceChildren();
+    document.getElementById(`${kind}-count`).textContent = `${items.length} collected`;
     const list = element("ul", "treasure-list");
     list.setAttribute("aria-label", label);
-    for (const item of items) {
+    if (items.length === 0) {
+      target.append(element("p", "treasure-empty sr-only", `No ${label} in this collection yet.`));
+    }
+    for (const item of items.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)) {
       const treasure = element("li", "treasure");
-      const portrait = element("div", "treasure-art");
-      portrait.append(artwork(item.art, "", true));
-      treasure.append(portrait, element("span", "treasure-name", item.name));
+      treasure.append(artButton(item.art, item.name, "treasure-art"), element("span", "treasure-name", item.name));
       list.append(treasure);
     }
     target.append(list);
+    if (pages > 1) {
+      const nav = element("nav", "shelf-pager");
+      nav.setAttribute("aria-label", `${label} pages`);
+      const previous = element("button", "", "‹");
+      const next = element("button", "", "›");
+      previous.type = next.type = "button";
+      previous.setAttribute("aria-label", `Previous ${label} page`);
+      next.setAttribute("aria-label", `Next ${label} page`);
+      previous.disabled = page === 0;
+      next.disabled = page === pages - 1;
+      const pageLabel = element("span", "", `${page + 1} / ${pages}`);
+      pageLabel.setAttribute("aria-live", "polite");
+      function changePage(delta) {
+        treasures(items, kind, label, page + delta);
+        // Keep keyboard focus on the surviving direction, or its enabled counterpart.
+        const buttons = [...footer.querySelectorAll("button")];
+        const preferred = buttons[delta > 0 ? 1 : 0];
+        (preferred && !preferred.disabled ? preferred : buttons.find((b) => !b.disabled))?.focus({ preventScroll: true });
+      }
+      previous.addEventListener("click", () => changePage(-1));
+      next.addEventListener("click", () => changePage(1));
+      nav.append(previous, pageLabel, next);
+      footer.append(nav);
+    }
   }
 
   function openRoom(card, button) {
-    // Repeated activation never stacks dialogs or changes the card behind an open room.
+    // One fixed selection. There is no timer, auto-advance, or adjacent-creature navigation.
     if (dialog.open) return;
     opener = button;
     document.getElementById("room-title").textContent = card.creatureName;
     document.getElementById("room-stage").textContent = `Stage ${card.stage}`;
-    document.getElementById("room-portrait").replaceChildren(artwork(card.art, "", false));
-    treasures(card.curios, document.getElementById("curios-content"), "Curios");
-    treasures(card.squishies, document.getElementById("squishies-content"), "Squishies");
+    document.getElementById("room-portrait").replaceChildren(artButton(card.art, card.creatureName, "creature-art"));
+    treasures(card.curios, "curios", "Curios");
+    treasures(card.squishies, "squishies", "Squishies");
     dialog.showModal();
     dialog.scrollTop = 0;
     document.body.classList.add("room-open");
@@ -149,6 +199,25 @@
   }
 
   closeButton.addEventListener("click", () => dialog.close());
+  closeArtButton.addEventListener("click", () => artDialog.close());
+  artDialog.addEventListener("close", () => {
+    const previous = artOpener;
+    artOpener = null;
+    document.getElementById("enlarged-art").replaceChildren();
+    if (previous && previous.isConnected) previous.focus({ preventScroll: true });
+  });
+  // Keep Tab inside the active modal even when it has only one control.
+  for (const modal of [dialog, artDialog]) modal.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab") return;
+    const buttons = [...modal.querySelectorAll("button:not(:disabled)")];
+    const first = buttons[0], last = buttons[buttons.length - 1];
+    if (!first) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first.focus();
+    }
+  });
   // Native showModal provides focus containment, inert background, and Escape dismissal.
   dialog.addEventListener("close", () => {
     document.body.classList.remove("room-open");
