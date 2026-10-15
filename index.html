@@ -17,7 +17,8 @@
 <a href="/lock-x-belt/">🔐 Lock X-belt →</a>
 <a href="/creature-gallery/">🖼️ Creature Gallery →</a>
 <a href="/scorex/">＝ ScoreX →</a>
-<a href="/morpheme-checker/">🔤 Morpheme Checker →</a>
+<a href="/morpheme-checker/">🔤 Morpheme Builder · Unit 1 →</a>
+<a href="/morpheme-builder-unit-2/">🔤 Morpheme Builder · Unit 2 →</a>
 <a href="/portal-source.html">Open the existing game portal →</a>
 </div>
 <small>You can open a game directly while the full menu loads.</small>
@@ -32,14 +33,15 @@
     if (!response.ok) throw new Error('Portal source could not be loaded');
     const source = await response.text();
     const marker = "<a class=\"game\" href=\"/boss-chest/\"><div class=\"icon\">🔐</div><div class=\"copy\"><h3>Boss Chest</h3><p>Play classroom game</p></div><div class=\"arrow\">→</div></a>";
-    const cards = "<a class=\"game\" href=\"/scorex/\"><div class=\"icon\">＝</div><div class=\"copy\"><h3>ScoreX</h3><p>Play classroom game</p></div><div class=\"arrow\">→</div></a><a class=\"game\" href=\"/morpheme-checker/\"><div class=\"icon\">🔤</div><div class=\"copy\"><h3>Morpheme Checker</h3><p>Build words and explore meanings</p></div><div class=\"arrow\">→</div></a>";
+    const cards = "<a class=\"game\" href=\"/scorex/\"><div class=\"icon\">＝</div><div class=\"copy\"><h3>ScoreX</h3><p>Play classroom game</p></div><div class=\"arrow\">→</div></a><a class=\"game\" href=\"/morpheme-checker/\"><div class=\"icon\">🔤</div><div class=\"copy\"><h3>Morpheme Builder · Unit 1</h3><p>Build Unit 1 words and explore meanings</p></div><div class=\"arrow\">→</div></a>";
     if (source.split(marker).length !== 2 || source.includes('href="/scorex/"') || source.includes('href="/morpheme-checker/"')) {
       throw new Error('Portal source has changed');
     }
     const lockX = marker.replace('<h3>Boss Chest</h3>', '<h3>Lock X</h3>');
     const belt = '<a class="game" href="/lock-x-belt/"><div class="icon">🔐</div><div class="copy"><h3>Lock X-belt</h3><p>Crack the right-shifting number code</p></div><div class="arrow">→</div></a>';
     const gallery = '<a class="game" href="/creature-gallery/"><div class="icon">🖼️</div><div class="copy"><h3>Creature Gallery</h3><p>Explore creatures and their collections</p></div><div class="arrow">→</div></a>';
-    const page = source.replace(marker, lockX + belt + cards + gallery);
+    const unit2 = '<a class="game" href="/morpheme-builder-unit-2/"><div class="icon">🔤</div><div class="copy"><h3>Morpheme Builder · Unit 2</h3><p>Build Unit 2 words and explore meanings</p></div><div class="arrow">→</div></a>';
+    const page = source.replace(marker, lockX + belt + cards + unit2 + gallery);
     clearTimeout(timeout);
     document.open();
     document.write(page);
@@ -54,4 +56,5 @@
 </script>
 </body>
 </html>
+
 
