@@ -7,6 +7,7 @@
   const CARD_KEY = /^[a-f0-9]{32}$/;
   const TEXT_CONTROLS = /[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/u;
   const MAX_BYTES = 2 * 1024 * 1024;
+  const RELICS = Object.freeze({"relic_skull_feathers":"Skull Feathers","relic_amber_antler":"Amber Antler","relic_spiral_stone":"Spiral Stone","relic_opal_vines":"Opal Vines","relic_ivory_fang":"Ivory Fang","relic_wood_feathers":"Wood Feathers","relic_obsidian_wrap":"Obsidian Wrap","relic_emerald_bone_ring":"Emerald Bone Ring"});
 
   function exactKeys(value, keys) {
     return value !== null && typeof value === "object" && !Array.isArray(value) &&
@@ -31,6 +32,28 @@
     });
   }
 
+  function validRoom(room) {
+    // Null and absent state are unknown; a known empty collection is explicit.
+    if (room === null) return true;
+    if (!exactKeys(room, ["flag", "relics", "relicUnknown"]) ||
+        !exactKeys(room.flag, ["held", "art"]) || typeof room.flag.held !== "boolean" ||
+        (room.flag.held ? typeof room.flag.art !== "string" || !ART_PATH.test(room.flag.art) : room.flag.art !== null) ||
+        !Number.isSafeInteger(room.relicUnknown) || room.relicUnknown < 0 ||
+        !Array.isArray(room.relics) || room.relics.length > 8) return false;
+    const ids = new Set();
+    let total = room.relicUnknown;
+    return room.relics.every((relic) => {
+      if (!exactKeys(relic, ["id", "name", "art", "count"]) ||
+          typeof relic.id !== "string" || !Object.hasOwn(RELICS, relic.id) || relic.name !== RELICS[relic.id] ||
+          typeof relic.art !== "string" || !ART_PATH.test(relic.art) ||
+          !Number.isSafeInteger(relic.count) || relic.count <= 0 || ids.has(relic.id)) return false;
+      total += relic.count;
+      if (!Number.isSafeInteger(total)) return false;
+      ids.add(relic.id);
+      return true;
+    });
+  }
+
   // Fail closed: an unknown field, unsafe path, or invalid card hides the whole payload.
   // The publishing step separately verifies canonical names and strips private data.
   function validateCollection(value) {
@@ -38,11 +61,14 @@
         !Array.isArray(value.cards) || value.cards.length > 2000) return false;
     const keys = new Set();
     return value.cards.every((card) => {
-      if (!exactKeys(card, ["key", "creatureName", "stage", "art", "curios", "squishies"]) ||
+      const cardFields = ["key", "creatureName", "stage", "art", "curios", "squishies"];
+      if (card && Object.hasOwn(card, "room")) cardFields.push("room");
+      if (!exactKeys(card, cardFields) ||
           typeof card.key !== "string" || !CARD_KEY.test(card.key) || keys.has(card.key) ||
           !validText(card.creatureName, 120) || !Number.isInteger(card.stage) || card.stage < 0 || card.stage > 3 ||
           typeof card.art !== "string" || !ART_PATH.test(card.art) ||
-          !validItems(card.curios, "curios") || !validItems(card.squishies, "squishies")) return false;
+          !validItems(card.curios, "curios") || !validItems(card.squishies, "squishies") ||
+          (Object.hasOwn(card, "room") && !validRoom(card.room))) return false;
       keys.add(card.key);
       return true;
     });
@@ -59,7 +85,7 @@
   const closeArtButton = document.getElementById("close-art");
   let opener = null;
   let artOpener = null;
-  const PAGE_SIZE = 6;
+  const PAGE_SIZE = 8;
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -117,9 +143,15 @@
     if (items.length === 0) {
       target.append(element("p", "treasure-empty sr-only", `No ${label} in this collection yet.`));
     }
-    for (const item of items.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)) {
-      const treasure = element("li", "treasure");
-      treasure.append(artButton(item.art, item.name, "treasure-art"), element("span", "treasure-name", item.name));
+    const visibleItems = items.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+    for (let slot = 0; slot < PAGE_SIZE; slot += 1) {
+      const item = visibleItems[slot];
+      const treasure = element("li", item ? "treasure" : "treasure treasure-empty-slot");
+      if (item) {
+        treasure.append(artButton(item.art, item.name, "treasure-art"), element("span", "treasure-name", item.name));
+      } else {
+        treasure.setAttribute("aria-hidden", "true");
+      }
       list.append(treasure);
     }
     target.append(list);
@@ -144,8 +176,37 @@
       }
       previous.addEventListener("click", () => changePage(-1));
       next.addEventListener("click", () => changePage(1));
-      nav.append(previous, pageLabel, next);
+      nav.append(previous, pageLabel, next, element("span", "pager-kind", label));
       footer.append(nav);
+    }
+  }
+
+  function roomHoldings(room) {
+    const flag = document.getElementById("room-flag");
+    const slots = document.getElementById("relics-content");
+    const availability = document.getElementById("room-availability");
+    flag.replaceChildren();
+    slots.replaceChildren();
+    availability.hidden = false;
+    availability.textContent = "Flag and relics weren’t included in this shared collection.";
+    if (room) {
+      if (room.flag.held) flag.append(artButton(room.flag.art, "Held banana flag", "flag-art"));
+      availability.hidden = room.relicUnknown === 0;
+      availability.textContent = room.relicUnknown > 0 ? `${room.relicUnknown} ${room.relicUnknown === 1 ? "relic" : "relics"} this week: identity not recorded.` : "";
+    }
+    // Eight canonical positions: unexported state never becomes a zero claim.
+    for (const id of Object.keys(RELICS)) {
+      const relic = room?.relics.find((item) => item.id === id);
+      const slot = element("li", "relic-slot");
+      if (relic) {
+        slot.append(artButton(relic.art, `${relic.name}, ${relic.count} collected this week`, "relic-art"));
+        const badge = element("span", relic.count > 9999 ? "relic-count relic-count-long" : "relic-count", `×${relic.count}`);
+        badge.title = `${relic.count} collected this week`;
+        slot.append(badge);
+      } else {
+        slot.setAttribute("aria-hidden", "true");
+      }
+      slots.append(slot);
     }
   }
 
@@ -156,8 +217,11 @@
     document.getElementById("room-title").textContent = card.creatureName;
     document.getElementById("room-stage").textContent = `Stage ${card.stage}`;
     document.getElementById("room-portrait").replaceChildren(artButton(card.art, card.creatureName, "creature-art"));
+    dialog.classList.remove("has-paging");
+    if (card.curios.length > PAGE_SIZE || card.squishies.length > PAGE_SIZE) dialog.classList.add("has-paging");
     treasures(card.curios, "curios", "Curios");
     treasures(card.squishies, "squishies", "Squishies");
+    roomHoldings(card.room);
     dialog.showModal();
     dialog.scrollTop = 0;
     document.body.classList.add("room-open");

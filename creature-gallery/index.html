@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <meta name="description" content="A little museum of creatures and their collected Curios and Squishies.">
     <title>Creature Gallery</title>
-    <link rel="stylesheet" href="style.css?v=2">
-    <script src="gallery.js?v=2" defer></script>
+    <link rel="stylesheet" href="style.css?v=3">
+    <script src="gallery.js?v=3" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#collection">Skip to the collection</a>
@@ -58,30 +58,42 @@
       </footer>
     </div>
 
-    <dialog id="trophy-room" class="trophy-room" aria-labelledby="room-title" aria-describedby="room-description">
-      <button id="close-room" class="close-room" type="button" autofocus aria-label="Close trophy room"><span aria-hidden="true">×</span><span>Back to gallery</span></button>
+    <dialog id="trophy-room" class="trophy-room" aria-labelledby="room-title" aria-describedby="room-description room-availability">
+      <button id="close-room" class="close-room" type="button" autofocus aria-label="Close trophy room"><span aria-hidden="true">←</span><span>Back to gallery</span></button>
       <div class="room-ambient" aria-hidden="true"></div>
       <div class="room-stage-set">
         <div class="room-background" aria-hidden="true"></div>
         <div class="room-layout">
           <header class="room-heading">
             <p>Trophy room</p>
-            <h2 id="room-title"></h2>
             <p id="room-stage" class="sr-only"></p>
-            <p id="room-description" class="sr-only">Explore this creature’s collected Curios and Squishies. This room stays open until you return to the gallery.</p>
+            <p id="room-description" class="sr-only">Explore this creature’s shared collection. Tap any creature or treasure to enlarge it. This room stays open until you return to the gallery.</p>
           </header>
+          <div id="room-flag" class="room-flag"></div>
           <div id="room-portrait" class="room-portrait"></div>
+          <h2 id="room-title" class="room-nameplate"></h2>
           <section class="room-collection room-curios" aria-labelledby="curios-title">
             <header><h3 id="curios-title">Curios</h3><span id="curios-count"></span></header>
             <div id="curios-content" class="shelf-content"></div>
-            <footer id="curios-pager"></footer>
           </section>
           <section class="room-collection room-squishies" aria-labelledby="squishies-title">
             <header><h3 id="squishies-title">Squishies</h3><span id="squishies-count"></span></header>
             <div id="squishies-content" class="shelf-content"></div>
-            <footer id="squishies-pager"></footer>
+          </section>
+          <section class="room-relics" aria-labelledby="relics-title">
+            <h3 id="relics-title">Tribe relics<span> · this week</span></h3>
+            <ul id="relics-content" class="relic-list" aria-label="Tribe relics · this week"></ul>
           </section>
         </div>
+      </div>
+      <div class="room-controls">
+        <div id="curios-pager" class="collection-pager"></div>
+        <div id="squishies-pager" class="collection-pager"></div>
+      </div>
+      <div class="room-notes">
+        <p id="room-availability">Flag and relics weren’t included in this shared collection.</p>
+        <p class="rotation-hint">Turn your phone sideways for a bigger view.</p>
+        <p class="room-tip">Tap a creature or treasure to enlarge it.</p>
       </div>
     </dialog>
     <dialog id="art-viewer" class="art-viewer" aria-labelledby="art-title">
