@@ -261,6 +261,47 @@ test('invalid die input cannot start a turn', () => {
   }
 });
 
+test('landing is blocked until every rolled step has been taken', () => {
+  for (let value = 1; value <= 6; value++) {
+    const s = liveGame();
+    assert.equal(s.movesLeft, 0);
+    assert.equal(roll(s, value), true);
+    assert.equal(s.movesLeft, value);
+    for (let taken = 0; taken < value; taken++) {
+      const before = structuredClone(s);
+      assert.equal(land(s), false, `roll ${value}, only ${taken} steps taken`);
+      assert.deepEqual(s, before);
+      assert.equal(step(s), true);
+      assert.equal(s.movesLeft, value - taken - 1);
+      assert.equal(s.players[0].position, taken + 1);
+    }
+    assert.equal(land(s), true);
+    assert.equal(s.phase, 'question');
+    assert.equal(s.question.index, value);
+  }
+});
+
+test('extra steps cannot move the token beyond the die roll, including across wrap', () => {
+  for (let value = 1; value <= 6; value++) {
+    const s = liveGame();
+    s.players[0].position = 31;
+    assert.equal(roll(s, value), true);
+    for (let i = 0; i < value; i++) assert.equal(step(s), true);
+    assert.equal(s.movesLeft, 0);
+    assert.equal(s.players[0].position, (31 + value) % 32);
+    const fullyMoved = structuredClone(s);
+    for (let i = 0; i < 3; i++) {
+      assert.equal(step(s), false);
+      assert.deepEqual(s, fullyMoved);
+    }
+    assert.equal(land(s), true);
+    const landed = structuredClone(s);
+    assert.equal(step(s), false);
+    assert.equal(land(s), false);
+    assert.deepEqual(s, landed);
+  }
+});
+
 test('invalid answers preserve the question; valid numeric and trimmed input is accepted', () => {
   for (const value of ['', ' ', '-1', '1.5', '1e1', 'abc', '0000', null, undefined, NaN, Infinity, true]) {
     const s = liveGame(); askQuestion(s);
