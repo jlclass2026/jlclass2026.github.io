@@ -8,3 +8,6 @@
 /* Keep each illustrated sprite isolated from its neighbour. */
 .art-0{clip-path:inset(0 8% 0 0)}.art-1{clip-path:inset(0 8% 0 0)}
 @media(min-width:851px) and (max-height:850px){.topbar{min-height:64px;padding:12px 28px}.board{min-height:610px;height:calc(100dvh - 135px);max-height:710px}.centre-content{padding-top:17px;gap:20px}.mission .reveal-art{height:120px}.collection{min-height:61px}}
+
+.hide-number{font-size:12px;width:23px;height:23px}
+@media(max-width:560px){.hide-number,.play-hideouts .hide-number{font-size:10px;width:18px;height:18px}}
