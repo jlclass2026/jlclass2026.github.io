@@ -11,3 +11,5 @@
 
 .hide-number{font-size:12px;width:23px;height:23px}
 @media(max-width:560px){.hide-number,.play-hideouts .hide-number{font-size:10px;width:18px;height:18px}}
+
+.pause-icon{display:flex;align-items:center;justify-content:center;gap:4px}.pause-icon i{display:block;width:3px;height:14px;background:currentColor;border-radius:1px}
