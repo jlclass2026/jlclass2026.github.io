@@ -21,6 +21,7 @@
 <a href="/morpheme-builder-unit-2/">🔤 Morpheme Builder · Unit 2 →</a>
 <a href="/shape-creature-challenge/?v=20261016">◒ Shape Creature Challenge →</a>
 <a href="/whos-nicked-jim/?v=20261016">🐶 Who’s Nicked Jim? →</a>
+<a href="/squishy-market/">✺ Squishy Market →</a>
 <a href="/portal-source.html">Open the existing game portal →</a>
 </div>
 <small>You can open a game directly while the full menu loads.</small>
@@ -45,7 +46,8 @@
     const unit2 = '<a class="game" href="/morpheme-builder-unit-2/"><div class="icon">🔤</div><div class="copy"><h3>Morpheme Builder · Unit 2</h3><p>Build Unit 2 words and explore meanings</p></div><div class="arrow">→</div></a>';
     const shapeCreature = '<a class="game" href="/shape-creature-challenge/?v=20261016"><div class="icon">◒</div><div class="copy"><h3>Shape Creature Challenge</h3><p>Build a secret creature. Describe, rebuild and reveal.</p></div><div class="arrow">→</div></a>';
     const nickedJim = '<a class="game" href="/whos-nicked-jim/?v=20261016"><div class="icon">🐶</div><div class="copy"><h3>Who’s Nicked Jim?</h3><p>Roll, solve and search. A cheeky two-player maths hide-and-seek.</p></div><div class="arrow">→</div></a>';
-    const page = source.replace(marker, lockX + belt + cards + unit2 + gallery + shapeCreature + nickedJim);
+    const squishyMarket = '<a class="game" href="/squishy-market/"><div class="icon">✺</div><div class="copy"><h3>Squishy Market</h3><p>Explore jungle shops and try a sample trade. Market PIN required.</p></div><div class="arrow">→</div></a>';
+    const page = source.replace(marker, lockX + belt + cards + unit2 + gallery + shapeCreature + nickedJim + squishyMarket);
     clearTimeout(timeout);
     document.open();
     document.write(page);
