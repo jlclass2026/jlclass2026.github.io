@@ -1,0 +1,164 @@
+<!doctype html><html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NW Market Rehearsal QA</title><style>body{font:18px system-ui;background:#143d30;color:#fff;padding:30px}button{padding:12px;margin:6px;border-radius:10px;cursor:pointer}dialog button{background:#d6e6c7;border:1px solid #8ca080}</style><h1>Offline Market rehearsal</h1><p>Fictional fixture using the exact NW Market module. No class records.</p><nav id="locationsMenu"></nav><script>let gameSettings={};let actionDepth=0;function saveData(){localStorage.setItem('nwMarketQA',JSON.stringify(gameSettings));return true}function closeHeaderMenus(){}</script>
+<!-- NW_MARKET_REHEARSAL_V1 -->
+<script>
+/* Fictional local-only teaching prototype. Not authentication or a real NW save adapter. */
+(function (root, factory) { const api = factory(); if (typeof module === 'object' && module.exports) module.exports = api; else root.MarketEngine = api; })(typeof globalThis !== 'undefined' ? globalThis : this, function factory(classId) {
+'use strict';
+const CLASS = classId || 'squishy-demo-v2', FORMAT = 'squishy-offers-v2', MAX_REQUESTS = 500;
+const clone = x => JSON.parse(JSON.stringify(x));
+const int = (x,max=Number.MAX_SAFE_INTEGER) => Number.isSafeInteger(x) && x >= 0 && x <= max;
+const fail = msg => { throw new Error(msg); };
+const now = () => new Date().toISOString();
+let seq = 0;
+const uid = () => 'offer-' + (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+'-'+(++seq)+'-'+Math.random().toString(36).slice(2));
+function seed() {
+ return {classId:CLASS,revision:1,students:[
+ {id:'moss',creature:'Mossback',name:'Alex',code:'1111',balance:800},
+ {id:'tide',creature:'Tidewhisk',name:'Blair',code:'2222',balance:625},
+ {id:'ember',creature:'Emberhorn',name:'Casey',code:'3333',balance:450},
+ {id:'star',creature:'Starpaw',name:'Drew',code:'4444',balance:1000}],
+ items:[['medusa','Starsteel Shark',0,'moss',240],['ghost','Glitter Princess',1,'moss',175],['sprite','Thunder Cube',2,'moss',310],['frankenstein','Harvest Bat',3,'tide',260],['jelly','Storm Puff',4,'tide',185],['dragon','Captain Banana',5,'tide',340],['medusa2','Starsteel Shark',0,'ember',225],['ghost2','Glitter Princess',1,'ember',150],['sprite2','Thunder Cube',2,'ember',280],['frankenstein2','Harvest Bat',3,'star',250],['jelly2','Storm Puff',4,'star',200],['dragon2','Captain Banana',5,'star',360]].map(([id,name,art,owner,price])=>({id,name,art,owner,price,version:1})),requests:[],log:[]};
+}
+function validate(state) {
+ if(!state || state.classId!==CLASS || !int(state.revision) || !Array.isArray(state.students) || !Array.isArray(state.items) || !Array.isArray(state.requests) || !Array.isArray(state.log)) fail('This is not a valid sample market.');
+ const ids = new Set();
+ for(const s of state.students) { if(!s || typeof s.id!=='string' || ids.has(s.id) || !int(s.balance)) fail('Invalid individual bank or creature ID.'); ids.add(s.id); }
+ const itemIds = new Set();
+ for(const i of state.items) { if(!i || typeof i.id!=='string' || itemIds.has(i.id) || !ids.has(i.owner) || !int(i.price,99999) || !int(i.version)) fail('Invalid sample collection.'); itemIds.add(i.id); }
+ const requestIds = new Set();
+ for(const r of state.requests) { validateRequest(r,state); if(requestIds.has(r.id)) fail('Duplicate request ID.'); requestIds.add(r.id); }
+ return true;
+}
+function student(state,id) { return state.students.find(x=>x.id===id) || fail('Unknown creature.'); }
+function item(state,id) { return state.items.find(x=>x.id===id) || fail('Unknown squishy.'); }
+function findRequest(state,id) { return state.requests.find(x=>x.id===id) || fail('Unknown offer.'); }
+function validateRequest(r,state) {
+ if(!r || typeof r!=='object' || Array.isArray(r)) fail('Malformed offer.');
+ const keys=['id','classId','buyer','seller','targetId','kind','offeredId','price','listingVersion','offeredVersion','status','createdAt','resolvedAt','reason'];
+ if(Object.keys(r).some(k=>!keys.includes(k))) fail('Unexpected offer fields.');
+ if(typeof r.id!=='string' || !/^offer-[a-zA-Z0-9-]{5,100}$/.test(r.id) || r.classId!==CLASS || !['buy','swap'].includes(r.kind) || !['pending','approved','denied','stale'].includes(r.status) || typeof r.createdAt!=='string' || r.createdAt.length>40 || !Number.isFinite(Date.parse(r.createdAt))) fail('Malformed or wrong-class offer.');
+ if(!state.students.some(s=>s.id===r.buyer) || !state.students.some(s=>s.id===r.seller) || r.buyer===r.seller || !state.items.some(i=>i.id===r.targetId) || !int(r.price,99999) || !int(r.listingVersion)) fail('Invalid offer parties or listing.');
+ if(r.kind==='swap') { if(!state.items.some(i=>i.id===r.offeredId) || r.offeredId===r.targetId || !int(r.offeredVersion)) fail('Invalid swap item.'); }
+ else if(r.offeredId!==null || r.offeredVersion!==null) fail('Purchase cannot include a swap item.');
+ if(r.resolvedAt!==undefined && (typeof r.resolvedAt!=='string' || !Number.isFinite(Date.parse(r.resolvedAt)))) fail('Invalid resolution date.');
+ if(r.reason!==undefined && (typeof r.reason!=='string' || r.reason.length>200)) fail('Invalid status reason.');
+ return true;
+}
+function currentProblem(state,r) {
+ const target=item(state,r.targetId), buyer=student(state,r.buyer), seller=student(state,r.seller);
+ if(target.owner!==r.seller) return 'That squishy has a different owner now.';
+ if(target.version!==r.listingVersion || target.price!==r.price) return 'The listing changed. Please make a new request.';
+ if(r.kind==='buy') {
+  if(buyer.balance<r.price) return 'Not enough JD in the buyer’s individual bank now.';
+  if(!int(seller.balance+r.price)) return 'The receiving bank balance is too large.';
+ } else { const offered=item(state,r.offeredId); if(offered.owner!==r.buyer || offered.version!==r.offeredVersion) return 'The offered squishy changed or has a different owner now.'; }
+ return null;
+}
+function invalidate(state) {
+ for(const r of state.requests) if(r.status==='pending') { const problem=currentProblem(state,r); if(problem) {r.status='stale';r.reason=problem;r.resolvedAt=now();} }
+}
+function updateListing(state,owner,itemId,price) {
+ validate(state); student(state,owner); const i=item(state,itemId);
+ if(i.owner!==owner) fail('Only this creature can change its listing.');
+ if(!int(price,99999)) fail('Use a price from 0.00 to 999.99 JD, in whole hundredths.');
+ if(i.price===price) return i;
+ i.price=price; i.version++; state.revision++; invalidate(state); return i;
+}
+function request(state,input) {
+ validate(state);
+ if(!input || !['buy','swap'].includes(input.kind)) fail('Choose purchase or swap.');
+ if(Object.keys(input).some(k=>!['buyer','targetId','kind','offeredId'].includes(k))) fail('Purchase requests must use the listed price, not a custom bid.');
+ const buyer=student(state,input.buyer), target=item(state,input.targetId);
+ if(target.owner===buyer.id) fail('Choose another creature’s squishy.');
+ if(state.requests.length>=MAX_REQUESTS) fail('The demo inbox is full. Reset the sample to try again.');
+ let offered=null;
+ if(input.kind==='swap') { offered=item(state,input.offeredId); if(offered.owner!==buyer.id) fail('You can only offer your own squishy.'); }
+ else if(input.offeredId!==undefined && input.offeredId!==null) fail('A purchase cannot include a swap item.');
+ if(input.kind==='buy' && buyer.balance<target.price) fail('Not enough JD for the listed price.');
+ if(state.requests.some(r=>r.status==='pending' && r.buyer===buyer.id && r.targetId===target.id && r.kind===input.kind && r.offeredId===(offered?offered.id:null))) fail('That offer is already waiting for your teacher.');
+ const r={id:uid(),classId:CLASS,buyer:buyer.id,seller:target.owner,targetId:target.id,kind:input.kind,offeredId:offered?offered.id:null,price:target.price,listingVersion:target.version,offeredVersion:offered?offered.version:null,status:'pending',createdAt:now()};
+ state.requests.push(r); state.revision++; return r;
+}
+function approve(state,id) {
+ validate(state); const r=findRequest(state,id);
+ if(r.status!=='pending') fail('This offer is already resolved or unavailable.');
+ const problem=currentProblem(state,r); if(problem) fail(problem);
+ const next=clone(state), nr=findRequest(next,id), target=item(next,r.targetId), buyer=student(next,r.buyer), seller=student(next,r.seller);
+ if(r.kind==='buy') { buyer.balance-=r.price; seller.balance+=r.price; }
+ else { const offered=item(next,r.offeredId); offered.owner=r.seller; offered.version++; }
+ target.owner=r.buyer; target.version++; nr.status='approved'; nr.resolvedAt=now(); next.revision++;
+ next.log.push({requestId:r.id,kind:r.kind,buyer:r.buyer,seller:r.seller,targetId:r.targetId,offeredId:r.offeredId,price:r.price,at:nr.resolvedAt});
+ invalidate(next); validate(next);
+ Object.assign(state,next); return findRequest(state,id);
+}
+function deny(state,id) { validate(state); const r=findRequest(state,id); if(r.status!=='pending') fail('This offer is already resolved or unavailable.');r.status='denied';r.resolvedAt=now();state.revision++;return r; }
+function exportRequests(state) { validate(state); return {format:FORMAT,classId:CLASS,requests:state.requests.filter(r=>r.status==='pending').map(clone)}; }
+function immutable(r) { return JSON.stringify(['id','classId','buyer','seller','targetId','kind','offeredId','price','listingVersion','offeredVersion','createdAt'].map(k=>r[k])); }
+function importRequests(state,payload) {
+ validate(state);
+ if(typeof payload==='string') {if(payload.length>500000) fail('Offer file is too large.'); try{payload=JSON.parse(payload);}catch(e){fail('Offer file is not valid JSON.');}}
+ if(!payload || typeof payload!=='object' || Array.isArray(payload) || Object.keys(payload).some(k=>!['format','classId','requests'].includes(k)) || payload.format!==FORMAT || payload.classId!==CLASS || !Array.isArray(payload.requests) || payload.requests.length>MAX_REQUESTS) fail('Use a sample offers file from this market.');
+ const next=clone(state); let added=0,duplicates=0;
+ for(const raw of payload.requests) {
+  validateRequest(raw,next); if(raw.status!=='pending' || raw.resolvedAt!==undefined || raw.reason!==undefined) fail('Only unresolved requests can be imported.');
+  const old=next.requests.find(r=>r.id===raw.id);
+  if(old) {if(immutable(old)!==immutable(raw)) fail('A request ID conflicts with an existing offer.');duplicates++;continue;}
+  if(next.requests.length>=MAX_REQUESTS) fail('The demo inbox is full.');
+  // Distinct IDs must not be used to replay the same pending offer.
+  if(next.requests.some(r=>r.status==='pending' && r.buyer===raw.buyer && r.targetId===raw.targetId && r.kind===raw.kind && r.offeredId===raw.offeredId && r.listingVersion===raw.listingVersion && r.offeredVersion===raw.offeredVersion)) fail('Duplicate offer with a different ID.');
+  next.requests.push(clone(raw));added++;
+ }
+ invalidate(next);if(added)next.revision++;validate(next);Object.assign(state,next);return {added,duplicates};
+}
+return {create: id=>{if(typeof id!=='string'||!/^nw-class-[a-zA-Z0-9-]{5,100}$/.test(id))fail('Invalid class ID.');return factory(id)},seed,validate,updateListing,request,approve,deny,exportRequests,importRequests,currentProblem,formatMoney:c=>(c/100).toFixed(2),CLASS_ID:CLASS};
+});
+
+</script>
+<script>
+/* Fictional rehearsal interchange. No real student records accepted. */
+(function(root,factory){const api=factory(typeof module==='object'?require('./engine.js'):root.MarketEngine);if(typeof module==='object')module.exports=api;else root.MarketExchange=api;})(globalThis,function(E){
+'use strict';const clone=x=>JSON.parse(JSON.stringify(x)),fail=m=>{throw Error(m)},keys=(x,allowed)=>{if(!x||typeof x!=='object'||Array.isArray(x)||Object.keys(x).some(k=>!allowed.includes(k)))fail('Unexpected interchange fields.')};
+function parse(p){if(typeof p==='string'){if(p.length>500000)fail('File too large.');p=JSON.parse(p)}return clone(p)}
+function base(p,format,allowed){keys(p,['format','schemaVersion','sampleOnly','classId',...allowed]);if(p.format!==format||p.schemaVersion!==1||p.sampleOnly!==true||p.classId!==E.CLASS_ID)fail('Only this fictional rehearsal format is accepted.');}
+function catalogue(state){E.validate(state);return{format:'nw-market-catalogue',schemaVersion:1,sampleOnly:true,classId:E.CLASS_ID,revision:state.revision,creatures:state.students.map(({id,creature,balance})=>({id,creature,balance})),items:clone(state.items),outcomes:state.requests.map(({id,status})=>({id,status}))}}
+function readCatalogue(input,previous,minimumRevision=0){const p=parse(input);base(p,'nw-market-catalogue',['revision','creatures','items','outcomes']);const seed=E.seed();if(!Number.isSafeInteger(p.revision)||p.revision<1||!Array.isArray(p.creatures)||p.creatures.length!==seed.students.length||!Array.isArray(p.items)||p.items.length!==seed.items.length||!Array.isArray(p.outcomes)||p.outcomes.length>500)fail('Invalid rehearsal catalogue.');if(p.revision<minimumRevision)fail('This catalogue is older than the current NW snapshot.');
+const ids=new Set();const students=p.creatures.map(c=>{keys(c,['id','creature','balance']);const s=seed.students.find(s=>s.id===c.id);if(!s||ids.has(c.id)||c.creature!==s.creature)fail('Unknown fictional creature.');ids.add(c.id);return{...s,balance:c.balance}});
+for(const i of p.items){keys(i,['id','name','art','owner','price','version']);const original=seed.items.find(o=>o.id===i.id);if(!original||i.name!==original.name||i.art!==original.art)fail('Unknown fictional item.');}
+const outcomes=new Map();for(const o of p.outcomes){keys(o,['id','status']);if(typeof o.id!=='string'||o.id.length>150||outcomes.has(o.id)||!['pending','approved','denied','stale'].includes(o.status))fail('Invalid receipt.');outcomes.set(o.id,o.status)}
+const state={classId:E.CLASS_ID,revision:p.revision,students,items:p.items,requests:[],log:[]};E.validate(state);
+if(previous){for(const old of previous.requests){const r=clone(old),status=outcomes.get(r.id);if(status)r.status=status;else if(r.status==='pending'&&E.currentProblem({...state,requests:[r]},r)){r.status='stale';r.reason='The NW catalogue changed.'}state.requests.push(r)}E.validate(state)}return state;}
+function offers(state,snapshotRevision,baseline){E.validate(state);const listings=baseline?state.items.filter(i=>{const b=baseline.items.find(x=>x.id===i.id);return b&&i.owner===b.owner&&i.price!==b.price}).map(i=>{const b=baseline.items.find(x=>x.id===i.id);return{itemId:i.id,owner:i.owner,expectedVersion:b.version,price:i.price}}):[];return{format:'nw-market-requests',schemaVersion:1,sampleOnly:true,classId:E.CLASS_ID,snapshotRevision,listings,offers:E.exportRequests(state)}}
+function importOffers(state,input,acceptListings=false){const p=parse(input);base(p,'nw-market-requests',['snapshotRevision','listings','offers']);if(!Number.isSafeInteger(p.snapshotRevision)||p.snapshotRevision<1||p.snapshotRevision>state.revision||!Array.isArray(p.listings)||p.listings.length>12)fail('Invalid offer snapshot or listings.');const next=clone(state),seen=new Set();let changes=0;for(const l of p.listings){keys(l,['itemId','owner','expectedVersion','price']);const i=next.items.find(i=>i.id===l.itemId);if(!i||seen.has(l.itemId)||i.owner!==l.owner||!Number.isSafeInteger(l.expectedVersion)||l.expectedVersion<1||!Number.isSafeInteger(l.price)||l.price<0||l.price>99999)fail('Invalid listing proposal.');seen.add(l.itemId);if(i.version===l.expectedVersion+1&&i.price===l.price)continue;if(i.version!==l.expectedVersion)fail('Listing proposal is stale. Export a refreshed catalogue first.');if(i.price!==l.price){E.updateListing(next,l.owner,l.itemId,l.price);changes++;}}
+const result=E.importRequests(next,p.offers);if(changes&&!acceptListings)return{needsListingApproval:true,changes,listings:clone(p.listings)};Object.assign(state,next);return{...result,changes,needsListingApproval:false};}
+return{catalogue,readCatalogue,offers,importOffers};});
+
+</script>
+<script>
+/* NW_MARKET_REHEARSAL_V1: isolated fictional rehearsal, never reads student records. */
+(function(root){'use strict';
+root.NWMarketRehearsal={install(adapter){
+const E=root.MarketEngine,X=root.MarketExchange;if(!E||!X)throw Error('Market engine and exchange are required.');let state=adapter.load()||E.seed(),busy=false;E.validate(state);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const box=document.createElement('dialog');box.id='nwMarketRehearsal';box.style.cssText='width:min(950px,94vw);max-height:90vh;border:0;border-radius:22px;background:#fffdf4;color:#173e30;padding:24px;overflow:auto;font-family:system-ui';document.body.appendChild(box);
+function tell(t){const el=box.querySelector('[data-message]');if(el)el.textContent=t}
+async function commit(fn){if(busy)return;busy=true;try{const next=JSON.parse(JSON.stringify(state)),result=fn(next);E.validate(next);await adapter.save(next);state=next;render();return result}catch(e){tell('No change applied: '+e.message);throw e}finally{busy=false}}
+function download(name,p){const u=URL.createObjectURL(new Blob([JSON.stringify(p,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),5000)}
+function render(){box.innerHTML=`<div style="display:flex;justify-content:space-between;gap:18px"><div><small>FICTIONAL DRESS REHEARSAL · OFFLINE AUTHORITY</small><h2>Squishy Market</h2></div><button data-close>Close</button></div><p>This separate practice ledger does not read or change real student collections or banks. Names below are fictional. Keep real saves offline.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button data-export>Export catalogue + receipts</button><button data-import>Import offer file</button><button data-reset>Reset fictional rehearsal</button></div><input data-file type="file" accept="application/json,.json" hidden><p data-message role="status" style="color:#9a382d"></p><p>Snapshot ${state.revision}. Import every device’s file. Listing changes require your review. A buy pays the listed price only; a swap exchanges one item each.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">${state.students.map(s=>`<div style="padding:12px;background:#eaf0df;border-radius:12px"><strong>${esc(s.name)} · ${esc(s.creature)}</strong><p>${E.formatMoney(s.balance)} JD · ${state.items.filter(i=>i.owner===s.id).length} squishies</p></div>`).join('')}</div><h3>Offers (${state.requests.filter(r=>r.status==='pending').length} waiting)</h3>${state.requests.slice().reverse().map(r=>{const b=state.students.find(s=>s.id===r.buyer),s=state.students.find(s=>s.id===r.seller),t=state.items.find(i=>i.id===r.targetId),o=state.items.find(i=>i.id===r.offeredId);return`<section style="border:1px solid #bbcdb7;padding:15px;border-radius:12px;margin:10px 0"><strong>${esc(b.name)}</strong> ${r.kind==='buy'?`offers ${E.formatMoney(r.price)} JD`:`offers ${esc(o.name)}`} for <strong>${esc(s.name)}’s ${esc(t.name)}</strong><p>Status: ${esc(r.status)}${r.reason?' · '+esc(r.reason):''}</p>${r.status==='pending'?`<button data-approve="${esc(r.id)}">Approve</button> <button data-deny="${esc(r.id)}">Deny</button>`:''}</section>`}).join('')||'<p>No offers imported yet.</p>'}<p style="font-size:12px">Export the refreshed catalogue after decisions, then import it on each market device. Re-importing a receipt never transfers items again. Back up your NW save before imports.</p>`;
+box.querySelector('[data-close]').onclick=()=>box.close();box.querySelector('[data-export]').onclick=()=>download('NW-Market-Fictional-Catalogue.json',X.catalogue(state));box.querySelector('[data-import]').onclick=()=>box.querySelector('[data-file]').click();box.querySelector('[data-reset]').onclick=async()=>{if(confirm('Reset only this fictional market ledger? Old rehearsal files will no longer be current. Real NW data is unchanged.')){await commit(next=>Object.assign(next,E.seed())).catch(()=>{});tell('Fictional ledger reset. Discard old rehearsal files and reset market browsers too.')}};
+box.querySelector('[data-file]').onchange=async e=>{try{const f=e.target.files[0];if(!f)return;if(f.size>500000)throw Error('File exceeds 500 KB.');const p=JSON.parse(await f.text()),test=JSON.parse(JSON.stringify(state)),preview=X.importOffers(test,p,false);if(preview.needsListingApproval){const details=preview.listings.map(l=>{const i=state.items.find(i=>i.id===l.itemId),s=state.students.find(s=>s.id===l.owner);return`${s.name}: ${i.name} → ${E.formatMoney(l.price)} JD`}).join('\n');if(!confirm('Review provisional listing prices before importing offers:\n\n'+details+'\n\nAccept these price updates? This does not approve any purchase or swap.')){tell('Import cancelled. No prices or offers changed.');return}}
+const result=await commit(next=>X.importOffers(next,p,true));if(result)tell(`Imported ${result.added} offers; ${result.duplicates} duplicates skipped. ${result.changes} price updates accepted.`)}catch(err){tell('Import rejected: '+err.message)}finally{e.target.value=''}};
+box.querySelectorAll('[data-approve]').forEach(b=>b.onclick=async()=>{if(!confirm('Approve this fictional deal? Confirm both traders agree. Current ownership and individual bank balances will be checked again.'))return;await commit(next=>E.approve(next,b.dataset.approve)).catch(()=>{})});box.querySelectorAll('[data-deny]').forEach(b=>b.onclick=async()=>{await commit(next=>E.deny(next,b.dataset.deny)).catch(()=>{})});}
+function open(){state=adapter.load()||E.seed();E.validate(state);render();if(!box.open)box.showModal()};adapter.mount(open);return{open,getState:()=>JSON.parse(JSON.stringify(state))};
+}};
+})(globalThis);
+
+</script>
+<script>
+/* NW_MARKET_HOOK_V1: append after v1.36 scripts. Safe namespaced settings property. */
+(function(){function init(){if(document.getElementById('nwMarketLocation'))return;const menu=document.getElementById('locationsMenu');if(!menu)return;NWMarketRehearsal.install({
+ load:()=>gameSettings.nwMarketRehearsalV1?JSON.parse(JSON.stringify(gameSettings.nwMarketRehearsalV1)):null,
+ save:next=>{if(typeof actionDepth!=='undefined'&&actionDepth>0)throw Error('Finish the current NW action first.');const prior=gameSettings.nwMarketRehearsalV1;gameSettings.nwMarketRehearsalV1=next;if(saveData()!==true){if(prior===undefined)delete gameSettings.nwMarketRehearsalV1;else gameSettings.nwMarketRehearsalV1=prior;throw Error('NW could not persist the change. Back up and resolve the save error first.');}},
+ mount:open=>{const b=document.createElement('button');b.id='nwMarketLocation';b.textContent='🛍️ Squishy Market';b.onclick=()=>{if(typeof closeHeaderMenus==='function')closeHeaderMenus();open()};menu.appendChild(b);}
+});}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
+
+</script>
+</html>
