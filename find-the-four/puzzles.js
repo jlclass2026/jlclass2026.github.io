@@ -448,6 +448,79 @@ const puzzles=[
         "easierHint": "CUP + CAKE makes CUPCAKE. Find three more words that work with CAKE."
       }
     ]
+  },
+  {
+    "id": "aquatic-odd-squad",
+    "title": "The Ocean Odd Squad",
+    "difficulty": "Stretch",
+    "groups": [
+      {
+        "label": "Jellies: soft-bodied stingers",
+        "words": [
+          "MOON JELLY",
+          "BOX JELLY",
+          "SEA NETTLE",
+          "FRIED EGG JELLY"
+        ],
+        "hint": "Four have soft, jelly-like bodies and stinging cells.",
+        "easierHint": "Find four kinds of jellyfish. One sounds like breakfast!",
+        "explanation": "These are four kinds of jellyfish, not fish. They have soft bodies without bones and use stinging cells to catch food. Fried egg jelly really is an animal's name!",
+        "sources": [
+          "https://www.montereybayaquarium.org/animals-the-ocean/animals-a-to-z/moon-jelly",
+          "https://www.nhm.ac.uk/discover/what-is-a-jellyfish.html",
+          "https://storage.montereybayaquarium.org/storage/pressroom/presskit/pdf/03-jellies-press_kit.pdf"
+        ]
+      },
+      {
+        "label": "Crustaceans: lobster relatives",
+        "words": [
+          "CRAB",
+          "LOBSTER",
+          "PRAWN",
+          "KRILL"
+        ],
+        "hint": "Four wear their skeleton on the outside.",
+        "easierHint": "Look for a crab, a lobster and two smaller relatives with jointed legs.",
+        "explanation": "Crabs, lobsters, prawns and krill are crustaceans. They have jointed legs and an outer skeleton called an exoskeleton. They shed that outer covering as they grow.",
+        "sources": [
+          "https://www.nhm.ac.uk/discover/mantis-shrimps.html"
+        ]
+      },
+      {
+        "label": "Marine mammal hunters",
+        "words": [
+          "BOTTLENOSE DOLPHIN",
+          "ORCA",
+          "GREY SEAL",
+          "SEA OTTER"
+        ],
+        "hint": "These hunters breathe air with lungs and feed their babies milk.",
+        "easierHint": "Find four marine mammals, including a dolphin and two furry hunters.",
+        "explanation": "These are marine mammals that hunt other animals. They breathe air with lungs and feed their young milk. Some jellies, crustaceans and fish hunt too, so MAMMAL is the important extra clue.",
+        "sources": [
+          "https://www.fisheries.noaa.gov/species/common-bottlenose-dolphin",
+          "https://www.fisheries.noaa.gov/species/killer-whale",
+          "https://www.fisheries.noaa.gov/species/gray-seal",
+          "https://www.montereybayaquarium.org/animals-the-ocean/animals-a-to-z/sea-otter"
+        ]
+      },
+      {
+        "label": "Bony fish",
+        "words": [
+          "CLOWNFISH",
+          "PARROTFISH",
+          "ANGELFISH",
+          "BUTTERFLYFISH"
+        ],
+        "hint": "Find four animals with backbones, fins and gills.",
+        "easierHint": "These four are fish, not jellies or mammals. Their names end in FISH.",
+        "explanation": "Clownfish, parrotfish, angelfish and butterflyfish are bony fish. They have internal skeletons with backbones, fins for swimming and gills for taking oxygen from water.",
+        "sources": [
+          "https://www.aquariumofpacific.org/exhibits/coralreefs/coral_animals",
+          "https://www.aquariumofpacific.org/onlinelearningcenter/category/bony_fishes/P20"
+        ]
+      }
+    ]
   }
 ];
 if(typeof module==='object'&&module.exports)module.exports=puzzles;else root.FOUR_PUZZLES=puzzles;
