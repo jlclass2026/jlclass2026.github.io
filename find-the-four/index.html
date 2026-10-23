@@ -7,17 +7,18 @@
   <meta name="description" content="Find four words that belong together. An original, no-pressure word-grouping game for the whole class.">
   <title>Find the Four • Classroom word challenge</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23232a32'/%3E%3Cpath d='M10 10h8v8h-8zm12 0h8v8h-8zM10 22h8v8h-8zm12 0h8v8h-8z' fill='%237de2d1'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="style.css?v=20261023-2">
-  <script defer src="puzzles.js?v=20261023-2"></script>
-  <script defer src="engine.js?v=20261023-2"></script>
-  <script defer src="game.js?v=20261023-2"></script>
+  <link rel="stylesheet" href="style.css?v=20261023-daily1">
+  <script defer src="puzzles.js?v=20261023-daily1"></script>
+  <script defer src="engine.js?v=20261023-daily1"></script>
+  <script defer src="daily.js?v=20261023-daily1"></script>
+  <script defer src="game.js?v=20261023-daily1"></script>
 </head>
 <body>
   <div class="prism" aria-hidden="true"></div>
   <main class="app">
     <header class="masthead">
       <div class="brand"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><p class="eyebrow">THE CLASSROOM CHALLENGE</p><h1>Find the <span>Four</span></h1></div></div>
-      <div class="puzzle-tools"><label class="puzzle-label" for="puzzle-select">Puzzle bank</label><div class="picker-row"><select id="puzzle-select" aria-label="Choose a puzzle"></select><button class="icon-button" id="fullscreen" title="Enter full screen" aria-label="Enter full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></div>
+      <div class="puzzle-tools"><span class="puzzle-label">One puzzle each day</span><div class="picker-row"><div class="daily-date"><time id="daily-date"></time><span>Resets at midnight · Perth</span></div><button class="icon-button" id="fullscreen" title="Enter full screen" aria-label="Enter full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></div>
     </header>
     <section class="intro" aria-label="How to play"><div><span class="difficulty" id="difficulty"></span><span class="puzzle-number" id="puzzle-number"></span></div><p>Find <strong>4 groups of 4.</strong> What connects each group?</p><div class="progress" id="progress" aria-label="0 of 4 groups found"></div></section>
     <section class="stage" aria-label="Word challenge">
@@ -26,9 +27,10 @@
       <aside class="cast cast-right" aria-label="Guest villains"><div class="mini-villain"><img src="assets/lady-scorn.webp" alt="Lady Scorn" width="558" height="640"><span class="cast-name">Lady Scorn</span></div><div class="mini-villain"><img src="assets/midnight-rider.webp" alt="Midnight Rider" width="640" height="640"><span class="cast-name">Midnight Rider</span></div></aside>
     </section>
     <section class="controls" aria-label="Game controls"><div class="selection"><span id="selection-dots" aria-hidden="true"></span><span id="selection-count">0 / 4 selected</span></div><div class="main-controls"><button id="shuffle" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 4-4m4-4c1-2 2-4 4-4h3m-4-4 4 4-4 4"/></svg>Shuffle</button><button id="deselect" class="button quiet" disabled>Clear</button><button id="check" class="button primary" disabled>Check group <span aria-hidden="true">→</span></button><button id="hint" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-6 3h6M8 14a7 7 0 1 1 8 0c-1 1-1 2-1 2H9s0-1-1-2Z"/></svg>Hint</button></div></section>
-    <footer><p class="discussion" id="discussion">Think • Talk • Connect</p><div class="footer-actions"><button id="reset" class="text-button">Reset puzzle</button><button id="teacher" class="text-button">Teacher reveal</button><button id="next" class="button next">Next puzzle <span aria-hidden="true">→</span></button></div></footer>
+    <footer><p class="discussion" id="discussion">Think • Talk • Connect</p><div class="footer-actions"><button id="about-daily" class="text-button">Daily play</button><button id="reset" class="text-button">Restart today</button><button id="teacher" class="text-button">Teacher reveal</button></div></footer>
   </main>
   <dialog id="help-dialog" aria-labelledby="dialog-title"><button id="dialog-close" class="dialog-close" aria-label="Close dialog">×</button><p class="eyebrow" id="dialog-kicker"></p><h2 id="dialog-title"></h2><p id="dialog-body"></p><div id="dialog-actions" class="dialog-actions"></div></dialog>
   <noscript>This game needs JavaScript. Enable it in your browser to play.</noscript>
 </body>
 </html>
+

@@ -521,6 +521,635 @@ const puzzles=[
         ]
       }
     ]
+  },
+  {
+    "id": "scaleclade-shuffle",
+    "title": "The Snap-Together Puzzle",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Scaleclade creatures",
+        "words": [
+          "IRONCREST",
+          "CINDERTAIL",
+          "RIFTBACK",
+          "THORNWHIRL"
+        ],
+        "hint": "Four familiar names share a creature family.",
+        "easierHint": "Find four Scaleclade names from NW.",
+        "explanation": "Ironcrest, Cindertail, Riftback and Thornwhirl are Scaleclade creatures."
+      },
+      {
+        "label": "TWO is the clue",
+        "words": [
+          "BICYCLE",
+          "BINOCULARS",
+          "DUET",
+          "TWINS"
+        ],
+        "hint": "A number connects four very different things.",
+        "easierHint": "Think of two wheels, two eyepieces, two performers or two babies.",
+        "explanation": "A bicycle has two wheels, binoculars two eyepieces, a duet two performers, and twins are two babies from one pregnancy. Bi- in bicycle and binoculars means two."
+      },
+      {
+        "label": "Teeth, but no mouths",
+        "words": [
+          "COMB",
+          "SAW",
+          "ZIP",
+          "GEAR"
+        ],
+        "hint": "Four objects borrow the name of a body part.",
+        "easierHint": "They have TEETH, but none has a mouth.",
+        "explanation": "A comb, saw, zip and gear have parts called teeth. These teeth untangle, cut, fasten or fit together."
+      },
+      {
+        "label": "Put TOOTH before these",
+        "words": [
+          "BRUSH",
+          "PASTE",
+          "ACHE",
+          "PICK"
+        ],
+        "hint": "One body-part word fits before four tiles.",
+        "easierHint": "TOOTH + BRUSH makes TOOTHBRUSH. Try three more.",
+        "explanation": "Toothbrush, toothpaste, toothache and toothpick all begin with TOOTH. Not all four are objects!"
+      }
+    ]
+  },
+  {
+    "id": "tideborn-trick",
+    "title": "The Mixed-Up Message",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Tideborn creatures",
+        "words": [
+          "MOXIBLU",
+          "TUMBERELL",
+          "VELUNOX",
+          "QUILLAMAR"
+        ],
+        "hint": "Four names belong to the same creature family.",
+        "easierHint": "Find four Tideborn names from NW.",
+        "explanation": "Moxiblu, Tumberell, Velunox and Quillamar belong to the Tideborn family."
+      },
+      {
+        "label": "Beginnings meaning UNDER",
+        "words": [
+          "SUBMARINE",
+          "SUBWAY",
+          "UNDERGROUND",
+          "UNDERWATER"
+        ],
+        "hint": "Different word beginnings point in the same direction.",
+        "easierHint": "SUB- and UNDER- can both mean beneath something.",
+        "explanation": "Here sub- means UNDER, as in submarine and subway. Underground and underwater use the English beginning under-. The spelling changes, but the idea is similar.",
+        "sources": [
+          "https://www.thenational.academy/pupils/lessons/spelling-words-with-the-prefixes-de-re-sub-super-inter-anti-and-auto/video"
+        ]
+      },
+      {
+        "label": "You use a KEY with these",
+        "words": [
+          "MAP",
+          "PIANO",
+          "LOCK",
+          "KEYBOARD"
+        ],
+        "hint": "One little word helps you use four very different things.",
+        "easierHint": "A map has a KEY. So do some musical and typing objects.",
+        "explanation": "A map key explains symbols; piano and keyboard keys are pressed; a lock can be opened with a key. KEY has several useful meanings."
+      },
+      {
+        "label": "Put FLY after these",
+        "words": [
+          "BUTTER",
+          "DRAGON",
+          "FIRE",
+          "HOUSE"
+        ],
+        "hint": "Add the same ending to make four insect names.",
+        "easierHint": "BUTTER + FLY makes BUTTERFLY. Find three more.",
+        "explanation": "Butterfly, dragonfly, firefly and housefly are insects. A dragonfly is not a tiny dragon!"
+      }
+    ]
+  },
+  {
+    "id": "twiggynook-word-trail",
+    "title": "The Hidden Trail",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Twiggynook names",
+        "words": [
+          "BARKBIBBLE",
+          "FROSTWHIRL",
+          "SPRUCEJIG",
+          "MOSSYBOP"
+        ],
+        "hint": "Four familiar names come from the same secret place.",
+        "easierHint": "Look for four Twiggynooks from the Secret Grove.",
+        "explanation": "Barkbibble, Frostwhirl, Sprucejig and Mossybop are Twiggynooks."
+      },
+      {
+        "label": "An old root for WRITING",
+        "words": [
+          "AUTOGRAPH",
+          "PHOTOGRAPH",
+          "GRAPHITE",
+          "PARAGRAPH"
+        ],
+        "hint": "A hidden word part connects writing, pictures and pencils.",
+        "easierHint": "Look for GRAPH, from an old Greek word meaning write.",
+        "explanation": "These words share the Greek writing root GRAPH. An autograph is someone's own writing; a photograph is a picture made with light; graphite is used in pencils; a paragraph is a section of writing.",
+        "sources": [
+          "https://www.etymonline.com/word/graphite",
+          "https://www.etymonline.com/word/autograph",
+          "https://www.etymonline.com/word/photograph",
+          "https://www.etymonline.com/word/paragraph"
+        ]
+      },
+      {
+        "label": "Put STAR before these",
+        "words": [
+          "FISH",
+          "LIGHT",
+          "DUST",
+          "SHIP"
+        ],
+        "hint": "A word from the night sky fits before four tiles.",
+        "easierHint": "STAR + FISH makes STARFISH. Find three more.",
+        "explanation": "Starfish, starlight, stardust and starship begin with STAR. Only some belong in space."
+      },
+      {
+        "label": "Ways to cook",
+        "words": [
+          "BOIL",
+          "BAKE",
+          "FRY",
+          "STEAM"
+        ],
+        "hint": "Four words tell a cook what to do.",
+        "easierHint": "Look for four cooking actions that use heat.",
+        "explanation": "Boil, bake, fry and steam are ways to cook food. They use heat in different ways."
+      }
+    ]
+  },
+  {
+    "id": "classroom-double-take",
+    "title": "The Double Take",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Non-living things with FACES",
+        "words": [
+          "CLOCK",
+          "WATCH",
+          "DICE",
+          "COIN"
+        ],
+        "hint": "Four objects share the name of a body part.",
+        "easierHint": "They have FACES, but they are not people.",
+        "explanation": "Clocks and watches have faces showing the time. Dice have flat faces, and a coin has two faces or sides."
+      },
+      {
+        "label": "Things you can TIE",
+        "words": [
+          "KNOT",
+          "BOW",
+          "RIBBON",
+          "SHOELACE"
+        ],
+        "hint": "The same action works with four tiles.",
+        "easierHint": "You can TIE each one.",
+        "explanation": "You can tie a knot, a bow, a ribbon or a shoelace. Some name the thing you tie; others name the shape you make."
+      },
+      {
+        "label": "Four maths operations",
+        "words": [
+          "ADD",
+          "SUBTRACT",
+          "MULTIPLY",
+          "DIVIDE"
+        ],
+        "hint": "Four actions change or combine numbers.",
+        "easierHint": "Think of plus, minus, times and sharing into groups.",
+        "explanation": "Add, subtract, multiply and divide are four operations used in maths."
+      },
+      {
+        "label": "Put ROOM after these",
+        "words": [
+          "BED",
+          "BATH",
+          "CLASS",
+          "PLAY"
+        ],
+        "hint": "The same ending makes four places.",
+        "easierHint": "BED + ROOM makes BEDROOM. Try three more.",
+        "explanation": "Bedroom, bathroom, classroom and playroom all end in ROOM."
+      }
+    ]
+  },
+  {
+    "id": "space-secret",
+    "title": "The Far-Out Mix",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Our four rocky planets",
+        "words": [
+          "MERCURY",
+          "VENUS",
+          "EARTH",
+          "MARS"
+        ],
+        "hint": "Four neighbours have solid, rocky surfaces.",
+        "easierHint": "Find the four planets closest to the Sun.",
+        "explanation": "Mercury, Venus, Earth and Mars are the four inner, rocky planets of our Solar System.",
+        "sources": [
+          "https://science.nasa.gov/exoplanets/terrestrial/"
+        ]
+      },
+      {
+        "label": "Add SHIP to the end",
+        "words": [
+          "SPACE",
+          "STAR",
+          "FRIEND",
+          "OWNER"
+        ],
+        "hint": "A shared ending makes two vehicles and two quite different ideas.",
+        "easierHint": "SPACE + SHIP makes SPACESHIP. Try all four.",
+        "explanation": "Spaceship and starship are vehicles. Friendship and ownership are not! All four words end in SHIP."
+      },
+      {
+        "label": "Slow ways to move",
+        "words": [
+          "CREEP",
+          "CRAWL",
+          "STROLL",
+          "TRUDGE"
+        ],
+        "hint": "Imagine moving without rushing.",
+        "easierHint": "Find four verbs for slow movement.",
+        "explanation": "Creep, crawl, stroll and trudge describe ways of moving slowly. Trudging is slow, heavy walking."
+      },
+      {
+        "label": "Things with a TAIL",
+        "words": [
+          "COMET",
+          "KITE",
+          "COIN",
+          "AEROPLANE"
+        ],
+        "hint": "A body-part word links four things that are not animals.",
+        "easierHint": "Think of a comet's tail, and heads or tails.",
+        "explanation": "A comet can grow a tail near the Sun; a kite can have a tail; an aeroplane has a tail; and a coin has a tails side."
+      }
+    ]
+  },
+  {
+    "id": "sport-sideways",
+    "title": "The Offbeat Round",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Sports with a dividing net",
+        "words": [
+          "TENNIS",
+          "BADMINTON",
+          "VOLLEYBALL",
+          "TABLE TENNIS"
+        ],
+        "hint": "Four sports keep opponents on different sides of something.",
+        "easierHint": "A NET separates the two sides.",
+        "explanation": "Tennis, badminton, volleyball and table tennis use a net between the opposing sides."
+      },
+      {
+        "label": "Sport words with another meaning",
+        "words": [
+          "BAT",
+          "RACKET",
+          "PITCH",
+          "MATCH"
+        ],
+        "hint": "Four sports words can also belong somewhere else.",
+        "easierHint": "Think of an animal, a loud noise, a high or low sound, and a fire-lighting stick.",
+        "explanation": "A bat can be an animal; a racket can be a loud noise; pitch describes how high or low a sound is; a match can light a fire. All four also have sports meanings."
+      },
+      {
+        "label": "THREE is the clue",
+        "words": [
+          "TRIANGLE",
+          "TRICYCLE",
+          "TRAFFIC LIGHTS",
+          "TRIPOD"
+        ],
+        "hint": "A number matters to four very different things.",
+        "easierHint": "Count sides, wheels, main colours or legs.",
+        "explanation": "A triangle has three sides, a tricycle three wheels, a tripod three legs, and standard road traffic lights use three main colours. Tri- means THREE."
+      },
+      {
+        "label": "Punctuation marks",
+        "words": [
+          "COMMA",
+          "FULL STOP",
+          "QUESTION MARK",
+          "APOSTROPHE"
+        ],
+        "hint": "Four help written sentences make sense.",
+        "easierHint": "Look for marks used when writing, rather than letters or numbers.",
+        "explanation": "A comma, full stop, question mark and apostrophe are punctuation marks."
+      }
+    ]
+  },
+  {
+    "id": "food-hidden-parts",
+    "title": "The Surprising Sort",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Fruits in plant science",
+        "words": [
+          "TOMATO",
+          "CUCUMBER",
+          "CAPSICUM",
+          "PUMPKIN"
+        ],
+        "hint": "Plant scientists might group these differently from a cook.",
+        "easierHint": "These grow from flowers and are fruits, even though we often call them vegetables.",
+        "explanation": "Tomato, cucumber, capsicum and pumpkin are botanical fruits. Capsicum is also called sweet pepper. Cooks often treat these as vegetables: a cooking name and a plant-science name can both be useful.",
+        "sources": [
+          "https://www.kew.org/plants/cucumber",
+          "https://www.kew.org/plants/pepper",
+          "https://www.kew.org/plants/squash",
+          "https://www.kew.org/read-and-watch/vegetable-fruit-seeds-up-close"
+        ]
+      },
+      {
+        "label": "Root vegetables",
+        "words": [
+          "CARROT",
+          "RADISH",
+          "TURNIP",
+          "BEETROOT"
+        ],
+        "hint": "Think about which part of the plant is grown for food.",
+        "easierHint": "These are root vegetables, with the part we usually eat growing underground.",
+        "explanation": "Carrot, radish, turnip and beetroot are root vegetables. This separates them from the fruits grown on the other four plants."
+      },
+      {
+        "label": "Put EAR before these",
+        "words": [
+          "DRUM",
+          "RING",
+          "WIG",
+          "ACHE"
+        ],
+        "hint": "A body-part word fits before four tiles.",
+        "easierHint": "EAR + DRUM makes EARDRUM. Find three more.",
+        "explanation": "Eardrum, earring, earwig and earache all begin with EAR. An earwig is an insect, not an ear's hairstyle!"
+      },
+      {
+        "label": "Taste words",
+        "words": [
+          "SWEET",
+          "SOUR",
+          "BITTER",
+          "SALTY"
+        ],
+        "hint": "Four words describe something your tongue notices.",
+        "easierHint": "Think about sugar, lemon, bitter flavours and salt.",
+        "explanation": "Sweet, sour, bitter and salty are words for tastes. They describe food rather than naming a food."
+      }
+    ]
+  },
+  {
+    "id": "look-again",
+    "title": "Look Again",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Put HEAD before these",
+        "words": [
+          "BAND",
+          "LIGHT",
+          "ACHE",
+          "PHONES"
+        ],
+        "hint": "Try adding the same word at the beginning.",
+        "easierHint": "Think of a headband and headphones.",
+        "explanation": "Headband, headlight, headache and headphones all begin with HEAD."
+      },
+      {
+        "label": "Put SNOW before these",
+        "words": [
+          "FLAKE",
+          "FALL",
+          "STORM",
+          "DROP"
+        ],
+        "hint": "A wintry word can join each one.",
+        "easierHint": "Put SNOW in front of each word.",
+        "explanation": "Snowflake, snowfall, snowstorm and snowdrop begin with SNOW. A snowdrop is a small white flower."
+      },
+      {
+        "label": "Wings, but not birds",
+        "words": [
+          "BEE",
+          "BAT",
+          "AEROPLANE",
+          "BUTTERFLY"
+        ],
+        "hint": "They share a feature that helps them move.",
+        "easierHint": "They all have wings, but none is a bird.",
+        "explanation": "Bees, bats, aeroplanes and butterflies have wings. A bat is a mammal, not a bird."
+      },
+      {
+        "label": "School subjects",
+        "words": [
+          "MATHS",
+          "ENGLISH",
+          "SCIENCE",
+          "HISTORY"
+        ],
+        "hint": "Look at a school timetable.",
+        "easierHint": "These are four subjects you learn at school.",
+        "explanation": "Maths, English, science and history are school subjects."
+      }
+    ]
+  },
+  {
+    "id": "new-discoveries",
+    "title": "New Discoveries",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Containers with a SPOUT",
+        "words": [
+          "TEAPOT",
+          "KETTLE",
+          "JUG",
+          "WATERING CAN"
+        ],
+        "hint": "Think about the part that helps liquid come out.",
+        "easierHint": "Each container has a SPOUT for pouring.",
+        "explanation": "A teapot, kettle, jug and watering can have a spout that helps direct liquid when you pour."
+      },
+      {
+        "label": "Put BOOK after these",
+        "words": [
+          "NOTE",
+          "TEXT",
+          "SCRAP",
+          "COOK"
+        ],
+        "hint": "Add the same ending to make four new words.",
+        "easierHint": "Each can go before BOOK.",
+        "explanation": "Notebook, textbook, scrapbook and cookbook are four kinds of book."
+      },
+      {
+        "label": "RINGS you can see",
+        "words": [
+          "SATURN",
+          "TREE",
+          "ONION",
+          "FINGER"
+        ],
+        "hint": "The same round shape appears in different places.",
+        "easierHint": "Think about rings in space, inside plants and worn as jewellery.",
+        "explanation": "Saturn has rings; tree trunks have growth rings; sliced onions show rings; and fingers can wear rings."
+      },
+      {
+        "label": "Compass directions",
+        "words": [
+          "NORTH",
+          "SOUTH",
+          "EAST",
+          "WEST"
+        ],
+        "hint": "These help you find your way.",
+        "easierHint": "Find the four main directions on a compass.",
+        "explanation": "North, south, east and west are the four main compass directions."
+      }
+    ]
+  },
+  {
+    "id": "unexpected-company",
+    "title": "Unexpected Company",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Birds that do not fly",
+        "words": [
+          "PENGUIN",
+          "OSTRICH",
+          "EMU",
+          "KIWI"
+        ],
+        "hint": "They are all birds, but one usual bird skill is missing.",
+        "easierHint": "These four are flightless birds.",
+        "explanation": "Penguins, ostriches, emus and kiwis are birds that do not fly. Having wings does not always mean flying.",
+        "sources": [
+          "https://australian.museum/learn/animals/birds/"
+        ]
+      },
+      {
+        "label": "Names for animal groups",
+        "words": [
+          "PACK",
+          "HERD",
+          "FLOCK",
+          "SWARM"
+        ],
+        "hint": "These do not name just one animal.",
+        "easierHint": "Think of a pack of wolves or a swarm of bees.",
+        "explanation": "Pack, herd, flock and swarm are names for groups of animals, such as wolves, cattle, birds and bees."
+      },
+      {
+        "label": "Put FIRE before these",
+        "words": [
+          "ENGINE",
+          "WORK",
+          "PLACE",
+          "WOOD"
+        ],
+        "hint": "The same word can come before each one.",
+        "easierHint": "Think of a rescue vehicle, a sparkling display and a warm hearth.",
+        "explanation": "Fire engine, firework, fireplace and firewood begin with FIRE."
+      },
+      {
+        "label": "Add MAN to make heroes",
+        "words": [
+          "SUPER",
+          "BAT",
+          "SPIDER",
+          "IRON"
+        ],
+        "hint": "Give four words the same ending to find familiar heroes.",
+        "easierHint": "Put MAN after each one.",
+        "explanation": "Superman, Batman, Spider-Man and Iron Man are superhero names. Some are written with a space or hyphen."
+      }
+    ]
+  },
+  {
+    "id": "different-view",
+    "title": "A Different View",
+    "difficulty": "Challenge",
+    "groups": [
+      {
+        "label": "Put FOOT before these",
+        "words": [
+          "PRINT",
+          "STEP",
+          "PATH",
+          "STOOL"
+        ],
+        "hint": "Try putting the same body-part word first.",
+        "easierHint": "Add FOOT to the beginning of each word.",
+        "explanation": "Footprint, footstep, footpath and footstool all begin with FOOT."
+      },
+      {
+        "label": "Put BLACK before these",
+        "words": [
+          "BERRY",
+          "BOARD",
+          "BIRD",
+          "SMITH"
+        ],
+        "hint": "One colour can join each word.",
+        "easierHint": "Put BLACK in front of each word.",
+        "explanation": "Blackberry, blackboard, blackbird and blacksmith begin with BLACK. A blacksmith makes and repairs things from metal."
+      },
+      {
+        "label": "Animals known for stripes",
+        "words": [
+          "TIGER",
+          "ZEBRA",
+          "WASP",
+          "NUMBAT"
+        ],
+        "hint": "Look for a repeated pattern on their bodies.",
+        "easierHint": "Look for animals with striped markings, including a Western Australian favourite.",
+        "explanation": "Tigers, zebras, familiar yellow-and-black wasps and numbats have striped markings. A numbat has pale bands across its back.",
+        "sources": [
+          "https://library.dbca.wa.gov.au/FullTextFiles/016542.pdf"
+        ]
+      },
+      {
+        "label": "The four seasons",
+        "words": [
+          "SPRING",
+          "SUMMER",
+          "AUTUMN",
+          "WINTER"
+        ],
+        "hint": "These come around every year.",
+        "easierHint": "Find the four seasons.",
+        "explanation": "Spring, summer, autumn and winter are the four seasons in the familiar four-season calendar."
+      }
+    ]
   }
 ];
 if(typeof module==='object'&&module.exports)module.exports=puzzles;else root.FOUR_PUZZLES=puzzles;
