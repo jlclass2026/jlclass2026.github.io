@@ -11,3 +11,5 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .solved:hover{filter:brightness(1.07)}
+/* Keep the board's grid track within its allocated flex height. */
+.stage{grid-template-rows:minmax(0,1fr)}.cast{min-height:0}
