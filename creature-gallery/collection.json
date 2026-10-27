@@ -234,6 +234,11 @@
           "art": "assets/5bdbaf8386d16339b77f16b25ee2955e2e46dd93ca3cf82f183a737fcfb45990.webp"
         },
         {
+          "id": "curio_06",
+          "name": "Puddle Pup",
+          "art": "assets/64b8e1a37090839c5f3367cf5a3a611442250fbbdad26d3cde303624687c8a32.webp"
+        },
+        {
           "id": "curio_28",
           "name": "Velvet Eclipse",
           "art": "assets/0fe5406a0e6eb102c8ef46d4fb0a011598e002b951bf67db80ec63fd8cb89ec3.webp"
@@ -671,6 +676,11 @@
       "art": "assets/e72b1d34b62e443f65aceedbf48fd863b7495fc8d648a958e0338bc422a30d56.webp",
       "curios": [
         {
+          "id": "curio_07",
+          "name": "Crystal Burrower",
+          "art": "assets/6bac0a0d68302030576731f5b900accdbcfa487db9ddc67cddbae9c718671f43.webp"
+        },
+        {
           "id": "curio_14",
           "name": "Pebble Hatchling",
           "art": "assets/12a1a939e32745b3895dc59f9cfc3bfa8d5f60d4dcb8efa9950676d3cc7f72a4.webp"
@@ -741,11 +751,92 @@
       }
     },
     {
+      "key": "5c09e779c06ccbf2026440e055226946",
+      "creatureName": "Rosywhisk",
+      "stage": 1,
+      "art": "assets/053f2b560ffc4f0ae34fc3ebbee34147fdf6bd66f00d6f3d6ba21cd719979c15.webp",
+      "curios": [
+        {
+          "id": "curio_19",
+          "name": "Coral Crawler",
+          "art": "assets/cd316c03546d5cbdd8c459d0e0a5fdadbf5c46eb6fb184ecabd38151cdf8df18.webp"
+        },
+        {
+          "id": "curio_23",
+          "name": "Prism Spider",
+          "art": "assets/82db23f97dea355d3f40c2d3b46f7174f91af7b5c0a9d0a5eab46a4283f416ba.webp"
+        }
+      ],
+      "squishies": [
+        {
+          "id": "circus_03_purple_pigtail_clown",
+          "name": "Plumperty",
+          "art": "assets/183b3cfdc340f0ffb16914b46aed007e415855bd09dfb76e98360709d14f7bab.webp"
+        },
+        {
+          "id": "dragons_06_gold",
+          "name": "Goldgleam",
+          "art": "assets/c7706b9fdb5ba2f5224c64846a8c3f8d07a95dde2193fa6f3b6a7794e8c1e1a2.webp"
+        },
+        {
+          "id": "emotions_05_calm",
+          "name": "Zenleaf",
+          "art": "assets/e77ac3fe5c500f651848523dfeea98a3e5cf839a637fc1ae1809192e7017daed.webp"
+        },
+        {
+          "id": "food_treats_07_pastel_cake",
+          "name": "Sprinkalina",
+          "art": "assets/18cd037e57d17f00c7cfd513e449b04adccdc4260a9f376003823f011fa5b259.webp"
+        },
+        {
+          "id": "myths_griffin",
+          "name": "Grifflet",
+          "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
+        },
+        {
+          "id": "weather_02_rain_cloud",
+          "name": "Drizzlepip",
+          "art": "assets/9ba0a5eb06ff7a9af272619f18c35b6b1ab09b2f6fc587644e1abd4cf6b1d374.webp"
+        },
+        {
+          "id": "wild_things_rusty_rumpus",
+          "name": "Rusty Rumpus",
+          "art": "assets/bf856c9be5f12a0da03e86a9fd1e71bdc99ead16c769d2b5c4cde29283e0c137.webp"
+        }
+      ],
+      "room": {
+        "flag": {
+          "held": false,
+          "art": null
+        },
+        "relics": [
+          {
+            "id": "relic_amber_antler",
+            "name": "Amber Antler",
+            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
+        "relicUnknown": 0
+      }
+    },
+    {
       "key": "364ea0b82247ba601efd5d706f93ff3d",
       "creatureName": "Rubyruff",
       "stage": 1,
       "art": "assets/b70aabda1475e635852154ee8b47ca1a2b429c190486f1bebccf2cf9925e487d.webp",
       "curios": [
+        {
+          "id": "curio_05",
+          "name": "Winged Moon",
+          "art": "assets/4186d94e967feea6a32cc4c658f1a207e639f48cb92b4c377aa1d0952309fc20.webp"
+        },
         {
           "id": "curio_29",
           "name": "Rainbow Bristle",
@@ -800,6 +891,11 @@
           "id": "curio_06",
           "name": "Puddle Pup",
           "art": "assets/64b8e1a37090839c5f3367cf5a3a611442250fbbdad26d3cde303624687c8a32.webp"
+        },
+        {
+          "id": "curio_10",
+          "name": "Dream Polyp",
+          "art": "assets/45ebafd3518f14f20e0e923c3c9b4fde3a1723a303db2b4b52badf392d04d17d.webp"
         },
         {
           "id": "curio_21",
@@ -863,6 +959,38 @@
             "count": 1
           }
         ],
+        "relicUnknown": 0
+      }
+    },
+    {
+      "key": "232318f1e9f172961966c73fb8dcdcbc",
+      "creatureName": "Stormhorn",
+      "stage": 1,
+      "art": "assets/60e12a660471dbf236f00d291ea4cbe82e77d361a75146bb7013584d2302247c.webp",
+      "curios": [],
+      "squishies": [
+        {
+          "id": "food_treats_03_chocolate_cake",
+          "name": "Chocodoodle",
+          "art": "assets/7261e17a84c9430ecbe350fc5d9936633dc2e0e28268cb169b2685f9e33d2d36.webp"
+        },
+        {
+          "id": "halloween_pumpkin_warrior",
+          "name": "Gourdon",
+          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+        },
+        {
+          "id": "monsters_06_pink_sparkle",
+          "name": "Pink Sparkle",
+          "art": "assets/90c9e5fd155034feccc476492400b6e0b0b6b5f646664bc3d659e5cac4292fe0.webp"
+        }
+      ],
+      "room": {
+        "flag": {
+          "held": false,
+          "art": null
+        },
+        "relics": [],
         "relicUnknown": 0
       }
     },

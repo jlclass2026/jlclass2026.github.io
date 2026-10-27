@@ -2,7 +2,7 @@
   "format": "nw-market-catalogue",
   "schemaVersion": 2,
   "classId": "nw-class-3b649cc6-153a-48fe-bbf8-35c1cc047f7e",
-  "revision": 27,
+  "revision": 28,
   "creatures": [
     {
       "id": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
@@ -55,6 +55,11 @@
       "balance": 452
     },
     {
+      "id": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "creature": "Rosywhisk",
+      "balance": 384
+    },
+    {
       "id": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
       "creature": "Rubyruff",
       "balance": 498
@@ -63,6 +68,11 @@
       "id": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
       "creature": "Sparkwhisk",
       "balance": 532
+    },
+    {
+      "id": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
+      "creature": "Stormhorn",
+      "balance": 384
     },
     {
       "id": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
@@ -202,6 +212,20 @@
       "id": "item-efc6434d-4efa-4dd1-a636-b5219587efda",
       "type": "wild_things_rusty_rumpus",
       "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-a240b736-c3cd-45a7-9a9e-238c557e5de9",
+      "type": "halloween_pumpkin_warrior",
+      "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-20a8547f-2c3b-4775-87f9-c227db68e5b8",
+      "type": "monsters_06_pink_sparkle",
+      "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
       "price": null,
       "version": 1
     },
@@ -556,6 +580,34 @@
       "version": 1
     },
     {
+      "id": "item-9d8b1c69-9b67-488d-9f5f-915f7b5450cc",
+      "type": "circus_03_purple_pigtail_clown",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-70effe71-7d48-4795-8fdf-4c75ac9f87c7",
+      "type": "emotions_05_calm",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-b565887a-692b-4510-8c63-224fce9cbd5e",
+      "type": "dragons_06_gold",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-1124fffe-a378-40dd-8d1c-2bc4a1a13f05",
+      "type": "wild_things_rusty_rumpus",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
       "id": "item-b2b04511-c762-4b77-ace8-9749d160fa31",
       "type": "circus_05_mint_white_hair_clown",
       "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
@@ -629,6 +681,13 @@
       "id": "item-2b021573-ada1-4d8e-8442-c7a3ac516af8",
       "type": "food_treats_08_grilled_cheese",
       "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-13084c02-b9b6-42c1-9136-d3413ea20fa4",
+      "type": "food_treats_03_chocolate_cake",
+      "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
       "price": null,
       "version": 1
     },
@@ -787,6 +846,20 @@
       "version": 2
     },
     {
+      "id": "item-1698df91-6d00-4f6d-8e73-fc829bf18d59",
+      "type": "myths_griffin",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-751c735f-2862-44a3-9ed3-f1a15eafe4fe",
+      "type": "food_treats_07_pastel_cake",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
       "id": "item-15f0799f-2e62-4297-b0ce-8c0298ff343b",
       "type": "food_treats_10_cinnamon_roll",
       "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
@@ -895,6 +968,13 @@
       "id": "item-414a66ca-4dec-43d8-9e46-d80f270df240",
       "type": "fruit_07_kiwi",
       "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-84372cc4-59f6-48d3-bf34-3886ea9146ae",
+      "type": "weather_02_rain_cloud",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
       "price": null,
       "version": 1
     }
