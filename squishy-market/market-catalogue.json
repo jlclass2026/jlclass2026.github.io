@@ -2,7 +2,7 @@
   "format": "nw-market-catalogue",
   "schemaVersion": 2,
   "classId": "nw-class-3b649cc6-153a-48fe-bbf8-35c1cc047f7e",
-  "revision": 73,
+  "revision": 74,
   "creatures": [
     {
       "id": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
@@ -1100,6 +1100,69 @@
     {
       "id": "item-2fc38ab2-39f9-4e35-905d-542f08b63551",
       "type": "myths_unicorn",
+      "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-d2a90dd0-4196-4893-b14b-9127ac62684a",
+      "type": "food_treats_10_cinnamon_roll",
+      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-64fc98dd-2775-4306-a399-5ce1e3f8f492",
+      "type": "food_treats_01_cheeseburger",
+      "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-8e90729d-b04c-49e5-85bc-0badd7ca5245",
+      "type": "food_treats_05_pink_iced_pastry",
+      "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-daf5aa6b-93e2-4fa6-ae85-939791d99d85",
+      "type": "food_treats_08_grilled_cheese",
+      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-00fec462-95c5-4703-acbe-5f50d4b6d480",
+      "type": "food_treats_09_raspberry_jelly",
+      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-2c0a9303-2034-4245-8447-9404528ea721",
+      "type": "food_treats_03_chocolate_cake",
+      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-97408ba5-9b42-45af-97a3-f8e014b3fb1d",
+      "type": "food_treats_10_cinnamon_roll",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-e507ebeb-f5e1-4b99-9d53-bb8d47bbc22b",
+      "type": "food_treats_01_cheeseburger",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-aa2ec2cd-39f8-4ab7-b90a-79021146b112",
+      "type": "food_treats_01_cheeseburger",
       "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
       "price": null,
       "version": 1
