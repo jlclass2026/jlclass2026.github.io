@@ -2,7 +2,7 @@
   "format": "nw-market-catalogue",
   "schemaVersion": 2,
   "classId": "nw-class-3b649cc6-153a-48fe-bbf8-35c1cc047f7e",
-  "revision": 74,
+  "revision": 75,
   "creatures": [
     {
       "id": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
@@ -78,11 +78,6 @@
       "id": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
       "creature": "Tumberell",
       "balance": 400
-    },
-    {
-      "id": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "creature": "Tumbletuft",
-      "balance": 745
     },
     {
       "id": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
@@ -277,20 +272,6 @@
       "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
       "price": null,
       "version": 2
-    },
-    {
-      "id": "item-9399de7e-cd0f-44f7-b852-16d709fa77ed",
-      "type": "emotions_01_happy",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-f771e4e6-bdba-40f2-af23-3ee91310e754",
-      "type": "wild_things_bramblehorn",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
     },
     {
       "id": "item-1b438f1f-8ba8-46a2-ba7a-9b2d89572af4",
@@ -706,20 +687,6 @@
       "version": 1
     },
     {
-      "id": "item-1bf41127-d16b-4ba6-8a6a-45f9a69e997a",
-      "type": "myths_unicorn",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-89850fe0-4507-49fe-8d8c-e4d88f56ab9b",
-      "type": "food_treats_03_chocolate_cake",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-9ab4de09-50af-4cd5-9924-52007d677cde",
       "type": "myths_chimera",
       "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
@@ -774,13 +741,6 @@
       "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "price": null,
       "version": 1
-    },
-    {
-      "id": "item-eefbb34f-93f4-4440-aa1c-6f6a65b0ea11",
-      "type": "myths_centaur",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 2
     },
     {
       "id": "item-eae9f33f-2567-48e0-bb68-60839b608772",
@@ -1017,13 +977,6 @@
       "id": "item-251b0ddb-50d7-4532-97b2-3ef8b9e7ab25",
       "type": "myths_cyclops",
       "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-b0084b76-e4b4-4612-84c9-9837add1f902",
-      "type": "myths_medusa",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
       "price": null,
       "version": 1
     },

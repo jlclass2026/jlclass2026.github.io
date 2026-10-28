@@ -391,6 +391,11 @@
           "id": "curio_17",
           "name": "Leaf Skipper",
           "art": "assets/fea2ef86ca448b8236c638f7be6d67699db534ff372d64697116648abe87cd7b.webp"
+        },
+        {
+          "id": "curio_33",
+          "name": "Clockwork Pear",
+          "art": "assets/d4bbe1ef5d349e0424eb0ce427c539e1d5ba65339073b11272c8e76f4c2ab78c.webp"
         }
       ],
       "squishies": [
@@ -889,6 +894,11 @@
           "id": "curio_23",
           "name": "Prism Spider",
           "art": "assets/82db23f97dea355d3f40c2d3b46f7174f91af7b5c0a9d0a5eab46a4283f416ba.webp"
+        },
+        {
+          "id": "curio_35",
+          "name": "Honeycomb Hopper",
+          "art": "assets/ffe3740d9c66d310c4549b1874724053aaa644bafddc5f303e2e3d4dd6d6d0f6.webp"
         }
       ],
       "squishies": [
@@ -1262,87 +1272,10 @@
       }
     },
     {
-      "key": "46e5130a19fc652bbfd89b762c075404",
-      "creatureName": "Tumbletuft",
-      "stage": 1,
-      "art": "assets/fe14555f5675ef1f61a64602a37705ab453a85ae2f7c6535fa65ee75856a3b12.webp",
-      "curios": [
-        {
-          "id": "curio_02",
-          "name": "Snapbud",
-          "art": "assets/b8ec9ec18abb776167abf2d7dbe703206d79f6106e4e2447eef7d8fc774c849b.webp"
-        },
-        {
-          "id": "curio_26",
-          "name": "Sunbeam Gecko",
-          "art": "assets/02b6b7a379d1519f2a6c90e5f66226d06118d99cb6423ada579d133321415a9a.webp"
-        }
-      ],
-      "squishies": [
-        {
-          "id": "emotions_01_happy",
-          "name": "Gigglepop",
-          "art": "assets/1e35d800f69df2141162900e2f247dbcf798e6148facdbc4105e784cf7ff3e8c.webp"
-        },
-        {
-          "id": "food_treats_03_chocolate_cake",
-          "name": "Chocodoodle",
-          "art": "assets/7261e17a84c9430ecbe350fc5d9936633dc2e0e28268cb169b2685f9e33d2d36.webp"
-        },
-        {
-          "id": "myths_centaur",
-          "name": "Cloverhoof",
-          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
-        },
-        {
-          "id": "myths_medusa",
-          "name": "Hissabella",
-          "art": "assets/63416574cb211b205a386c7c7e550ac7cbacb92c92553413570e5cfe1061ab11.webp"
-        },
-        {
-          "id": "myths_unicorn",
-          "name": "Prismhoof",
-          "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
-        },
-        {
-          "id": "wild_things_bramblehorn",
-          "name": "Bramblehorn",
-          "art": "assets/450970d80e164d9476d264891db05287c464e0a54fbba9155ce0fc9f61d2eae1.webp"
-        }
-      ],
-      "room": {
-        "flag": {
-          "held": false,
-          "art": null
-        },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
-        "relicUnknown": 0
-      }
-    },
-    {
       "key": "1312642476e8bede32ee70a4f9222e70",
       "creatureName": "Vantimo",
-      "stage": 1,
-      "art": "assets/efe422d046e602570fbd89ac1e9737b51432d6004e6f5dd8e58ab3fb67f0d6df.webp",
+      "stage": 2,
+      "art": "assets/7750e47d42ec8133abbaaf52d644cce61ff0ef62077bc39589b240cc9bbba55c.webp",
       "curios": [
         {
           "id": "curio_01",
@@ -1455,6 +1388,11 @@
           "id": "curio_22",
           "name": "Cinder Salamander",
           "art": "assets/7b39e3760c89b55072cc1387fd3a589293a903de8e1dd31eaa23b48361e6cad6.webp"
+        },
+        {
+          "id": "curio_32",
+          "name": "Petal Twister",
+          "art": "assets/ec1175276d886afa9265def12117859e0c49d30a93d0886c94c0156f14a08bba.webp"
         }
       ],
       "squishies": [
