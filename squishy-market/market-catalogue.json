@@ -2,7 +2,7 @@
   "format": "nw-market-catalogue",
   "schemaVersion": 2,
   "classId": "nw-class-3b649cc6-153a-48fe-bbf8-35c1cc047f7e",
-  "revision": 75,
+  "revision": 76,
   "creatures": [
     {
       "id": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
@@ -78,6 +78,11 @@
       "id": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
       "creature": "Tumberell",
       "balance": 400
+    },
+    {
+      "id": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "creature": "Tumbletuft",
+      "balance": 745
     },
     {
       "id": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
@@ -272,6 +277,20 @@
       "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
       "price": null,
       "version": 2
+    },
+    {
+      "id": "item-9399de7e-cd0f-44f7-b852-16d709fa77ed",
+      "type": "emotions_01_happy",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-f771e4e6-bdba-40f2-af23-3ee91310e754",
+      "type": "wild_things_bramblehorn",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 1
     },
     {
       "id": "item-1b438f1f-8ba8-46a2-ba7a-9b2d89572af4",
@@ -687,6 +706,20 @@
       "version": 1
     },
     {
+      "id": "item-1bf41127-d16b-4ba6-8a6a-45f9a69e997a",
+      "type": "myths_unicorn",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-89850fe0-4507-49fe-8d8c-e4d88f56ab9b",
+      "type": "food_treats_03_chocolate_cake",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 1
+    },
+    {
       "id": "item-9ab4de09-50af-4cd5-9924-52007d677cde",
       "type": "myths_chimera",
       "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
@@ -741,6 +774,13 @@
       "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "price": null,
       "version": 1
+    },
+    {
+      "id": "item-eefbb34f-93f4-4440-aa1c-6f6a65b0ea11",
+      "type": "myths_centaur",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 2
     },
     {
       "id": "item-eae9f33f-2567-48e0-bb68-60839b608772",
@@ -981,6 +1021,13 @@
       "version": 1
     },
     {
+      "id": "item-b0084b76-e4b4-4612-84c9-9837add1f902",
+      "type": "myths_medusa",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 1
+    },
+    {
       "id": "item-40fb8802-4a8d-4ca8-b862-c9749c7f06fc",
       "type": "myths_cerberus",
       "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
@@ -1117,6 +1164,20 @@
       "id": "item-aa2ec2cd-39f8-4ab7-b90a-79021146b112",
       "type": "food_treats_01_cheeseburger",
       "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-5789e0ea-19cc-445b-aa16-1f50c7fd2808",
+      "type": "fruit_08_peach",
+      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-a26fbd69-a4f4-4b90-af31-e9bed85105ec",
+      "type": "space_mars",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
       "price": null,
       "version": 1
     }

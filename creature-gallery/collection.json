@@ -16,6 +16,11 @@
           "id": "curio_24",
           "name": "Dandelion Drifter",
           "art": "assets/d695b7518fa49c4f314aa0caaf591195a063c269b3bcb5c162839648f60ac7c8.webp"
+        },
+        {
+          "id": "curio_36",
+          "name": "Doorway Keeper",
+          "art": "assets/8b313dd7adc9319031488c582d3466c87c5e78f93c6ea5a44e6a1cb410bee240.webp"
         }
       ],
       "squishies": [
@@ -72,8 +77,8 @@
       ],
       "room": {
         "flag": {
-          "held": false,
-          "art": null
+          "held": true,
+          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
         },
         "relics": [
           {
@@ -86,6 +91,12 @@
             "id": "relic_skull_feathers",
             "name": "Skull Feathers",
             "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_spiral_stone",
+            "name": "Spiral Stone",
+            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
             "count": 1
           }
         ],
@@ -174,6 +185,12 @@
             "count": 1
           },
           {
+            "id": "relic_opal_vines",
+            "name": "Opal Vines",
+            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
+            "count": 1
+          },
+          {
             "id": "relic_skull_feathers",
             "name": "Skull Feathers",
             "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
@@ -192,8 +209,8 @@
     {
       "key": "d50227dd886df923f119e386e4cd0c10",
       "creatureName": "Bumblebop",
-      "stage": 1,
-      "art": "assets/6d9f0b981eb49e476ad1a714a4d7ed4084f8d75bd8162426631bc1bdeb4f039a.webp",
+      "stage": 2,
+      "art": "assets/9bd2947bf820c1a2b78c55c980e6d365ce334878fb6c8d30ecb437927861c687.webp",
       "curios": [
         {
           "id": "curio_11",
@@ -430,6 +447,11 @@
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
         },
         {
+          "id": "space_mars",
+          "name": "Rusty Rocket",
+          "art": "assets/745a8f10720a99a173cd63d877d0d7358f8960ea8ebc084cdcfc2fef5eca3293.webp"
+        },
+        {
           "id": "wild_things_forest_grumbler",
           "name": "Forest Grumbler",
           "art": "assets/eef41f8ec061f6185a0b8dabe1b77f6310cdb0f3026b22fdb02b6a2079cc3827.webp"
@@ -440,7 +462,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -503,7 +532,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -541,6 +577,11 @@
           "art": "assets/7261e17a84c9430ecbe350fc5d9936633dc2e0e28268cb169b2685f9e33d2d36.webp"
         },
         {
+          "id": "fruit_08_peach",
+          "name": "Peachipuff",
+          "art": "assets/28915e69bac841a62d68968524db951d098c902c18ed9a2a7da682b7db4c6d12.webp"
+        },
+        {
           "id": "halloween_vampire",
           "name": "Vesperfang",
           "art": "assets/614bb78fb14ff34dedb84cea600f0648e6503ce35314868cea5224d228776cec.webp"
@@ -576,6 +617,12 @@
             "id": "relic_amber_antler",
             "name": "Amber Antler",
             "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_opal_vines",
+            "name": "Opal Vines",
+            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
             "count": 1
           },
           {
@@ -694,8 +741,8 @@
     {
       "key": "e9b2dbda8eac1437480d43936ad12dfd",
       "creatureName": "Razzik",
-      "stage": 1,
-      "art": "assets/ea81beb4ac98ba0dd1f84bbe4e721b2e9c324e645f30f8f4dc44aab97f05f80b.webp",
+      "stage": 2,
+      "art": "assets/2ebc3429dc2062d2135a1fad8dc42639a44c7041970b67ddf4e5fb0d389d9210.webp",
       "curios": [
         {
           "id": "curio_05",
@@ -775,6 +822,12 @@
             "id": "relic_amber_antler",
             "name": "Amber Antler",
             "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_opal_vines",
+            "name": "Opal Vines",
+            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
             "count": 1
           },
           {
@@ -859,8 +912,8 @@
       ],
       "room": {
         "flag": {
-          "held": false,
-          "art": null
+          "held": true,
+          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
         },
         "relics": [
           {
@@ -873,6 +926,12 @@
             "id": "relic_skull_feathers",
             "name": "Skull Feathers",
             "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_spiral_stone",
+            "name": "Spiral Stone",
+            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
             "count": 1
           }
         ],
@@ -1108,8 +1167,8 @@
       ],
       "room": {
         "flag": {
-          "held": false,
-          "art": null
+          "held": true,
+          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
         },
         "relics": [
           {
@@ -1122,6 +1181,12 @@
             "id": "relic_skull_feathers",
             "name": "Skull Feathers",
             "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_spiral_stone",
+            "name": "Spiral Stone",
+            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
             "count": 1
           }
         ],
@@ -1166,7 +1231,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -1272,6 +1344,83 @@
       }
     },
     {
+      "key": "46e5130a19fc652bbfd89b762c075404",
+      "creatureName": "Tumbletuft",
+      "stage": 1,
+      "art": "assets/fe14555f5675ef1f61a64602a37705ab453a85ae2f7c6535fa65ee75856a3b12.webp",
+      "curios": [
+        {
+          "id": "curio_02",
+          "name": "Snapbud",
+          "art": "assets/b8ec9ec18abb776167abf2d7dbe703206d79f6106e4e2447eef7d8fc774c849b.webp"
+        },
+        {
+          "id": "curio_26",
+          "name": "Sunbeam Gecko",
+          "art": "assets/02b6b7a379d1519f2a6c90e5f66226d06118d99cb6423ada579d133321415a9a.webp"
+        }
+      ],
+      "squishies": [
+        {
+          "id": "emotions_01_happy",
+          "name": "Gigglepop",
+          "art": "assets/1e35d800f69df2141162900e2f247dbcf798e6148facdbc4105e784cf7ff3e8c.webp"
+        },
+        {
+          "id": "food_treats_03_chocolate_cake",
+          "name": "Chocodoodle",
+          "art": "assets/7261e17a84c9430ecbe350fc5d9936633dc2e0e28268cb169b2685f9e33d2d36.webp"
+        },
+        {
+          "id": "myths_centaur",
+          "name": "Cloverhoof",
+          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
+        },
+        {
+          "id": "myths_medusa",
+          "name": "Hissabella",
+          "art": "assets/63416574cb211b205a386c7c7e550ac7cbacb92c92553413570e5cfe1061ab11.webp"
+        },
+        {
+          "id": "myths_unicorn",
+          "name": "Prismhoof",
+          "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        },
+        {
+          "id": "wild_things_bramblehorn",
+          "name": "Bramblehorn",
+          "art": "assets/450970d80e164d9476d264891db05287c464e0a54fbba9155ce0fc9f61d2eae1.webp"
+        }
+      ],
+      "room": {
+        "flag": {
+          "held": false,
+          "art": null
+        },
+        "relics": [
+          {
+            "id": "relic_amber_antler",
+            "name": "Amber Antler",
+            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_spiral_stone",
+            "name": "Spiral Stone",
+            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
+            "count": 1
+          }
+        ],
+        "relicUnknown": 0
+      }
+    },
+    {
       "key": "1312642476e8bede32ee70a4f9222e70",
       "creatureName": "Vantimo",
       "stage": 2,
@@ -1355,6 +1504,12 @@
             "id": "relic_amber_antler",
             "name": "Amber Antler",
             "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
+            "count": 1
+          },
+          {
+            "id": "relic_opal_vines",
+            "name": "Opal Vines",
+            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
             "count": 1
           },
           {
