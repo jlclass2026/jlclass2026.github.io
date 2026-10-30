@@ -77,29 +77,10 @@
       ],
       "room": {
         "flag": {
-          "held": true,
-          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
+          "held": false,
+          "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -182,32 +163,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_opal_vines",
-            "name": "Opal Vines",
-            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -290,20 +246,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -401,20 +344,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -487,14 +417,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -557,14 +480,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -637,32 +553,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_opal_vines",
-            "name": "Opal Vines",
-            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -755,32 +646,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_opal_vines",
-            "name": "Opal Vines",
-            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -855,29 +721,10 @@
       ],
       "room": {
         "flag": {
-          "held": true,
-          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
+          "held": false,
+          "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -955,26 +802,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -1032,20 +860,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -1120,29 +935,10 @@
       ],
       "room": {
         "flag": {
-          "held": true,
-          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
+          "held": false,
+          "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -1240,20 +1036,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -1311,26 +1094,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -1423,32 +1187,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_opal_vines",
-            "name": "Opal Vines",
-            "art": "assets/225f361fe46a07f7502db9f2b1f05d96daf40c4d7b95c053fb9791b4019697b2.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     },
@@ -1536,26 +1275,7 @@
           "held": false,
           "art": null
         },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
+        "relics": [],
         "relicUnknown": 0
       }
     }
