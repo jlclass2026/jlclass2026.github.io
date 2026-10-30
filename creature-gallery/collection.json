@@ -25,14 +25,14 @@
       ],
       "squishies": [
         {
-          "id": "circus_03_purple_pigtail_clown",
-          "name": "Plumperty",
-          "art": "assets/183b3cfdc340f0ffb16914b46aed007e415855bd09dfb76e98360709d14f7bab.webp"
-        },
-        {
           "id": "food_treats_02_pepperoni_pizza",
           "name": "Peppaloo",
           "art": "assets/687e416d9615a0d5d1894b100cbf5bd3c2b48e06feca654e12392a801068b0a0.webp"
+        },
+        {
+          "id": "food_treats_08_grilled_cheese",
+          "name": "Toastle",
+          "art": "assets/3a7d53b2b5e1c2d0f142982adadab998d8e1c88920d2f6ce1ff8036b1d877f8e.webp"
         },
         {
           "id": "food_treats_09_raspberry_jelly",
@@ -162,6 +162,11 @@
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
         },
         {
+          "id": "space_moon",
+          "name": "Moonbeam",
+          "art": "assets/3fe323448bb3dd9d38c1613ab38f5e6019816f17ce26ea38f408dd72e39077c2.webp"
+        },
+        {
           "id": "space_nebula",
           "name": "Nebula Nib",
           "art": "assets/de21b16af024079ce9dfdd92279e196d013872b952055538873eb36a909bab69.webp"
@@ -245,14 +250,24 @@
           "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
         },
         {
-          "id": "myths_cerberus",
-          "name": "Triple Trouble",
-          "art": "assets/c080a8aed1862598fb7fbd66f930afd89001acca0a8f22badde84237865663a3.webp"
+          "id": "halloween_bonebop",
+          "name": "Bonebop",
+          "art": "assets/e9fdfcc62988ade820799e661bcc1e884925c7133584aca3f275e641f8e76ea3.webp"
+        },
+        {
+          "id": "halloween_pumpkin_warrior",
+          "name": "Gourdon",
+          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
         },
         {
           "id": "myths_unicorn",
           "name": "Prismhoof",
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        },
+        {
+          "id": "space_mars",
+          "name": "Rusty Rocket",
+          "art": "assets/745a8f10720a99a173cd63d877d0d7358f8960ea8ebc084cdcfc2fef5eca3293.webp"
         },
         {
           "id": "weather_01_sun",
@@ -346,6 +361,11 @@
           "art": "assets/aba94d637b1131e91e9bba714c1ea4627d1d817f500dbd142f82155027a9a43f.webp"
         },
         {
+          "id": "halloween_werewolf",
+          "name": "Moonmuzzle",
+          "art": "assets/59061d9f60ccf9a3283990c09844ff9a539d8be0a6b4ad5f4af12300b44f7bb7.webp"
+        },
+        {
           "id": "monsters_04_teal_watcher",
           "name": "Teal Watcher",
           "art": "assets/093255447f245d62ad4928252a3a5fa5f21706d685d3a8ef1f784e80e99df080.webp"
@@ -359,6 +379,11 @@
           "id": "myths_unicorn",
           "name": "Prismhoof",
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        },
+        {
+          "id": "space_earth",
+          "name": "Terra Tumble",
+          "art": "assets/933dd724c21c38d52c1ce1bfb0e7f791529ba60bc0d18805eef1e0e63bc4c988.webp"
         },
         {
           "id": "weather_07_mint_wind",
@@ -417,9 +442,9 @@
       ],
       "squishies": [
         {
-          "id": "circus_05_mint_white_hair_clown",
-          "name": "Mistimop",
-          "art": "assets/2e68847fdb7853111b914b59221682f0372572f66e9900cc862b87f07c24be83.webp"
+          "id": "circus_06_purple_gold_clown",
+          "name": "Jinxabell",
+          "art": "assets/2df14c9e51326cb26a0444d97c69e64069a0fbe86caabe77a6379f2e157f2354.webp"
         },
         {
           "id": "emotions_09_shy",
@@ -442,9 +467,9 @@
           "art": "assets/d9d2e9cb6983148664a5ace0f096bd10aba61d70d417f45a32a8893641f3deda.webp"
         },
         {
-          "id": "myths_unicorn",
-          "name": "Prismhoof",
-          "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+          "id": "myths_cerberus",
+          "name": "Triple Trouble",
+          "art": "assets/c080a8aed1862598fb7fbd66f930afd89001acca0a8f22badde84237865663a3.webp"
         },
         {
           "id": "space_mars",
@@ -582,14 +607,14 @@
           "art": "assets/28915e69bac841a62d68968524db951d098c902c18ed9a2a7da682b7db4c6d12.webp"
         },
         {
+          "id": "halloween_pumpkin_warrior",
+          "name": "Gourdon",
+          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+        },
+        {
           "id": "halloween_vampire",
           "name": "Vesperfang",
           "art": "assets/614bb78fb14ff34dedb84cea600f0648e6503ce35314868cea5224d228776cec.webp"
-        },
-        {
-          "id": "monsters_03_lavender_stardust",
-          "name": "Lavender Stardust",
-          "art": "assets/d94a0c31b95f63c73903f76509a545de0746e9fab26057da54d1a7b6e27d500d.webp"
         },
         {
           "id": "myths_griffin",
@@ -642,103 +667,6 @@
       }
     },
     {
-      "key": "7a7700203397403a5e93371d66fb8f06",
-      "creatureName": "Opalnuzzle",
-      "stage": 1,
-      "art": "assets/7d4ac3d8942c4a6004f08081015f6cf1fbf8e87265b7de82cb6d474161e933ed.webp",
-      "curios": [
-        {
-          "id": "curio_12",
-          "name": "Mushroom Sprout",
-          "art": "assets/4b28ecd00dda7d554ffbbb8b8449834ba30641e7bacfbdd661328121e4e86842.webp"
-        },
-        {
-          "id": "curio_20",
-          "name": "Ribbon Eel",
-          "art": "assets/897464a3d629ea3c7d498e9d7cc06f16c31d68de906bdea4044691fe9f116c81.webp"
-        }
-      ],
-      "squishies": [
-        {
-          "id": "circus_04_green_hat_clown",
-          "name": "Dottles",
-          "art": "assets/9c8831d79253ea25233b780f8b110f07bbad063ae34880e96cca6680354c78ea.webp"
-        },
-        {
-          "id": "emotions_03_sad",
-          "name": "Teardrop",
-          "art": "assets/863083da10038dc37ebc9102cc4d8fa94b96c89a29fafbaf0093af2b01ffd307.webp"
-        },
-        {
-          "id": "food_treats_01_cheeseburger",
-          "name": "Bunbix",
-          "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
-        },
-        {
-          "id": "food_treats_06_waffle",
-          "name": "Waffleston",
-          "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
-        },
-        {
-          "id": "halloween_pumpkin_warrior",
-          "name": "Gourdon",
-          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
-        },
-        {
-          "id": "halloween_vampire",
-          "name": "Vesperfang",
-          "art": "assets/614bb78fb14ff34dedb84cea600f0648e6503ce35314868cea5224d228776cec.webp"
-        },
-        {
-          "id": "myths_kraken",
-          "name": "Krakenpop",
-          "art": "assets/56e242cd39e57e530d46ee9cec2e78be73085876233034605870486a744eaa32.webp"
-        },
-        {
-          "id": "myths_mermaid",
-          "name": "Coraluna",
-          "art": "assets/952e3829c371e7a7e43f673cdb00ce359e3f405ba59d4d46ed2ebcdadce56e30.webp"
-        },
-        {
-          "id": "space_earth",
-          "name": "Terra Tumble",
-          "art": "assets/933dd724c21c38d52c1ce1bfb0e7f791529ba60bc0d18805eef1e0e63bc4c988.webp"
-        },
-        {
-          "id": "wild_things_mossy_mischief",
-          "name": "Mossy Mischief",
-          "art": "assets/2ca0989dc62d0a7e26feeb43abdb6122e542605f9ed0fef89c43478e6436702f.webp"
-        }
-      ],
-      "room": {
-        "flag": {
-          "held": false,
-          "art": null
-        },
-        "relics": [
-          {
-            "id": "relic_amber_antler",
-            "name": "Amber Antler",
-            "art": "assets/6043cda5b26141c3781009de5bd0af34f123d83724baf72105ec4dc0517a3e80.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          },
-          {
-            "id": "relic_spiral_stone",
-            "name": "Spiral Stone",
-            "art": "assets/211b9a9f2110892b0ead33707eb590b9651c8c4f1d67791c25d5a2a13924b790.webp",
-            "count": 1
-          }
-        ],
-        "relicUnknown": 0
-      }
-    },
-    {
       "key": "e9b2dbda8eac1437480d43936ad12dfd",
       "creatureName": "Razzik",
       "stage": 2,
@@ -772,6 +700,11 @@
           "art": "assets/b43eb668a710787397ae56b420b2059f68d1de33e9b330cb0ef17c316ce66f83.webp"
         },
         {
+          "id": "halloween_bonebop",
+          "name": "Bonebop",
+          "art": "assets/e9fdfcc62988ade820799e661bcc1e884925c7133584aca3f275e641f8e76ea3.webp"
+        },
+        {
           "id": "halloween_zombie",
           "name": "Mossmumble",
           "art": "assets/5418810601c10a0ea416e9d1e875610f3f7034689831ac58fad43788734842a1.webp"
@@ -790,6 +723,11 @@
           "id": "myths_unicorn",
           "name": "Prismhoof",
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        },
+        {
+          "id": "space_galaxy",
+          "name": "Galaxy Glimmer",
+          "art": "assets/d3061678f283b9b5c746c8279391e80f65d6c0b45e075a523561db598b0a3d11.webp"
         },
         {
           "id": "space_nebula",
@@ -870,6 +808,11 @@
       ],
       "squishies": [
         {
+          "id": "circus_03_purple_pigtail_clown",
+          "name": "Plumperty",
+          "art": "assets/183b3cfdc340f0ffb16914b46aed007e415855bd09dfb76e98360709d14f7bab.webp"
+        },
+        {
           "id": "circus_07_ringmaster_clown",
           "name": "Barnabob",
           "art": "assets/0a5ced9826504e71a6f6f9777cd5eed92cf9cc64880bf638c135670e68809a30.webp"
@@ -885,24 +828,24 @@
           "art": "assets/990eee05d7e89da8d111e2568035414af257e100c012bc29193b1d251be32ca0.webp"
         },
         {
-          "id": "food_treats_08_grilled_cheese",
-          "name": "Toastle",
-          "art": "assets/3a7d53b2b5e1c2d0f142982adadab998d8e1c88920d2f6ce1ff8036b1d877f8e.webp"
-        },
-        {
-          "id": "halloween_pumpkin_warrior",
-          "name": "Gourdon",
-          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
-        },
-        {
-          "id": "myths_cerberus",
-          "name": "Triple Trouble",
-          "art": "assets/c080a8aed1862598fb7fbd66f930afd89001acca0a8f22badde84237865663a3.webp"
+          "id": "halloween_witch",
+          "name": "Hexibelle",
+          "art": "assets/e7c9877ea5894d0dc827943a91bae0dfd1d127cc4c19d0af10273da0ce3351ce.webp"
         },
         {
           "id": "myths_mermaid",
           "name": "Coraluna",
           "art": "assets/952e3829c371e7a7e43f673cdb00ce359e3f405ba59d4d46ed2ebcdadce56e30.webp"
+        },
+        {
+          "id": "myths_unicorn",
+          "name": "Prismhoof",
+          "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        },
+        {
+          "id": "space_moon",
+          "name": "Moonbeam",
+          "art": "assets/3fe323448bb3dd9d38c1613ab38f5e6019816f17ce26ea38f408dd72e39077c2.webp"
         },
         {
           "id": "wild_things_tawny_tumbler",
@@ -992,6 +935,11 @@
           "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
         },
         {
+          "id": "space_mars",
+          "name": "Rusty Rocket",
+          "art": "assets/745a8f10720a99a173cd63d877d0d7358f8960ea8ebc084cdcfc2fef5eca3293.webp"
+        },
+        {
           "id": "weather_09_hail",
           "name": "Hailibop",
           "art": "assets/883d1feda00a9473e40a7a35eed2cfd8f3969436e9fb6a3421d0447ca2cece53.webp"
@@ -1057,6 +1005,11 @@
           "id": "food_treats_01_cheeseburger",
           "name": "Bunbix",
           "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
+        },
+        {
+          "id": "halloween_strawskitter",
+          "name": "Strawskitter",
+          "art": "assets/fa5d91f625fdcc9573e00b4e0262e85a04411d31e8dc394e94926c2b883a947b.webp"
         },
         {
           "id": "myths_centaur",
@@ -1194,55 +1147,6 @@
       }
     },
     {
-      "key": "232318f1e9f172961966c73fb8dcdcbc",
-      "creatureName": "Stormhorn",
-      "stage": 1,
-      "art": "assets/60e12a660471dbf236f00d291ea4cbe82e77d361a75146bb7013584d2302247c.webp",
-      "curios": [],
-      "squishies": [
-        {
-          "id": "food_treats_05_pink_iced_pastry",
-          "name": "Glazibelle",
-          "art": "assets/990eee05d7e89da8d111e2568035414af257e100c012bc29193b1d251be32ca0.webp"
-        },
-        {
-          "id": "food_treats_08_grilled_cheese",
-          "name": "Toastle",
-          "art": "assets/3a7d53b2b5e1c2d0f142982adadab998d8e1c88920d2f6ce1ff8036b1d877f8e.webp"
-        },
-        {
-          "id": "halloween_pumpkin_warrior",
-          "name": "Gourdon",
-          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
-        },
-        {
-          "id": "monsters_06_pink_sparkle",
-          "name": "Pink Sparkle",
-          "art": "assets/90c9e5fd155034feccc476492400b6e0b0b6b5f646664bc3d659e5cac4292fe0.webp"
-        },
-        {
-          "id": "myths_unicorn",
-          "name": "Prismhoof",
-          "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
-        }
-      ],
-      "room": {
-        "flag": {
-          "held": false,
-          "art": null
-        },
-        "relics": [
-          {
-            "id": "relic_skull_feathers",
-            "name": "Skull Feathers",
-            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
-            "count": 1
-          }
-        ],
-        "relicUnknown": 0
-      }
-    },
-    {
       "key": "596da85697a3c7bba050ebcf296a01cf",
       "creatureName": "Tumberell",
       "stage": 2,
@@ -1296,14 +1200,24 @@
           "art": "assets/9167e8b22707ad2a05cd49b091fe29d19222f846beceb58a14fa78a3db8cb5b2.webp"
         },
         {
-          "id": "halloween_pumpkin_warrior",
-          "name": "Gourdon",
-          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+          "id": "halloween_wrapscallion",
+          "name": "Wrapscallion",
+          "art": "assets/6ffac04ce64ca7990393be9c7867440129adf15e3e0478e2916762f3b29bba74.webp"
+        },
+        {
+          "id": "monsters_03_lavender_stardust",
+          "name": "Lavender Stardust",
+          "art": "assets/d94a0c31b95f63c73903f76509a545de0746e9fab26057da54d1a7b6e27d500d.webp"
         },
         {
           "id": "myths_centaur",
           "name": "Cloverhoof",
           "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
+        },
+        {
+          "id": "myths_cerberus",
+          "name": "Triple Trouble",
+          "art": "assets/c080a8aed1862598fb7fbd66f930afd89001acca0a8f22badde84237865663a3.webp"
         },
         {
           "id": "myths_chimera",
@@ -1444,9 +1358,9 @@
       ],
       "squishies": [
         {
-          "id": "circus_06_purple_gold_clown",
-          "name": "Jinxabell",
-          "art": "assets/2df14c9e51326cb26a0444d97c69e64069a0fbe86caabe77a6379f2e157f2354.webp"
+          "id": "circus_05_mint_white_hair_clown",
+          "name": "Mistimop",
+          "art": "assets/2e68847fdb7853111b914b59221682f0372572f66e9900cc862b87f07c24be83.webp"
         },
         {
           "id": "emotions_10_sleepy",
@@ -1474,9 +1388,14 @@
           "art": "assets/d9de633b32f1bf4a6d4dd69ffe3ab83db2bcb32b4e09a6a55df90ef7def69e42.webp"
         },
         {
-          "id": "halloween_witch",
-          "name": "Hexibelle",
-          "art": "assets/e7c9877ea5894d0dc827943a91bae0dfd1d127cc4c19d0af10273da0ce3351ce.webp"
+          "id": "halloween_pumpkin_warrior",
+          "name": "Gourdon",
+          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+        },
+        {
+          "id": "halloween_wrapscallion",
+          "name": "Wrapscallion",
+          "art": "assets/6ffac04ce64ca7990393be9c7867440129adf15e3e0478e2916762f3b29bba74.webp"
         },
         {
           "id": "myths_centaur",
@@ -1487,6 +1406,11 @@
           "id": "myths_unicorn",
           "name": "Prismhoof",
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        },
+        {
+          "id": "space_saturn",
+          "name": "Saturn Swirl",
+          "art": "assets/45d7e8339656070bef6bce115d07c68a41dd7632c85794102f99673b5aceb466.webp"
         },
         {
           "id": "weather_08_gray_fog",
