@@ -60,6 +60,11 @@
           "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
+          "id": "myths_cyclops",
+          "name": "Wobbleye",
+          "art": "assets/123e482c1c917b1d161559120108a220cc7b94803a2ab2a40efd644a7ca556ba.webp"
+        },
+        {
           "id": "myths_griffin",
           "name": "Grifflet",
           "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
@@ -87,8 +92,8 @@
     {
       "key": "f769faaec656b0139c5a820fb1e5e168",
       "creatureName": "Bumbalune",
-      "stage": 1,
-      "art": "assets/d567864fd4d0887e0fa465494348b0907ede05a20b3a2eb27d26bda8ac5554dd.webp",
+      "stage": 2,
+      "art": "assets/05d738b7416465e2a3f75d97125915ce5b0f0d137c46c907ec480beebfc3785c.webp",
       "curios": [
         {
           "id": "curio_04",
@@ -131,6 +136,11 @@
           "id": "halloween_vampire",
           "name": "Vesperfang",
           "art": "assets/614bb78fb14ff34dedb84cea600f0648e6503ce35314868cea5224d228776cec.webp"
+        },
+        {
+          "id": "myths_centaur",
+          "name": "Cloverhoof",
+          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
           "id": "myths_chimera",
@@ -196,11 +206,6 @@
           "art": "assets/3e3b43ee7a710628338739392bb9771ac257872793615cbe5d4fcfc95f0c1d7a.webp"
         },
         {
-          "id": "emotions_04_angry",
-          "name": "Grumbleglow",
-          "art": "assets/74d92c042aea5026d27a4046778e6f5c3c5fbb3c97ee0221cb2b57e7da1b26c4.webp"
-        },
-        {
           "id": "food_treats_06_waffle",
           "name": "Waffleston",
           "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
@@ -211,9 +216,19 @@
           "art": "assets/e9fdfcc62988ade820799e661bcc1e884925c7133584aca3f275e641f8e76ea3.webp"
         },
         {
+          "id": "halloween_ghost",
+          "name": "Wispwick",
+          "art": "assets/d9de633b32f1bf4a6d4dd69ffe3ab83db2bcb32b4e09a6a55df90ef7def69e42.webp"
+        },
+        {
           "id": "halloween_pumpkin_warrior",
           "name": "Gourdon",
           "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+        },
+        {
+          "id": "myths_centaur",
+          "name": "Cloverhoof",
+          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
           "id": "myths_unicorn",
@@ -253,8 +268,8 @@
     {
       "key": "a5c341c8e21817458f7b4cb7e0922b7e",
       "creatureName": "Cindertail",
-      "stage": 1,
-      "art": "assets/c003e8cd5e7d287abce32c46ef7a64399732a10b35167976a09f9cc46bcffeae.webp",
+      "stage": 2,
+      "art": "assets/ebb27e3cd83d4caac38eaff9d195e0b4ed48eeb449253ff63c6e8d780e3654c9.webp",
       "curios": [
         {
           "id": "curio_03",
@@ -312,6 +327,11 @@
           "id": "monsters_04_teal_watcher",
           "name": "Teal Watcher",
           "art": "assets/093255447f245d62ad4928252a3a5fa5f21706d685d3a8ef1f784e80e99df080.webp"
+        },
+        {
+          "id": "myths_griffin",
+          "name": "Grifflet",
+          "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
         },
         {
           "id": "myths_medusa",
@@ -397,6 +417,11 @@
           "art": "assets/d9d2e9cb6983148664a5ace0f096bd10aba61d70d417f45a32a8893641f3deda.webp"
         },
         {
+          "id": "myths_centaur",
+          "name": "Cloverhoof",
+          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
+        },
+        {
           "id": "myths_cerberus",
           "name": "Triple Trouble",
           "art": "assets/c080a8aed1862598fb7fbd66f930afd89001acca0a8f22badde84237865663a3.webp"
@@ -436,6 +461,11 @@
           "id": "curio_27",
           "name": "Tide Jelly",
           "art": "assets/e21c77c14660da1844d3a2d1ca0aaab7378a9182c8a336f16d090ed0db95dfcb.webp"
+        },
+        {
+          "id": "curio_37",
+          "name": "Buttonback",
+          "art": "assets/a8cb24b2ec865b298591095e4485ccc8fcb1b954a73083b911e38ec2a8477b53.webp"
         }
       ],
       "squishies": [
@@ -470,6 +500,11 @@
           "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
         },
         {
+          "id": "myths_kraken",
+          "name": "Krakenpop",
+          "art": "assets/56e242cd39e57e530d46ee9cec2e78be73085876233034605870486a744eaa32.webp"
+        },
+        {
           "id": "wild_things_tawny_tumbler",
           "name": "Tawny Tumbler",
           "art": "assets/5448c5f80d754181d37a3477fa4abe1bde6da055afde3265351b23fcaf9198e1.webp"
@@ -499,6 +534,11 @@
           "id": "curio_29",
           "name": "Rainbow Bristle",
           "art": "assets/94b7f630831cc83a4bcf07b9ef34d3a20c0496bfcbe8d79cd4277b13d3c56738.webp"
+        },
+        {
+          "id": "curio_34",
+          "name": "Origami Manta",
+          "art": "assets/3a7511d5bc3c24c4b2a8941f6fa19efbf7f55a8752c81773e35f073c1c90637d.webp"
         }
       ],
       "squishies": [
@@ -533,9 +573,9 @@
           "art": "assets/614bb78fb14ff34dedb84cea600f0648e6503ce35314868cea5224d228776cec.webp"
         },
         {
-          "id": "myths_griffin",
-          "name": "Grifflet",
-          "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
+          "id": "myths_chimera",
+          "name": "Chimichomp",
+          "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
         },
         {
           "id": "weather_01_sun",
@@ -543,9 +583,102 @@
           "art": "assets/7547b2b17fd4d239214996c4c375f36cf5f1ca26a97e4b52fbbf05cdd6dd255b.webp"
         },
         {
+          "id": "weather_08_gray_fog",
+          "name": "Murklemist",
+          "art": "assets/479c1fa0f6637626ba0ceb1240497202470c58a2881daad62ee1421fd1a09d97.webp"
+        },
+        {
           "id": "wild_things_bramblehorn",
           "name": "Bramblehorn",
           "art": "assets/450970d80e164d9476d264891db05287c464e0a54fbba9155ce0fc9f61d2eae1.webp"
+        }
+      ],
+      "room": {
+        "flag": {
+          "held": false,
+          "art": null
+        },
+        "relics": [],
+        "relicUnknown": 0
+      }
+    },
+    {
+      "key": "7a7700203397403a5e93371d66fb8f06",
+      "creatureName": "Opalnuzzle",
+      "stage": 1,
+      "art": "assets/7d4ac3d8942c4a6004f08081015f6cf1fbf8e87265b7de82cb6d474161e933ed.webp",
+      "curios": [
+        {
+          "id": "curio_12",
+          "name": "Mushroom Sprout",
+          "art": "assets/4b28ecd00dda7d554ffbbb8b8449834ba30641e7bacfbdd661328121e4e86842.webp"
+        },
+        {
+          "id": "curio_20",
+          "name": "Ribbon Eel",
+          "art": "assets/897464a3d629ea3c7d498e9d7cc06f16c31d68de906bdea4044691fe9f116c81.webp"
+        },
+        {
+          "id": "curio_38",
+          "name": "Candle Orchard",
+          "art": "assets/9d3f08cf870cddf5d84ed6357b95e2561f0b8aa69d3471693ebd891efc444bdf.webp"
+        }
+      ],
+      "squishies": [
+        {
+          "id": "circus_04_green_hat_clown",
+          "name": "Dottles",
+          "art": "assets/9c8831d79253ea25233b780f8b110f07bbad063ae34880e96cca6680354c78ea.webp"
+        },
+        {
+          "id": "emotions_03_sad",
+          "name": "Teardrop",
+          "art": "assets/863083da10038dc37ebc9102cc4d8fa94b96c89a29fafbaf0093af2b01ffd307.webp"
+        },
+        {
+          "id": "food_treats_01_cheeseburger",
+          "name": "Bunbix",
+          "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
+        },
+        {
+          "id": "food_treats_06_waffle",
+          "name": "Waffleston",
+          "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
+        },
+        {
+          "id": "halloween_pumpkin_warrior",
+          "name": "Gourdon",
+          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+        },
+        {
+          "id": "halloween_vampire",
+          "name": "Vesperfang",
+          "art": "assets/614bb78fb14ff34dedb84cea600f0648e6503ce35314868cea5224d228776cec.webp"
+        },
+        {
+          "id": "myths_cyclops",
+          "name": "Wobbleye",
+          "art": "assets/123e482c1c917b1d161559120108a220cc7b94803a2ab2a40efd644a7ca556ba.webp"
+        },
+        {
+          "id": "myths_kraken",
+          "name": "Krakenpop",
+          "art": "assets/56e242cd39e57e530d46ee9cec2e78be73085876233034605870486a744eaa32.webp"
+        },
+        {
+          "id": "myths_mermaid",
+          "name": "Coraluna",
+          "art": "assets/952e3829c371e7a7e43f673cdb00ce359e3f405ba59d4d46ed2ebcdadce56e30.webp"
+        },
+        {
+          "id": "space_earth",
+          "name": "Terra Tumble",
+          "art": "assets/933dd724c21c38d52c1ce1bfb0e7f791529ba60bc0d18805eef1e0e63bc4c988.webp"
+        },
+        {
+          "id": "wild_things_mossy_mischief",
+          "name": "Mossy Mischief",
+          "art": "assets/2ca0989dc62d0a7e26feeb43abdb6122e542605f9ed0fef89c43478e6436702f.webp"
         }
       ],
       "room": {
@@ -577,6 +710,11 @@
           "id": "curio_16",
           "name": "Snowball Grub",
           "art": "assets/0ce0a126fe39b6deaa86bc4e5413c439ae09ef1424f0d6460cd4ae4507abb676.webp"
+        },
+        {
+          "id": "curio_24",
+          "name": "Dandelion Drifter",
+          "art": "assets/d695b7518fa49c4f314aa0caaf591195a063c269b3bcb5c162839648f60ac7c8.webp"
         }
       ],
       "squishies": [
@@ -589,6 +727,11 @@
           "id": "emotions_07_surprised",
           "name": "Gaspop",
           "art": "assets/b43eb668a710787397ae56b420b2059f68d1de33e9b330cb0ef17c316ce66f83.webp"
+        },
+        {
+          "id": "food_treats_10_cinnamon_roll",
+          "name": "Cinnabumble",
+          "art": "assets/9167e8b22707ad2a05cd49b091fe29d19222f846beceb58a14fa78a3db8cb5b2.webp"
         },
         {
           "id": "halloween_bonebop",
@@ -604,6 +747,11 @@
           "id": "monsters_05_golden_cyclops",
           "name": "Golden Cyclops",
           "art": "assets/54783d1193f9bb2facd88dda3b1d0dd3a592d7378ea7814b9aeb7b2415a9b1a0.webp"
+        },
+        {
+          "id": "myths_centaur",
+          "name": "Cloverhoof",
+          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
           "id": "myths_kraken",
@@ -653,8 +801,8 @@
     {
       "key": "416474640bd39ec26a09200a4c92ac53",
       "creatureName": "Riftback",
-      "stage": 1,
-      "art": "assets/e72b1d34b62e443f65aceedbf48fd863b7495fc8d648a958e0338bc422a30d56.webp",
+      "stage": 2,
+      "art": "assets/0b31a0354150cbde99f73db6501f00d438a818cef8fd6972812e587a214627b1.webp",
       "curios": [
         {
           "id": "curio_07",
@@ -699,6 +847,11 @@
           "art": "assets/e7c9877ea5894d0dc827943a91bae0dfd1d127cc4c19d0af10273da0ce3351ce.webp"
         },
         {
+          "id": "myths_medusa",
+          "name": "Hissabella",
+          "art": "assets/63416574cb211b205a386c7c7e550ac7cbacb92c92553413570e5cfe1061ab11.webp"
+        },
+        {
           "id": "myths_mermaid",
           "name": "Coraluna",
           "art": "assets/952e3829c371e7a7e43f673cdb00ce359e3f405ba59d4d46ed2ebcdadce56e30.webp"
@@ -731,8 +884,8 @@
     {
       "key": "5c09e779c06ccbf2026440e055226946",
       "creatureName": "Rosywhisk",
-      "stage": 1,
-      "art": "assets/053f2b560ffc4f0ae34fc3ebbee34147fdf6bd66f00d6f3d6ba21cd719979c15.webp",
+      "stage": 2,
+      "art": "assets/9c718c1ca23796402d641c66a54a15e399134ea61493333c1102c5a106d94730.webp",
       "curios": [
         {
           "id": "curio_19",
@@ -767,6 +920,11 @@
           "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
         },
         {
+          "id": "food_treats_06_waffle",
+          "name": "Waffleston",
+          "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
+        },
+        {
           "id": "halloween_zombie",
           "name": "Mossmumble",
           "art": "assets/5418810601c10a0ea416e9d1e875610f3f7034689831ac58fad43788734842a1.webp"
@@ -780,6 +938,11 @@
           "id": "myths_griffin",
           "name": "Grifflet",
           "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
+        },
+        {
+          "id": "myths_phoenix",
+          "name": "Flickerwing",
+          "art": "assets/3fa4ee632eb481bf4b568b45552f0bfe57fcdd8c61f22545f8e94be38198087f.webp"
         },
         {
           "id": "space_mars",
@@ -821,6 +984,11 @@
           "id": "curio_29",
           "name": "Rainbow Bristle",
           "art": "assets/94b7f630831cc83a4bcf07b9ef34d3a20c0496bfcbe8d79cd4277b13d3c56738.webp"
+        },
+        {
+          "id": "curio_35",
+          "name": "Honeycomb Hopper",
+          "art": "assets/ffe3740d9c66d310c4549b1874724053aaa644bafddc5f303e2e3d4dd6d6d0f6.webp"
         }
       ],
       "squishies": [
@@ -845,6 +1013,11 @@
           "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
+          "id": "myths_chimera",
+          "name": "Chimichomp",
+          "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
+        },
+        {
           "id": "myths_unicorn",
           "name": "Prismhoof",
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
@@ -867,8 +1040,8 @@
     {
       "key": "628f93b339d946d45870f4045ee68a65",
       "creatureName": "Sparkwhisk",
-      "stage": 1,
-      "art": "assets/2eae5a2bdc3724bf7637e0c4f96cb0b0796628d8fdd1658312bbe3034a1c2641.webp",
+      "stage": 2,
+      "art": "assets/da557be85e4df1561a47824f78cc03405c9e3d8c902d167d0d85cc454d8383e2.webp",
       "curios": [
         {
           "id": "curio_06",
@@ -918,6 +1091,11 @@
           "art": "assets/5418810601c10a0ea416e9d1e875610f3f7034689831ac58fad43788734842a1.webp"
         },
         {
+          "id": "myths_cerberus",
+          "name": "Triple Trouble",
+          "art": "assets/c080a8aed1862598fb7fbd66f930afd89001acca0a8f22badde84237865663a3.webp"
+        },
+        {
           "id": "myths_chimera",
           "name": "Chimichomp",
           "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
@@ -943,6 +1121,59 @@
       }
     },
     {
+      "key": "232318f1e9f172961966c73fb8dcdcbc",
+      "creatureName": "Stormhorn",
+      "stage": 1,
+      "art": "assets/60e12a660471dbf236f00d291ea4cbe82e77d361a75146bb7013584d2302247c.webp",
+      "curios": [
+        {
+          "id": "curio_06",
+          "name": "Puddle Pup",
+          "art": "assets/64b8e1a37090839c5f3367cf5a3a611442250fbbdad26d3cde303624687c8a32.webp"
+        }
+      ],
+      "squishies": [
+        {
+          "id": "food_treats_05_pink_iced_pastry",
+          "name": "Glazibelle",
+          "art": "assets/990eee05d7e89da8d111e2568035414af257e100c012bc29193b1d251be32ca0.webp"
+        },
+        {
+          "id": "food_treats_08_grilled_cheese",
+          "name": "Toastle",
+          "art": "assets/3a7d53b2b5e1c2d0f142982adadab998d8e1c88920d2f6ce1ff8036b1d877f8e.webp"
+        },
+        {
+          "id": "halloween_pumpkin_warrior",
+          "name": "Gourdon",
+          "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
+        },
+        {
+          "id": "monsters_06_pink_sparkle",
+          "name": "Pink Sparkle",
+          "art": "assets/90c9e5fd155034feccc476492400b6e0b0b6b5f646664bc3d659e5cac4292fe0.webp"
+        },
+        {
+          "id": "myths_centaur",
+          "name": "Cloverhoof",
+          "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
+        },
+        {
+          "id": "myths_unicorn",
+          "name": "Prismhoof",
+          "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
+        }
+      ],
+      "room": {
+        "flag": {
+          "held": false,
+          "art": null
+        },
+        "relics": [],
+        "relicUnknown": 0
+      }
+    },
+    {
       "key": "596da85697a3c7bba050ebcf296a01cf",
       "creatureName": "Tumberell",
       "stage": 2,
@@ -952,6 +1183,11 @@
           "id": "curio_13",
           "name": "Storm Puff",
           "art": "assets/33259ce6ef6a753977ee7aa1886c7ed4a499df4568d88f16e424ef63258f24a6.webp"
+        },
+        {
+          "id": "curio_19",
+          "name": "Coral Crawler",
+          "art": "assets/cd316c03546d5cbdd8c459d0e0a5fdadbf5c46eb6fb184ecabd38151cdf8df18.webp"
         },
         {
           "id": "curio_24",
@@ -1021,6 +1257,11 @@
           "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
         },
         {
+          "id": "myths_griffin",
+          "name": "Grifflet",
+          "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
+        },
+        {
           "id": "weather_05_rainbow_cloud",
           "name": "Prismapop",
           "art": "assets/c2e4c0b34ba138ab9c79546f4ae6ffffe9984e4ff01f4e77acfa07f1921f0713.webp"
@@ -1074,6 +1315,11 @@
           "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
+          "id": "myths_kraken",
+          "name": "Krakenpop",
+          "art": "assets/56e242cd39e57e530d46ee9cec2e78be73085876233034605870486a744eaa32.webp"
+        },
+        {
           "id": "myths_medusa",
           "name": "Hissabella",
           "art": "assets/63416574cb211b205a386c7c7e550ac7cbacb92c92553413570e5cfe1061ab11.webp"
@@ -1118,6 +1364,11 @@
           "id": "curio_26",
           "name": "Sunbeam Gecko",
           "art": "assets/02b6b7a379d1519f2a6c90e5f66226d06118d99cb6423ada579d133321415a9a.webp"
+        },
+        {
+          "id": "curio_32",
+          "name": "Petal Twister",
+          "art": "assets/ec1175276d886afa9265def12117859e0c49d30a93d0886c94c0156f14a08bba.webp"
         }
       ],
       "squishies": [
@@ -1125,6 +1376,11 @@
           "id": "circus_05_mint_white_hair_clown",
           "name": "Mistimop",
           "art": "assets/2e68847fdb7853111b914b59221682f0372572f66e9900cc862b87f07c24be83.webp"
+        },
+        {
+          "id": "emotions_04_angry",
+          "name": "Grumbleglow",
+          "art": "assets/74d92c042aea5026d27a4046778e6f5c3c5fbb3c97ee0221cb2b57e7da1b26c4.webp"
         },
         {
           "id": "emotions_10_sleepy",
@@ -1147,11 +1403,6 @@
           "art": "assets/18cd037e57d17f00c7cfd513e449b04adccdc4260a9f376003823f011fa5b259.webp"
         },
         {
-          "id": "halloween_ghost",
-          "name": "Wispwick",
-          "art": "assets/d9de633b32f1bf4a6d4dd69ffe3ab83db2bcb32b4e09a6a55df90ef7def69e42.webp"
-        },
-        {
           "id": "halloween_pumpkin_warrior",
           "name": "Gourdon",
           "art": "assets/02e0b7005e81c44436518dc6296cc04dc819775cf1e18a19f643fb679cad9c4c.webp"
@@ -1167,6 +1418,16 @@
           "art": "assets/50902c0f0c60a1dafaba3a0c2e9d42ca1e2c7757d886e3721f9c43326c607aa1.webp"
         },
         {
+          "id": "myths_chimera",
+          "name": "Chimichomp",
+          "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
+        },
+        {
+          "id": "myths_griffin",
+          "name": "Grifflet",
+          "art": "assets/707f669eb865c951a39509bf55f5cae3e1db75909c1ecdae95969516a551ffe8.webp"
+        },
+        {
           "id": "myths_unicorn",
           "name": "Prismhoof",
           "art": "assets/cfb41855803f60734a07092aeee1f071f9faa6fdd370c92a4d81a0e3b3619dc7.webp"
@@ -1175,11 +1436,6 @@
           "id": "space_saturn",
           "name": "Saturn Swirl",
           "art": "assets/45d7e8339656070bef6bce115d07c68a41dd7632c85794102f99673b5aceb466.webp"
-        },
-        {
-          "id": "weather_08_gray_fog",
-          "name": "Murklemist",
-          "art": "assets/479c1fa0f6637626ba0ceb1240497202470c58a2881daad62ee1421fd1a09d97.webp"
         }
       ],
       "room": {
@@ -1194,8 +1450,8 @@
     {
       "key": "ed655f90aeec4a66f9464383de85a78e",
       "creatureName": "Velunox",
-      "stage": 1,
-      "art": "assets/27dda6f5484d9fdda7df4ab5ceaccca7a7f403569e2092901ca686979b57bb31.webp",
+      "stage": 2,
+      "art": "assets/7025b4e72e479d82a8670b66bd6bfcb411cbad69f806050bbf6e25e249e6506d.webp",
       "curios": [
         {
           "id": "curio_18",
@@ -1238,6 +1494,11 @@
           "id": "halloween_werewolf",
           "name": "Moonmuzzle",
           "art": "assets/59061d9f60ccf9a3283990c09844ff9a539d8be0a6b4ad5f4af12300b44f7bb7.webp"
+        },
+        {
+          "id": "myths_chimera",
+          "name": "Chimichomp",
+          "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
         },
         {
           "id": "myths_cyclops",
