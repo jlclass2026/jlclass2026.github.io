@@ -25,6 +25,11 @@
       ],
       "squishies": [
         {
+          "id": "f1_lando_norris",
+          "name": "Lando",
+          "art": "assets/f74037caec372e7255fbef480ba92839175ce059834f15544b647f28c525d801.webp"
+        },
+        {
           "id": "food_treats_02_pepperoni_pizza",
           "name": "Peppaloo",
           "art": "assets/687e416d9615a0d5d1894b100cbf5bd3c2b48e06feca654e12392a801068b0a0.webp"
@@ -85,7 +90,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -123,6 +135,11 @@
           "art": "assets/e77ac3fe5c500f651848523dfeea98a3e5cf839a637fc1ae1809192e7017daed.webp"
         },
         {
+          "id": "f1_oscar_piastri",
+          "name": "Oscar",
+          "art": "assets/79d6d9a958b73cb4006e7937b74a3f623dbbcc8c91d2906c65ebf8b335277ad7.webp"
+        },
+        {
           "id": "food_treats_01_cheeseburger",
           "name": "Bunbix",
           "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
@@ -156,11 +173,6 @@
           "id": "space_moon",
           "name": "Moonbeam",
           "art": "assets/3fe323448bb3dd9d38c1613ab38f5e6019816f17ce26ea38f408dd72e39077c2.webp"
-        },
-        {
-          "id": "space_nebula",
-          "name": "Nebula Nib",
-          "art": "assets/de21b16af024079ce9dfdd92279e196d013872b952055538873eb36a909bab69.webp"
         },
         {
           "id": "wild_things_rusty_rumpus",
@@ -206,6 +218,16 @@
           "art": "assets/3e3b43ee7a710628338739392bb9771ac257872793615cbe5d4fcfc95f0c1d7a.webp"
         },
         {
+          "id": "emotions_09_shy",
+          "name": "Shimmerbash",
+          "art": "assets/f12bba74ca684695cd08bc03df2809f16b1c8b07a1f0b592391b876b9af30f77.webp"
+        },
+        {
+          "id": "f1_charles_leclerc",
+          "name": "Charles",
+          "art": "assets/b7c497899aadfe22ceb2d4f36554d975145207e897d6d5681191c44d502b98f1.webp"
+        },
+        {
           "id": "food_treats_06_waffle",
           "name": "Waffleston",
           "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
@@ -246,11 +268,6 @@
           "art": "assets/7547b2b17fd4d239214996c4c375f36cf5f1ca26a97e4b52fbbf05cdd6dd255b.webp"
         },
         {
-          "id": "weather_08_gray_fog",
-          "name": "Murklemist",
-          "art": "assets/479c1fa0f6637626ba0ceb1240497202470c58a2881daad62ee1421fd1a09d97.webp"
-        },
-        {
           "id": "wild_things_rusty_rumpus",
           "name": "Rusty Rumpus",
           "art": "assets/bf856c9be5f12a0da03e86a9fd1e71bdc99ead16c769d2b5c4cde29283e0c137.webp"
@@ -258,10 +275,17 @@
       ],
       "room": {
         "flag": {
-          "held": false,
-          "art": null
+          "held": true,
+          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -297,6 +321,11 @@
           "id": "dragons_02_ice",
           "name": "Frostnap",
           "art": "assets/f1a23a62626470b3a255774c2b09ea3faf630496cbced76c47076d2e188e065e.webp"
+        },
+        {
+          "id": "f1_kimi_antonelli",
+          "name": "Kimi",
+          "art": "assets/ad07b528596f396ed7406bdfb3fe0eeefab02369c2a60fcd4521591634446cc4.webp"
         },
         {
           "id": "food_treats_01_cheeseburger",
@@ -364,15 +393,22 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
     {
       "key": "5990bf23d5236520a03eb772fceb58b7",
       "creatureName": "Coralclonk",
-      "stage": 1,
-      "art": "assets/067b94bf18ecfb998f03d339dd718fcfedeabc6e03a2bb5afdcb5dce3445e68e.webp",
+      "stage": 2,
+      "art": "assets/28c2ec5c5a816ec6c90ddec1b33ab04a753ae873b39f75d3aa41ae11a6459a5b.webp",
       "curios": [
         {
           "id": "curio_07",
@@ -397,9 +433,9 @@
           "art": "assets/2df14c9e51326cb26a0444d97c69e64069a0fbe86caabe77a6379f2e157f2354.webp"
         },
         {
-          "id": "emotions_09_shy",
-          "name": "Shimmerbash",
-          "art": "assets/f12bba74ca684695cd08bc03df2809f16b1c8b07a1f0b592391b876b9af30f77.webp"
+          "id": "f1_lando_norris",
+          "name": "Lando",
+          "art": "assets/f74037caec372e7255fbef480ba92839175ce059834f15544b647f28c525d801.webp"
         },
         {
           "id": "food_treats_03_chocolate_cake",
@@ -432,6 +468,16 @@
           "art": "assets/745a8f10720a99a173cd63d877d0d7358f8960ea8ebc084cdcfc2fef5eca3293.webp"
         },
         {
+          "id": "space_nebula",
+          "name": "Nebula Nib",
+          "art": "assets/de21b16af024079ce9dfdd92279e196d013872b952055538873eb36a909bab69.webp"
+        },
+        {
+          "id": "weather_08_gray_fog",
+          "name": "Murklemist",
+          "art": "assets/479c1fa0f6637626ba0ceb1240497202470c58a2881daad62ee1421fd1a09d97.webp"
+        },
+        {
           "id": "wild_things_forest_grumbler",
           "name": "Forest Grumbler",
           "art": "assets/eef41f8ec061f6185a0b8dabe1b77f6310cdb0f3026b22fdb02b6a2079cc3827.webp"
@@ -442,7 +488,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -480,6 +533,11 @@
           "art": "assets/b43eb668a710787397ae56b420b2059f68d1de33e9b330cb0ef17c316ce66f83.webp"
         },
         {
+          "id": "f1_george_russell",
+          "name": "George",
+          "art": "assets/97b4cc07a1c6c2eff23e688f2acec08606989d65dce11af1d395bea53f476ddb.webp"
+        },
+        {
           "id": "halloween_zombie",
           "name": "Mossmumble",
           "art": "assets/5418810601c10a0ea416e9d1e875610f3f7034689831ac58fad43788734842a1.webp"
@@ -515,7 +573,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -551,6 +616,11 @@
           "id": "emotions_01_happy",
           "name": "Gigglepop",
           "art": "assets/1e35d800f69df2141162900e2f247dbcf798e6148facdbc4105e784cf7ff3e8c.webp"
+        },
+        {
+          "id": "f1_george_russell",
+          "name": "George",
+          "art": "assets/97b4cc07a1c6c2eff23e688f2acec08606989d65dce11af1d395bea53f476ddb.webp"
         },
         {
           "id": "food_treats_03_chocolate_cake",
@@ -598,7 +668,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -634,6 +711,11 @@
           "id": "emotions_03_sad",
           "name": "Teardrop",
           "art": "assets/863083da10038dc37ebc9102cc4d8fa94b96c89a29fafbaf0093af2b01ffd307.webp"
+        },
+        {
+          "id": "f1_liam_lawson",
+          "name": "Liam",
+          "art": "assets/1e509ad8ba666ebe6a947efd0345536e446cf6223585463eceadfb8c2861a423.webp"
         },
         {
           "id": "food_treats_01_cheeseburger",
@@ -729,6 +811,11 @@
           "art": "assets/b43eb668a710787397ae56b420b2059f68d1de33e9b330cb0ef17c316ce66f83.webp"
         },
         {
+          "id": "f1_liam_lawson",
+          "name": "Liam",
+          "art": "assets/1e509ad8ba666ebe6a947efd0345536e446cf6223585463eceadfb8c2861a423.webp"
+        },
+        {
           "id": "food_treats_10_cinnamon_roll",
           "name": "Cinnabumble",
           "art": "assets/9167e8b22707ad2a05cd49b091fe29d19222f846beceb58a14fa78a3db8cb5b2.webp"
@@ -794,7 +881,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -837,14 +931,14 @@
           "art": "assets/b43eb668a710787397ae56b420b2059f68d1de33e9b330cb0ef17c316ce66f83.webp"
         },
         {
+          "id": "f1_liam_lawson",
+          "name": "Liam",
+          "art": "assets/1e509ad8ba666ebe6a947efd0345536e446cf6223585463eceadfb8c2861a423.webp"
+        },
+        {
           "id": "food_treats_05_pink_iced_pastry",
           "name": "Glazibelle",
           "art": "assets/990eee05d7e89da8d111e2568035414af257e100c012bc29193b1d251be32ca0.webp"
-        },
-        {
-          "id": "halloween_witch",
-          "name": "Hexibelle",
-          "art": "assets/e7c9877ea5894d0dc827943a91bae0dfd1d127cc4c19d0af10273da0ce3351ce.webp"
         },
         {
           "id": "myths_medusa",
@@ -877,7 +971,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -915,14 +1016,19 @@
           "art": "assets/c7706b9fdb5ba2f5224c64846a8c3f8d07a95dde2193fa6f3b6a7794e8c1e1a2.webp"
         },
         {
-          "id": "food_treats_01_cheeseburger",
-          "name": "Bunbix",
-          "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
+          "id": "f1_liam_lawson",
+          "name": "Liam",
+          "art": "assets/1e509ad8ba666ebe6a947efd0345536e446cf6223585463eceadfb8c2861a423.webp"
         },
         {
           "id": "food_treats_06_waffle",
           "name": "Waffleston",
           "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
+        },
+        {
+          "id": "food_treats_10_cinnamon_roll",
+          "name": "Cinnabumble",
+          "art": "assets/9167e8b22707ad2a05cd49b091fe29d19222f846beceb58a14fa78a3db8cb5b2.webp"
         },
         {
           "id": "halloween_zombie",
@@ -965,7 +1071,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -996,6 +1109,11 @@
           "id": "circus_06_purple_gold_clown",
           "name": "Jinxabell",
           "art": "assets/2df14c9e51326cb26a0444d97c69e64069a0fbe86caabe77a6379f2e157f2354.webp"
+        },
+        {
+          "id": "f1_max_verstappen",
+          "name": "Max",
+          "art": "assets/0a290b7d33177095f2ba0e0e07244e679578ec6d6a88a7a3106e4c82c3b6eb7e.webp"
         },
         {
           "id": "food_treats_01_cheeseburger",
@@ -1030,10 +1148,17 @@
       ],
       "room": {
         "flag": {
-          "held": false,
-          "art": null
+          "held": true,
+          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -1071,6 +1196,11 @@
           "art": "assets/1e35d800f69df2141162900e2f247dbcf798e6148facdbc4105e784cf7ff3e8c.webp"
         },
         {
+          "id": "f1_oscar_piastri",
+          "name": "Oscar",
+          "art": "assets/79d6d9a958b73cb4006e7937b74a3f623dbbcc8c91d2906c65ebf8b335277ad7.webp"
+        },
+        {
           "id": "food_treats_03_chocolate_cake",
           "name": "Chocodoodle",
           "art": "assets/7261e17a84c9430ecbe350fc5d9936633dc2e0e28268cb169b2685f9e33d2d36.webp"
@@ -1084,6 +1214,11 @@
           "id": "halloween_demon",
           "name": "Emberimp",
           "art": "assets/d9d2e9cb6983148664a5ace0f096bd10aba61d70d417f45a32a8893641f3deda.webp"
+        },
+        {
+          "id": "halloween_witch",
+          "name": "Hexibelle",
+          "art": "assets/e7c9877ea5894d0dc827943a91bae0dfd1d127cc4c19d0af10273da0ce3351ce.webp"
         },
         {
           "id": "halloween_zombie",
@@ -1116,7 +1251,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -1133,6 +1275,11 @@
         }
       ],
       "squishies": [
+        {
+          "id": "f1_liam_lawson",
+          "name": "Liam",
+          "art": "assets/1e509ad8ba666ebe6a947efd0345536e446cf6223585463eceadfb8c2861a423.webp"
+        },
         {
           "id": "food_treats_05_pink_iced_pastry",
           "name": "Glazibelle",
@@ -1222,14 +1369,19 @@
           "art": "assets/9c9be7fe668ea308edff8d4b7ced6b0d0af9d681f7ecb6f09895d11f216686aa.webp"
         },
         {
+          "id": "f1_oscar_piastri",
+          "name": "Oscar",
+          "art": "assets/79d6d9a958b73cb4006e7937b74a3f623dbbcc8c91d2906c65ebf8b335277ad7.webp"
+        },
+        {
+          "id": "food_treats_01_cheeseburger",
+          "name": "Bunbix",
+          "art": "assets/8969972416e21d5ff21f9c019e6c267eb743240283891d9a42027eaee553c28d.webp"
+        },
+        {
           "id": "food_treats_05_pink_iced_pastry",
           "name": "Glazibelle",
           "art": "assets/990eee05d7e89da8d111e2568035414af257e100c012bc29193b1d251be32ca0.webp"
-        },
-        {
-          "id": "food_treats_10_cinnamon_roll",
-          "name": "Cinnabumble",
-          "art": "assets/9167e8b22707ad2a05cd49b091fe29d19222f846beceb58a14fa78a3db8cb5b2.webp"
         },
         {
           "id": "halloween_wrapscallion",
@@ -1274,10 +1426,17 @@
       ],
       "room": {
         "flag": {
-          "held": false,
-          "art": null
+          "held": true,
+          "art": "assets/9e7a9a81489a2b296029c8f9140146edb8f1030425c27837609dfd53227815ba.webp"
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -1303,6 +1462,11 @@
           "id": "emotions_01_happy",
           "name": "Gigglepop",
           "art": "assets/1e35d800f69df2141162900e2f247dbcf798e6148facdbc4105e784cf7ff3e8c.webp"
+        },
+        {
+          "id": "f1_max_verstappen",
+          "name": "Max",
+          "art": "assets/0a290b7d33177095f2ba0e0e07244e679578ec6d6a88a7a3106e4c82c3b6eb7e.webp"
         },
         {
           "id": "food_treats_03_chocolate_cake",
@@ -1340,7 +1504,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     },
@@ -1348,7 +1519,7 @@
       "key": "1312642476e8bede32ee70a4f9222e70",
       "creatureName": "Vantimo",
       "stage": 2,
-      "art": "assets/7750e47d42ec8133abbaaf52d644cce61ff0ef62077bc39589b240cc9bbba55c.webp",
+      "art": "assets/179a36a3ebeb172bad0129962837ac65baa5c6b5c61533ce386309463fe89b2a.webp",
       "curios": [
         {
           "id": "curio_01",
@@ -1378,6 +1549,11 @@
           "art": "assets/2e68847fdb7853111b914b59221682f0372572f66e9900cc862b87f07c24be83.webp"
         },
         {
+          "id": "dino_park_triceratops",
+          "name": "Triceratops",
+          "art": "assets/5b24203eec38a6c42d8032d5c6733203511dffc5c2e1a43c981a27b1a2c63c4f.webp"
+        },
+        {
           "id": "emotions_04_angry",
           "name": "Grumbleglow",
           "art": "assets/74d92c042aea5026d27a4046778e6f5c3c5fbb3c97ee0221cb2b57e7da1b26c4.webp"
@@ -1386,6 +1562,11 @@
           "id": "emotions_10_sleepy",
           "name": "Dreamwink",
           "art": "assets/9c9be7fe668ea308edff8d4b7ced6b0d0af9d681f7ecb6f09895d11f216686aa.webp"
+        },
+        {
+          "id": "f1_liam_lawson",
+          "name": "Liam",
+          "art": "assets/1e509ad8ba666ebe6a947efd0345536e446cf6223585463eceadfb8c2861a423.webp"
         },
         {
           "id": "food_treats_05_pink_iced_pastry",
@@ -1443,100 +1624,14 @@
           "held": false,
           "art": null
         },
-        "relics": [],
-        "relicUnknown": 0
-      }
-    },
-    {
-      "key": "ed655f90aeec4a66f9464383de85a78e",
-      "creatureName": "Velunox",
-      "stage": 2,
-      "art": "assets/7025b4e72e479d82a8670b66bd6bfcb411cbad69f806050bbf6e25e249e6506d.webp",
-      "curios": [
-        {
-          "id": "curio_18",
-          "name": "Ink Sprite",
-          "art": "assets/a1e9a629087abc216fcc302bf2839e5f63383b5ad21c7bf209c6dcca69c790c8.webp"
-        },
-        {
-          "id": "curio_22",
-          "name": "Cinder Salamander",
-          "art": "assets/7b39e3760c89b55072cc1387fd3a589293a903de8e1dd31eaa23b48361e6cad6.webp"
-        },
-        {
-          "id": "curio_32",
-          "name": "Petal Twister",
-          "art": "assets/ec1175276d886afa9265def12117859e0c49d30a93d0886c94c0156f14a08bba.webp"
-        }
-      ],
-      "squishies": [
-        {
-          "id": "circus_03_purple_pigtail_clown",
-          "name": "Plumperty",
-          "art": "assets/183b3cfdc340f0ffb16914b46aed007e415855bd09dfb76e98360709d14f7bab.webp"
-        },
-        {
-          "id": "emotions_10_sleepy",
-          "name": "Dreamwink",
-          "art": "assets/9c9be7fe668ea308edff8d4b7ced6b0d0af9d681f7ecb6f09895d11f216686aa.webp"
-        },
-        {
-          "id": "food_treats_06_waffle",
-          "name": "Waffleston",
-          "art": "assets/9c17b321785905ac99a1fea32f06451955a894d1f7eca69bc5accfe818d94cdb.webp"
-        },
-        {
-          "id": "halloween_ghost",
-          "name": "Wispwick",
-          "art": "assets/d9de633b32f1bf4a6d4dd69ffe3ab83db2bcb32b4e09a6a55df90ef7def69e42.webp"
-        },
-        {
-          "id": "halloween_werewolf",
-          "name": "Moonmuzzle",
-          "art": "assets/59061d9f60ccf9a3283990c09844ff9a539d8be0a6b4ad5f4af12300b44f7bb7.webp"
-        },
-        {
-          "id": "myths_chimera",
-          "name": "Chimichomp",
-          "art": "assets/3a8ac6492c3b19d0a94c4896d431c0da2cf3d809d04a6298c87dc7549107a3cc.webp"
-        },
-        {
-          "id": "myths_cyclops",
-          "name": "Wobbleye",
-          "art": "assets/123e482c1c917b1d161559120108a220cc7b94803a2ab2a40efd644a7ca556ba.webp"
-        },
-        {
-          "id": "myths_phoenix",
-          "name": "Flickerwing",
-          "art": "assets/3fa4ee632eb481bf4b568b45552f0bfe57fcdd8c61f22545f8e94be38198087f.webp"
-        },
-        {
-          "id": "space_comet",
-          "name": "Comet Zip",
-          "art": "assets/32eeaad219e01f64ae2211f5f776220d74f51674b2e0695ebcf18dc1641b2923.webp"
-        },
-        {
-          "id": "weather_01_sun",
-          "name": "Sollybeam",
-          "art": "assets/7547b2b17fd4d239214996c4c375f36cf5f1ca26a97e4b52fbbf05cdd6dd255b.webp"
-        },
-        {
-          "id": "weather_09_hail",
-          "name": "Hailibop",
-          "art": "assets/883d1feda00a9473e40a7a35eed2cfd8f3969436e9fb6a3421d0447ca2cece53.webp"
-        },
-        {
-          "id": "wild_things_bramblehorn",
-          "name": "Bramblehorn",
-          "art": "assets/450970d80e164d9476d264891db05287c464e0a54fbba9155ce0fc9f61d2eae1.webp"
-        }
-      ],
-      "room": {
-        "flag": {
-          "held": false,
-          "art": null
-        },
-        "relics": [],
+        "relics": [
+          {
+            "id": "relic_skull_feathers",
+            "name": "Skull Feathers",
+            "art": "assets/afd3c10ac95e3fde6ccd57dd5df5f339be2a238e19a96038860c8b2a71306d5e.webp",
+            "count": 1
+          }
+        ],
         "relicUnknown": 0
       }
     }

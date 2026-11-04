@@ -2,7 +2,7 @@
   "format": "nw-market-catalogue",
   "schemaVersion": 2,
   "classId": "nw-class-3b649cc6-153a-48fe-bbf8-35c1cc047f7e",
-  "revision": 110,
+  "revision": 130,
   "creatures": [
     {
       "id": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
@@ -12,7 +12,7 @@
     {
       "id": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
       "creature": "Bumbalune",
-      "balance": 298
+      "balance": 498
     },
     {
       "id": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
@@ -27,7 +27,7 @@
     {
       "id": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
       "creature": "Coralclonk",
-      "balance": 689
+      "balance": 489
     },
     {
       "id": "creature-35d20243-f7e9-4d54-822a-89f12b445644",
@@ -52,7 +52,7 @@
     {
       "id": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
       "creature": "Riftback",
-      "balance": 774
+      "balance": 1124
     },
     {
       "id": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
@@ -67,7 +67,7 @@
     {
       "id": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
       "creature": "Sparkwhisk",
-      "balance": 404
+      "balance": 54
     },
     {
       "id": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
@@ -88,11 +88,6 @@
       "id": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "creature": "Vantimo",
       "balance": 297
-    },
-    {
-      "id": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "creature": "Velunox",
-      "balance": 848
     }
   ],
   "items": [
@@ -120,9 +115,9 @@
     {
       "id": "item-5b6a41b3-b5c1-4748-9ae1-a3d4e9562d27",
       "type": "weather_08_gray_fog",
-      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-d7928638-580f-45f4-881b-8f828047597e",
@@ -176,9 +171,9 @@
     {
       "id": "item-1851a093-dcd1-47ad-a7bf-584704269aab",
       "type": "emotions_09_shy",
-      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
       "price": null,
-      "version": 2
+      "version": 3
     },
     {
       "id": "item-baa5f32e-d1a0-4c53-89cb-e02569675fd4",
@@ -226,41 +221,6 @@
       "id": "item-20a8547f-2c3b-4775-87f9-c227db68e5b8",
       "type": "monsters_06_pink_sparkle",
       "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-accd430b-8e32-4f2b-90ea-20a614ed88cf",
-      "type": "halloween_werewolf",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-1d193e68-7205-424b-a66c-3b5c7c62bad5",
-      "type": "circus_03_purple_pigtail_clown",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-4b3ca2c0-3220-483e-abb9-7e614c654974",
-      "type": "emotions_10_sleepy",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-7f1bca4e-caf0-4499-b0a9-47598de9a98e",
-      "type": "weather_01_sun",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-5b644f68-1755-455d-849a-c52d85f34539",
-      "type": "wild_things_bramblehorn",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
       "price": null,
       "version": 1
     },
@@ -351,9 +311,9 @@
     {
       "id": "item-9ebf0907-4679-443a-b11e-33ef6149e2d0",
       "type": "halloween_witch",
-      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
       "price": null,
-      "version": 3
+      "version": 4
     },
     {
       "id": "item-d8f6d195-38a8-49aa-9aa3-58b3699ed7a4",
@@ -692,20 +652,6 @@
       "version": 2
     },
     {
-      "id": "item-f0b98dff-5178-40e6-af35-a3fb91466ca9",
-      "type": "myths_phoenix",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-9752de14-4812-43e4-aecb-2b44f08b4161",
-      "type": "food_treats_06_waffle",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-1bf41127-d16b-4ba6-8a6a-45f9a69e997a",
       "type": "myths_unicorn",
       "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
@@ -883,9 +829,9 @@
     {
       "id": "item-fd67567f-9969-4d64-b8b6-5271aacc418e",
       "type": "space_nebula",
-      "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
       "price": null,
-      "version": 2
+      "version": 3
     },
     {
       "id": "item-e20cb122-5679-4c71-8978-ccc3120eec2e",
@@ -898,27 +844,6 @@
       "id": "item-32705c32-a46b-4d73-b6ad-95d7bf118fde",
       "type": "fruit_03_lemon",
       "owner": "creature-e38e8e27-a6c3-4726-849e-5335d9f95cbe",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-b291a67f-086b-4f1d-b478-e7c0b33cdc6e",
-      "type": "space_comet",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-8c5d40e9-a30f-4553-b583-236569b3316a",
-      "type": "weather_09_hail",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-7b188172-de63-4265-9eb1-c4276dc70e95",
-      "type": "halloween_ghost",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
       "price": null,
       "version": 1
     },
@@ -1014,13 +939,6 @@
       "version": 1
     },
     {
-      "id": "item-251b0ddb-50d7-4532-97b2-3ef8b9e7ab25",
-      "type": "myths_cyclops",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-b0084b76-e4b4-4612-84c9-9837add1f902",
       "type": "myths_medusa",
       "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
@@ -1107,9 +1025,9 @@
     {
       "id": "item-d2a90dd0-4196-4893-b14b-9127ac62684a",
       "type": "food_treats_10_cinnamon_roll",
-      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-64fc98dd-2775-4306-a399-5ce1e3f8f492",
@@ -1156,9 +1074,9 @@
     {
       "id": "item-e507ebeb-f5e1-4b99-9d53-bb8d47bbc22b",
       "type": "food_treats_01_cheeseburger",
-      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-aa2ec2cd-39f8-4ab7-b90a-79021146b112",
@@ -1315,13 +1233,6 @@
       "version": 1
     },
     {
-      "id": "item-18e756a9-8c3e-44cd-9230-ac56bf930f11",
-      "type": "myths_chimera",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-3d988948-a8db-440c-bfb9-c81d4f8b1965",
       "type": "myths_kraken",
       "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
@@ -1416,6 +1327,132 @@
       "id": "item-1f27260f-ab6d-4335-a2b5-02d850c10db6",
       "type": "food_treats_06_waffle",
       "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-9baafb26-6f6c-4ea2-9689-2f9bf962dcd9",
+      "type": "f1_charles_leclerc",
+      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-e29c3d5f-aa00-4250-a253-51fdc5b2cba7",
+      "type": "f1_oscar_piastri",
+      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-37a958ec-17b8-48f5-95fd-5cb624920e45",
+      "type": "f1_kimi_antonelli",
+      "owner": "creature-e38e8e27-a6c3-4726-849e-5335d9f95cbe",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-47c3dba2-afec-4f7d-b2ea-a3df389529fe",
+      "type": "f1_oscar_piastri",
+      "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-e4ceff05-eeb9-49b3-8979-e77b377b9198",
+      "type": "f1_liam_lawson",
+      "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-f6812bb1-a8b5-470e-acba-3ee1a5416671",
+      "type": "f1_max_verstappen",
+      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-9e4d0c25-f0f4-4547-8cb7-6253f4fa0534",
+      "type": "f1_liam_lawson",
+      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-cf1c5190-db86-4a95-8119-18c9e6d75916",
+      "type": "f1_lando_norris",
+      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-79d7123e-896c-477a-b689-05f2a97d0a04",
+      "type": "f1_liam_lawson",
+      "owner": "creature-809e5677-5aa3-4e01-8c3e-0e3d361ec079",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-c6327685-d836-401b-a100-4eabeeb99d81",
+      "type": "f1_liam_lawson",
+      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-45288187-8851-4cbc-a221-8c0efe3ee55a",
+      "type": "f1_george_russell",
+      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-b27684f7-7b23-4b7a-b44a-67ac3a3dad0f",
+      "type": "f1_liam_lawson",
+      "owner": "creature-d759bda1-2aeb-47fc-bf71-7fe0dbec777c",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-ff9641d6-ba27-4122-8585-c8f3d017df9b",
+      "type": "f1_lando_norris",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-5263632d-9bc4-4daa-9983-60a300a74350",
+      "type": "f1_oscar_piastri",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-b11908f6-5a2e-4c23-8b90-84d24a95fdf3",
+      "type": "f1_george_russell",
+      "owner": "creature-35d20243-f7e9-4d54-822a-89f12b445644",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-3848c973-5008-4a7c-838f-6ccfefdb2ab3",
+      "type": "f1_liam_lawson",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-fe16dd3d-6861-4111-9296-ef4bd4f0f103",
+      "type": "f1_max_verstappen",
+      "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-a7f5e171-e72b-4b0a-b232-da1dc6c70c73",
+      "type": "dino_park_triceratops",
+      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "price": null,
       "version": 1
     }
@@ -1883,7 +1920,7 @@
     },
     {
       "id": "offer-5a67a6c3-313c-4f8e-84af-9ff59ac0550c",
-      "status": "pending"
+      "status": "denied"
     },
     {
       "id": "offer-3e50a328-d578-4697-8916-c27ab775309e",
@@ -1975,11 +2012,11 @@
     },
     {
       "id": "offer-a2f39339-ab4b-4cfb-ad84-b12e606acbae",
-      "status": "pending"
+      "status": "approved"
     },
     {
       "id": "offer-9dd56c36-1ef2-4b25-8700-6df6709a022f",
-      "status": "pending"
+      "status": "denied"
     },
     {
       "id": "offer-fb3384ab-bec8-4ed3-a5bc-8915a6e55917",
@@ -1987,15 +2024,63 @@
     },
     {
       "id": "offer-be59ba11-8749-43e3-a628-2fbbafa9ff81",
-      "status": "pending"
+      "status": "stale"
     },
     {
       "id": "offer-0085fd65-6a8b-436a-9b09-faae67e0b355",
-      "status": "pending"
+      "status": "denied"
     },
     {
       "id": "offer-635e43f9-37b7-49b6-8ff7-9a0a52a07d88",
-      "status": "pending"
+      "status": "approved"
+    },
+    {
+      "id": "offer-af1de7ec-cc60-4056-b885-7de96066a06a",
+      "status": "denied"
+    },
+    {
+      "id": "offer-7ae18905-bd7d-490e-9cef-bd1ab85981f4",
+      "status": "denied"
+    },
+    {
+      "id": "offer-91f6a842-c993-4ef1-9f3f-81922408ed44",
+      "status": "denied"
+    },
+    {
+      "id": "offer-78812d95-29d0-4895-9d98-7a9b1c3abd85",
+      "status": "denied"
+    },
+    {
+      "id": "offer-423a53f5-e305-4274-9b5c-41ea25c59fc6",
+      "status": "denied"
+    },
+    {
+      "id": "offer-bd0552c8-b2f8-4cd3-84df-f95d9dde7a79",
+      "status": "denied"
+    },
+    {
+      "id": "offer-d4ec4c5a-68e5-4f85-aa26-408fa2e119ea",
+      "status": "approved"
+    },
+    {
+      "id": "offer-82f24c34-bb51-4168-a239-658ae48860f4",
+      "status": "denied"
+    },
+    {
+      "id": "offer-d08a0d59-43df-4dbc-8db7-a248e18feeea",
+      "status": "denied"
+    },
+    {
+      "id": "offer-cc0a764c-3b20-49a4-be99-159e3766f4a9",
+      "status": "approved"
+    },
+    {
+      "id": "offer-cc70f0de-af7e-4099-b759-32b024d55d79",
+      "status": "denied"
+    },
+    {
+      "id": "offer-fce39c6f-3d36-422e-a9e7-2b141ce95dac",
+      "status": "denied"
     },
     {
       "id": "offer-ee192378-f628-4e2b-82fc-d1befc1a1b7f",
@@ -2155,6 +2240,18 @@
     },
     {
       "id": "offer-b9484ee2-bbee-4b8c-9c28-92a218d9bf32",
+      "status": "denied"
+    },
+    {
+      "id": "offer-5272d8f3-f91f-4279-8735-cb1417aeb603",
+      "status": "denied"
+    },
+    {
+      "id": "offer-91b7f579-af90-442c-b5b9-9a9284145076",
+      "status": "denied"
+    },
+    {
+      "id": "offer-b43df101-78f0-4d9b-b2d0-803e8d9f89b4",
       "status": "denied"
     }
   ]
