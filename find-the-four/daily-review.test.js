@@ -135,10 +135,10 @@ test('Perth anchor changes exactly at 16:00 UTC, independently of local dates', 
   }
 });
 
-test('daily cycle is 20 days, including negative offsets and leap-day transitions', () => {
-  assert.equal(puzzles.length, 20, 'The bank must contain 20 puzzles for the requested 20-day cycle');
+test('expanded word cycle is 45 days, including negative offsets and leap-day transitions', () => {
+  assert.equal(puzzles.length, 45, 'The original 20 boards plus 25 new boards form a 45-day cycle');
   const anchor = Date.parse('2026-10-22T16:00:00Z');
-  for (let days = -100; days < 500; days++) assert.equal(D.describe(anchor + days * 86400000, puzzles.length).index, ((days % 20) + 20) % 20);
+  for (let days = -100; days < 500; days++) assert.equal(D.describe(anchor + days * 86400000, puzzles.length).index, ((days % 45) + 45) % 45);
   for (const [instant, date] of [['2028-02-28T16:00:00Z','2028-02-29'], ['2028-02-29T16:00:00Z','2028-03-01']]) assert.equal(D.describe(Date.parse(instant), 20).date, date);
 });
 
@@ -411,7 +411,7 @@ test('all 50 maths days initialize, solve, reload and leave the word board playa
     restored.element('mode-words').click();
     assert.equal(restored.solved().length, 0);
     assert.equal(restored.tiles().length, 16);
-    assert.deepEqual(restored.tiles().map(t => t.dataset.word).sort(), puzzles[index%20].groups.flatMap(g=>g.words).sort());
+    assert.deepEqual(restored.tiles().map(t => t.dataset.word).sort(), puzzles[index%puzzles.length].groups.flatMap(g=>g.words).sort());
     restored.element('mode-maths').click();
     assert.equal(restored.solved().length, 4);
   }
