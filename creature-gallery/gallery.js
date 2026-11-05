@@ -85,7 +85,8 @@
   const closeArtButton = document.getElementById("close-art");
   let opener = null;
   let artOpener = null;
-  const PAGE_SIZE = 8;
+  const FAMILIES = Object.freeze({"Umbrawyn": "Furkin", "Bramblebolt": "Furkin", "Tumbletuft": "Furkin", "Rosywhisk": "Furkin", "Emberpounce": "Furkin", "Bumblebop": "Furkin", "Sparkwhisk": "Furkin", "Mintmuddle": "Furkin", "Stargiggle": "Furkin", "Flickerfluff": "Furkin", "Copperwobble": "Furkin", "Ironcrest": "Scaleclad", "Cindertail": "Scaleclad", "Riftback": "Scaleclad", "Thornwhirl": "Scaleclad", "Opalnuzzle": "Scaleclad", "Dewfin": "Scaleclad", "Gloompip": "Scaleclad", "Coralclonk": "Scaleclad", "Stormhorn": "Scaleclad", "Rubyruff": "Scaleclad", "Moxiblu": "Tideborn", "Tumberell": "Tideborn", "Velunox": "Tideborn", "Quillamar": "Tideborn", "Razzik": "Tideborn", "Oryndra": "Tideborn", "Maribelle": "Tideborn", "Pipquill": "Tideborn", "Vantimo": "Tideborn", "Bumbalune": "Tideborn"});
+  let pageSize = 8;
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -133,7 +134,7 @@
   function treasures(items, kind, label, page = 0) {
     const target = document.getElementById(`${kind}-content`);
     const footer = document.getElementById(`${kind}-pager`);
-    const pages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    const pages = Math.max(1, Math.ceil(items.length / pageSize));
     page = Math.max(0, Math.min(pages - 1, page));
     target.replaceChildren();
     footer.replaceChildren();
@@ -143,8 +144,8 @@
     if (items.length === 0) {
       target.append(element("p", "treasure-empty sr-only", `No ${label} in this collection yet.`));
     }
-    const visibleItems = items.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-    for (let slot = 0; slot < PAGE_SIZE; slot += 1) {
+    const visibleItems = items.slice(page * pageSize, (page + 1) * pageSize);
+    for (let slot = 0; slot < pageSize; slot += 1) {
       const item = visibleItems[slot];
       const treasure = element("li", item ? "treasure" : "treasure treasure-empty-slot");
       if (item) {
@@ -210,15 +211,64 @@
     }
   }
 
+  // Match New World's alpha-normalized stage 2–3 silhouettes, using only validated local art.
+  function normalizeCreature(card) {
+    const button = document.querySelector("#room-portrait .creature-art");
+    const img = button.querySelector("img");
+    function measure() {
+      if (!button.isConnected || !img.naturalWidth) return;
+      try {
+        const scale = Math.min(1, 768 / Math.max(img.naturalWidth, img.naturalHeight));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.ceil(img.naturalWidth * scale);
+        canvas.height = Math.ceil(img.naturalHeight * scale);
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let left = canvas.width, top = canvas.height, right = -1, bottom = -1;
+        for (let y = 0; y < canvas.height; y += 1) for (let x = 0; x < canvas.width; x += 1) {
+          if (pixels[(y * canvas.width + x) * 4 + 3] > 8) {
+            left = Math.min(left, x); top = Math.min(top, y);
+            right = Math.max(right, x); bottom = Math.max(bottom, y);
+          }
+        }
+        if (right < 0) return;
+        left = Math.max(0, left - 1); top = Math.max(0, top - 1);
+        right = Math.min(canvas.width - 1, right + 1); bottom = Math.min(canvas.height - 1, bottom + 1);
+        const bw = (right - left + 1) / scale, bh = (bottom - top + 1) / scale;
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
+        svg.setAttribute("viewBox", [left / scale, top / scale, bw, bh].join(" "));
+        svg.setAttribute("preserveAspectRatio", "xMidYMax meet");
+        svg.setAttribute("aria-hidden", "true");
+        image.setAttribute("href", card.art);
+        image.setAttribute("width", img.naturalWidth);
+        image.setAttribute("height", img.naturalHeight);
+        svg.append(image); button.replaceChildren(svg);
+        const width = Math.min(card.stage === 3 ? 46 : 43, (card.stage === 3 ? 55 : 42) * (bw / bh) * 941 / 1672);
+        button.parentElement.style.width = `${width}%`;
+        button.parentElement.style.height = `${width * 1672 / 941 / (bw / bh)}%`;
+      } catch { /* Keep the accessible, uncropped original if canvas is unavailable. */ }
+    }
+    if (img.complete) measure(); else img.addEventListener("load", measure, { once: true });
+  }
+
   function openRoom(card, button) {
     // One fixed selection. There is no timer, auto-advance, or adjacent-creature navigation.
     if (dialog.open) return;
     opener = button;
+    const family = card.stage >= 2 && Object.hasOwn(FAMILIES, card.creatureName) ? FAMILIES[card.creatureName] : "";
+    dialog.dataset.world = family;
+    dialog.dataset.visualStage = String(card.stage);
+    pageSize = family ? 6 : 8;
+    document.getElementById("room-world").textContent = family ? `${family === "Scaleclad" ? "Scaleclade" : family} world` : "Trophy room";
     document.getElementById("room-title").textContent = card.creatureName;
     document.getElementById("room-stage").textContent = `Stage ${card.stage}`;
     document.getElementById("room-portrait").replaceChildren(artButton(card.art, card.creatureName, "creature-art"));
+    document.getElementById("room-portrait").removeAttribute("style");
+    if (family) normalizeCreature(card);
     dialog.classList.remove("has-paging");
-    if (card.curios.length > PAGE_SIZE || card.squishies.length > PAGE_SIZE) dialog.classList.add("has-paging");
+    if (card.curios.length > pageSize || card.squishies.length > pageSize) dialog.classList.add("has-paging");
     treasures(card.curios, "curios", "Curios");
     treasures(card.squishies, "squishies", "Squishies");
     roomHoldings(card.room);
@@ -325,3 +375,4 @@
 
   load();
 })();
+

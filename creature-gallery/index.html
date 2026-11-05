@@ -8,8 +8,8 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <meta name="description" content="A little museum of creatures and their collected Curios and Squishies.">
     <title>Creature Gallery</title>
-    <link rel="stylesheet" href="style.css?v=3">
-    <script src="gallery.js?v=3" defer></script>
+    <link rel="stylesheet" href="style.css?v=4">
+    <script src="gallery.js?v=4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#collection">Skip to the collection</a>
@@ -65,7 +65,7 @@
         <div class="room-background" aria-hidden="true"></div>
         <div class="room-layout">
           <header class="room-heading">
-            <p>Trophy room</p>
+            <p id="room-world">Trophy room</p>
             <p id="room-stage" class="sr-only"></p>
             <p id="room-description" class="sr-only">Explore this creature’s shared collection. Tap any creature or treasure to enlarge it. This room stays open until you return to the gallery.</p>
           </header>
@@ -103,3 +103,4 @@
     </dialog>
   </body>
 </html>
+
