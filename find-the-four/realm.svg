@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#101c32"/><stop offset=".52" stop-color="#23323e"/><stop offset="1" stop-color="#0b191d"/></linearGradient>
+ <radialGradient id="moon"><stop stop-color="#d9f7df" stop-opacity=".4"/><stop offset=".3" stop-color="#8dd9d1" stop-opacity=".12"/><stop offset="1" stop-color="#89c9c0" stop-opacity="0"/></radialGradient>
+ <linearGradient id="mist" x2="0" y2="1"><stop stop-color="#8fc4c4" stop-opacity="0"/><stop offset=".6" stop-color="#78b8b7" stop-opacity=".12"/><stop offset="1" stop-color="#243f45" stop-opacity="0"/></linearGradient>
+ <linearGradient id="path" x2="0" y2="1"><stop stop-color="#b5e4d8" stop-opacity="0"/><stop offset="1" stop-color="#6f9297" stop-opacity=".18"/></linearGradient>
+ <g id="pine"><path d="M0 0-26 52h15l-35 50h23l-38 57h53v55H8v-55h53l-38-57h23L11 52h15Z"/></g>
+</defs>
+<path fill="url(#sky)" d="M0 0h1600v1000H0z"/>
+<ellipse cx="1240" cy="220" rx="440" ry="400" fill="url(#moon)"/>
+<circle cx="1250" cy="155" r="49" fill="#c1d6cb" opacity=".28"/>
+<path d="M0 355 160 260 306 374 489 246 686 375 836 259 1108 377 1310 278 1600 370V1000H0Z" fill="#172a37"/>
+<g fill="#173139" opacity=".8"><use href="#pine" transform="translate(65 270) scale(1.8)"/><use href="#pine" transform="translate(270 270) scale(2)"/><use href="#pine" transform="translate(420 340) scale(1.4)"/><use href="#pine" transform="translate(1160 275) scale(1.6)"/><use href="#pine" transform="translate(1425 270) scale(2.4)"/><use href="#pine" transform="translate(1550 305) scale(2)"/></g>
+<g fill="#0f252d"><use href="#pine" transform="translate(5 160) scale(2.8)"/><use href="#pine" transform="translate(170 360) scale(1.9)"/><use href="#pine" transform="translate(340 425) scale(1.2)"/><use href="#pine" transform="translate(1290 360) scale(1.8)"/><use href="#pine" transform="translate(1550 160) scale(3)"/></g>
+<path d="M0 765q220-100 415-30t385 0q260-60 390 0t410-25v290H0Z" fill="#0b1a22"/>
+<path d="M710 670h180l270 330H430Z" fill="url(#path)"/>
+<path d="M0 530h1600v380H0Z" fill="url(#mist)"/>
+<g fill="none" stroke="#08161e" stroke-linecap="round"><path stroke-width="42" d="M-30 1000Q80 700 30 360T-10-20M1600 1030q-60-370-15-620t20-450"/><path stroke-width="17" d="M28 430q80-85 135-210m-125 99Q90 185 216 135M15 208Q85 97 57-20m1535 375q-70-113-174-141m161 84q-100-140-98-338"/><path stroke-width="8" d="m161 222-12-107m-53 48 91-99m1351 204 20-117m-95 78-75-11"/></g>
+<g fill="#78d5bd" opacity=".5"><circle cx="193" cy="607" r="2"/><circle cx="106" cy="496" r="3"/><circle cx="328" cy="758" r="2"/><circle cx="1306" cy="592" r="3"/><circle cx="1441" cy="452" r="2"/><circle cx="1190" cy="781" r="2"/><circle cx="535" cy="874" r="2"/><circle cx="1087" cy="921" r="2"/></g>
+<g fill="#0a1720"><path d="m0 941 91-73 96 51 93 81H0Z"/><path d="m1600 881-98-34-105 108-115 45h318Z"/></g>
+</svg>

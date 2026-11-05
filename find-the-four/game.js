@@ -1,11 +1,46 @@
 (() => {
   'use strict';
-  const E = window.FourEngine, D = window.FourDaily, puzzles = window.FOUR_PUZZLES;
+  const E = window.FourEngine, D = window.FourDaily;
+  const banks = {words: window.FOUR_PUZZLES, maths: window.FOUR_MATHS_PUZZLES};
+  const MODE_KEY = 'find-the-four.mode.v1', sessionProgress = new Map(), unsavedProgress = new Set();
+  let mode = 'words', puzzles;
   const $ = id => document.getElementById(id);
   let day, state, hintIndex = null, hintLevel = 0, midnightTimer, storage, storageOK = true;
-  const dialog = $('help-dialog');
+  const dialog = $('help-dialog'), celebration = $('boss-celebration');
+  const bossQueue = E.shuffle([0,1,2,3]);
+  let celebrationTimer;
+  function stopCelebration() {clearTimeout(celebrationTimer); celebration.hidden = true; celebration.classList.remove('active');}
+  function celebrate() {
+    stopCelebration();
+    const boss = bossQueue.shift(); bossQueue.push(boss);
+    celebration.dataset.boss = String(boss);
+    celebration.hidden = false;
+    void celebration.offsetWidth; // Restart the entrance after rapid correct guesses.
+    celebration.classList.add('active');
+    celebrationTimer = setTimeout(stopCelebration, 1000);
+  }
   try {storage = window.localStorage;} catch {storageOK = false;}
-  puzzles.forEach(p => E.validatePuzzle(p));
+  try {if (storage.getItem(MODE_KEY) === 'maths') mode = 'maths';} catch {}
+  puzzles = banks[mode];
+  Object.values(banks).flat().forEach(p => E.validatePuzzle(p));
+  const tileName = () => mode === 'maths' ? 'calculation' : 'word';
+  function updateModeUI() {
+    for (const name of ['words', 'maths']) $('mode-' + name).setAttribute('aria-pressed', String(name === mode));
+    $('board').dataset.mode = mode;
+    $('board').setAttribute('aria-label', mode === 'maths' ? 'Calculation tiles' : 'Word tiles');
+    $('stage').setAttribute('aria-label', mode === 'maths' ? 'Maths challenge' : 'Word challenge');
+    $('instructions').innerHTML = mode === 'maths' ? 'Find <strong>4 groups of 4.</strong> Each group has the same answer.' : 'Find <strong>4 groups of 4.</strong> What connects each group?';
+  }
+  function switchMode(next) {
+    if (next === mode) {refreshDay(true); return;}
+    refreshDay(true);
+    save();
+    mode = next; puzzles = banks[mode];
+    try {storage.setItem(MODE_KEY, mode);} catch {}
+    loadToday(D.describe(Date.now(), puzzles.length));
+  }
+  $('mode-words').addEventListener('click', () => switchMode('words'));
+  $('mode-maths').addEventListener('click', () => switchMode('maths'));
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function say(message, kind = '') { $('status').textContent = message; $('status').dataset.kind = kind; }
   function finish() {
@@ -18,7 +53,10 @@
     if (stored.state?.solved.length === 4 && state.solved.length < 4) {
       state = stored.state; render(); finish(); return false;
     }
+    const savedKey = D.key(day, state.puzzle);
+    sessionProgress.set(savedKey, state);
     storageOK = D.write(storage, day, state);
+    if (storageOK) unsavedProgress.delete(savedKey); else unsavedProgress.add(savedKey);
     if (!storageOK && state.solved.length < 4) $('discussion').textContent = 'Progress cannot be saved in this browser';
     return true;
   }
@@ -29,21 +67,27 @@
     midnightTimer = setTimeout(() => refreshDay(), Math.max(1, Math.min(next - now, 60000)));
   }
   function loadToday(today, newDay = false) {
+    stopCelebration();
     day = today;
     const stored = D.read(storage, day, puzzles[day.index]);
     storageOK = stored.available;
-    state = stored.state || E.create(puzzles[day.index]);
+    const savedKey = D.key(day, puzzles[day.index]), previous = sessionProgress.get(savedKey);
+    // An inactive mode may have advanced in another tab. Prefer its saved state,
+    // except when this tab has changes it could not save or storage is blocked.
+    const localOnly = !stored.available || unsavedProgress.has(savedKey);
+    state = stored.state?.solved.length === 4 ? stored.state : (localOnly && previous) || stored.state || previous || E.create(puzzles[day.index]);
+    updateModeUI();
     hintIndex = null; hintLevel = 0;
     if (dialog.open) dialog.close();
     $('daily-date').dateTime = day.date;
     $('daily-date').textContent = new Intl.DateTimeFormat('en-AU', {weekday:'short', day:'numeric', month:'short', timeZone:'UTC'}).format(new Date(day.date + 'T00:00:00Z'));
     $('difficulty').textContent = state.puzzle.difficulty;
     $('difficulty').dataset.level = state.puzzle.difficulty;
-    $('puzzle-number').textContent = 'TODAY';
+    $('puzzle-number').textContent = mode === 'maths' ? 'MATHS · TODAY' : 'TODAY';
     $('discussion').textContent = 'Think • Talk • Connect';
     render(); save();
     if (state.solved.length === 4) finish();
-    else say(newDay ? 'A new Perth day, a new Find the Four. Let’s connect!' : stored.state ? 'Welcome back. Today’s puzzle is just as you left it.' : 'Today’s challenge. Talk it through and choose four words.');
+    else say(newDay ? 'A new Perth day, a new Find the Four. Let’s connect!' : stored.state ? 'Welcome back. Today’s puzzle is just as you left it.' : `Today’s challenge. Talk it through and choose four ${tileName()}s.`);
     schedule();
   }
   function refreshDay(syncCompletion = false) {
@@ -77,10 +121,10 @@
     const result = E.submit(state);
     if (result.type === 'incomplete') return;
     if (!save()) return;
-    if (result.type === 'repeat') {say('You tried that set. Swap a word and explore another connection.'); return;}
+    if (result.type === 'repeat') {say(`You tried that set. Swap a ${tileName()} and explore another connection.`); return;}
     if (result.type === 'near') {say('So close! Three of these belong together. Try swapping one.', 'hint'); return;}
     if (result.type === 'different') {say('Not that group yet. Keep talking and try another idea.'); return;}
-    hintIndex = null; hintLevel = 0; render();
+    hintIndex = null; hintLevel = 0; render(); celebrate();
     if (result.type === 'complete') {finish(); document.querySelector('.solved')?.focus({preventScroll:true});}
     else {say(`${state.puzzle.groups[result.groupIndex].label}! ${4 - state.solved.length} more ${state.solved.length === 3 ? 'group' : 'groups'} to find.`, 'success'); document.querySelector('.tile')?.focus({preventScroll:true});}
   }
@@ -90,9 +134,9 @@
     if (solved) {const group=state.puzzle.groups[Number(solved.dataset.group)];openDialog('THE CONNECTION',group.label,group.explanation || group.easierHint || group.hint,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);return;}
     const tile = event.target.closest('.tile'); if (!tile) return;
     const word = tile.dataset.word, result = E.toggle(state, word);
-    if (result === 'full') {say('Four are selected. Tap a selected word to swap it, or check your group.'); return;}
+    if (result === 'full') {say(`Four are selected. Tap a selected ${tileName()} to swap it, or check your group.`); return;}
     render(word); if (!save()) return;
-    say(state.selected.length === 4 ? 'What connects your four words? Share your idea, then check.' : `${state.selected.length} of 4 selected. Keep looking for a connection.`);
+    say(state.selected.length === 4 ? (mode === 'maths' ? 'Do all four calculations have the same answer? Check your group.' : 'What connects your four words? Share your idea, then check.') : `${state.selected.length} of 4 selected. Keep looking for a connection.`);
   });
   $('board').addEventListener('keydown', event => {
     if (refreshDay(true) || !event.target.matches('.tile')) return;
@@ -104,14 +148,14 @@
     if (next !== undefined) {event.preventDefault(); tiles[next].focus();}
   });
   $('check').addEventListener('click', check);
-  $('shuffle').addEventListener('click', () => {if(refreshDay(true)||state.solved.length===4)return;state.order=E.shuffle(state.order);render();if(save())say('A fresh view. Your selected words stay selected.');});
+  $('shuffle').addEventListener('click', () => {if(refreshDay(true)||state.solved.length===4)return;state.order=E.shuffle(state.order);render();if(save())say(`A fresh view. Your selected ${tileName()}s stay selected.`);});
   function clearSelection() {if(refreshDay(true)||state.solved.length===4)return;state.selected=[];render();if(save())say('Selection cleared. Try a fresh idea.');document.querySelector('.tile')?.focus({preventScroll:true});}
   $('deselect').addEventListener('click', clearSelection);
   $('reset').addEventListener('click', () => {
     if(refreshDay(true)||state.solved.length===4)return;
-    openDialog('TODAY ONLY','Restart today’s puzzle?','This clears your progress on this puzzle. It will not open another day’s puzzle.',[
+    openDialog('TODAY ONLY','Restart today’s puzzle?',`This clears today’s ${mode} progress only. The other mode stays as it is. It will not open another day’s puzzle.`,[
       {label:'Keep playing',primary:true,run:()=>dialog.close()},
-      {label:'Restart today',run:()=>{if(refreshDay(true)||state.solved.length===4)return;state=E.create(puzzles[day.index]);hintIndex=null;hintLevel=0;dialog.close();render();if(save())say('Same daily puzzle, fresh start.');}}
+      {label:'Restart today',run:()=>{if(refreshDay(true)||state.solved.length===4)return;stopCelebration();state=E.create(puzzles[day.index]);hintIndex=null;hintLevel=0;dialog.close();render();if(save())say('Same daily puzzle, fresh start.');}}
     ]);
   });
   function openDialog(kicker, title, body, actions) {
@@ -123,26 +167,27 @@
     if(refreshDay(true)||state.solved.length===4)return;
     if(hintIndex===null||state.solved.some(s=>s.index===hintIndex)){hintIndex=state.puzzle.groups.findIndex((g,i)=>!state.solved.some(s=>s.index===i));hintLevel=0;}
     const group=state.puzzle.groups[hintIndex];
-    openDialog('A LITTLE NUDGE',hintLevel?'One more clue…':'Look a little closer',hintLevel?(group.easierHint||`One word in this group is ${group.words[0]}. ${group.hint}`):group.hint,[{label:'Back to the board',primary:true,run:()=>dialog.close()},...(hintLevel?[]:[{label:'More help',run:()=>{hintLevel=1;hint();}}])]);
+    openDialog('A LITTLE NUDGE',hintLevel?'One more clue…':'Look a little closer',hintLevel?(group.easierHint||`One ${tileName()} in this group is ${group.words[0]}. ${group.hint}`):group.hint,[{label:'Back to the board',primary:true,run:()=>dialog.close()},...(hintLevel?[]:[{label:'More help',run:()=>{hintLevel=1;hint();}}])]);
   }
   $('hint').addEventListener('click',hint);
   $('teacher').addEventListener('click',()=>{
     if(refreshDay(true)||state.solved.length===4)return;
-    openDialog('TEACHER TOOLS','Show a connection?','This reveals answers for today only. Revealing all finishes today’s puzzle; the next one arrives at midnight in Perth.',[
+    openDialog('TEACHER TOOLS','Show a connection?',`This reveals today’s ${mode} answers only. Revealing all finishes this mode for today; the next board arrives at midnight in Perth.`,[
       {label:'Keep playing',run:()=>dialog.close()},{label:'Reveal one group',run:()=>reveal(false)},{label:'Reveal all',primary:true,run:()=>reveal(true)}
     ]);
   });
-  function reveal(all) {if(refreshDay(true)||state.solved.length===4)return;E.reveal(state,all);hintIndex=null;hintLevel=0;dialog.close();render();if(!save())return;if(state.solved.length===4)finish();else say('One connection revealed. Can you find the others?','hint');}
-  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','One shared challenge each day',`Everyone gets the same puzzle for the Perth date. A different board arrives at midnight, even if this page stays open. This bank has ${puzzles.length} puzzles and repeats after ${puzzles.length} days. Progress is saved only in this browser, with no names or accounts.${storageOK?'':' This browser is currently blocking progress saving.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
+  function reveal(all) {if(refreshDay(true)||state.solved.length===4)return;stopCelebration();E.reveal(state,all);hintIndex=null;hintLevel=0;dialog.close();render();if(!save())return;if(state.solved.length===4)finish();else say('One connection revealed. Can you find the others?','hint');}
+  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','One shared challenge each day',`Everyone gets the same puzzle in each mode for the Perth date. Words and Maths have separate progress, so switching modes never skips a board. Both change at midnight, even if this page stays open. This ${mode} bank has ${puzzles.length} puzzles and repeats after ${puzzles.length} days. Maths has 50 boards: 800 calculations in 200 groups of four. Progress is saved only in this browser, with no names or accounts.${storageOK?'':' This browser is currently blocking progress saving.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
   $('dialog-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{const r=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom))dialog.close();});
   document.addEventListener('keydown',event=>{if(refreshDay(true)||dialog.open)return;if(event.key==='Escape'&&state.selected.length)clearSelection();if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();check();}});
   window.addEventListener('focus',()=>refreshDay(true));
   window.addEventListener('pageshow',()=>refreshDay(true));
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshDay(true);});
-  window.addEventListener('storage',event=>{if(refreshDay())return;const key=D.key(day,state.puzzle);if(event.key===key||event.key===key+':complete'){const stored=D.read(storage,day,state.puzzle).state;if(stored){state=stored;hintIndex=null;hintLevel=0;if(dialog.open)dialog.close();render();if(state.solved.length===4)finish();else say('Today’s progress updated from another tab.');}}});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopCelebration();else refreshDay(true);});
+  window.addEventListener('storage',event=>{if(refreshDay())return;const key=D.key(day,state.puzzle);if(event.key===key||event.key===key+':complete'){const stored=D.read(storage,day,state.puzzle).state;if(stored){state=stored;sessionProgress.set(key,state);unsavedProgress.delete(key);hintIndex=null;hintLevel=0;if(dialog.open)dialog.close();render();if(state.solved.length===4)finish();else say('Today’s progress updated from another tab.');}}});
   if(!document.fullscreenEnabled)$('fullscreen').hidden=true;
   $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{say('Full screen is unavailable in this browser. The game still works here.');}});
   document.addEventListener('fullscreenchange',()=>{const label=document.fullscreenElement?'Exit full screen':'Enter full screen';$('fullscreen').title=label;$('fullscreen').setAttribute('aria-label',label);});
   loadToday(D.describe(Date.now(),puzzles.length));
 })();
+

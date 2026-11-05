@@ -97,9 +97,9 @@ function makeBrowser({now = '2026-10-23T02:00:00Z', saved = storage(), search = 
   else window.localStorage = saved;
   const context = vm.createContext({window, document, Date: FakeDate, console, setTimeout, clearTimeout, URLSearchParams, location: window.location});
   Object.defineProperty(context, 'localStorage', {get() { return window.localStorage; }});
-  for (const file of ['puzzles.js', 'engine.js', 'daily.js', 'game.js']) {
+  for (const file of ['puzzles.js', 'maths-puzzles.js', 'engine.js', 'daily.js', 'game.js']) {
     vm.runInContext(fs.readFileSync(path.join(__dirname, file), 'utf8'), context, {filename: file});
-    for (const key of ['FourEngine', 'FourDaily', 'FOUR_PUZZLES']) if (context[key]) window[key] = context[key];
+    for (const key of ['FourEngine', 'FourDaily', 'FOUR_PUZZLES', 'FOUR_MATHS_PUZZLES']) if (context[key]) window[key] = context[key];
   }
   const element = id => { const node = elements.get(id); assert.ok(node, `Missing element: ${id}`); return node; };
   return {
@@ -369,3 +369,184 @@ test('client scripts do not read navigation parameters or contact a backend', ()
   assert.doesNotMatch(html,/<(?:script|link|iframe)[^>]+(?:src|href)="https?:\/\//);
 });
 
+
+
+const maths = require('./maths-puzzles');
+const MODE_KEY = 'find-the-four.mode.v1';
+
+test('mode toggle is accessible and existing word progress remains unchanged', () => {
+  const saved = storage(), browser = makeBrowser({saved});
+  assert.equal(browser.element('mode-words').getAttribute('aria-pressed'), 'true');
+  browser.select(puzzles[0].groups[0].words.slice(0,2));
+  const wordOrder = browser.tiles().map(t => t.dataset.word);
+  browser.element('mode-maths').click();
+  assert.equal(browser.element('mode-maths').getAttribute('aria-pressed'), 'true');
+  assert.equal(browser.element('mode-words').getAttribute('aria-pressed'), 'false');
+  assert.equal(browser.element('board').getAttribute('aria-label'), 'Calculation tiles');
+  assert.match(browser.element('instructions').innerHTML, /same answer/);
+  browser.select(maths[0].groups[0].words.slice(0,3));
+  browser.element('mode-words').click();
+  assert.deepEqual(browser.tiles().map(t => t.dataset.word), wordOrder);
+  assert.equal(browser.tiles().filter(t => t.getAttribute('aria-pressed') === 'true').length, 2);
+  browser.element('mode-maths').click();
+  assert.equal(browser.tiles().filter(t => t.getAttribute('aria-pressed') === 'true').length, 3);
+  const restored = makeBrowser({saved});
+  assert.equal(restored.element('mode-maths').getAttribute('aria-pressed'), 'true');
+  assert.equal(restored.tiles().filter(t => t.getAttribute('aria-pressed') === 'true').length, 3);
+});
+
+test('all 50 maths days initialize, solve, reload and leave the word board playable', () => {
+  const anchor = Date.parse('2026-10-23T02:00:00Z');
+  for (let index = 0; index < maths.length; index++) {
+    const now = new Date(anchor + index * 86400000).toISOString(), saved = storage();
+    const browser = makeBrowser({now,saved}), puzzle = maths[index];
+    browser.element('mode-maths').click();
+    assert.deepEqual(browser.tiles().map(t => t.dataset.word).sort(), puzzle.groups.flatMap(g => g.words).sort());
+    assert.ok(browser.tiles().every(t => !/Equals|answer/.test(t.getAttribute('aria-label') || '')));
+    for (const group of [3,1,0,2]) browser.solve(group,puzzle);
+    assert.equal(browser.tiles().length, 0);
+    const restored = makeBrowser({now,saved});
+    assert.equal(restored.solved().length, 4);
+    assert.equal(restored.element('reset').hidden, true);
+    restored.element('mode-words').click();
+    assert.equal(restored.solved().length, 0);
+    assert.equal(restored.tiles().length, 16);
+    assert.deepEqual(restored.tiles().map(t => t.dataset.word).sort(), puzzles[index%20].groups.flatMap(g=>g.words).sort());
+    restored.element('mode-maths').click();
+    assert.equal(restored.solved().length, 4);
+  }
+});
+
+test('wrong maths guesses, near misses, repeats, shuffle and restart are independent of words', () => {
+  const saved = storage(), browser = makeBrowser({saved});
+  browser.solve(0); browser.element('mode-maths').click();
+  browser.select([...maths[0].groups[0].words.slice(0,3), maths[0].groups[1].words[0]]);
+  browser.element('check').click(); assert.match(browser.element('status').textContent,/So close/);
+  browser.element('check').click(); assert.match(browser.element('status').textContent,/tried that set/);
+  browser.element('shuffle').click();
+  assert.equal(browser.tiles().filter(t=>t.getAttribute('aria-pressed')==='true').length,4);
+  browser.element('reset').click(); browser.element('dialog-actions').children.find(b=>b.textContent==='Keep playing').click();
+  assert.equal(browser.tiles().filter(t=>t.getAttribute('aria-pressed')==='true').length,4);
+  browser.element('reset').click(); browser.element('dialog-actions').children.find(b=>b.textContent==='Restart today').click();
+  assert.equal(browser.tiles().filter(t=>t.getAttribute('aria-pressed')==='true').length,0);
+  browser.element('mode-words').click(); assert.equal(browser.solved().length,1);
+});
+
+test('maths reveal completion persists independently and is honestly labelled', () => {
+  const saved=storage(), browser=makeBrowser({saved}); browser.element('mode-maths').click();
+  browser.solve(0,maths[0]); browser.reveal(true);
+  const restored=makeBrowser({saved});
+  assert.equal(restored.solved().length,4);
+  assert.equal(restored.solved().filter(t=>t.getAttribute('aria-label').startsWith('Explain Revealed')).length,3);
+  restored.element('mode-words').click(); assert.equal(restored.tiles().length,16);
+  restored.element('mode-maths').click(); assert.equal(restored.tiles().length,0);
+});
+
+test('blocked storage keeps both modes playable and preserves progress while toggling', () => {
+  for(const storageGetterThrows of [false,true]) {
+    const browser=makeBrowser({saved:storage({},true),storageGetterThrows});
+    browser.solve(0); browser.element('mode-maths').click(); browser.solve(0,maths[0]);
+    browser.element('mode-words').click(); assert.equal(browser.solved().length,1);
+    browser.element('mode-maths').click(); assert.equal(browser.solved().length,1);
+    assert.match(browser.element('discussion').textContent,/cannot be saved/);
+  }
+});
+
+test('invalid saved mode falls back to Words without navigation or errors', () => {
+  for(const invalid of ['future','{"mode":"maths"}','', 'MATHS']) {
+    const browser=makeBrowser({saved:storage({[MODE_KEY]:invalid}),search:'?mode=maths&puzzle=49'});
+    assert.equal(browser.element('mode-words').getAttribute('aria-pressed'),'true');
+    assert.deepEqual(browser.tiles().map(t=>t.dataset.word).sort(),puzzles[0].groups.flatMap(g=>g.words).sort());
+  }
+});
+
+test('maths midnight rollover and inactive word mode both use the new Perth date', () => {
+  const browser=makeBrowser({now:'2026-10-23T15:59:59.999Z'});
+  browser.solve(0); browser.element('mode-maths').click(); browser.solve(0,maths[0]);
+  browser.setNow('2026-10-23T16:00:00Z');browser.runDueTimers();
+  assert.equal(browser.element('daily-date').dateTime,'2026-10-24');
+  assert.equal(browser.solved().length,0);
+  assert.deepEqual(browser.tiles().map(t=>t.dataset.word).sort(),maths[1].groups.flatMap(g=>g.words).sort());
+  browser.element('mode-words').click(); assert.equal(browser.solved().length,0);
+  assert.deepEqual(browser.tiles().map(t=>t.dataset.word).sort(),puzzles[1].groups.flatMap(g=>g.words).sort());
+});
+
+test('mode switching closes stale hints and repeated switching cannot unlock a completed board', () => {
+  const browser=makeBrowser(); browser.element('hint').click(); assert.equal(browser.element('help-dialog').open,true);
+  browser.element('mode-maths').click(); assert.equal(browser.element('help-dialog').open,false);
+  browser.reveal(true);
+  for(let i=0;i<5;i++){browser.element('mode-words').click();browser.element('mode-maths').click();}
+  assert.equal(browser.solved().length,4);
+  assert.equal(browser.element('reset').hidden,true);
+});
+
+test('cross-tab maths completion wins even while another mode is visible', () => {
+  const saved=storage(),one=makeBrowser({saved}),two=makeBrowser({saved});
+  two.element('mode-maths').click();two.solve(0,maths[0]);two.element('mode-words').click();
+  one.element('mode-maths').click();one.reveal(true);
+  two.element('mode-maths').click();assert.equal(two.solved().length,4);
+  const restored=makeBrowser({saved});assert.equal(restored.solved().length,4);
+});
+
+test('maths bank cycles after 50 days and never loads previous-date completion', () => {
+  const saved=storage(),first=makeBrowser({saved});first.element('mode-maths').click();first.reveal(true);
+  const now=new Date(Date.parse('2026-10-23T02:00:00Z')+50*86400000).toISOString();
+  const later=makeBrowser({now,saved});assert.equal(later.solved().length,0);
+  assert.deepEqual(later.tiles().map(t=>t.dataset.word).sort(),maths[0].groups.flatMap(g=>g.words).sort());
+});
+
+test('newer incomplete progress in an inactive mode wins over stale in-memory progress', () => {
+  const saved=storage(),one=makeBrowser({saved}),two=makeBrowser({saved});
+  two.element('mode-maths').click();two.solve(0,maths[0]);two.element('mode-words').click();
+  one.element('mode-maths').click();one.solve(1,maths[0]);
+  assert.equal(one.solved().length,2);
+  two.element('mode-maths').click();assert.equal(two.solved().length,2);
+  const restored=makeBrowser({saved});assert.equal(restored.solved().length,2);
+});
+
+test('readable but unwritable storage preserves both modes’ unsaved changes', () => {
+  const saved=storage(),browser=makeBrowser({saved});
+  browser.element('mode-maths').click();browser.element('mode-words').click();
+  saved.setItem=()=>{throw new Error('Quota exceeded');};
+  browser.solve(0);browser.element('mode-maths').click();browser.solve(0,maths[0]);
+  browser.element('mode-words').click();assert.equal(browser.solved().length,1);
+  browser.element('mode-maths').click();assert.equal(browser.solved().length,1);
+});
+
+test('only newly correct groups trigger a one-second cameo, with four different bosses', () => {
+  const browser=makeBrowser(), popup=browser.element('boss-celebration');
+  assert.equal(popup.hidden,true);
+  browser.select([...puzzles[0].groups[0].words.slice(0,3),puzzles[0].groups[1].words[0]]);
+  browser.element('check').click(); assert.equal(popup.hidden,true);
+  browser.element('deselect').click();
+  const bosses=[];
+  for(const group of [0,1,2,3]){
+    browser.solve(group);assert.equal(popup.hidden,false);assert.equal(popup.classList.contains('active'),true);bosses.push(popup.dataset.boss);
+  }
+  assert.equal(new Set(bosses).size,4);
+  assert.equal([...browser.timers.values()].filter(t=>t.delay===1000).length,1,'Rapid solutions replace the previous effect timer');
+  browser.setNow('2026-10-23T02:00:00.999Z');browser.runDueTimers();assert.equal(popup.hidden,false);
+  browser.setNow('2026-10-23T02:00:01.000Z');browser.runDueTimers();assert.equal(popup.hidden,true);
+  browser.element('check').click();assert.equal(popup.hidden,true);
+});
+
+test('cameos never replay on reload, switching, or revealing, and are cancelled when leaving', () => {
+  const saved=storage(),browser=makeBrowser({saved}),popup=browser.element('boss-celebration');
+  browser.solve(0); assert.equal(popup.hidden,false);
+  browser.element('mode-maths').click();assert.equal(popup.hidden,true);
+  browser.reveal(false);assert.equal(popup.hidden,true);
+  browser.solve(1,maths[0]);assert.equal(popup.hidden,false);
+  browser.document.hidden=true;browser.document.dispatch('visibilitychange');assert.equal(popup.hidden,true);
+  const restored=makeBrowser({saved});assert.equal(restored.element('boss-celebration').hidden,true);
+  restored.reveal(true);assert.equal(restored.element('boss-celebration').hidden,true);
+});
+
+test('immersive scenery and reduced-motion cameo remain decorative and cannot block play', () => {
+  const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+  const css=fs.readFileSync(path.join(__dirname,'style.css'),'utf8');
+  assert.doesNotMatch(html,/<aside class="cast/);
+  assert.match(html,/<div class="realm" aria-hidden="true">/);
+  assert.match(html,/id="boss-celebration"[^>]*aria-hidden="true" hidden/);
+  assert.match(css,/\.boss-celebration\{[^}]*pointer-events:none/);
+  assert.match(css,/@media\(prefers-reduced-motion:reduce\)\{\.boss-celebration\.active \.boss-guest\{animation:none;transform:translate\(-50%,0\);opacity:1/);
+});
