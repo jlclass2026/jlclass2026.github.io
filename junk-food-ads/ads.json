@@ -88,5 +88,17 @@
     "title": "Take a Bite into the Future",
     "width": 1055,
     "height": 1491
+  },
+  {
+    "slug": "delicious-breakfast",
+    "title": "Delicious Breakfast",
+    "width": 1086,
+    "height": 1448
+  },
+  {
+    "slug": "exploding-goodness",
+    "title": "Exploding Goodness",
+    "width": 1055,
+    "height": 1491
   }
 ]
