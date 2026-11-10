@@ -2,12 +2,12 @@
   "format": "nw-market-catalogue",
   "schemaVersion": 2,
   "classId": "nw-class-3b649cc6-153a-48fe-bbf8-35c1cc047f7e",
-  "revision": 136,
+  "revision": 174,
   "creatures": [
     {
       "id": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
       "creature": "Bramblebolt",
-      "balance": 627
+      "balance": 1127
     },
     {
       "id": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
@@ -17,7 +17,7 @@
     {
       "id": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
       "creature": "Bumblebop",
-      "balance": 1466
+      "balance": 966
     },
     {
       "id": "creature-e38e8e27-a6c3-4726-849e-5335d9f95cbe",
@@ -65,6 +65,11 @@
       "balance": 1367
     },
     {
+      "id": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "creature": "Sparkwhisk",
+      "balance": 277
+    },
+    {
       "id": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
       "creature": "Stormhorn",
       "balance": 808
@@ -75,11 +80,6 @@
       "balance": 1168
     },
     {
-      "id": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "creature": "Tumbletuft",
-      "balance": 1350
-    },
-    {
       "id": "creature-31cd6dbf-a5b2-4775-9461-3b0c0bdf1656",
       "creature": "Umbrawyn",
       "balance": 0
@@ -88,14 +88,16 @@
       "id": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "creature": "Vantimo",
       "balance": 507
-    },
-    {
-      "id": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "creature": "Velunox",
-      "balance": 1033
     }
   ],
   "items": [
+    {
+      "id": "item-f99ceb05-60ce-4e4a-b046-2c2c67fef4a2",
+      "type": "halloween_demon",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 2
+    },
     {
       "id": "item-668fadc6-b4e4-4c17-bc93-616a2d2428e7",
       "type": "circus_01_rainbow_clown",
@@ -155,9 +157,9 @@
     {
       "id": "item-58861269-b0fa-4e67-8423-89dd888d42a8",
       "type": "halloween_demon",
-      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
       "price": null,
-      "version": 2
+      "version": 3
     },
     {
       "id": "item-f2c8193b-b638-48b9-9bee-a2f16bd473c4",
@@ -223,46 +225,11 @@
       "version": 1
     },
     {
-      "id": "item-accd430b-8e32-4f2b-90ea-20a614ed88cf",
-      "type": "halloween_werewolf",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-1d193e68-7205-424b-a66c-3b5c7c62bad5",
-      "type": "circus_03_purple_pigtail_clown",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-4b3ca2c0-3220-483e-abb9-7e614c654974",
-      "type": "emotions_10_sleepy",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-7f1bca4e-caf0-4499-b0a9-47598de9a98e",
-      "type": "weather_01_sun",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-5b644f68-1755-455d-849a-c52d85f34539",
-      "type": "wild_things_bramblehorn",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-97493143-ec8b-4d78-9acf-d38cc293f053",
       "type": "halloween_ghost",
-      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
       "price": null,
-      "version": 3
+      "version": 4
     },
     {
       "id": "item-6dc5115a-0912-4d3a-a3b1-99f308ad15d2",
@@ -270,20 +237,6 @@
       "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
       "price": null,
       "version": 2
-    },
-    {
-      "id": "item-9399de7e-cd0f-44f7-b852-16d709fa77ed",
-      "type": "emotions_01_happy",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-f771e4e6-bdba-40f2-af23-3ee91310e754",
-      "type": "wild_things_bramblehorn",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
     },
     {
       "id": "item-1b438f1f-8ba8-46a2-ba7a-9b2d89572af4",
@@ -337,9 +290,16 @@
     {
       "id": "item-708b9b8e-f44a-4a55-85fc-2e19bc5c2831",
       "type": "wild_things_max",
-      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
+      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
       "price": null,
-      "version": 1
+      "version": 2
+    },
+    {
+      "id": "item-9ebf0907-4679-443a-b11e-33ef6149e2d0",
+      "type": "halloween_witch",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 4
     },
     {
       "id": "item-d8f6d195-38a8-49aa-9aa3-58b3699ed7a4",
@@ -503,6 +463,34 @@
       "version": 1
     },
     {
+      "id": "item-d3f498aa-c4ee-4e72-9cd6-1fb8bd777fce",
+      "type": "halloween_zombie",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-d8aaba8d-87a8-4ad5-a8eb-ba85f311a327",
+      "type": "circus_04_green_hat_clown",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-41098d23-51f3-4912-a50d-3f27c2dda523",
+      "type": "emotions_01_happy",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-6e49e03f-3d7d-422c-a627-0e2098e03e84",
+      "type": "wild_things_rusty_rumpus",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
       "id": "item-6054eed5-aff2-40d8-aa7a-5ff888de539c",
       "type": "halloween_zombie",
       "owner": "creature-35d20243-f7e9-4d54-822a-89f12b445644",
@@ -650,32 +638,11 @@
       "version": 2
     },
     {
-      "id": "item-f0b98dff-5178-40e6-af35-a3fb91466ca9",
-      "type": "myths_phoenix",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
+      "id": "item-9ab4de09-50af-4cd5-9924-52007d677cde",
+      "type": "myths_chimera",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
       "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-9752de14-4812-43e4-aecb-2b44f08b4161",
-      "type": "food_treats_06_waffle",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-1bf41127-d16b-4ba6-8a6a-45f9a69e997a",
-      "type": "myths_unicorn",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-89850fe0-4507-49fe-8d8c-e4d88f56ab9b",
-      "type": "food_treats_03_chocolate_cake",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-86a930d7-846e-4447-9a35-f43c23b1c245",
@@ -690,6 +657,13 @@
       "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
       "price": null,
       "version": 1
+    },
+    {
+      "id": "item-1b57f462-dfc1-44ed-a424-24f91794a991",
+      "type": "food_treats_10_cinnamon_roll",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 2
     },
     {
       "id": "item-e7a83d66-6cb0-4ab3-a6d6-85161cc4c038",
@@ -718,13 +692,6 @@
       "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "price": null,
       "version": 1
-    },
-    {
-      "id": "item-eefbb34f-93f4-4440-aa1c-6f6a65b0ea11",
-      "type": "myths_centaur",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 2
     },
     {
       "id": "item-eae9f33f-2567-48e0-bb68-60839b608772",
@@ -767,6 +734,13 @@
       "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
       "price": null,
       "version": 2
+    },
+    {
+      "id": "item-e1a3d430-9fb4-493d-ba1c-8f708d6981e8",
+      "type": "food_treats_03_chocolate_cake",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
     },
     {
       "id": "item-42f13741-093e-4732-b768-7ee888fee355",
@@ -835,27 +809,6 @@
       "id": "item-32705c32-a46b-4d73-b6ad-95d7bf118fde",
       "type": "fruit_03_lemon",
       "owner": "creature-e38e8e27-a6c3-4726-849e-5335d9f95cbe",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-b291a67f-086b-4f1d-b478-e7c0b33cdc6e",
-      "type": "space_comet",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-8c5d40e9-a30f-4553-b583-236569b3316a",
-      "type": "weather_09_hail",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-7b188172-de63-4265-9eb1-c4276dc70e95",
-      "type": "halloween_ghost",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
       "price": null,
       "version": 1
     },
@@ -951,20 +904,6 @@
       "version": 1
     },
     {
-      "id": "item-251b0ddb-50d7-4532-97b2-3ef8b9e7ab25",
-      "type": "myths_cyclops",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-b0084b76-e4b4-4612-84c9-9837add1f902",
-      "type": "myths_medusa",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-40fb8802-4a8d-4ca8-b862-c9749c7f06fc",
       "type": "myths_cerberus",
       "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
@@ -988,9 +927,9 @@
     {
       "id": "item-712a1cb6-af14-48f3-96ec-dcf2c8123789",
       "type": "myths_unicorn",
-      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
+      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-97516d91-a26d-4471-8dec-77a4e8695bf1",
@@ -1012,6 +951,13 @@
       "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
       "price": null,
       "version": 2
+    },
+    {
+      "id": "item-aba2a0c4-16d6-491a-b7e3-1738ab5b712c",
+      "type": "myths_griffin",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
     },
     {
       "id": "item-1942481e-d25d-4bd9-bc9a-9c34af00c869",
@@ -1065,16 +1011,16 @@
     {
       "id": "item-00fec462-95c5-4703-acbe-5f50d4b6d480",
       "type": "food_treats_09_raspberry_jelly",
-      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
+      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-2c0a9303-2034-4245-8447-9404528ea721",
       "type": "food_treats_03_chocolate_cake",
-      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
+      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-97408ba5-9b42-45af-97a3-f8e014b3fb1d",
@@ -1156,9 +1102,9 @@
     {
       "id": "item-ee2a1f5e-38c4-4074-bf75-9b885c581a62",
       "type": "space_moon",
-      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
+      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-b88c79b2-9cfa-4fdc-a1d0-0ad67b6c0ff8",
@@ -1198,9 +1144,9 @@
     {
       "id": "item-29c396f2-3824-4088-a58d-24077d7a9169",
       "type": "space_mars",
-      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-e0e8164f-9e11-4253-a63d-2053fd91b006",
@@ -1241,20 +1187,6 @@
       "id": "item-b4ab4164-2022-47ef-b399-b292158c72aa",
       "type": "myths_centaur",
       "owner": "creature-48a07d45-c5e7-431a-9f7a-74e686060ed4",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-18e756a9-8c3e-44cd-9230-ac56bf930f11",
-      "type": "myths_chimera",
-      "owner": "creature-3da98cb4-b79c-440b-9330-1c4a8bb0d386",
-      "price": null,
-      "version": 1
-    },
-    {
-      "id": "item-3d988948-a8db-440c-bfb9-c81d4f8b1965",
-      "type": "myths_kraken",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
       "price": null,
       "version": 1
     },
@@ -1304,6 +1236,13 @@
       "id": "item-3beecc7b-68a2-4798-82ca-e79ed5c1218e",
       "type": "myths_centaur",
       "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-233d01fa-19d8-40eb-8c08-f7f95c4504c0",
+      "type": "myths_cerberus",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
       "price": null,
       "version": 1
     },
@@ -1378,13 +1317,6 @@
       "version": 1
     },
     {
-      "id": "item-f6812bb1-a8b5-470e-acba-3ee1a5416671",
-      "type": "f1_max_verstappen",
-      "owner": "creature-02212cdf-85bf-4041-9f4a-67a84f730eda",
-      "price": null,
-      "version": 1
-    },
-    {
       "id": "item-9e4d0c25-f0f4-4547-8cb7-6253f4fa0534",
       "type": "f1_liam_lawson",
       "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
@@ -1434,6 +1366,13 @@
       "version": 1
     },
     {
+      "id": "item-5263632d-9bc4-4daa-9983-60a300a74350",
+      "type": "f1_oscar_piastri",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
       "id": "item-b11908f6-5a2e-4c23-8b90-84d24a95fdf3",
       "type": "f1_george_russell",
       "owner": "creature-35d20243-f7e9-4d54-822a-89f12b445644",
@@ -1478,9 +1417,9 @@
     {
       "id": "item-863ec479-1881-479b-b7e9-9cf8f5f288b7",
       "type": "clan_s1_r5_r",
-      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-9bdb4e6a-e79f-4e50-acac-a3a538e1721b",
@@ -1520,9 +1459,9 @@
     {
       "id": "item-40c2fb7d-f65c-4f14-8c51-99697e9881fd",
       "type": "clan_s1_r1_r",
-      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-481b4b23-95c1-4c9e-9511-ee32c5c2173b",
@@ -1548,14 +1487,231 @@
     {
       "id": "item-aa511cdb-a089-4194-a8fe-299007f8cbb2",
       "type": "clan_s1_r1_l",
-      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
       "price": null,
-      "version": 1
+      "version": 2
     },
     {
       "id": "item-6e94f12a-ff81-4f5c-903f-277511b7e7d2",
       "type": "fruit_02_orange",
       "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-f86762d0-fe19-48cf-90ec-c49fa48151a4",
+      "type": "monsters_04_teal_watcher",
+      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-c6cf65f4-c2ee-4c7a-909a-c71422109e75",
+      "type": "monsters_04_teal_watcher",
+      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-12f66780-ed52-406d-834c-999a7c8f7a64",
+      "type": "monsters_07_blue_sprout",
+      "owner": "creature-e38e8e27-a6c3-4726-849e-5335d9f95cbe",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-a247a6b0-7ccf-4bf8-acc6-c2d5c8cc4200",
+      "type": "monsters_01_lime_antenna",
+      "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-ae7dcab4-9179-4610-9d7b-f77860614a30",
+      "type": "monsters_02_orange_triple_eye",
+      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-4ec182e6-09c4-4d88-ab90-fefc119117f7",
+      "type": "monsters_08_peach_flop",
+      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-bf049451-e4e0-4719-9380-3add8be40d20",
+      "type": "monsters_08_peach_flop",
+      "owner": "creature-809e5677-5aa3-4e01-8c3e-0e3d361ec079",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-e2919900-813a-427f-9e99-74a51bf8ce77",
+      "type": "monsters_03_lavender_stardust",
+      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-6cfdabcf-f089-4ba3-adaa-8a6bb8f9d09a",
+      "type": "monsters_08_peach_flop",
+      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-72831ff8-882f-4a02-883c-187f2d31f5cd",
+      "type": "monsters_05_golden_cyclops",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-c05ca967-7cb9-46b7-ab18-8e3c636fde99",
+      "type": "monsters_09_aqua_moonbeam",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-2fb9f9b2-38a3-402f-a411-1517cb1f004d",
+      "type": "monsters_06_pink_sparkle",
+      "owner": "creature-35d20243-f7e9-4d54-822a-89f12b445644",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-fff7d301-c1e2-4348-abf5-0c703230fced",
+      "type": "monsters_01_lime_antenna",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-2fb8acce-c04f-4a71-bf18-0e49e70d0c07",
+      "type": "monsters_07_blue_sprout",
+      "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-20b7373b-8851-4238-95a9-5e8612807831",
+      "type": "monsters_04_teal_watcher",
+      "owner": "creature-31cd6dbf-a5b2-4775-9461-3b0c0bdf1656",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-c2e67681-2edf-430c-a662-f43159774872",
+      "type": "ocean_seahorse",
+      "owner": "creature-ac1c5fbc-a6de-4db3-ac03-7b5cd75ac58a",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-0029d7e6-2ea1-4704-9917-6c02d77b27c8",
+      "type": "ocean_dolphin",
+      "owner": "creature-1726250c-4ccc-4e2c-b2dd-b95438616898",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-94edc884-ae0b-479e-b913-957f5cc49421",
+      "type": "ocean_otter",
+      "owner": "creature-e38e8e27-a6c3-4726-849e-5335d9f95cbe",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-29d071c6-37f7-437c-a604-4b82f9a14159",
+      "type": "ocean_pufferfish",
+      "owner": "creature-5bb76be0-9dba-4eeb-9f62-294b4e428560",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-af1c3a2d-612c-464a-915a-4f47f86ec82d",
+      "type": "ocean_clownfish",
+      "owner": "creature-b2835f6e-6bd9-459e-9bc3-99666299b825",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-0655cb55-5916-4a03-bcc2-a51944c8116e",
+      "type": "ocean_shark",
+      "owner": "creature-0395f38c-b903-4f53-9296-81f5c511f919",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-8e67a2c3-fc8c-4f48-8c8f-1c9bfc1fe041",
+      "type": "ocean_penguin",
+      "owner": "creature-809e5677-5aa3-4e01-8c3e-0e3d361ec079",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-6eb01050-884c-4c30-a3ea-2e8b017505aa",
+      "type": "ocean_crab",
+      "owner": "creature-e8ddf481-7894-4c04-b2fb-9566d74098e1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-ca83a8b6-0793-4998-9976-77e0f0cc83af",
+      "type": "ocean_clownfish",
+      "owner": "creature-e9153c12-1434-4ea6-b312-aaac1df67c77",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-a94c364e-1736-4b9e-b410-d5cf4cd5a85d",
+      "type": "ocean_turtle",
+      "owner": "creature-d759bda1-2aeb-47fc-bf71-7fe0dbec777c",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-f8eb7ab7-673b-453a-80dd-c4c6f103871c",
+      "type": "ocean_orca",
+      "owner": "creature-53c4b559-02a5-4f8c-b55a-52de40d257d6",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-16c3ff73-71b1-43d5-9c6b-6d9f54922e70",
+      "type": "ocean_narwhal",
+      "owner": "creature-083c1c4c-9e9f-44a7-92ef-74bb26834806",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-e8946999-63da-4826-97f6-0a8ba4668773",
+      "type": "ocean_penguin",
+      "owner": "creature-35d20243-f7e9-4d54-822a-89f12b445644",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-eb4ff23d-296f-4eb0-9441-077bce6d8dd6",
+      "type": "ocean_shark",
+      "owner": "creature-3b321eda-9c06-4d45-a784-ea902dc336d0",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-49cfa224-1b35-4a57-b021-8dc3846d636e",
+      "type": "ocean_orca",
+      "owner": "creature-bdcf32e6-008b-4263-95f5-bf0cc9c869a1",
+      "price": null,
+      "version": 1
+    },
+    {
+      "id": "item-4fac563f-3567-4267-9055-defeaaaa7088",
+      "type": "ocean_shark",
+      "owner": "creature-31cd6dbf-a5b2-4775-9461-3b0c0bdf1656",
       "price": null,
       "version": 1
     }
@@ -2195,11 +2351,239 @@
     },
     {
       "id": "offer-435c3be7-f34f-4134-84bb-49976482d0cc",
-      "status": "pending"
+      "status": "denied"
     },
     {
       "id": "offer-96905993-a6a0-415d-a257-b47d8018ed81",
       "status": "approved"
+    },
+    {
+      "id": "offer-82b967d7-f8cc-4cb1-8a7b-e50da982be77",
+      "status": "stale"
+    },
+    {
+      "id": "offer-cc0e6e91-c234-403b-8744-22568c1226be",
+      "status": "denied"
+    },
+    {
+      "id": "offer-5e57871e-f446-4133-8096-5e78bb72600a",
+      "status": "denied"
+    },
+    {
+      "id": "offer-4bcecbc5-ef67-4fe9-8ace-c344372e3259",
+      "status": "pending"
+    },
+    {
+      "id": "offer-03dc1f5d-47b7-4530-94b1-7ba6b0ee8f90",
+      "status": "denied"
+    },
+    {
+      "id": "offer-3d003544-2fdc-4a0e-938b-5064755b7645",
+      "status": "approved"
+    },
+    {
+      "id": "offer-220baff4-da83-47a3-89a9-3744edc97f54",
+      "status": "denied"
+    },
+    {
+      "id": "offer-ece5e8fb-55f2-4252-8fa8-99e724a468df",
+      "status": "denied"
+    },
+    {
+      "id": "offer-4435fd68-7823-4643-812c-e935cf6b4c25",
+      "status": "denied"
+    },
+    {
+      "id": "offer-bcf99043-a3fc-414e-bd7e-d7e6383e92a5",
+      "status": "stale"
+    },
+    {
+      "id": "offer-ff51d6a9-8333-4c0c-8cee-b278a6421b7e",
+      "status": "stale"
+    },
+    {
+      "id": "offer-76a62e07-0e72-4ece-b55b-20dcb56b1627",
+      "status": "stale"
+    },
+    {
+      "id": "offer-2770c9df-2534-47b4-8ca8-8e108eff7434",
+      "status": "approved"
+    },
+    {
+      "id": "offer-c48f082a-ff60-4541-b4f0-76bee7dd4df9",
+      "status": "stale"
+    },
+    {
+      "id": "offer-0c837711-39c1-4224-b610-00dc20779a5e",
+      "status": "denied"
+    },
+    {
+      "id": "offer-3546dbf9-7198-42da-961e-0f460d7c6d1d",
+      "status": "stale"
+    },
+    {
+      "id": "offer-6ec3d07a-389f-4072-b903-5016595f202c",
+      "status": "pending"
+    },
+    {
+      "id": "offer-0cdf66a6-0b5d-4b0a-9cbf-f6ada8cf71e8",
+      "status": "stale"
+    },
+    {
+      "id": "offer-449f20e4-8a27-4b26-b948-0890a1f46396",
+      "status": "denied"
+    },
+    {
+      "id": "offer-583183f7-6fa5-404b-82eb-40a533e5d05e",
+      "status": "denied"
+    },
+    {
+      "id": "offer-1ca54608-0245-44c3-926d-5ea136252e0f",
+      "status": "pending"
+    },
+    {
+      "id": "offer-a2536565-1623-48f0-84cc-dddd1070a9f0",
+      "status": "stale"
+    },
+    {
+      "id": "offer-30d6df7c-9207-46fc-82be-0619043e5cc2",
+      "status": "stale"
+    },
+    {
+      "id": "offer-96e0a803-a32d-443a-8851-a20a7c4c51da",
+      "status": "pending"
+    },
+    {
+      "id": "offer-b13be56d-3c2b-4aad-bee7-5c06ed51aa16",
+      "status": "denied"
+    },
+    {
+      "id": "offer-1491b9dc-bdb4-4582-a8ec-99b8e8c15db1",
+      "status": "denied"
+    },
+    {
+      "id": "offer-2b364465-a6f2-458b-884f-967e729a320e",
+      "status": "denied"
+    },
+    {
+      "id": "offer-41493e7a-7009-4ef1-8e96-b36f9c1901b0",
+      "status": "pending"
+    },
+    {
+      "id": "offer-6a6bab86-716f-4a7b-887d-9fffa492dbb6",
+      "status": "denied"
+    },
+    {
+      "id": "offer-89ea2785-70a9-4cc5-9b68-ce980f46aecf",
+      "status": "approved"
+    },
+    {
+      "id": "offer-08e5803c-0ad2-41b8-b18c-9753bb9087b4",
+      "status": "approved"
+    },
+    {
+      "id": "offer-a4f030dc-141a-4eea-9b0f-61f401d796fd",
+      "status": "denied"
+    },
+    {
+      "id": "offer-4a0bb084-a47e-4366-8f21-03ce7bab4e8e",
+      "status": "denied"
+    },
+    {
+      "id": "offer-981efd97-9754-41d7-a63f-a686e0811d83",
+      "status": "denied"
+    },
+    {
+      "id": "offer-9bf2371f-fd77-47a5-9c38-96327430442f",
+      "status": "pending"
+    },
+    {
+      "id": "offer-7721f3da-6599-43ad-bb28-a7ee3fac5438",
+      "status": "denied"
+    },
+    {
+      "id": "offer-4019f470-0838-44d6-9b18-f75324017830",
+      "status": "pending"
+    },
+    {
+      "id": "offer-7564ae5b-87fe-4b0d-98b9-800b9c79d4d2",
+      "status": "pending"
+    },
+    {
+      "id": "offer-c638e6fb-aa8a-4177-9cd0-796794aafef5",
+      "status": "denied"
+    },
+    {
+      "id": "offer-166ed3da-8db1-4c7a-a24d-af22a5c7634b",
+      "status": "denied"
+    },
+    {
+      "id": "offer-89d48aab-f28f-41e2-a5b7-84d4c8418d9a",
+      "status": "denied"
+    },
+    {
+      "id": "offer-51824949-ad9e-4b09-a331-d1a7d886e72e",
+      "status": "stale"
+    },
+    {
+      "id": "offer-e503c91b-dd53-47bf-af1e-b142ed7b2b7d",
+      "status": "stale"
+    },
+    {
+      "id": "offer-cc774cbb-2746-4a31-8c3e-d300386efa8a",
+      "status": "approved"
+    },
+    {
+      "id": "offer-5c49314a-4feb-415e-ac88-2ebfb5803389",
+      "status": "stale"
+    },
+    {
+      "id": "offer-66a9dab4-3ff5-4764-a7ae-25a99ea0c8fa",
+      "status": "stale"
+    },
+    {
+      "id": "offer-31cdb3b0-c928-4eef-b553-dfdc4c178130",
+      "status": "denied"
+    },
+    {
+      "id": "offer-95b486a3-8df7-42e7-ade1-e399120db52f",
+      "status": "pending"
+    },
+    {
+      "id": "offer-206c2066-492e-4bbb-b58a-cb24daa1ba64",
+      "status": "denied"
+    },
+    {
+      "id": "offer-311527b2-19de-417d-aab0-6085f74d341b",
+      "status": "approved"
+    },
+    {
+      "id": "offer-71beac73-3d7b-47b8-82ef-41bc1c266a90",
+      "status": "stale"
+    },
+    {
+      "id": "offer-bcd5b91b-1851-4e58-b22e-58f2b2de76cb",
+      "status": "denied"
+    },
+    {
+      "id": "offer-f7bd1fca-cdb4-4a4e-a15e-1511caa6334f",
+      "status": "stale"
+    },
+    {
+      "id": "offer-58c66680-8701-4fc1-becc-105f01c8360a",
+      "status": "denied"
+    },
+    {
+      "id": "offer-2f641658-a1cc-4216-a63d-b9ef8f33256a",
+      "status": "denied"
+    },
+    {
+      "id": "offer-800e0111-be81-4dc8-b8fb-1484c1089528",
+      "status": "denied"
+    },
+    {
+      "id": "offer-3d1e9012-deef-4f2c-afb5-cbf8f16af3d7",
+      "status": "denied"
     },
     {
       "id": "offer-ee192378-f628-4e2b-82fc-d1befc1a1b7f",
@@ -2371,6 +2755,30 @@
     },
     {
       "id": "offer-b43df101-78f0-4d9b-b2d0-803e8d9f89b4",
+      "status": "denied"
+    },
+    {
+      "id": "offer-2fc785a3-ac29-44f6-95f8-f75e036e365c",
+      "status": "denied"
+    },
+    {
+      "id": "offer-c5fe29ff-d0e7-4216-b96e-0cd2a7b6f839",
+      "status": "denied"
+    },
+    {
+      "id": "offer-cfed4a6c-d4b4-435c-80f5-670cd8b766ef",
+      "status": "denied"
+    },
+    {
+      "id": "offer-e2385646-d2f4-4382-aaf8-3090f7508c4b",
+      "status": "denied"
+    },
+    {
+      "id": "offer-2cca8c30-6950-4a1a-aaca-87d5f5cdfb50",
+      "status": "denied"
+    },
+    {
+      "id": "offer-f5f641ee-21a4-443b-97f6-dc6b4f46183b",
       "status": "denied"
     }
   ]
