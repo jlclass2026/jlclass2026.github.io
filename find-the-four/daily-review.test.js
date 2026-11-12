@@ -513,7 +513,7 @@ test('readable but unwritable storage preserves both modes’ unsaved changes', 
   browser.element('mode-maths').click();assert.equal(browser.solved().length,1);
 });
 
-test('only newly correct groups trigger a one-second cameo, with four different bosses', () => {
+test('only newly correct groups trigger a two-second cameo, with four different bosses', () => {
   const browser=makeBrowser(), popup=browser.element('boss-celebration');
   assert.equal(popup.hidden,true);
   browser.select([...puzzles[0].groups[0].words.slice(0,3),puzzles[0].groups[1].words[0]]);
@@ -524,9 +524,9 @@ test('only newly correct groups trigger a one-second cameo, with four different 
     browser.solve(group);assert.equal(popup.hidden,false);assert.equal(popup.classList.contains('active'),true);bosses.push(popup.dataset.boss);
   }
   assert.equal(new Set(bosses).size,4);
-  assert.equal([...browser.timers.values()].filter(t=>t.delay===1000).length,1,'Rapid solutions replace the previous effect timer');
-  browser.setNow('2026-10-23T02:00:00.999Z');browser.runDueTimers();assert.equal(popup.hidden,false);
-  browser.setNow('2026-10-23T02:00:01.000Z');browser.runDueTimers();assert.equal(popup.hidden,true);
+  assert.equal([...browser.timers.values()].filter(t=>t.delay===2000).length,1,'Rapid solutions replace the previous effect timer');
+  browser.setNow('2026-10-23T02:00:01.999Z');browser.runDueTimers();assert.equal(popup.hidden,false);
+  browser.setNow('2026-10-23T02:00:02.000Z');browser.runDueTimers();assert.equal(popup.hidden,true);
   browser.element('check').click();assert.equal(popup.hidden,true);
 });
 
