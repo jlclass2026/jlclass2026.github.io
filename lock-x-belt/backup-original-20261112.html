@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock X-belt</title>
+    <style>
+        :root {
+            --green: #538d4e;
+            --yellow: #b59f3b;
+            --grey: #3a3a3c;
+            --dark-bg: #121213;
+            --light-text: #ffffff;
+        }
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        h1 { margin: 0 0 10px 0; font-size: 24px; color: #818384; }
+        
+        #word-banner {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            min-height: 120px;
+            width: 100%;
+            max-width: 900px;
+            color: #4da8da;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .tile {
+            width: 70px;
+            height: 70px;
+            border: 2px solid #3a3a3c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            background-color: transparent;
+        }
+        
+        /* State Colors */
+        .tile.correct { background-color: var(--green); border-color: var(--green); }
+        .tile.present { background-color: var(--yellow); border-color: var(--yellow); }
+        .tile.absent { background-color: var(--grey); border-color: var(--grey); }
+
+        /* Numpad */
+        #numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 400px;
+        }
+        .key {
+            background-color: #818384;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            height: 60px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .key:active { background-color: #565758; }
+        .key.wide { grid-column: span 3; background-color: #538d4e; }
+        .key.del { background-color: #d9534f; }
+        .key.zero { grid-column: span 2; }
+
+        #message {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            color: var(--yellow);
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lock X-belt</h1>
+    
+    <!-- Massive spelled-out number appears here -->
+    <div id="word-banner"></div>
+
+    <div id="game-board"></div>
+
+    <div id="message"></div>
+
+    <div id="numpad">
+        <button class="key" onclick="inputDigit('1')">1</button>
+        <button class="key" onclick="inputDigit('2')">2</button>
+        <button class="key" onclick="inputDigit('3')">3</button>
+        <button class="key" onclick="inputDigit('4')">4</button>
+        <button class="key" onclick="inputDigit('5')">5</button>
+        <button class="key" onclick="inputDigit('6')">6</button>
+        <button class="key" onclick="inputDigit('7')">7</button>
+        <button class="key" onclick="inputDigit('8')">8</button>
+        <button class="key" onclick="inputDigit('9')">9</button>
+        <button class="key zero" onclick="inputDigit('0')">0</button>
+        <button class="key del" onclick="deleteDigit()">DEL</button>
+        <button class="key wide" onclick="submitGuess()">ENTER (LOCK IN)</button>
+    </div>
+
+    <script>
+        const MAX_GUESSES = 6;
+        let secretCode = [];
+        let currentTarget = [];
+        let guesses = Array(MAX_GUESSES).fill().map(() => []);
+        let currentRow = 0;
+        let gameOver = false;
+
+        function initGame() {
+            // Generate 4 unique digits to make the conveyor belt easier to track
+            let digits = [0,1,2,3,4,5,6,7,8,9];
+            for (let i = digits.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [digits[i], digits[j]] = [digits[j], digits[i]];
+            }
+            secretCode = digits.slice(0, 4);
+            currentTarget = [...secretCode];
+            
+            console.log("Teacher Cheat Sheet: Current Target is", currentTarget.join(''));
+            drawBoard();
+        }
+
+        function drawBoard() {
+            const board = document.getElementById('game-board');
+            board.innerHTML = '';
+            for (let i = 0; i < MAX_GUESSES; i++) {
+                const row = document.createElement('div');
+                row.className = 'row';
+                for (let j = 0; j < 4; j++) {
+                    const tile = document.createElement('div');
+                    tile.className = 'tile';
+                    tile.id = `tile-${i}-${j}`;
+                    // Fill in letters if they exist in the current guess
+                    if (guesses[i][j] !== undefined) {
+                        tile.textContent = guesses[i][j];
+                    }
+                    row.appendChild(tile);
+                }
+                board.appendChild(row);
+            }
+        }
+
+        function updateLiveTiles() {
+            for (let j = 0; j < 4; j++) {
+                const tile = document.getElementById(`tile-${currentRow}-${j}`);
+                tile.textContent = guesses[currentRow][j] !== undefined ? guesses[currentRow][j] : '';
+            }
+            updateWordBanner();
+        }
+
+        function inputDigit(digit) {
+            if (gameOver || guesses[currentRow].length >= 4) return;
+            guesses[currentRow].push(parseInt(digit));
+            updateLiveTiles();
+        }
+
+        function deleteDigit() {
+            if (gameOver || guesses[currentRow].length === 0) return;
+            guesses[currentRow].pop();
+            updateLiveTiles();
+        }
+
+        function submitGuess() {
+            if (gameOver || guesses[currentRow].length !== 4) return;
+            
+            evaluateGuess();
+            
+            if (!gameOver) {
+                // Apply the Conveyor Belt Shift (Right Shift)
+                const lastDigit = currentTarget.pop();
+                currentTarget.unshift(lastDigit);
+                
+                document.getElementById('message').textContent = "Numbers have shifted 1 place right!";
+                setTimeout(() => document.getElementById('message').textContent = "", 3000);
+                
+                console.log("Teacher Cheat Sheet: Shifted Target is now", currentTarget.join(''));
+                
+                currentRow++;
+                document.getElementById('word-banner').textContent = "";
+            }
+        }
+
+        function evaluateGuess() {
+            let guess = guesses[currentRow];
+            let targetCopy = [...currentTarget];
+            let guessResult = ['absent', 'absent', 'absent', 'absent'];
+
+            // First pass: Greens (Exact matches)
+            for (let i = 0; i < 4; i++) {
+                if (guess[i] === targetCopy[i]) {
+                    guessResult[i] = 'correct';
+                    targetCopy[i] = null; // Remove from pool for yellow checks
+                    guess[i] = -1; // Mark as processed
+                }
+            }
+
+            // Second pass: Yellows (Wrong place)
+            for (let i = 0; i < 4; i++) {
+                if (guessResult[i] !== 'correct' && targetCopy.includes(guess[i])) {
+                    guessResult[i] = 'present';
+                    targetCopy[targetCopy.indexOf(guess[i])] = null;
+                }
+            }
+
+            // Apply colors
+            let correctCount = 0;
+            for (let i = 0; i < 4; i++) {
+                const tile = document.getElementById(`tile-${currentRow}-${i}`);
+                tile.classList.add(guessResult[i]);
+                if (guessResult[i] === 'correct') correctCount++;
+            }
+
+            if (correctCount === 4) {
+                document.getElementById('message').textContent = "Code Cracked!";
+                document.getElementById('message').style.color = 'var(--green)';
+                gameOver = true;
+            } else if (currentRow === MAX_GUESSES - 1) {
+                document.getElementById('message').textContent = `Game Over. Target was ${currentTarget.join('')}`;
+                gameOver = true;
+            }
+            
+            // Restore guess array for display integrity
+            guesses[currentRow] = Array.from(document.getElementById(`tile-${currentRow}-0`).parentElement.children).map(t => parseInt(t.textContent));
+        }
+
+        function updateWordBanner() {
+            const arr = guesses[currentRow];
+            if (arr.length === 0) {
+                document.getElementById('word-banner').textContent = "";
+                return;
+            }
+            document.getElementById('word-banner').textContent = convertToWords(arr);
+        }
+
+        function convertToWords(arr) {
+            const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+            const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+            // Pad array with zeros at the front if less than 4 digits are typed
+            let paddedArr = [...arr];
+            while (paddedArr.length < 4) paddedArr.unshift(0);
+
+            let th = paddedArr[0], h = paddedArr[1], t = paddedArr[2], o = paddedArr[3];
+            let words = [];
+
+            if (arr.length === 4 && th > 0) words.push(ones[th] + " thousand");
+            if (arr.length >= 3 && h > 0) words.push(ones[h] + " hundred");
+
+            let remainder = t * 10 + o;
+            if (arr.length >= 1 && remainder > 0) {
+                if (arr.length >= 3 && (th > 0 || h > 0)) words.push("and");
+                if (remainder < 20) {
+                    words.push(ones[remainder]);
+                } else {
+                    let tenWord = tens[t];
+                    let oneWord = ones[o];
+                    words.push(tenWord + (oneWord ? "-" + oneWord : ""));
+                }
+            }
+            
+            if (arr.length === 4 && th === 0 && h === 0 && remainder === 0) return "zero";
+            return words.join(" ");
+        }
+
+        // Start game
+        initGame();
+    </script>
+</body>
+</html>
