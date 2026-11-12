@@ -29,7 +29,7 @@
   function updateModeUI() {
     document.title = `Find the Four · ${mode === "maths" ? "Maths" : "Words"}`;
     $("brand-mode").textContent = mode === "maths" ? "MATHS CONNECTIONS" : "WORD CONNECTIONS";
-    for (const name of ['words', 'maths']) $('mode-' + name).setAttribute('aria-pressed', String(name === mode));
+    for (const name of ['words', 'maths']) $('mode-' + name)?.setAttribute('aria-pressed', String(name === mode));
     $('board').dataset.mode = mode;
     $('board').setAttribute('aria-label', mode === 'maths' ? 'Calculation tiles' : 'Word tiles');
     $('stage').setAttribute('aria-label', mode === 'maths' ? 'Maths challenge' : 'Word challenge');
@@ -43,8 +43,8 @@
     try {storage.setItem(MODE_KEY, mode);} catch {}
     loadToday(D.describe(Date.now(), puzzles.length));
   }
-  $('mode-words').addEventListener('click', () => switchMode('words'));
-  $('mode-maths').addEventListener('click', () => switchMode('maths'));
+  $('mode-words')?.addEventListener('click', () => switchMode('words'));
+  $('mode-maths')?.addEventListener('click', () => switchMode('maths'));
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function say(message, kind = '') { $('status').textContent = message; $('status').dataset.kind = kind; }
   function finish() {
@@ -157,7 +157,7 @@
   $('deselect').addEventListener('click', clearSelection);
   $('reset').addEventListener('click', () => {
     if(refreshDay(true)||state.solved.length===4)return;
-    openDialog('TODAY ONLY','Restart today’s puzzle?',`This clears today’s ${mode} progress only. The other mode stays as it is. It will not open another day’s puzzle.`,[
+    openDialog('TODAY ONLY','Restart today’s puzzle?',`This clears today’s ${mode} progress only. The other game stays as it is. It will not open another day’s puzzle.`,[
       {label:'Keep playing',primary:true,run:()=>dialog.close()},
       {label:'Restart today',run:()=>{if(refreshDay(true)||state.solved.length===4)return;stopCelebration();state=E.create(puzzles[day.index]);hintIndex=null;hintLevel=0;dialog.close();render();if(save())say('Same daily puzzle, fresh start.');}}
     ]);
@@ -181,7 +181,7 @@
     ]);
   });
   function reveal(all) {if(refreshDay(true)||state.solved.length===4)return;stopCelebration();E.reveal(state,all);hintIndex=null;hintLevel=0;dialog.close();render();if(!save())return;if(state.solved.length===4)finish();else say('One connection revealed. Can you find the others?','hint');}
-  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','One shared challenge each day',`Everyone gets the same puzzle in each mode for the Perth date. Words and Maths have separate progress, so switching modes never skips a board. Both change at midnight, even if this page stays open. This ${mode} bank has ${puzzles.length} puzzles and repeats after ${puzzles.length} days. Maths has 50 boards: 800 calculations in 200 groups of four. Progress is saved only in this browser, with no names or accounts.${storageOK?'':' This browser is currently blocking progress saving.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
+  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','One shared challenge each day',`Everyone gets the same puzzle in each mode for the Perth date. Words and Maths have separate progress, so each game keeps its own daily board. Both change at midnight, even if this page stays open. This ${mode} bank has ${puzzles.length} puzzles and repeats after ${puzzles.length} days. Maths has 50 boards: 800 calculations in 200 groups of four. Progress is saved only in this browser, with no names or accounts.${storageOK?'':' This browser is currently blocking progress saving.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
   $('dialog-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{const r=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom))dialog.close();});
   document.addEventListener('keydown',event=>{if(refreshDay(true)||dialog.open)return;if(event.key==='Escape'&&state.selected.length)clearSelection();if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();check();}});
