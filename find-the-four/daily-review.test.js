@@ -76,6 +76,8 @@ function makeBrowser({now = '2026-10-23T02:00:00Z', saved = storage(), search = 
   const elements = new Map();
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   for (const match of html.matchAll(/<([\w-]+)\b[^>]*\bid="([^"]+)"[^>]*>/g)) elements.set(match[2], new Element(match[1], match[2]));
+  // Legacy mode-switch tests retain synthetic controls; live routes have no mode tabs.
+  for(const id of ['mode-words','mode-maths']) if(!elements.has(id)) elements.set(id,new Element('button',id));
   const document = new Element('document');
   document.getElementById = id => elements.get(id) ?? null;
   document.querySelectorAll = selector => [...elements.values()].flatMap(element => [...(element.matches(selector) ? [element] : []), ...element.querySelectorAll(selector)]);
@@ -550,3 +552,5 @@ test('immersive scenery and reduced-motion cameo remain decorative and cannot bl
   assert.match(css,/\.boss-celebration\{[^}]*pointer-events:none/);
   assert.match(css,/@media\(prefers-reduced-motion:reduce\)\{\.boss-celebration\.active \.boss-guest\{animation:none;transform:translate\(-50%,0\);opacity:1/);
 });
+
+test('independent game pages have no mode-switch controls',()=>{for(const name of ['index.html','words.html','maths.html']){const html=fs.readFileSync(path.join(__dirname,name),'utf8');assert.ok(!html.includes('class="mode-toggle"'));assert.ok(!html.includes('id="mode-words"'));assert.ok(!html.includes('id="mode-maths"'));} });
