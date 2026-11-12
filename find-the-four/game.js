@@ -17,14 +17,18 @@
     celebration.hidden = false;
     void celebration.offsetWidth; // Restart the entrance after rapid correct guesses.
     celebration.classList.add('active');
-    celebrationTimer = setTimeout(stopCelebration, 1000);
+    celebrationTimer = setTimeout(stopCelebration, 2000);
   }
   try {storage = window.localStorage;} catch {storageOK = false;}
   try {if (storage.getItem(MODE_KEY) === 'maths') mode = 'maths';} catch {}
+  const entryMode = document.body?.dataset.entryMode;
+  if (entryMode === "words" || entryMode === "maths") mode = entryMode;
   puzzles = banks[mode];
   Object.values(banks).flat().forEach(p => E.validatePuzzle(p));
   const tileName = () => mode === 'maths' ? 'calculation' : 'word';
   function updateModeUI() {
+    document.title = `Find the Four · ${mode === "maths" ? "Maths" : "Words"}`;
+    $("brand-mode").textContent = mode === "maths" ? "MATHS CONNECTIONS" : "WORD CONNECTIONS";
     for (const name of ['words', 'maths']) $('mode-' + name).setAttribute('aria-pressed', String(name === mode));
     $('board').dataset.mode = mode;
     $('board').setAttribute('aria-label', mode === 'maths' ? 'Calculation tiles' : 'Word tiles');
