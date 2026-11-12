@@ -299,7 +299,18 @@
       info.append(element("span", "card-name", card.creatureName));
       const cta = element("span", "card-link");
       cta.append(element("span", "", "Explore trophy room"));
-      const arrow = element("span", "arrow", "↗");
+      const arrow = element("span", "arrow");
+      const arrowIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      arrowIcon.setAttribute("viewBox", "0 0 24 24");
+      arrowIcon.setAttribute("width", "20");
+      arrowIcon.setAttribute("height", "20");
+      const arrowPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      arrowPath.setAttribute("d", "M5 19L19 5M5 5h14v14");
+      arrowPath.setAttribute("fill", "none");
+      arrowPath.setAttribute("stroke", "currentColor");
+      arrowPath.setAttribute("stroke-width", "2");
+      arrowIcon.append(arrowPath);
+      arrow.append(arrowIcon);
       arrow.setAttribute("aria-hidden", "true");
       cta.append(arrow);
       info.append(cta);
@@ -375,4 +386,5 @@
 
   load();
 })();
+
 
