@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171b22">
+  <meta name="description" content="Find connected words or four calculations with the same answer. Two daily, no-pressure classroom challenges.">
+  <title>Find the Four • Words & maths challenge</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23232a32'/%3E%3Cpath d='M10 10h8v8h-8zm12 0h8v8h-8zM10 22h8v8h-8zm12 0h8v8h-8z' fill='%237de2d1'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css?v=20261112-split2">
+  <script defer src="puzzles.js?v=20261112-split2"></script>
+  <script defer src="maths-puzzles.js?v=20261112-split2"></script>
+  <script defer src="engine.js?v=20261112-split2"></script>
+  <script defer src="daily.js?v=20261112-split2"></script>
+  <script defer src="game.js?v=20261112-split2"></script>
+</head>
+<body data-entry-mode="words">
+  <div class="realm" aria-hidden="true">
+    <img class="realm-boss beast" src="assets/beast-of-polka-dots.webp" alt="" width="427" height="640">
+    <img class="realm-boss rider" src="assets/midnight-rider.webp" alt="" width="640" height="640">
+    <div class="realm-fog"></div>
+  </div>
+  <main class="app">
+    <header class="masthead">
+      <div class="brand"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><p id="brand-mode" class="eyebrow">THE CLASSROOM CHALLENGE</p><h1>Find the <span>Four</span></h1></div></div>
+      <div class="puzzle-tools"><span class="puzzle-label">One daily puzzle in each mode</span><div class="picker-row"><div class="mode-toggle" role="group" aria-label="Game mode"><button id="mode-words" type="button" aria-pressed="true">Words</button><button id="mode-maths" type="button" aria-pressed="false">Maths</button></div><div class="daily-date"><time id="daily-date"></time><span>Resets at midnight · Perth</span></div><button class="icon-button" id="fullscreen" title="Enter full screen" aria-label="Enter full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></div>
+    </header>
+    <section class="intro" aria-label="How to play"><div><span class="difficulty" id="difficulty"></span><span class="puzzle-number" id="puzzle-number"></span></div><p id="instructions">Find <strong>4 groups of 4.</strong> What connects each group?</p><div class="progress" id="progress" aria-label="0 of 4 groups found"></div></section>
+    <section class="stage" id="stage" aria-label="Word challenge">
+      <div class="board-wrap"><div class="board" id="board" aria-label="Word tiles"></div><div class="status" id="status" role="status" aria-live="polite" aria-atomic="true">Talk it through. Choose four words to begin.</div></div>
+    </section>
+    <section class="controls" aria-label="Game controls"><div class="selection"><span id="selection-dots" aria-hidden="true"></span><span id="selection-count">0 / 4 selected</span></div><div class="main-controls"><button id="shuffle" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 4-4m4-4c1-2 2-4 4-4h3m-4-4 4 4-4 4"/></svg>Shuffle</button><button id="deselect" class="button quiet" disabled>Clear</button><button id="check" class="button primary" disabled>Check group <span aria-hidden="true">→</span></button><button id="hint" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-6 3h6M8 14a7 7 0 1 1 8 0c-1 1-1 2-1 2H9s0-1-1-2Z"/></svg>Hint</button></div></section>
+    <footer><p class="discussion" id="discussion">Think • Talk • Connect</p><div class="footer-actions"><button id="about-daily" class="text-button">Daily play</button><button id="reset" class="text-button">Restart today</button><button id="teacher" class="text-button">Teacher reveal</button></div></footer>
+  </main>
+  <dialog id="help-dialog" aria-labelledby="dialog-title"><button id="dialog-close" class="dialog-close" aria-label="Close dialog">×</button><p class="eyebrow" id="dialog-kicker"></p><h2 id="dialog-title"></h2><p id="dialog-body"></p><div id="dialog-actions" class="dialog-actions"></div></dialog>
+  <div id="boss-celebration" class="boss-celebration" aria-hidden="true" hidden>
+    <div class="boss-portal"></div>
+    <img class="boss-guest" src="../scorex/assets/villains-01.webp" alt="" width="640" height="640">
+    <img class="boss-guest" src="../scorex/assets/villains-04.webp" alt="" width="640" height="640">
+    <img class="boss-guest" src="../scorex/assets/villains-07.webp" alt="" width="640" height="640">
+    <img class="boss-guest" src="../scorex/assets/villains-25.webp" alt="" width="640" height="640">
+    <span class="boss-cheer">CONNECTION LOCKED!</span>
+  </div>
+  <noscript>This game needs JavaScript. Enable it in your browser to play.</noscript>
+</body>
+</html>
+
+
