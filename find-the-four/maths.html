@@ -4,17 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#171b22">
-  <meta name="description" content="Find four calculations with the same answer. Easy, Original and Hard daily maths challenges.">
-  <title>Find the Four • Maths connections</title>
+  <meta name="description" content="Find five calculations with the same answer. Easy, Medium, Hard and Mad Donkey daily maths challenges.">
+  <title>Find the Five • Maths connections</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23232a32'/%3E%3Cpath d='M10 10h8v8h-8zm12 0h8v8h-8zM10 22h8v8h-8zm12 0h8v8h-8z' fill='%237de2d1'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css?v=20261112-separate3">
-  <script defer src="puzzles.js?v=20261112-separate3"></script>
-  <script defer src="maths-puzzles.js?v=20261112-separate3"></script>
-  <script defer src="maths-levels.js?v=20261114-levels1"></script>
-  <script defer src="engine.js?v=20261112-separate3"></script>
-  <script defer src="daily.js?v=20261112-separate3"></script>
-  <script defer src="maths-game.js?v=20261114-levels1"></script>
   <link rel="stylesheet" href="maths-levels.css?v=20261114-levels1">
+  <script defer src="five-banks.js?v=20261114-five1"></script>
+  <script defer src="five-engine.js?v=20261114-five1"></script>
+  <script defer src="five-daily.js?v=20261114-five1"></script>
+  <script defer src="five-game.js?v=20261114-five1"></script>
+  <link rel="stylesheet" href="five.css?v=20261114-five1">
 </head>
 <body data-entry-mode="maths">
   <div class="realm" aria-hidden="true">
@@ -24,21 +23,22 @@
   </div>
   <main class="app">
     <header class="masthead">
-      <div class="brand"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><p id="brand-mode" class="eyebrow">THE CLASSROOM CHALLENGE</p><h1>Find the <span>Four</span></h1></div></div>
+      <div class="brand"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><p id="brand-mode" class="eyebrow">THE CLASSROOM CHALLENGE</p><h1>Find the <span>Five</span></h1></div></div>
+    <nav class="level-switch" aria-label="Maths difficulty"><button data-level="easy" aria-pressed="false">Easy</button><button data-level="normal" aria-pressed="true">Medium</button><button data-level="hard" aria-pressed="false">Hard</button><button data-level="donkey" aria-pressed="false">Mad Donkey</button></nav>
       <div class="puzzle-tools"><span class="puzzle-label">One daily challenge</span><div class="picker-row"><div class="daily-date"><time id="daily-date"></time></div><button class="icon-button" id="fullscreen" title="Enter full screen" aria-label="Enter full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></div>
     </header>
-    <nav class="level-switch" aria-label="Maths difficulty"><button data-level="easy" aria-pressed="false">Easy</button><button data-level="normal" aria-pressed="true">Original</button><button data-level="hard" aria-pressed="false">Hard</button></nav>
-    <section class="intro" aria-label="How to play"><div><span class="difficulty" id="difficulty"></span><span class="puzzle-number" id="puzzle-number"></span></div><p id="instructions">Find <strong>4 groups of 4.</strong> What connects each group?</p><div class="progress" id="progress" aria-label="0 of 4 groups found"></div></section>
+
+    <section class="intro" aria-label="How to play"><div><span class="difficulty" id="difficulty"></span><span class="puzzle-number" id="puzzle-number"></span></div><p id="instructions">Find <strong>5 groups of 5.</strong> What connects each group?</p><div class="progress-wrap"><div class="progress" id="progress" aria-label="0 of 5 groups found"></div><span id="donkey-count" hidden></span></div></section>
     <section class="stage" id="stage" aria-label="Word challenge">
-      <div class="board-wrap"><div class="board" id="board" aria-label="Word tiles"></div><div class="status" id="status" role="status" aria-live="polite" aria-atomic="true">Talk it through. Choose four words to begin.</div></div>
+      <div class="board-wrap"><div class="board" id="board" aria-label="Word tiles"></div><div class="status" id="status" role="status" aria-live="polite" aria-atomic="true">Talk it through. Choose five calculations to begin.</div></div>
     </section>
-    <section class="controls" aria-label="Game controls"><div class="selection"><span id="selection-dots" aria-hidden="true"></span><span id="selection-count">0 / 4 selected</span></div><div class="main-controls"><button id="shuffle" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 4-4m4-4c1-2 2-4 4-4h3m-4-4 4 4-4 4"/></svg>Shuffle</button><button id="deselect" class="button quiet" disabled>Clear</button><button id="check" class="button primary" disabled>Check group <span aria-hidden="true">→</span></button><button id="hint" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-6 3h6M8 14a7 7 0 1 1 8 0c-1 1-1 2-1 2H9s0-1-1-2Z"/></svg>Hint</button></div></section>
+    <section class="controls" aria-label="Game controls"><div class="selection"><span id="selection-dots" aria-hidden="true"></span><span id="selection-count">0 / 5 selected</span></div><div class="main-controls"><button id="shuffle" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 3-2 4-4m4-4c1-2 2-4 4-4h3m-4-4 4 4-4 4"/></svg>Shuffle</button><button id="deselect" class="button quiet" disabled>Clear</button><button id="check" class="button primary" disabled>Check group <span aria-hidden="true">→</span></button><button id="donkey" class="button quiet" aria-pressed="false" hidden>Donkey</button><button id="hint" class="button quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-6 3h6M8 14a7 7 0 1 1 8 0c-1 1-1 2-1 2H9s0-1-1-2Z"/></svg>Help</button></div></section>
     <footer><p class="discussion" id="discussion">Think • Talk • Connect</p><div class="footer-actions"><button id="about-daily" class="text-button">Daily play</button><button id="reset" class="text-button">Restart today</button><button id="teacher" class="text-button">Teacher reveal</button></div></footer>
   </main>
   <dialog id="help-dialog" aria-labelledby="dialog-title"><button id="dialog-close" class="dialog-close" aria-label="Close dialog">×</button><p class="eyebrow" id="dialog-kicker"></p><h2 id="dialog-title"></h2><p id="dialog-body"></p><div id="dialog-actions" class="dialog-actions"></div></dialog>
   <div id="boss-celebration" class="boss-celebration" aria-hidden="true" hidden>
     <div class="boss-portal"></div>
-    <span id="number-celebration" class="number-pop"></span><span class="boss-cheer">FOUR MATCHING ANSWERS!</span>
+    <span id="number-celebration" class="number-pop"></span><span class="boss-cheer">FIVE MATCHING ANSWERS!</span>
   </div>
   <noscript>This game needs JavaScript. Enable it in your browser to play.</noscript>
 </body>
