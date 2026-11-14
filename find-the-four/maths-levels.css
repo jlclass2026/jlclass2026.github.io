@@ -1,0 +1,12 @@
+
+.level-switch{display:flex;justify-content:center;gap:8px;margin:0 auto 10px;padding:5px;background:#0c1724b3;border:1px solid #ffffff24;border-radius:18px;width:max-content;max-width:100%}
+.level-switch button{font:700 15px system-ui;color:#ccdae8;border:1px solid transparent;background:transparent;border-radius:12px;padding:10px 24px;cursor:pointer}
+.level-switch button[aria-pressed=true]{color:#102b29;background:linear-gradient(135deg,#a9f4d8,#76d6ee);box-shadow:0 3px 14px #42e9c428}
+.level-switch button:focus-visible{outline:3px solid #ffd06a;outline-offset:3px}
+.hint-pick .tile{outline:2px dashed #ffd16e;outline-offset:-5px;cursor:help}#hint[aria-pressed=true]{background:#584522;color:#ffdfa2}
+.number-pop{display:block;position:absolute;inset:0;display:grid;place-items:center;font:1000 clamp(110px,28vw,340px)/1 system-ui;letter-spacing:-.06em;color:#ffdf5b;-webkit-text-stroke:2px #fff6c3;text-shadow:2px 3px 0 #ff859d,4px 6px 0 #f15b9d,6px 9px 0 #c964db,8px 12px 0 #766eea,10px 15px 0 #43b8dc,0 22px 55px #07101c;filter:drop-shadow(0 0 30px #d79fff60)}
+.boss-celebration.active .number-pop{animation:number-bounce 3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes number-bounce{0%{transform:translateY(65vh) scale(.3) rotate(-8deg);opacity:0}18%{transform:translateY(-3vh) scale(1.12) rotate(2deg);opacity:1}28%,72%{transform:translateY(0) scale(1) rotate(0);opacity:1}100%{transform:translateY(65vh) scale(.5);opacity:0}}
+body[data-entry-mode=maths] .realm-boss.beast{object-fit:contain;opacity:.65;filter:drop-shadow(0 0 30px #83ddbe24)}
+@media(max-width:600px){.level-switch button{padding:8px 19px}.number-pop{font-size:clamp(100px,32vw,210px)}.level-switch{margin-bottom:5px}}
+@media(prefers-reduced-motion:reduce){.boss-celebration.active .number-pop{animation:none}.number-pop{transform:none}}
