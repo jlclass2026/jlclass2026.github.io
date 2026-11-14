@@ -40,12 +40,27 @@ form.addEventListener('submit',async e=>{
     status.textContent='Opening the test game…';
     const html=await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
     // Replace the root-relative asset URLs with this HTTPS origin before making a Blob document.
-    const ready=html.replaceAll('/tidal-transformations-test/assets/',location.origin+'/tidal-transformations-test/assets/');
+    let ready=html;
+    // SVG crop sprites must contain their source image bytes, not external URLs.
+    // Load these public art assets only after successful decryption. No code is persisted.
+    const sourceMatch=html.match(/const VANDA_SPRITE_SOURCES=(\{[^;]+\});/);
+    if(sourceMatch){
+      const sources=JSON.parse(sourceMatch[1]), entries=Object.entries(sources);let loaded=0,index=0;
+      await Promise.all(Array.from({length:4},async()=>{while(index<entries.length){const [name,url]=entries[index++];
+        if(!/^\/tidal-transformations-test\/assets\/[a-f0-9]{24}\.webp$/.test(url))throw new Error('Unexpected artwork URL');
+        const art=await fetch(url);if(!art.ok)throw new Error('Artwork unavailable');
+        const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;art.blob().then(blob=>reader.readAsDataURL(blob),reject);});
+        sources[name]=data;loaded++;status.textContent='Loading creatures '+loaded+' / '+entries.length+'…';
+      }}));
+      ready=ready.replace(sourceMatch[0],'const VANDA_SPRITE_SOURCES='+JSON.stringify(sources)+';');
+    }
+    ready=ready.replaceAll('/tidal-transformations-test/assets/',location.origin+'/tidal-transformations-test/assets/');
     gameUrl=URL.createObjectURL(new Blob([ready],{type:'text/html'}));
-    const frame=document.createElement('iframe');frame.title='Tidal Transformations development test';frame.allow='autoplay; fullscreen';frame.src=gameUrl;
+    const frame=document.createElement('iframe');frame.title='Vandawoods development test';frame.allow='autoplay; fullscreen';frame.src=gameUrl;
     frame.addEventListener('load',()=>{status.textContent='';}, {once:true});
     host.replaceChildren(frame);code.value='';attempts=0;gate.hidden=true;session.hidden=false;document.body.classList.add('playing');
     document.getElementById('lock').focus();
   }catch(error){console.error('Test gate load failed:',error.name);status.textContent='The test game could not load. Please check your connection and try again.';}
   finally{busy=false;unlock.disabled=false;reveal.disabled=false;code.disabled=false;}
 });
+
