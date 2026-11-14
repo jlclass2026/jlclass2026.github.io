@@ -47,8 +47,8 @@ form.addEventListener('submit',async e=>{
     if(sourceMatch){
       const sources=JSON.parse(sourceMatch[1]), entries=Object.entries(sources);let loaded=0,index=0;
       await Promise.all(Array.from({length:4},async()=>{while(index<entries.length){const [name,url]=entries[index++];
-        if(!/^\/tidal-transformations-test\/assets\/[a-f0-9]{24}\.(?:webp|png)$/.test(url))throw new Error('Unexpected artwork URL');
-        const art=await fetch(url);if(!art.ok)throw new Error('Artwork unavailable');
+        if(!/^\/tidal-transformations-test\/assets\/[a-f0-9]{24}\.(?:webp|png)$/.test(url))throw new Error('Artwork format not supported: '+name);
+        const art=await fetch(url);if(!art.ok)throw new Error('Artwork unavailable: '+name);
         const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;art.blob().then(blob=>reader.readAsDataURL(blob),reject);});
         sources[name]=data;loaded++;status.textContent='Loading creatures '+loaded+' / '+entries.length+'…';
       }}));
@@ -60,7 +60,7 @@ form.addEventListener('submit',async e=>{
     frame.addEventListener('load',()=>{status.textContent='';}, {once:true});
     host.replaceChildren(frame);code.value='';attempts=0;gate.hidden=true;session.hidden=false;document.body.classList.add('playing');
     document.getElementById('lock').focus();
-  }catch(error){console.error('Test gate load failed:',error.name);status.textContent='The test game could not load. Please check your connection and try again.';}
+  }catch(error){console.error('Test gate load failed:',error.name);status.textContent=(error.message && error.message.startsWith('Artwork '))?error.message:'The test game could not load. Please check your connection and try again.';}
   finally{busy=false;unlock.disabled=false;reveal.disabled=false;code.disabled=false;}
 });
 
