@@ -30,11 +30,11 @@
       const data = JSON.parse(raw), words = puzzle.groups.flatMap(g => g.words).concat((puzzle.decoys||[]).map(d=>d.word));
       if(!Array.isArray(data.foundDecoys)||new Set(data.foundDecoys).size!==data.foundDecoys.length||data.foundDecoys.some(w=>!(puzzle.decoys||[]).some(d=>d.word===w))||typeof data.revealedDecoys!=='boolean')return null;
       if (!data || data.version !== VERSION || data.date !== day.date || data.puzzleId !== puzzle.id || data.fingerprint !== fingerprint(puzzle)) return null;
-      if (!Array.isArray(data.solved) || data.solved.length > 5 || data.solved.some(s => !s || !Number.isInteger(s.index) || s.index < 0 || s.index > 4 || typeof s.revealed !== 'boolean') || new Set(data.solved.map(s => s.index)).size !== data.solved.length) return null;
+      if (!Array.isArray(data.solved) || data.solved.length > puzzle.groups.length || data.solved.some(s => !s || !Number.isInteger(s.index) || s.index < 0 || s.index >= puzzle.groups.length || typeof s.revealed !== 'boolean') || new Set(data.solved.map(s => s.index)).size !== data.solved.length) return null;
       const remaining = words.filter(w => !data.foundDecoys.includes(w) && !data.solved.some(s => puzzle.groups[s.index].words.includes(w)));
       if (!Array.isArray(data.order) || data.order.length !== remaining.length || new Set(data.order).size !== data.order.length || data.order.some(w => !remaining.includes(w))) return null;
-      if (!Array.isArray(data.selected) || data.selected.length > 5 || new Set(data.selected).size !== data.selected.length || data.selected.some(w => !data.order.includes(w))) return null;
-      if (!Array.isArray(data.guesses) || data.guesses.length > 142506 || new Set(data.guesses).size !== data.guesses.length || data.guesses.some(g => {if(typeof g !== 'string')return true;const set=g.split('\u0000');return set.length!==5||new Set(set).size!==5||set.some(w=>!words.includes(w))||set.slice().sort().join('\u0000')!==g;})) return null;
+      if (!Array.isArray(data.selected) || data.selected.length > puzzle.groups.length || new Set(data.selected).size !== data.selected.length || data.selected.some(w => !data.order.includes(w))) return null;
+      if (!Array.isArray(data.guesses) || data.guesses.length > 142506 || new Set(data.guesses).size !== data.guesses.length || data.guesses.some(g => {if(typeof g !== 'string')return true;const set=g.split('\u0000');return set.length!==puzzle.groups.length||new Set(set).size!==puzzle.groups.length||set.some(w=>!words.includes(w))||set.slice().sort().join('\u0000')!==g;})) return null;
       if (!Number.isInteger(data.attempts) || data.attempts !== data.guesses.length) return null;
       const correct = puzzle.groups.map(g => g.words.slice().sort().join('\u0000'));
       if (data.solved.some(s => !s.revealed && !data.guesses.includes(correct[s.index]))) return null;

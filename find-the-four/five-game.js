@@ -15,6 +15,7 @@
   function celebrate(answer) {
     stopCelebration();
     $('number-celebration').textContent=String(answer);
+    document.querySelector('.boss-cheer').textContent=countWord().toUpperCase()+' MATCHING ANSWERS!';
     celebration.hidden=false;void celebration.offsetWidth;celebration.classList.add('active');
     celebrationTimer=setTimeout(stopCelebration,3000);
   }
@@ -24,6 +25,8 @@
   if (entryMode === "words" || entryMode === "maths") mode = entryMode;
   puzzles = levels[level];
   Object.values(levels).flat().forEach(p => E.validatePuzzle(p));
+  const size=()=>state.puzzle.groups.length;
+  const countWord=()=>size()===4?'four':'five';
   const tileName = () => mode === 'maths' ? 'calculation' : 'word';
   function updateModeUI() {
     document.title = `Find the Five · ${mode === "maths" ? "Maths" : "Words"}`;
@@ -32,14 +35,14 @@
     $('board').dataset.mode = mode;
     $('board').setAttribute('aria-label', mode === 'maths' ? 'Calculation tiles' : 'Word tiles');
     $('stage').setAttribute('aria-label', mode === 'maths' ? 'Maths challenge' : 'Word challenge');
-    $('instructions').innerHTML = mode === 'maths' ? (level==='donkey'?'Find <strong>5 groups of 5</strong> + 5 donkeys.':'Find <strong>5 groups of 5.</strong> Match the answers.') : 'Find <strong>5 groups of 5.</strong> What connects each group?';
+    $('instructions').innerHTML = mode === 'maths' ? (level==='easy'?'Find <strong>4 groups of 4.</strong> Match the answers.':level==='donkey'?'Find <strong>5 groups of 5</strong> + 5 donkeys.':'Find <strong>5 groups of 5.</strong> Match the answers.') : 'Find <strong>5 groups of 5.</strong> What connects each group?';
   }
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function say(message, kind = '') { $('status').textContent = message; $('status').dataset.kind = kind; }
   function finish() {
     choosingHint=false; choosingDonkey=false;
-    say((state.solved.some(s => s.revealed)||state.revealedDecoys) ? 'All five groups shown. Come back tomorrow for a new Find the Five!' : 'Five groups found! Come back tomorrow for a new Find the Five!', 'success');
-    $('discussion').textContent = 'Five connections complete!';
+    say((state.solved.some(s => s.revealed)||state.revealedDecoys) ? `All ${countWord()} groups shown. Come back tomorrow for a new puzzle!` : `All ${countWord()} groups found! Come back tomorrow for a new puzzle!`, 'success');
+    $('discussion').textContent = `${size()} connections complete!`;
   }
   function save() {
     // A second tab must not overwrite an already completed day with an older board.
@@ -82,7 +85,7 @@
     $('discussion').textContent = level==='donkey'?'Find 5 groups + 5 donkeys':'Think • Talk • Connect';
     render(); save();
     if (E.complete(state)) finish();
-    else say(newDay ? 'A new Perth day, a new Find the Five. Let’s connect!' : stored.state ? 'Welcome back. Today’s puzzle is just as you left it.' : `Today’s challenge. Talk it through and choose five ${tileName()}s.`);
+    else say(newDay ? 'A new Perth day, a new Find the Five. Let’s connect!' : stored.state ? 'Welcome back. Today’s puzzle is just as you left it.' : `Today’s challenge. Talk it through and choose ${countWord()} ${tileName()}s.`);
     schedule();
   }
   function refreshDay(syncCompletion = false) {
@@ -104,15 +107,16 @@
     $('donkey-count').hidden=level!=='donkey';
     $('donkey-count').textContent=`${state.foundDecoys.length} / 5 donkeys found`;
     $('board').classList.toggle('hint-pick',choosingHint); $('hint').setAttribute('aria-pressed',String(choosingHint));
+    $('board').dataset.size=String(size());
     $('board').innerHTML = state.solved.map(s => {
       const group = state.puzzle.groups[s.index];
-      return `<button class="solved" data-group="${s.index}" data-colour="${s.index}" title="Explain this connection" aria-label="Explain ${s.revealed ? 'Revealed' : 'Found'} group: ${esc(group.label)}"><span class="group-label">${esc(group.label)}${s.revealed ? ' <span class="revealed">(revealed)</span>' : ''}</span><span class="group-words">${group.words.map(esc).join(' · ')}</span></button>`;
+      return `<button class="solved" data-group="${s.index}" data-colour="${s.index}" title="Explain this connection" aria-label="Explain ${s.revealed ? 'Revealed' : 'Found'} group: ${esc(group.label)}"><span class="group-label">${esc(group.label)}${s.revealed ? ' <span class="revealed">(revealed)</span>' : ''}</span><span class="group-words">${group.words.map(w=>`<span class="solved-equation">${esc(w)}<strong>${w.includes('__')?' → '+ '__ = ':' = '}${esc(group.answer)}</strong></span>`).join('')}</span></button>`;
     }).join('') + state.order.map(word => `<button class="tile" data-word="${esc(word)}" data-long="${word.length > 8}" aria-pressed="${state.selected.includes(word)}">${esc(word)}</button>`).join('');
-    $('progress').innerHTML = [0,1,2,3,4].map(i => `<i class="${i < state.solved.length ? 'filled' : ''}"></i>`).join('');
-    $('progress').setAttribute('aria-label', `${state.solved.length} of 5 groups ${(state.solved.some(s => s.revealed)||state.revealedDecoys) ? 'shown' : 'found'}`);
-    $('selection-dots').innerHTML = [0,1,2,3,4].map(i => `<i class="${i < state.selected.length ? 'filled' : ''}"></i>`).join('');
-    $('selection-count').textContent = E.complete(state) ? 'Today’s puzzle complete' : `${state.selected.length} / 5 selected`;
-    $('check').disabled = state.selected.length !== 5;
+    $('progress').innerHTML = Array.from({length:size()},(_,i)=>i).map(i => `<i class="${i < state.solved.length ? 'filled' : ''}"></i>`).join('');
+    $('progress').setAttribute('aria-label', `${state.solved.length} of ${size()} groups ${(state.solved.some(s => s.revealed)||state.revealedDecoys) ? 'shown' : 'found'}`);
+    $('selection-dots').innerHTML = Array.from({length:size()},(_,i)=>i).map(i => `<i class="${i < state.selected.length ? 'filled' : ''}"></i>`).join('');
+    $('selection-count').textContent = E.complete(state) ? 'Today’s puzzle complete' : `${state.selected.length} / ${size()} selected`;
+    $('check').disabled = state.selected.length !== size();
     $('deselect').disabled = !state.selected.length;
     for (const id of ['hint','shuffle','teacher','reset']) $(id).disabled = E.complete(state);
     $('reset').hidden = E.complete(state);
@@ -124,11 +128,11 @@
     if (result.type === 'incomplete') return;
     if (!save()) return;
     if (result.type === 'repeat') {say(`You tried that set. Swap a ${tileName()} and explore another connection.`); return;}
-    if (result.type === 'near') {say('So close! Four of these belong together. Try swapping one.', 'hint'); return;}
+    if (result.type === 'near') {say(`So close! ${size()-1} of these belong together. Try swapping one.`, 'hint'); return;}
     if (result.type === 'different') {say('Not that group yet. Keep talking and try another idea.'); return;}
     hintIndex = null; hintLevel = 0; choosingHint=false; choosingDonkey=false; $('board').classList.remove('hint-pick'); $('hint').setAttribute('aria-pressed','false'); render(); celebrate(state.puzzle.groups[result.groupIndex].answer);
     if (result.type === 'complete') {finish(); document.querySelector('.solved')?.focus({preventScroll:true});}
-    else {say(state.solved.length===5?'All groups found. Now identify the remaining donkeys.':`${state.puzzle.groups[result.groupIndex].label}! ${5 - state.solved.length} more ${state.solved.length === 4 ? 'group' : 'groups'} to find.`, 'success'); document.querySelector('.tile')?.focus({preventScroll:true});}
+    else {say(state.solved.length===size()?'All groups found. Now identify the remaining donkeys.':`${state.puzzle.groups[result.groupIndex].label}! ${size() - state.solved.length} more ${state.solved.length === size()-1 ? 'group' : 'groups'} to find.`, 'success'); document.querySelector('.tile')?.focus({preventScroll:true});}
   }
   $('board').addEventListener('click', event => {
     if (refreshDay(true)) return;
@@ -153,14 +157,14 @@
       say('One answer shown. Keep looking for connections.','hint');return;
     }
     const result = E.toggle(state, word);
-    if (result === 'full') {say(`Five are selected. Tap a selected ${tileName()} to swap it, or check your group.`); return;}
+    if (result === 'full') {say(`${size()} are selected. Tap a selected ${tileName()} to swap it, or check your group.`); return;}
     render(word); if (!save()) return;
-    say(state.selected.length === 5 ? (mode === 'maths' ? 'Do all five calculations have the same answer? Check your group.' : 'What connects your five words? Share your idea, then check.') : `${state.selected.length} of 5 selected. Keep looking for a connection.`);
+    say(state.selected.length === size() ? (mode === 'maths' ? `Do all ${countWord()} calculations have the same answer? Check your group.` : 'What connects your five words? Share your idea, then check.') : `${state.selected.length} of ${size()} selected. Keep looking for a connection.`);
   });
   $('board').addEventListener('keydown', event => {
     if (refreshDay(true) || !event.target.matches('.tile')) return;
     const tiles = [...document.querySelectorAll('.tile')], current = tiles.indexOf(event.target);
-    const shifts = {ArrowLeft:-1,ArrowRight:1,ArrowUp:-5,ArrowDown:5}; let next;
+    const shifts = {ArrowLeft:-1,ArrowRight:1,ArrowUp:-size(),ArrowDown:size()}; let next;
     if (event.key in shifts) next = Math.min(tiles.length - 1, Math.max(0, current + shifts[event.key]));
     if (event.key === 'Home') next = 0;
     if (event.key === 'End') next = tiles.length - 1;
@@ -187,7 +191,7 @@
     choosingDonkey=false;choosingHint=!choosingHint;render();
     $('hint').setAttribute('aria-pressed',String(choosingHint));
     $('board').classList.toggle('hint-pick',choosingHint);
-    say(choosingHint?'Choose one calculation to see its answer. Tap Hint again to cancel.':'Hint cancelled. Choose five calculations.','hint');
+    say(choosingHint?'Choose one calculation to see its answer. Tap Hint again to cancel.':`Hint cancelled. Choose ${countWord()} calculations.`,'hint');
   }
   $('hint').addEventListener('click',hint);
   $('donkey').addEventListener('click',()=>{
@@ -202,7 +206,7 @@
     ]);
   });
   function reveal(all) {if(refreshDay(true)||E.complete(state))return;stopCelebration();E.reveal(state,all);hintIndex=null;hintLevel=0;dialog.close();render();if(!save())return;if(E.complete(state))finish();else say('One connection revealed. Can you find the others?','hint');}
-  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','A daily challenge at each level',`Easy, Medium, Hard and Mad Donkey each have 50 daily boards. Each level saves its own progress. Easy uses numbers up to 50 with no division. Hard includes missing numbers and three-digit calculations. Match five answers, including the missing number on a blank tile. Mad Donkey adds five odd calculations: tap Donkey, then one odd tile. Find all five groups and all five donkeys to finish. No names or accounts.${storageOK?'':' Progress cannot be saved in this browser.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
+  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','A daily challenge at each level',`Easy, Medium, Hard and Mad Donkey each have 50 daily boards. Each level saves its own progress. Easy has four groups of four, with numbers up to 50 and no division. Other levels have five groups of five. Hard includes missing numbers and three-digit calculations. Match answers, including the missing number on a blank tile. Mad Donkey adds five odd calculations: tap Donkey, then one odd tile. Find all five groups and all five donkeys to finish. No names or accounts.${storageOK?'':' Progress cannot be saved in this browser.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
   document.querySelectorAll('button[data-level]').forEach(button=>button.addEventListener('click',()=>{
     const next=button.dataset.level;if(next===level)return;
     refreshDay(true);save();level=next;puzzles=levels[level];
