@@ -47,7 +47,7 @@ form.addEventListener('submit',async e=>{
     if(sourceMatch){
       const sources=JSON.parse(sourceMatch[1]), entries=Object.entries(sources);let loaded=0,index=0;
       await Promise.all(Array.from({length:4},async()=>{while(index<entries.length){const [name,url]=entries[index++];
-        if(!/^\/tidal-transformations-test\/assets\/[a-f0-9]{24}\.webp$/.test(url))throw new Error('Unexpected artwork URL');
+        if(!/^\/tidal-transformations-test\/assets\/[a-f0-9]{24}\.(?:webp|png)$/.test(url))throw new Error('Unexpected artwork URL');
         const art=await fetch(url);if(!art.ok)throw new Error('Artwork unavailable');
         const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;art.blob().then(blob=>reader.readAsDataURL(blob),reject);});
         sources[name]=data;loaded++;status.textContent='Loading creatures '+loaded+' / '+entries.length+'…';
