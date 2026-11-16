@@ -92,3 +92,44 @@
   document.querySelectorAll('.game-tile img').forEach(img => img.addEventListener('error', () => { img.hidden = true; }, {once:true}));
   document.querySelector('.world-scene').addEventListener('error', () => document.body.classList.add('art-unavailable'), {once:true});
 })();
+
+// Teacher convenience gate only. Public static assets are not private storage.
+(() => {
+  'use strict';
+  const panel = document.querySelector('#class-games .menu-panel');
+  if (!panel) return;
+  const footer = document.createElement('footer');
+  footer.className = 'patch-footer';
+  const trigger = document.createElement('button');
+  trigger.type = 'button'; trigger.className = 'patch-trigger'; trigger.textContent = 'Patch';
+  trigger.setAttribute('aria-haspopup', 'dialog');
+  footer.append(trigger); panel.append(footer);
+  const dialog = document.createElement('dialog');
+  dialog.className = 'patch-dialog';
+  dialog.setAttribute('aria-labelledby', 'patch-title');
+  dialog.innerHTML = '<h2 id="patch-title">Latest patch</h2><p>Enter the teacher PIN to download.</p><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download patch</button></div>';
+  document.body.append(dialog);
+  const input = dialog.querySelector('input');
+  const status = dialog.querySelector('#patch-status');
+  const download = dialog.querySelector('.patch-download');
+  let downloading = false;
+  function close() { dialog.close(); }
+  function reset() { input.value = ''; status.textContent = ''; downloading = false; download.disabled = false; }
+  trigger.addEventListener('click', () => { reset(); dialog.showModal(); input.focus(); });
+  dialog.querySelector('.patch-cancel').addEventListener('click', close);
+  dialog.addEventListener('close', () => { reset(); if (document.body.dataset.view === 'class-games') trigger.focus(); });
+  addEventListener('hashchange', () => { if (dialog.open) close(); });
+  dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) close(); } });
+  function startDownload() {
+    if (downloading) return;
+    if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
+    downloading = true; download.disabled = true; input.value = '';
+    const link = document.createElement('a');
+    link.href = '/patches/latest-patch.zip?v=20261116-underwater-1';
+    link.download = 'New World Underwater Board Patch.zip';
+    document.body.append(link); link.click(); link.remove();
+    status.textContent = 'Download requested. Check your Downloads folder. Save your class and read READ ME FIRST before updating.';
+  }
+  download.addEventListener('click', startDownload);
+  input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); startDownload(); } });
+})();
