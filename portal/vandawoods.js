@@ -125,8 +125,8 @@
     if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
     downloading = true; download.disabled = true; input.value = '';
     const link = document.createElement('a');
-    link.href = '/patches/latest-patch.zip?v=20261116-underwater-1';
-    link.download = 'New World Underwater Board Patch.zip';
+    link.href = '/patches/latest-patch.zip?v=20261116-underwater-2';
+    link.download = 'New World Underwater Board Repair.zip';
     document.body.append(link); link.click(); link.remove();
     status.textContent = 'Download requested. Check your Downloads folder. Save your class and read READ ME FIRST before updating.';
   }
