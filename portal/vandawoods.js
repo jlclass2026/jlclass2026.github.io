@@ -107,7 +107,7 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'patch-dialog';
   dialog.setAttribute('aria-labelledby', 'patch-title');
-  dialog.innerHTML = '<h2 id="patch-title">Latest patch</h2><p>Enter the teacher PIN to download.</p><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download patch</button></div>';
+  dialog.innerHTML = '<h2 id="patch-title">Maths printouts</h2><p>Enter the teacher PIN to download.</p><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download patch</button></div>';
   document.body.append(dialog);
   const input = dialog.querySelector('input');
   const status = dialog.querySelector('#patch-status');
@@ -125,10 +125,10 @@
     if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
     downloading = true; download.disabled = true; input.value = '';
     const link = document.createElement('a');
-    link.href = '/patches/latest-patch.zip?v=20261116-underwater-2';
-    link.download = 'New World Underwater Board Repair.zip';
+    link.href = '/patches/latest-patch.zip?v=20261117-maths-printouts-1';
+    link.download = 'Squishy World Maths Printouts.zip';
     document.body.append(link); link.click(); link.remove();
-    status.textContent = 'Download requested. Check your Downloads folder. Save your class and read READ ME FIRST before updating.';
+    status.textContent = 'Download requested. Check your Downloads folder. Print the design sheet on A3 and the two-page votes and results sheet double-sided on A4.';
   }
   download.addEventListener('click', startDownload);
   input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); startDownload(); } });
