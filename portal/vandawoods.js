@@ -107,7 +107,7 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'patch-dialog';
   dialog.setAttribute('aria-labelledby', 'patch-title');
-  dialog.innerHTML = '<h2 id="patch-title">Shhh downloads</h2><p>Choose your file, then enter the teacher PIN.</p><label for="patch-file">File</label><select id="patch-file"><option value="cold-task">Persuasive cold task: holiday destination</option><option value="health">Year 3 Health test</option></select><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download</button></div>';
+  dialog.innerHTML = '<h2 id="patch-title">Shhh downloads</h2><p>Choose your file, then enter the teacher PIN.</p><label for="patch-file">File</label><select id="patch-file"><option value="market">Squishy Market offers — 18 November</option><option value="cold-task">Persuasive cold task: holiday destination</option><option value="health">Year 3 Health test</option></select><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download</button></div>';
   document.body.append(dialog);
   const input = dialog.querySelector('input');
   const status = dialog.querySelector('#patch-status');
@@ -124,6 +124,15 @@
     if (downloading) return;
     if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
     downloading = true; download.disabled = true; input.value = '';
+    if (dialog.querySelector('#patch-file').value === 'market') {
+      const link = document.createElement('a');
+      link.href = '/patches/squishy-market-offers-2026-11-18.json';
+      link.download = 'Squishy-Market-Offers-2026-11-18.json';
+      document.body.append(link); link.click(); link.remove();
+      status.textContent = 'Market import download requested. Choose this JSON in your game’s offer import.';
+      downloading = false; download.disabled = false;
+      return;
+    }
     if (dialog.querySelector('#patch-file').value === 'cold-task') {
       const prompt = 'Cold task: The best holiday destination\n\nYour family is deciding where to go for their next holiday. Where do you think they should go?\n\nWrite a persuasive text to convince your family to choose your destination. Give reasons and examples to explain why it would be a great place to visit.\n';
       const link = document.createElement('a');
