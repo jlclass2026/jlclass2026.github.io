@@ -101,7 +101,7 @@
   const footer = document.createElement('footer');
   footer.className = 'patch-footer';
   const trigger = document.createElement('button');
-  trigger.type = 'button'; trigger.className = 'patch-trigger'; trigger.textContent = 'Patch';
+  trigger.type = 'button'; trigger.className = 'patch-trigger'; trigger.textContent = 'Shhh';
   trigger.setAttribute('aria-haspopup', 'dialog');
   footer.append(trigger); panel.append(footer);
   const dialog = document.createElement('dialog');
@@ -125,7 +125,7 @@
     if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
     downloading = true; download.disabled = true; input.value = '';
     const link = document.createElement('a');
-    link.href = '/patches/latest-patch.zip?v=20261117-health-test-1';
+    link.href = '/patches/latest-patch.zip?v=20261118-health-dinner-2';
     link.download = 'Year 3 Health Test.zip';
     document.body.append(link); link.click(); link.remove();
     status.textContent = 'Download requested. Check your Downloads folder. The ZIP contains the two-page Year 3 Health Food Choices test.';
