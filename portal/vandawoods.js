@@ -107,7 +107,7 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'patch-dialog';
   dialog.setAttribute('aria-labelledby', 'patch-title');
-  dialog.innerHTML = '<h2 id="patch-title">Health test</h2><p>Enter the teacher PIN to download.</p><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download patch</button></div>';
+  dialog.innerHTML = '<h2 id="patch-title">Shhh downloads</h2><p>Choose your file, then enter the teacher PIN.</p><label for="patch-file">File</label><select id="patch-file"><option value="cold-task">Persuasive cold task: holiday destination</option><option value="health">Year 3 Health test</option></select><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download</button></div>';
   document.body.append(dialog);
   const input = dialog.querySelector('input');
   const status = dialog.querySelector('#patch-status');
@@ -124,6 +124,17 @@
     if (downloading) return;
     if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
     downloading = true; download.disabled = true; input.value = '';
+    if (dialog.querySelector('#patch-file').value === 'cold-task') {
+      const prompt = 'Cold task: The best holiday destination\n\nYour family is deciding where to go for their next holiday. Where do you think they should go?\n\nWrite a persuasive text to convince your family to choose your destination. Give reasons and examples to explain why it would be a great place to visit.\n';
+      const link = document.createElement('a');
+      link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(prompt);
+      link.download = 'Year 3 Persuasive Cold Task - Holiday Destination.txt';
+      document.body.append(link); link.click(); link.remove();
+      status.textContent = prompt;
+      status.style.whiteSpace = 'pre-wrap';
+      downloading = false; download.disabled = false;
+      return;
+    }
     const link = document.createElement('a');
     link.href = '/patches/latest-patch.zip?v=20261118-health-dinner-2';
     link.download = 'Year 3 Health Test.zip';
