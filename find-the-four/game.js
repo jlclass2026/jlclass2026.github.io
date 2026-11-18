@@ -5,7 +5,7 @@
   const MODE_KEY = 'find-the-four.mode.v1', sessionProgress = new Map(), unsavedProgress = new Set();
   let mode = 'words', puzzles;
   const $ = id => document.getElementById(id);
-  let day, state, hintIndex = null, hintLevel = 0, midnightTimer, storage, storageOK = true;
+  let day, state, hintIndex = null, hintLevel = 0, releaseTimer, storage, storageOK = true;
   const dialog = $('help-dialog'), celebration = $('boss-celebration');
   const bossQueue = E.shuffle([0,1,2,3]);
   let celebrationTimer;
@@ -49,7 +49,7 @@
   function say(message, kind = '') { $('status').textContent = message; $('status').dataset.kind = kind; }
   function finish() {
     say(state.solved.some(s => s.revealed) ? 'All four groups shown. Come back tomorrow for a new Find the Four!' : 'Four groups found! Come back tomorrow for a new Find the Four!', 'success');
-    $('discussion').textContent = 'Next puzzle at midnight · Perth';
+    $('discussion').textContent = 'Next puzzle at 8:30 am · Perth';
   }
   function save() {
     // A second tab must not overwrite an already completed day with an older board.
@@ -65,10 +65,10 @@
     return true;
   }
   function schedule() {
-    clearTimeout(midnightTimer);
-    const now = Date.now(), next = D.describe(now, puzzles.length).nextMidnight;
-    // Exact midnight timer, with a short clock-change/suspended-tab safety check.
-    midnightTimer = setTimeout(() => refreshDay(), Math.max(1, Math.min(next - now, 60000)));
+    clearTimeout(releaseTimer);
+    const now = Date.now(), next = D.describe(now, puzzles.length).nextRelease;
+    // Exact 8:30 am Perth release timer, with a short clock-change/suspended-tab safety check.
+    releaseTimer = setTimeout(() => refreshDay(), Math.max(1, Math.min(next - now, 60000)));
   }
   function loadToday(today, newDay = false) {
     stopCelebration();
@@ -176,12 +176,12 @@
   $('hint').addEventListener('click',hint);
   $('teacher').addEventListener('click',()=>{
     if(refreshDay(true)||state.solved.length===4)return;
-    openDialog('TEACHER TOOLS','Show a connection?',`This reveals today’s ${mode} answers only. Revealing all finishes this mode for today; the next board arrives at midnight in Perth.`,[
+    openDialog('TEACHER TOOLS','Show a connection?',`This reveals today’s ${mode} answers only. Revealing all finishes this mode for today; the next board arrives at 8:30 am in Perth.`,[
       {label:'Keep playing',run:()=>dialog.close()},{label:'Reveal one group',run:()=>reveal(false)},{label:'Reveal all',primary:true,run:()=>reveal(true)}
     ]);
   });
   function reveal(all) {if(refreshDay(true)||state.solved.length===4)return;stopCelebration();E.reveal(state,all);hintIndex=null;hintLevel=0;dialog.close();render();if(!save())return;if(state.solved.length===4)finish();else say('One connection revealed. Can you find the others?','hint');}
-  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','One shared challenge each day',`Everyone gets the same puzzle in each mode for the Perth date. Words and Maths have separate progress, so each game keeps its own daily board. Both change at midnight, even if this page stays open. This ${mode} bank has ${puzzles.length} puzzles and repeats after ${puzzles.length} days. Maths has 50 boards: 800 calculations in 200 groups of four. Progress is saved only in this browser, with no names or accounts.${storageOK?'':' This browser is currently blocking progress saving.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
+  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','One shared challenge each day',`Everyone gets the same puzzle in each mode for the Perth puzzle day. Words and Maths have separate progress, so each game keeps its own daily board. Both change at 8:30 am Perth time, even if this page stays open. This ${mode} bank has ${puzzles.length} puzzles and repeats after ${puzzles.length} days. Maths has 50 boards: 800 calculations in 200 groups of four. Progress is saved only in this browser, with no names or accounts.${storageOK?'':' This browser is currently blocking progress saving.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
   $('dialog-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{const r=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom))dialog.close();});
   document.addEventListener('keydown',event=>{if(refreshDay(true)||dialog.open)return;if(event.key==='Escape'&&state.selected.length)clearSelection();if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();check();}});

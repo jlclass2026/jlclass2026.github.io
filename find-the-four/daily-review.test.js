@@ -28,7 +28,7 @@ function storage(initial = {}, blocked = false) {
   };
 }
 
-function makeBrowser({now = '2026-10-23T02:00:00Z', saved = storage(), search = '', storageGetterThrows = false} = {}) {
+function makeBrowser({now = '2026-10-23T10:30:00Z', saved = storage(), search = '', storageGetterThrows = false} = {}) {
   let clock = Date.parse(now), focused = null, nextTimerId = 0;
   const timers = new Map();
   const decode = text => text.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
@@ -118,40 +118,40 @@ function makeBrowser({now = '2026-10-23T02:00:00Z', saved = storage(), search = 
   };
 }
 
-test('Perth anchor changes exactly at 16:00 UTC, independently of local dates', () => {
+test('Perth anchor changes exactly at 00:30 UTC, independently of local dates', () => {
   for (const [instant, date, index] of [
-    ['2026-10-22T15:59:59.999Z', '2026-10-22', 19],
-    ['2026-10-22T16:00:00.000Z', '2026-10-23', 0],
-    ['2026-10-23T15:59:59.999Z', '2026-10-23', 0],
-    ['2026-10-23T16:00:00.000Z', '2026-10-24', 1],
-    ['2026-10-31T15:59:59.999Z', '2026-10-31', 8],
-    ['2026-10-31T16:00:00.000Z', '2026-11-01', 9],
-    ['2026-12-31T15:59:59.999Z', '2026-12-31', 9],
-    ['2026-12-31T16:00:00.000Z', '2027-01-01', 10],
+    ['2026-10-23T00:29:59.999Z', '2026-10-22', 19],
+    ['2026-10-23T00:30:00.000Z', '2026-10-23', 0],
+    ['2026-10-24T00:29:59.999Z', '2026-10-23', 0],
+    ['2026-10-24T00:30:00.000Z', '2026-10-24', 1],
+    ['2026-11-01T00:29:59.999Z', '2026-10-31', 8],
+    ['2026-11-01T00:30:00.000Z', '2026-11-01', 9],
+    ['2027-01-01T00:29:59.999Z', '2026-12-31', 9],
+    ['2027-01-01T00:30:00.000Z', '2027-01-01', 10],
   ]) {
     const result = D.describe(Date.parse(instant), 20);
     assert.equal(result.date, date, instant); assert.equal(result.index, index, instant);
-    assert.equal(new Date(result.nextMidnight).toISOString().slice(11), '16:00:00.000Z');
-    assert.ok(result.nextMidnight > Date.parse(instant));
-    assert.ok(result.nextMidnight - Date.parse(instant) <= 86400000);
+    assert.equal(new Date(result.nextRelease).toISOString().slice(11), '00:30:00.000Z');
+    assert.ok(result.nextRelease > Date.parse(instant));
+    assert.ok(result.nextRelease - Date.parse(instant) <= 86400000);
   }
 });
 
 test('expanded word cycle is 45 days, including negative offsets and leap-day transitions', () => {
   assert.equal(puzzles.length, 45, 'The original 20 boards plus 25 new boards form a 45-day cycle');
-  const anchor = Date.parse('2026-10-22T16:00:00Z');
+  const anchor = Date.parse('2026-10-23T00:30:00Z');
   for (let days = -100; days < 500; days++) assert.equal(D.describe(anchor + days * 86400000, puzzles.length).index, ((days % 45) + 45) % 45);
-  for (const [instant, date] of [['2028-02-28T16:00:00Z','2028-02-29'], ['2028-02-29T16:00:00Z','2028-03-01']]) assert.equal(D.describe(Date.parse(instant), 20).date, date);
+  for (const [instant, date] of [['2028-02-29T00:30:00Z','2028-02-29'], ['2028-03-01T00:30:00Z','2028-03-01']]) assert.equal(D.describe(Date.parse(instant), 20).date, date);
 });
 
 test('assignment is identical in UTC, Perth, Los Angeles, Kathmandu and Auckland', () => {
-  const script = `const d=require('./daily');process.stdout.write(JSON.stringify(['2026-10-23T15:59:59Z','2026-10-23T16:00:00Z','2026-11-01T16:00:00Z','2027-01-01T16:00:00Z'].map(x=>d.describe(Date.parse(x),20))))`;
+  const script = `const d=require('./daily');process.stdout.write(JSON.stringify(['2026-10-24T00:29:59Z','2026-10-24T00:30:00Z','2026-11-02T00:30:00Z','2027-01-02T00:30:00Z'].map(x=>d.describe(Date.parse(x),20))))`;
   const values = ['UTC','Australia/Perth','America/Los_Angeles','Asia/Kathmandu','Pacific/Auckland'].map(TZ => execFileSync(process.execPath, ['-e', script], {cwd: __dirname, env: {...process.env, TZ}, encoding: 'utf8'}));
   assert.ok(values.every(value => value === values[0]));
 });
 
 test('save identity isolates dates, IDs, puzzle content, and format versions', () => {
-  const today = D.describe(Date.parse('2026-10-23T02:00:00Z'), 20), tomorrow = D.describe(Date.parse('2026-10-24T02:00:00Z'), 20);
+  const today = D.describe(Date.parse('2026-10-23T10:30:00Z'), 20), tomorrow = D.describe(Date.parse('2026-10-24T10:30:00Z'), 20);
   const state = E.create(puzzles[0]), raw = D.encode(today, state), data = JSON.parse(raw);
   const revised = structuredClone(puzzles[0]); revised.groups[0].words[0] += ' changed';
   const renamed = {...puzzles[0], id: puzzles[0].id + '-new'};
@@ -166,7 +166,7 @@ test('save identity isolates dates, IDs, puzzle content, and format versions', (
 });
 
 test('state round trip retains selection, order, attempts, guesses, found groups and revealed groups', () => {
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'), 20), state = E.create(puzzles[0]);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'), 20), state = E.create(puzzles[0]);
   state.selected = [...puzzles[0].groups[0].words.slice(0,3), puzzles[0].groups[1].words[0]]; E.submit(state);
   state.selected = [...puzzles[0].groups[1].words]; E.submit(state); E.reveal(state);
   state.selected = state.order.slice(0, 2);
@@ -178,7 +178,7 @@ test('state round trip retains selection, order, attempts, guesses, found groups
 });
 
 test('malformed, oversized and structurally invalid saved progress fails closed', () => {
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'), 20), state = E.create(puzzles[0]), valid = JSON.parse(D.encode(day, state));
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'), 20), state = E.create(puzzles[0]), valid = JSON.parse(D.encode(day, state));
   for (const raw of [undefined, null, '{}', 'null', '[]', 'bad json', '{', ' '.repeat(200001)]) assert.equal(D.decode(raw, day, puzzles[0]), null);
   const mutations = [
     {order: valid.order.slice(1)}, {order: [...valid.order.slice(1), valid.order[1]]}, {order: [...valid.order.slice(1), 'alien word']},
@@ -191,14 +191,14 @@ test('malformed, oversized and structurally invalid saved progress fails closed'
 });
 
 test('blocked or corrupt storage does not throw and reports unavailability accurately', () => {
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'), 20), state = E.create(puzzles[0]);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'), 20), state = E.create(puzzles[0]);
   assert.deepEqual(D.read(storage({}, true), day, puzzles[0]), {state: null, available: false});
   assert.equal(D.write(storage({}, true), day, state), false);
   assert.deepEqual(D.read(storage({[D.key(day, puzzles[0])]: 'broken'}), day, puzzles[0]), {state: null, available: true});
 });
 
 test('impossible found groups or unsolved correct guesses are rejected on restore', () => {
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'), 20), state = E.create(puzzles[0]);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'), 20), state = E.create(puzzles[0]);
   E.reveal(state); const fakeFound = JSON.parse(D.encode(day,state)); fakeFound.solved[0].revealed = false;
   assert.equal(D.decode(JSON.stringify(fakeFound),day,puzzles[0]),null,'Found groups need their recorded correct guess');
   const fakeGuess = JSON.parse(D.encode(day,E.create(puzzles[0])));
@@ -207,7 +207,7 @@ test('impossible found groups or unsolved correct guesses are rejected on restor
 });
 
 test('invalid completion snapshot cannot hide valid progress; a valid completion survives a partial write failure', () => {
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'),20), state = E.create(puzzles[0]), key = D.key(day,puzzles[0]);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'),20), state = E.create(puzzles[0]), key = D.key(day,puzzles[0]);
   E.reveal(state);
   const saved = storage({[key]: D.encode(day,state), [key+':complete']: '{broken'});
   assert.deepEqual(D.read(saved,day,puzzles[0]).state,state);
@@ -281,19 +281,19 @@ test('blocked read/write and even localStorage property access leave the game pl
 });
 
 test('corrupt browser save falls back to a fresh board without crashing', () => {
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'), puzzles.length);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'), puzzles.length);
   const browser = makeBrowser({saved: storage({[D.key(day,puzzles[0])]: '{not JSON'})});
   assert.equal(browser.tiles().length, 16); assert.equal(browser.solved().length, 0);
   assert.equal(browser.element('selection-count').textContent, '0 / 4 selected');
 });
 
-test('the next puzzle is not loaded early and timer rolls it over at exactly midnight', () => {
-  const browser = makeBrowser({now: '2026-10-23T15:59:59.000Z'});
+test('the next puzzle is not loaded early and timer rolls it over at exactly 8:30 am Perth', () => {
+  const browser = makeBrowser({now: '2026-10-24T00:29:59.000Z'});
   browser.solve(0); browser.element('hint').click();
-  assert.ok([...browser.timers.values()].some(timer => timer.at === Date.parse('2026-10-23T16:00:00.000Z')), 'There must be a timer for exact Perth midnight');
-  browser.setNow('2026-10-23T15:59:59.999Z'); browser.runDueTimers();
+  assert.ok([...browser.timers.values()].some(timer => timer.at === Date.parse('2026-10-24T00:30:00.000Z')), 'There must be a timer for exact Perth 8:30 am Perth');
+  browser.setNow('2026-10-24T00:29:59.999Z'); browser.runDueTimers();
   assert.equal(browser.element('daily-date').dateTime, '2026-10-23'); assert.equal(browser.solved().length, 1);
-  browser.setNow('2026-10-23T16:00:00.000Z'); browser.runDueTimers();
+  browser.setNow('2026-10-24T00:30:00.000Z'); browser.runDueTimers();
   assert.equal(browser.element('daily-date').dateTime, '2026-10-24'); assert.equal(browser.solved().length, 0);
   assert.equal(browser.element('help-dialog').open, false);
   assert.deepEqual(browser.tiles().map(tile => tile.dataset.word).sort(), puzzles[1].groups.flatMap(group => group.words).sort());
@@ -301,18 +301,18 @@ test('the next puzzle is not loaded early and timer rolls it over at exactly mid
 
 test('focus, pageshow and visibility recovery catch a sleeping tab without early leakage', () => {
   for (const trigger of [browser => browser.window.dispatch('focus'), browser => browser.window.dispatch('pageshow'), browser => browser.document.dispatch('visibilitychange')]) {
-    const browser = makeBrowser({now: '2026-10-23T15:59:59.000Z'});
+    const browser = makeBrowser({now: '2026-10-24T00:29:59.000Z'});
     browser.reveal(true); trigger(browser); assert.equal(browser.solved().length, 4); assert.equal(browser.element('daily-date').dateTime,'2026-10-23');
-    browser.setNow('2026-10-25T16:00:00.000Z'); trigger(browser);
+    browser.setNow('2026-10-26T00:30:00.000Z'); trigger(browser);
     assert.equal(browser.element('daily-date').dateTime,'2026-10-26'); assert.equal(browser.solved().length, 0);
     assert.deepEqual(browser.tiles().map(tile => tile.dataset.word).sort(), puzzles[3].groups.flatMap(group => group.words).sort());
   }
 });
 
-test('a queued interaction just after midnight changes day instead of mutating either puzzle', () => {
-  const browser = makeBrowser({now: '2026-10-23T15:59:59.000Z'});
+test('a queued interaction just after 8:30 am Perth changes day instead of mutating either puzzle', () => {
+  const browser = makeBrowser({now: '2026-10-24T00:29:59.000Z'});
   browser.select(puzzles[0].groups[0].words);
-  browser.setNow('2026-10-23T16:00:00.000Z'); browser.element('check').click();
+  browser.setNow('2026-10-24T00:30:00.000Z'); browser.element('check').click();
   assert.equal(browser.element('daily-date').dateTime, '2026-10-24'); assert.equal(browser.solved().length, 0);
   assert.equal(browser.tiles().filter(tile => tile.getAttribute('aria-pressed') === 'true').length, 0);
   assert.equal(browser.element('selection-count').textContent, '0 / 4 selected');
@@ -320,7 +320,7 @@ test('a queued interaction just after midnight changes day instead of mutating e
 
 test('same puzzle after a full cycle never restores a previous date’s completion', () => {
   const saved = storage(), browser = makeBrowser({saved}); browser.reveal(true);
-  const later = makeBrowser({saved, now: new Date(Date.parse('2026-10-23T02:00:00Z') + puzzles.length * 86400000).toISOString()});
+  const later = makeBrowser({saved, now: new Date(Date.parse('2026-10-23T10:30:00Z') + puzzles.length * 86400000).toISOString()});
   assert.equal(later.solved().length, 0); assert.equal(later.tiles().length,16);
   assert.deepEqual(later.tiles().map(tile => tile.dataset.word).sort(), puzzles[0].groups.flatMap(group => group.words).sort());
 });
@@ -330,21 +330,21 @@ test('completion in another tab wins over a stale unfinished board and is loaded
   one.reveal(true); two.element('shuffle').click();
   assert.equal(two.solved().length,4); assert.equal(two.element('reset').disabled,true);
   const three = makeBrowser({saved}); assert.equal(three.solved().length,4);
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'),puzzles.length);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'),puzzles.length);
   saved.setItem(D.key(day,puzzles[0]), D.encode(day,E.create(puzzles[0])));
   const four = makeBrowser({saved}); assert.equal(four.solved().length,4,'An older incomplete snapshot must not override the completion record');
 });
 
 test('storage events update same-day progress and completion without loading another day', () => {
   const saved = storage(), one = makeBrowser({saved}), two = makeBrowser({saved});
-  const day = D.describe(Date.parse('2026-10-23T02:00:00Z'),puzzles.length), key = D.key(day,puzzles[0]);
+  const day = D.describe(Date.parse('2026-10-23T10:30:00Z'),puzzles.length), key = D.key(day,puzzles[0]);
   one.solve(0); two.window.dispatch('storage',{key}); assert.equal(two.solved().length,1);
   one.reveal(true); two.window.dispatch('storage',{key:key+':complete'}); assert.equal(two.solved().length,4);
   two.window.dispatch('storage',{key:key.replace(day.date,'2026-10-24')}); assert.equal(two.element('daily-date').dateTime,'2026-10-23');
 });
 
 test('every bank day initializes, solves and restores exactly its assigned puzzle', () => {
-  const anchor = Date.parse('2026-10-23T02:00:00Z');
+  const anchor = Date.parse('2026-10-23T10:30:00Z');
   for (let index = 0; index < puzzles.length; index++) {
     const now = new Date(anchor + index * 86400000).toISOString(), saved = storage(), browser = makeBrowser({now,saved}), puzzle = puzzles[index];
     assert.deepEqual(browser.tiles().map(tile => tile.dataset.word).sort(),puzzle.groups.flatMap(group=>group.words).sort(),puzzle.id);
@@ -356,10 +356,10 @@ test('every bank day initializes, solves and restores exactly its assigned puzzl
 });
 
 test('future-day progress already in storage never opens early', () => {
-  const day = D.describe(Date.parse('2026-10-24T02:00:00Z'),puzzles.length), state = E.create(puzzles[1]);
+  const day = D.describe(Date.parse('2026-10-24T10:30:00Z'),puzzles.length), state = E.create(puzzles[1]);
   E.reveal(state,true);
   const saved = storage(); D.write(saved,day,state);
-  const browser = makeBrowser({saved,now:'2026-10-23T15:59:59.999Z'});
+  const browser = makeBrowser({saved,now:'2026-10-24T00:29:59.999Z'});
   assert.equal(browser.element('daily-date').dateTime,'2026-10-23'); assert.equal(browser.solved().length,0);
   assert.deepEqual(browser.tiles().map(tile=>tile.dataset.word).sort(),puzzles[0].groups.flatMap(group=>group.words).sort());
 });
@@ -398,7 +398,7 @@ test('mode toggle is accessible and existing word progress remains unchanged', (
 });
 
 test('all 50 maths days initialize, solve, reload and leave the word board playable', () => {
-  const anchor = Date.parse('2026-10-23T02:00:00Z');
+  const anchor = Date.parse('2026-10-23T10:30:00Z');
   for (let index = 0; index < maths.length; index++) {
     const now = new Date(anchor + index * 86400000).toISOString(), saved = storage();
     const browser = makeBrowser({now,saved}), puzzle = maths[index];
@@ -462,10 +462,10 @@ test('invalid saved mode falls back to Words without navigation or errors', () =
   }
 });
 
-test('maths midnight rollover and inactive word mode both use the new Perth date', () => {
-  const browser=makeBrowser({now:'2026-10-23T15:59:59.999Z'});
+test('maths 8:30 am Perth rollover and inactive word mode both use the new Perth date', () => {
+  const browser=makeBrowser({now:'2026-10-24T00:29:59.999Z'});
   browser.solve(0); browser.element('mode-maths').click(); browser.solve(0,maths[0]);
-  browser.setNow('2026-10-23T16:00:00Z');browser.runDueTimers();
+  browser.setNow('2026-10-24T00:30:00Z');browser.runDueTimers();
   assert.equal(browser.element('daily-date').dateTime,'2026-10-24');
   assert.equal(browser.solved().length,0);
   assert.deepEqual(browser.tiles().map(t=>t.dataset.word).sort(),maths[1].groups.flatMap(g=>g.words).sort());
@@ -492,7 +492,7 @@ test('cross-tab maths completion wins even while another mode is visible', () =>
 
 test('maths bank cycles after 50 days and never loads previous-date completion', () => {
   const saved=storage(),first=makeBrowser({saved});first.element('mode-maths').click();first.reveal(true);
-  const now=new Date(Date.parse('2026-10-23T02:00:00Z')+50*86400000).toISOString();
+  const now=new Date(Date.parse('2026-10-23T10:30:00Z')+50*86400000).toISOString();
   const later=makeBrowser({now,saved});assert.equal(later.solved().length,0);
   assert.deepEqual(later.tiles().map(t=>t.dataset.word).sort(),maths[0].groups.flatMap(g=>g.words).sort());
 });
@@ -527,8 +527,8 @@ test('only newly correct groups trigger a two-second cameo, with four different 
   }
   assert.equal(new Set(bosses).size,4);
   assert.equal([...browser.timers.values()].filter(t=>t.delay===2000).length,1,'Rapid solutions replace the previous effect timer');
-  browser.setNow('2026-10-23T02:00:01.999Z');browser.runDueTimers();assert.equal(popup.hidden,false);
-  browser.setNow('2026-10-23T02:00:02.000Z');browser.runDueTimers();assert.equal(popup.hidden,true);
+  browser.setNow('2026-10-23T10:30:01.999Z');browser.runDueTimers();assert.equal(popup.hidden,false);
+  browser.setNow('2026-10-23T10:30:02.000Z');browser.runDueTimers();assert.equal(popup.hidden,true);
   browser.element('check').click();assert.equal(popup.hidden,true);
 });
 

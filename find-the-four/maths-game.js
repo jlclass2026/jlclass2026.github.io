@@ -8,7 +8,7 @@
   const MODE_KEY = 'find-the-four.mode.v1', sessionProgress = new Map(), unsavedProgress = new Set();
   let mode = 'words', puzzles;
   const $ = id => document.getElementById(id);
-  let day, state, hintIndex = null, hintLevel = 0, midnightTimer, storage, storageOK = true;
+  let day, state, hintIndex = null, hintLevel = 0, releaseTimer, storage, storageOK = true;
   const dialog = $('help-dialog'), celebration = $('boss-celebration');
   const bossQueue = E.shuffle([0,1,2,3]);
   let celebrationTimer;
@@ -65,10 +65,10 @@
     return true;
   }
   function schedule() {
-    clearTimeout(midnightTimer);
-    const now = Date.now(), next = D.describe(now, puzzles.length).nextMidnight;
-    // Exact midnight timer, with a short clock-change/suspended-tab safety check.
-    midnightTimer = setTimeout(() => refreshDay(), Math.max(1, Math.min(next - now, 60000)));
+    clearTimeout(releaseTimer);
+    const now = Date.now(), next = D.describe(now, puzzles.length).nextRelease;
+    // Exact 8:30 am Perth release timer, with a short clock-change/suspended-tab safety check.
+    releaseTimer = setTimeout(() => refreshDay(), Math.max(1, Math.min(next - now, 60000)));
   }
   function loadToday(today, newDay = false) {
     stopCelebration();
@@ -192,7 +192,7 @@
     ]);
   });
   function reveal(all) {if(refreshDay(true)||state.solved.length===4)return;stopCelebration();E.reveal(state,all);hintIndex=null;hintLevel=0;dialog.close();render();if(!save())return;if(state.solved.length===4)finish();else say('One connection revealed. Can you find the others?','hint');}
-  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','A daily challenge at each level',`Easy, Original and Hard each have 50 daily boards. Each level saves its own progress. Easy uses numbers up to 50 with no division. Hard includes missing numbers and three-digit calculations. Match the answers, including the missing number on a blank tile. No names or accounts.${storageOK?'':' Progress cannot be saved in this browser.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
+  $('about-daily').addEventListener('click',()=>{if(refreshDay(true))return;openDialog('DAILY PLAY','A daily challenge at each level',`Easy, Original and Hard each have 50 daily boards, released at 8:30 am Perth time. Each level saves its own progress. Easy uses numbers up to 50 with no division. Hard includes missing numbers and three-digit calculations. Match the answers, including the missing number on a blank tile. No names or accounts.${storageOK?'':' Progress cannot be saved in this browser.'}`,[{label:'Back to the board',primary:true,run:()=>dialog.close()}]);});
   document.querySelectorAll('[data-level]').forEach(button=>button.addEventListener('click',()=>{
     const next=button.dataset.level;if(next===level)return;
     refreshDay(true);save();level=next;puzzles=levels[level];

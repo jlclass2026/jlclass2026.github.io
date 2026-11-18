@@ -1,18 +1,18 @@
-/* Perth calendar-day assignment and local-only progress. No personal data. */
+/* Perth 8:30 am puzzle-day assignment and local-only progress. No personal data. */
 (function(root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(require('./five-engine'));
   else root.FiveDaily = factory(root.FiveEngine);
 })(typeof globalThis !== 'undefined' ? globalThis : this, function(E) {
   'use strict';
-  const DAY = 86400000, OFFSET = 8 * 3600000;
+  const DAY = 86400000, OFFSET = 8 * 3600000, RELEASE = 8.5 * 3600000;
   const ANCHOR = Date.UTC(2026, 9, 23) / DAY;
   const VERSION = 1, PREFIX = 'find-the-five.daily.v1:';
   function describe(now, count) {
     const ms = Number(now);
     if (!Number.isFinite(ms) || !Number.isInteger(count) || count < 1) throw new Error('Invalid daily puzzle date or bank.');
     // Perth is UTC+8 year-round. UTC arithmetic avoids the device's local zone/DST.
-    const day = Math.floor((ms + OFFSET) / DAY);
-    return {date:new Date(day * DAY).toISOString().slice(0,10), index:((day - ANCHOR) % count + count) % count, nextMidnight:(day + 1) * DAY - OFFSET};
+    const day = Math.floor((ms + OFFSET - RELEASE) / DAY);
+    return {date:new Date(day * DAY).toISOString().slice(0,10), index:((day - ANCHOR) % count + count) % count, nextRelease:(day + 1) * DAY - OFFSET + RELEASE};
   }
   function fingerprint(puzzle) {
     const text = JSON.stringify([puzzle.groups.map(g => [g.label, g.words]),puzzle.decoys]);
