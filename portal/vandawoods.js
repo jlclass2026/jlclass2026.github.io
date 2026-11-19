@@ -107,7 +107,7 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'patch-dialog';
   dialog.setAttribute('aria-labelledby', 'patch-title');
-  dialog.innerHTML = '<h2 id="patch-title">Update</h2><p>Choose your file, then enter the teacher PIN.</p><label for="patch-file">File</label><select id="patch-file"><optgroup label="Dark Side of the Moon"><option value="lunar-wallpaper">The Lunar Fortress (desktop background)</option><option value="moonquake-portrait">Moonquake (portrait)</option></optgroup><optgroup label="Previous downloads"><option value="dream-nightmare">Dream &amp; Nightmare motion patch</option><option value="market">Squishy Market offers — 18 November</option><option value="cold-task">Persuasive cold task: holiday destination</option><option value="health">Year 3 Health test</option></optgroup></select><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download</button></div>';
+  dialog.innerHTML = '<h2 id="patch-title">Update</h2><p>Choose your file, then enter the teacher PIN.</p><label for="patch-file">File</label><select id="patch-file"><optgroup label="Dark Side of the Moon"><option value="lunar-wallpaper">The Lunar Fortress (desktop background)</option><option value="moonquake-portrait">Moonquake (portrait)</option><option value="moonquake-video">Dark Side of the Moon (video)</option></optgroup><optgroup label="Previous downloads"><option value="dream-nightmare">Dream &amp; Nightmare motion patch</option><option value="market">Squishy Market offers — 18 November</option><option value="cold-task">Persuasive cold task: holiday destination</option><option value="health">Year 3 Health test</option></optgroup></select><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download</button></div>';
   document.body.append(dialog);
   const input = dialog.querySelector('input');
   const status = dialog.querySelector('#patch-status');
@@ -128,6 +128,7 @@
     const lunarAssets = {
       'lunar-wallpaper': ['/patches/lunar-fortress-20261119.jpg', 'Moonquake - The Lunar Fortress.jpg'],
       'moonquake-portrait': ['/patches/moonquake-20261119.jpg', 'Moonquake - Portrait.jpg'],
+      'moonquake-video': ['/patches/dark-side-of-the-moon-20261119.mp4', 'Dark Side of the Moon.mp4'],
     };
     if (Object.hasOwn(lunarAssets, selection)) {
       const [href, filename] = lunarAssets[selection];
