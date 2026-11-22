@@ -80,8 +80,13 @@ one('#gate-form').addEventListener('submit',async e=>{
  unlock();
 });
 function unlock(){gate.hidden=true;play.hidden=false;choose(cases[0]);one('#case').focus();}
-one('#case').innerHTML=cases.map(c=>'<option value="'+c.id+'">'+c.title+'</option>').join('');
-one('#case').addEventListener('change',e=>choose(cases.find(c=>c.id===e.target.value)));
+one('#case').innerHTML=cases.map(c=>'<option value="'+c.id+'">'+c.title+'</option>').join('')+'<option value="stolen-minute">The Stolen Minute · Mystery</option>';
+one('#case').addEventListener('change',e=>{
+ if(e.target.value==='stolen-minute'){location.assign('stolen-minute/');return;}
+ const selected=cases.find(c=>c.id===e.target.value);
+ if(selected)choose(selected);
+});
+window.addEventListener('pageshow',()=>{if(mission&&one('#case').value==='stolen-minute')one('#case').value=mission.id;});
 function choose(c){
  mission=c; tab='map'; pick={}; attempted=false; saveClock=c.id==='midnight'?1410:720; year=c.year; month=c.month;
  one('#case').value=c.id;one('#case-code').textContent=c.file;one('#case-title').textContent=c.title;one('#case-brief').textContent=c.brief;
