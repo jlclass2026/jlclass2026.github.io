@@ -2,53 +2,68 @@
 'use strict';
 const one=(s,r=document)=>r.querySelector(s), many=(s,r=document)=>[...r.querySelectorAll(s)];
 const planets=[
- ['aurora','Aurora',15,30,'#e3b9ff','#784cc4'],['comet','Comet Dock',28,76,'#fff6b8','#af7321'],
- ['beacon','Beacon Ring',49,42,'#a0fae6','#288691'],['sable','Sable Moon',73,23,'#d5ecff','#667cc6'],
- ['ember','Ember Port',85,71,'#ffd991','#ca5c58']
+ ['aurora','Aurora',17,27,'#e3b9ff','#784cc4','Tall antenna tower with three prongs'],
+ ['comet','Comet Dock',18,72,'#fff6b8','#af7321','Long rectangular docking gantry with a comet trail'],
+ ['beacon','Beacon Ring',49,30,'#a0fae6','#288691','Hollow circular structure with one open centre'],
+ ['sable','Sable Moon',82,27,'#d5ecff','#667cc6','Dark, rocky crescent'],
+ ['ember','Ember Port',81,72,'#ffd991','#ca5c58','Six-sided orange refinery'],
+ ['prism','Prism Spire',50,75,'#b9dcff','#8470e1','Tall pointed crystal with flat facets']
 ];
 const crew=[
  ['mira','Captain Mira','Pilot','Steers the rescue ship','✦'],
  ['jax','Engineer Jax','Engineer','Fixes radios and engines','⚙'],
  ['tali','Scout Tali','Mapper','Draws star maps','✧'],
- ['bo','Medic Bo','Medic','Looks after injured crew','✚']
+ ['bo','Medic Bo','Medic','Looks after injured crew','✚'],
+ ['nix','Navigator Nix','Navigator','They chart safe routes','✥'],
+ ['vela','Ranger Vela','Ranger','She scouts the outer stations','✶']
 ];
 const cases=[
- {id:'sunshift',file:'CASE 01 / DAY SHIFT',title:'The silent beacon',brief:'A rescue transmission went out during a test. Work out its time and date, then use the calendar evidence to tell two listening receivers apart.',month:10,year:2026,
- clues:['The test started at 2:00 pm. The rescue signal came 35 minutes later. Set the mission clock to the signal time.','The receiver schedules overlap. Find every station listening at your signal time. Don’t choose between them yet.','The test was two days after Thursday 12 November. Work out the date, then tap that day on the calendar. Match your signal time to the evidence it opens.','Find the crew member whose duty record matches the station, date and time.'],
- receivers:[['aurora',840,855],['comet',850,880],['beacon',870,895],['sable',880,905],['ember',895,920]],
+ {id:'sunshift',file:'CASE 01 / DAY SHIFT',title:'The silent beacon',brief:'A rescue transmission went out during a test. Find its time and date, then use the shape in the calendar evidence to tell the listening stations apart.',month:10,year:2026,
+ clues:['The test started at 2:00 pm. The rescue signal came 35 minutes later. Set the mission clock to the signal time.','The receiver schedules overlap. Find every station listening at your signal time. Don’t choose between them yet.','The test was two days after Thursday 12 November. Work out the date and tap it on the calendar. Find the entry at your signal time.','Match the shape in that entry to a listening station. Then find the crew member on duty at that station, on that date and at that time.'],
+ receivers:[['aurora',830,860],['comet',845,880],['beacon',870,895],['sable',885,905],['ember',895,920],['prism',865,900]],
  logs:[
-  ['2026-11-12',875,'The signal passed through the cargo dock.'],
-  ['2026-11-13',875,'The signal was picked up beside the docking clamps.'],
-  ['2026-11-14',855,'The signal passed through the cargo dock.'],
-  ['2026-11-14',875,'The signal came from the ring-shaped station.'],
-  ['2026-11-15',875,'The ring-shaped station logged a short pulse.']
+  ['2026-11-12',850,'A long rectangular frame crossed the camera view.','comet'],
+  ['2026-11-12',875,'The camera saw one big circle with empty space in the middle.','beacon'],
+  ['2026-11-13',850,'Three antenna prongs stood out above a narrow tower.','aurora'],
+  ['2026-11-13',875,'A long rectangular frame was visible against a bright tail.','comet'],
+  ['2026-11-14',850,'The picture showed three prongs rising from a tower.','aurora'],
+  ['2026-11-14',875,'Light from a star was visible right through the centre of a round structure.','beacon'],
+  ['2026-11-15',850,'The signal came from a long, straight docking frame.','comet'],
+  ['2026-11-15',875,'A tall point with flat, shining faces filled the view.','prism']
  ],
  shifts:[
-  ['mira','comet','2026-11-14',875],['mira','beacon','2026-11-15',875],
-  ['jax','beacon','2026-11-14',875],['jax','comet','2026-11-13',855],
-  ['tali','comet','2026-11-13',875],['tali','aurora','2026-11-12',845],
-  ['bo','comet','2026-11-12',875],['bo','beacon','2026-11-14',885]
+  ['mira','comet','2026-11-12',850],['mira','comet','2026-11-14',875],
+  ['jax','beacon','2026-11-14',875],['jax','comet','2026-11-15',850],
+  ['tali','comet','2026-11-13',875],['tali','sable','2026-11-13',900],
+  ['bo','beacon','2026-11-12',875],['bo','aurora','2026-11-14',850],
+  ['nix','prism','2026-11-15',875],['nix','ember','2026-11-15',910],
+  ['vela','aurora','2026-11-13',850],['vela','prism','2026-11-14',875]
  ],
  answer:{map:'beacon',clock:875,calendar:'2026-11-14',roster:'jax'},
- explain:'2:00 pm plus 35 minutes is 2:35 pm. Both Comet Dock and Beacon Ring were listening. Two days after Thursday 12 November is Saturday 14 November. The 2:35 pm entry on that day points to the ring-shaped station, Beacon Ring. Engineer Jax was on duty there at that time.'},
- {id:'midnight',file:'CASE 02 / MIDNIGHT SHIFT',title:'A message across midnight',brief:'The rescue signal was sent when a countdown ended. Use the clock and calendar to follow it across midnight, even though there are similar records on nearby days.',month:10,year:2026,
- clues:['The countdown began at 11:45 pm and lasted 30 minutes. Find when the rescue signal went out.','More than one receiver may be listening at that time. Check the schedules on both sides of midnight.','The countdown started on Monday 30 November. On which date did it finish? Tap the finish date and read the entry at your signal time.','Once you have the time, date and station, find who was on duty in the crew roster.'],
- receivers:[['aurora',1395,1425],['comet',1425,8],['beacon',0,20],['sable',10,25],['ember',25,40]],
+ explain:'2:00 pm plus 35 minutes is 2:35 pm. Comet Dock, Beacon Ring and Prism Spire were all listening. Two days after Thursday 12 November is Saturday 14 November. Only the 2:35 pm clue on that date describes an open centre in a round structure, so it points to Beacon Ring. Engineer Jax was on duty there then.'},
+ {id:'midnight',file:'CASE 02 / MIDNIGHT SHIFT',title:'A message across midnight',brief:'The rescue signal was sent when a countdown ended. Follow it across midnight and match the recorded shape to a listening station.',month:10,year:2026,
+ clues:['The countdown began at 11:45 pm and lasted 30 minutes. Find when the rescue signal went out.','More than one receiver was listening then. The listening schedules can cross midnight.','The countdown started on Monday 30 November. On which date did it finish? Tap the finish date and read the entry at your signal time.','The shape in the entry identifies a listening station. Match that station, date and time to the crew roster.'],
+ receivers:[['aurora',1395,1425],['comet',1425,8],['beacon',0,20],['sable',10,25],['ember',25,40],['prism',12,35]],
  logs:[
-  ['2026-11-29',15,'The pulse was picked up by the receiver in the ring-shaped station.'],
-  ['2026-11-30',15,'The pulse was heard at the moon outpost.'],
-  ['2026-12-01',5,'The pulse was picked up by the receiver in the ring-shaped station.'],
-  ['2026-12-01',15,'A relay on the moon outpost passed on the signal.'],
-  ['2026-12-02',15,'The pulse was picked up by the receiver in the ring-shaped station.']
+  ['2026-11-29',5,'Stars were visible through the open middle of a circular structure.','beacon'],
+  ['2026-11-29',15,'A slim crystal rose to a point, with light glinting off its flat sides.','prism'],
+  ['2026-11-30',5,'A rectangular frame stretched across a bright tail.','comet'],
+  ['2026-11-30',15,'The receiver was on a sliver of dark rock, curved on one side.','sable'],
+  ['2026-12-01',5,'A large circular structure was open right through the middle.','beacon'],
+  ['2026-12-01',15,'The camera recorded a dark, rocky sliver with two curved tips.','sable'],
+  ['2026-12-02',5,'The long rectangular frame reached out in front of a bright tail.','comet'],
+  ['2026-12-02',15,'A star was visible through a single open circle.','beacon']
  ],
  shifts:[
-  ['mira','sable','2026-11-30',15],['mira','comet','2026-12-01',5],
-  ['jax','beacon','2026-11-29',15],['jax','sable','2026-12-01',20],
-  ['tali','sable','2026-12-01',15],['tali','ember','2026-12-02',35],
-  ['bo','beacon','2026-12-01',15],['bo','beacon','2026-12-02',15]
+  ['mira','sable','2026-11-30',15],['mira','ember','2026-12-02',35],
+  ['jax','prism','2026-11-29',15],['jax','sable','2026-12-01',20],
+  ['tali','sable','2026-12-01',15],['tali','comet','2026-12-02',5],
+  ['bo','comet','2026-11-30',5],['bo','beacon','2026-12-02',15],
+  ['nix','beacon','2026-11-29',5],['nix','prism','2026-12-01',15],
+  ['vela','beacon','2026-12-01',5],['vela','beacon','2026-12-01',15]
  ],
  answer:{map:'sable',clock:15,calendar:'2026-12-01',roster:'tali'},
- explain:'Starting at 11:45 pm, 15 minutes takes you to midnight. Another 15 minutes takes you to 12:15 am on Tuesday 1 December. Beacon Ring and Sable Moon were both listening. The 12:15 am entry on 1 December points to the moon outpost, Sable Moon. Scout Tali was on duty there at that time.'}
+ explain:'Starting at 11:45 pm, 15 minutes takes you to midnight. Another 15 minutes takes you to 12:15 am on Tuesday 1 December. Beacon Ring, Sable Moon and Prism Spire were all listening. The 12:15 am clue on 1 December describes a rocky crescent, so it points to Sable Moon. Scout Tali was on duty there then.'}
 ];
 const tabNames={map:'Where',clock:'Time',calendar:'Date',roster:'Who'};
 const help={map:'use the calendar entry to tell the listening receivers apart',clock:'count the elapsed minutes and check am or pm',calendar:'work out the date, then open its signal entries',roster:'match station, date and time on the duty record'};
@@ -57,7 +72,8 @@ let mission=cases[0], tab='map', pick={}, saveClock=480, attempted=false, year=m
 const pad=n=>String(n).padStart(2,'0');
 const timeLabel=n=>((Math.floor(n/60)%12)||12)+':'+pad(n%60)+' '+(n>=720?'pm':'am');
 const dateLabel=s=>new Intl.DateTimeFormat('en-AU',{timeZone:'UTC',weekday:'short',day:'numeric',month:'short'}).format(new Date(s+'T00:00:00Z'));
-const planetName=id=>planets.find(x=>x[0]===id)?.[1]||id;
+const station=id=>planets.find(x=>x[0]===id);
+const planetName=id=>station(id)?.[1]||id;
 const windowEnd=n=>timeLabel(n%1440);
 const attr=(on)=>' aria-pressed="'+Boolean(on)+'"';
 const values={map:()=>planets.find(x=>x[0]===pick.map)?.[1],clock:()=>pick.clock===undefined?null:timeLabel(pick.clock),calendar:()=>pick.calendar?dateLabel(pick.calendar):null,roster:()=>crew.find(x=>x[0]===pick.roster)?.[1]};
@@ -81,9 +97,9 @@ function choose(c){
 }
 const starField=Array.from({length:60},(_,i)=>'<circle cx="'+((i*233+41)%989)+'" cy="'+((i*131+91)%555)+'" r="'+((i%4)*.49+.45)+'" fill="'+(i%5===0?'#b8f6ff':'#fff')+'" opacity="'+(.2+i%8*.09)+'"/>').join('');
 function renderMap(){
- const lines=[[0,1],[0,2],[1,2],[2,3],[3,4]].map(([i,j])=>'<path d="M '+planets[i][2]*10+' '+planets[i][3]*5.6+' L '+planets[j][2]*10+' '+planets[j][3]*5.6+'" fill="none" stroke="#bbdcff" stroke-width="4" stroke-dasharray="9 9" opacity=".55"/>').join('');
- const windows=mission.receivers.map(([id,start,end])=>'<button type="button" class="window-record" data-planet="'+id+'"'+attr(pick.map===id)+'><strong>'+planetName(id)+'</strong><span>'+windowEnd(start)+' to '+windowEnd(end)+'</span></button>').join('');
- return head('Star map','Which receivers were listening at your signal time? Use the calendar evidence to choose one.')+'<div class="map"><svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">'+starField+lines+'</svg>'+planets.map(([id,name,x,y,c1,c2])=>'<button class="planet" data-planet="'+id+'"'+attr(pick.map===id)+' style="left:'+x+'%;top:'+y+'%;--planet1:'+c1+';--planet2:'+c2+'"><i></i><span>'+name+'</span></button>').join('')+'</div><div class="evidence"><h4>Receiver listening schedules</h4><p>A receiver starts listening at the first time and stops at the second. More than one receiver can be listening at the same time.</p><div class="window-list">'+windows+'</div></div>';
+ const lines=[[0,1],[0,2],[1,2],[1,5],[2,3],[2,4],[2,5],[3,4],[4,5]].map(([i,j])=>'<path d="M '+planets[i][2]*10+' '+planets[i][3]*5.6+' L '+planets[j][2]*10+' '+planets[j][3]*5.6+'" fill="none" stroke="#bbdcff" stroke-width="4" stroke-dasharray="9 9" opacity=".55"/>').join('');
+ const windows=mission.receivers.map(([id,start,end])=>'<button type="button" class="window-record" data-planet="'+id+'"'+attr(pick.map===id)+'><strong>'+planetName(id)+'</strong><span>'+windowEnd(start)+' to '+windowEnd(end)+(end<start?' (next day)':'')+'</span><small class="station-shape">'+station(id)[6]+'</small></button>').join('');
+ return head('Star map','Which receivers were listening at your signal time? Use the calendar evidence to choose one.')+'<div class="map"><svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">'+starField+lines+'</svg>'+planets.map(([id,name,x,y,c1,c2,shape])=>'<button type="button" class="planet" data-planet="'+id+'"'+attr(pick.map===id)+' aria-label="'+name+': '+shape+'" style="left:'+x+'%;top:'+y+'%;--planet1:'+c1+';--planet2:'+c2+'"><i aria-hidden="true"></i><img class="station-art" src="assets/'+id+'.webp" alt=""><span>'+name+'</span></button>').join('')+'</div><div class="evidence"><h4>Receiver listening schedules</h4><p>A receiver starts listening at the first time and stops at the second. More than one receiver can be listening at the same time.</p><div class="window-list">'+windows+'</div></div>';
 }
 function renderClock(){
  const direction=(tick,rad)=>[Math.sin(tick*Math.PI/30)*rad,-Math.cos(tick*Math.PI/30)*rad];
@@ -116,7 +132,7 @@ function renderCalendar(){
 function renderRoster(){
  return head('Crew roster','Shifts change from day to day. Each crew member has two records: match the station, date and time.')+'<div class="roster">'+crew.map(([id,name,role,detail,icon])=>{
   const rows=mission.shifts.filter(row=>row[0]===id);
-  return '<button class="crew" data-crew="'+id+'"'+attr(pick.roster===id)+'><span aria-hidden="true">'+icon+'</span><strong>'+name+'</strong><small>'+role+'</small><span class="shift-pair">'+rows.map(([,station,date,t])=>'<span class="shift"><strong>'+planetName(station)+'</strong><span>'+dateLabel(date)+' · '+timeLabel(t)+'</span></span>').join('')+'</span></button>';
+  return '<button type="button" class="crew" data-crew="'+id+'"'+attr(pick.roster===id)+'><span class="portrait-wrap"><span class="crew-icon" aria-hidden="true">'+icon+'</span><img class="crew-portrait" src="assets/'+id+'.webp" alt=""></span><strong>'+name+'</strong><small title="'+detail+'">'+role+'</small><span class="shift-pair">'+rows.map(([,station,date,t])=>'<span class="shift"><strong>'+planetName(station)+'</strong><span>'+dateLabel(date)+' · '+timeLabel(t)+'</span></span>').join('')+'</span></button>';
  }).join('')+'</div>';
 }
 function drawSummary(){

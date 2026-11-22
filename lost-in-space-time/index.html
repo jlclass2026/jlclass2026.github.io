@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#121126">
 <title>Lost in Space &amp; Time</title>
-<link rel="stylesheet" href="game.css?v=3"><link rel="stylesheet" href="star-map.css?v=1"><script defer src="game.js?v=3"></script><script defer src="star-map.js?v=1"></script>
+<link rel="stylesheet" href="game.css?v=4"><link rel="stylesheet" href="star-map.css?v=4"><script defer src="game.js?v=4"></script><script defer src="star-map.js?v=4"></script>
 </head>
 <body>
 <main id="gate" class="gate">
@@ -13,7 +13,7 @@
  <form id="gate-form"><label for="pin">Enter class PIN</label><div><input id="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" required><button class="primary">Enter mission control</button></div><p id="gate-error" role="alert"></p></form>
 </main>
 <main id="play" class="mission" hidden>
- <header class="top"><div><a class="return" href="/#class-games">Class Games</a><p class="kicker">STAR RESCUE UNIT</p><h1>Lost in <em>Space &amp; Time</em></h1></div>
+ <header class="top"><div class="mission-lockup"><a class="return" href="/#class-games" aria-label="Back to Class Games">Class Games</a><div><p class="kicker">STAR RESCUE UNIT</p><h1>Lost in <em>Space &amp; Time</em></h1></div></div>
  <div class="mission-select"><label for="case">Case file</label><select id="case"></select></div></header>
  <div class="board">
   <section class="brief shell" aria-labelledby="case-title"><p class="kicker" id="case-code"></p><h2 id="case-title"></h2><p id="case-brief"></p><ol id="clues" class="clues"></ol></section>

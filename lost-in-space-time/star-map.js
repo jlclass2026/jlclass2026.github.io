@@ -39,6 +39,7 @@ function enhance(){
   const nebula=document.createElement('div');nebula.className='map-nebula';atmosphere.append(nebula);
   starsLayer(atmosphere,'map-parallax--far',farField);
   starsLayer(atmosphere,'map-parallax--near',closeField);
+  const flare=document.createElement('div');flare.className='map-flare';atmosphere.append(flare);
   const tag=document.createElement('div');tag.className='map-console-tag';tag.textContent='SECTOR VIEW';tag.setAttribute('aria-hidden','true');
   const toggle=document.createElement('button');toggle.type='button';toggle.className='map-motion-toggle';
   toggle.addEventListener('click',()=>{
@@ -49,6 +50,11 @@ function enhance(){
   updateMotion(map,toggle);
   map.prepend(atmosphere,tag);
   map.append(toggle);
+  map.querySelectorAll('.station-art').forEach(img=>{
+    const unavailable=()=>img.closest('.planet')?.classList.add('asset-missing');
+    if(img.complete&&!img.naturalWidth)unavailable();
+    img.addEventListener('error',unavailable,{once:true});
+  });
   if (finePointer?.matches) {
     let pending=0,latest=null;
     map.addEventListener('pointermove',event=>{
@@ -58,7 +64,7 @@ function enhance(){
       pending=requestAnimationFrame(()=>{
         pending=0;
         const box=map.getBoundingClientRect();
-        if(!latest||!box.width||!box.height)return;
+        if(pausedByUser||motionSetting?.matches||!latest||!box.width||!box.height)return;
         map.style.setProperty('--map-dx', ((latest[0]-box.left)/box.width*2-1)*9+'px');
         map.style.setProperty('--map-dy', ((latest[1]-box.top)/box.height*2-1)*6+'px');
       });
