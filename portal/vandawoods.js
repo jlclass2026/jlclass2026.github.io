@@ -89,7 +89,17 @@
     cards.forEach(card => { card.hidden = !card.dataset.search.includes(term); if (!card.hidden) count++; });
     document.querySelector('#class-games .no-results').hidden = count > 0;
   });
-  document.querySelectorAll('.game-tile img').forEach(img => img.addEventListener('error', () => { img.hidden = true; }, {once:true}));
+  const classGameIcons = {
+    '/timekeeper/icon.svg': 'timekeeper',
+    '/graphit/icon.svg': 'graphit',
+    '/lost-in-space-time/icon.svg': 'lost-space-time',
+    '/dorobo/icon.svg': 'dorobo'
+  };
+  document.querySelectorAll('.game-tile img').forEach(img => {
+    img.addEventListener('error', () => { img.hidden = true; }, {once:true});
+    const name = img.closest('#class-games') && classGameIcons[img.getAttribute('src')];
+    if (name) img.src = '/portal/assets/game-icons/' + name + '-v4.webp';
+  });
   document.querySelector('.world-scene').addEventListener('error', () => document.body.classList.add('art-unavailable'), {once:true});
 })();
 
