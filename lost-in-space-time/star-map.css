@@ -1,0 +1,125 @@
+/* A moving starfield, with fixed and readable controls above it. No external assets. */
+.map.space-map-live{
+ --map-dx:0px;--map-dy:0px;isolation:isolate;
+ background:
+  radial-gradient(ellipse at 78% 0,#433286 0,transparent 45%),
+  radial-gradient(ellipse at 15% 88%,#153b59 2%,transparent 57%),
+  linear-gradient(135deg,#181435 0%,#0b1434 60%,#111838);
+ border-color:#63598e;
+ box-shadow:inset 0 0 40px #050a1bae,0 6px 21px #0a071e6e;
+}
+.space-map-live::before,.space-map-live::after{
+ content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit
+}
+.space-map-live::before{
+ opacity:.22;
+ background:
+  linear-gradient(90deg,transparent 48.9%,#8fafd994 49.7%,transparent 50.4%),
+  linear-gradient(0deg,transparent 48.9%,#8fafd994 49.7%,transparent 50.4%);
+ background-size:44px 44px;
+ mask-image:linear-gradient(to top,#000a 0%,transparent 66%);
+}
+.space-map-live::after{
+ box-shadow:inset 0 0 26px #0b0b2b52;
+ background:linear-gradient(118deg,#b6dbff19 0%,transparent 20%,transparent 87%,#daaff820 100%)
+}
+.space-map-live .map-atmosphere{position:absolute;inset:-9%;z-index:-1;pointer-events:none}
+.space-map-live .map-nebula{
+ position:absolute;inset:-12%;
+ transform-origin:48% 64%;
+ background:
+  radial-gradient(ellipse at 39% 59%,#50b3cf44,transparent 36%),
+  radial-gradient(ellipse at 57% 42%,#8668d765,transparent 41%),
+  radial-gradient(ellipse at 67% 54%,#aa52ce42,transparent 48%),
+  radial-gradient(ellipse at 22% 70%,#509cc761,transparent 27%);
+ filter:blur(10px);
+ animation:space-nebula 32s ease-in-out infinite alternate;
+}
+@keyframes space-nebula{
+ from{transform:translate3d(-3%,1%,0) rotate(-8deg) scale(1)}
+ to{transform:translate3d(4%,3%,0) rotate(9deg) scale(1.12)}
+}
+.space-map-live .map-parallax{
+ position:absolute;inset:0;transform:translate3d(var(--map-dx),var(--map-dy),0);
+ transition:transform .24s ease-out;
+}
+.space-map-live .map-parallax--far{opacity:.58;transform:translate3d(calc(var(--map-dx) * .4),calc(var(--map-dy) * .4),0)}
+.space-map-live .map-stars{position:absolute;inset:0;animation:space-stars 24s ease-in-out infinite alternate}
+.space-map-live .map-parallax--far .map-stars{animation-duration:42s;animation-direction:alternate-reverse}
+@keyframes space-stars{
+ from{transform:translate3d(-2.3%,1.1%,0);opacity:.78}
+ to{transform:translate3d(3.1%,-1.6%,0);opacity:1}
+}
+.space-map-live>svg{z-index:1;pointer-events:none}
+.space-map-live>svg path{stroke:#acceee;stroke-width:3;stroke-dasharray:7 8;opacity:.66;filter:drop-shadow(0 0 4px #6da7e241)}
+.space-map-live>svg circle{opacity:.2}
+.space-map-live .map-console-tag{
+ position:absolute;z-index:4;top:.55rem;left:.58rem;pointer-events:none;
+ display:flex;align-items:center;gap:.42rem;color:#e5ebff;background:#151933dd;
+ border:1px solid #8c87b87a;border-radius:6px;padding:.27rem .43rem;
+ font:780 .64rem/1.2 system-ui,sans-serif;letter-spacing:.10em;
+}
+.space-map-live .map-console-tag::before{content:"";width:6px;height:6px;border-radius:100%;background:#8aeef5;box-shadow:0 0 9px #92f1ff}
+.space-map-live .map-motion-toggle{
+ position:absolute;z-index:6;top:.34rem;right:.34rem;min-height:34px;min-width:44px;
+ font-size:.69rem;font-weight:740;padding:.3rem .48rem;color:#dce7f7;border-color:#8c87b883;background:#151933ed;line-height:1.2
+}
+.space-map-live .map-motion-toggle:hover{color:#fff;background:#2c2851}
+.space-map-live .planet{
+ z-index:3;min-width:68px;min-height:48px;gap:.33rem;
+ color:#eef8ff;background:none;border:none;padding:.21rem .25rem;
+}
+.space-map-live .planet:focus-visible{z-index:5;outline-offset:3px}
+.space-map-live .planet>span{
+ font-weight:830;padding:.12rem .32rem;line-height:1.18;
+ border:1px solid #869cc560;border-radius:5px;background:#131a35ee;box-shadow:0 2px 5px #0a081a99;
+ text-shadow:none;white-space:nowrap;
+}
+.space-map-live .planet>i{
+ position:relative;isolation:isolate;width:clamp(28px,4.3vw,43px);height:clamp(28px,4.3vw,43px);
+ border:1px solid var(--planet1);
+ background:
+  radial-gradient(circle at 22% 19%,#ffffff 0,#ffffff40 13%,transparent 34%),
+  radial-gradient(circle at 70% 80%,#0e1839ba,transparent 58%),
+  repeating-linear-gradient(154deg,transparent 0% 16%,#fff1 20% 23%,#1b16333f 25% 28%,transparent 32% 36%),
+  radial-gradient(circle at 27% 27%,var(--planet1) 0%,var(--planet2) 62%,#181330 98%);
+ box-shadow:inset -3px -5px 9px #0e1636cc,0 0 12px -2px var(--planet2),0 3px 5px #090b19;
+ transform:rotate(var(--planet-tilt,14deg));transition:transform .2s ease-out,box-shadow .2s;
+}
+.space-map-live .planet>i::before{
+ content:"";position:absolute;inset:-5px;border:1px solid var(--planet1);border-radius:100%;
+ animation:space-beacon 3.4s ease-out infinite;animation-delay:var(--pulse-delay,0s);pointer-events:none;
+}
+@keyframes space-beacon{
+ 0%{transform:scale(.94);opacity:.63}
+ 78%,100%{transform:scale(1.58);opacity:0}
+}
+.space-map-live .planet[data-planet=aurora]>i{--planet-tilt:-20deg;--pulse-delay:-.5s}
+.space-map-live .planet[data-planet=comet]>i{--planet-tilt:28deg;--pulse-delay:-1.5s}
+.space-map-live .planet[data-planet=beacon]>i{--planet-tilt:-9deg;--pulse-delay:-1s}
+.space-map-live .planet[data-planet=sable]>i{--planet-tilt:20deg;--pulse-delay:-2.1s}
+.space-map-live .planet[data-planet=ember]>i{--planet-tilt:8deg;--pulse-delay:-2.7s}
+.space-map-live .planet[data-planet=beacon]>i::after,
+.space-map-live .planet[data-planet=comet]>i::after{
+ content:"";position:absolute;inset:34% -24%;border-radius:50%;border:2px solid #e4eafa;
+ border-top-color:#e4eafa58;transform:rotate(-21deg);opacity:.75;pointer-events:none
+}
+.space-map-live .planet[data-planet=comet]>i::after{inset:30% -23%;border-color:#ffd88c;border-top-color:#f7d38a55;transform:rotate(30deg)}
+.space-map-live .planet:is(:hover,[aria-pressed=true]){z-index:4;background:none;box-shadow:none}
+.space-map-live .planet:is(:hover,[aria-pressed=true])>span{color:#ccfbff;border-color:#8aeef5;background:#172f4bf2}
+.space-map-live .planet:is(:hover,[aria-pressed=true])>i{transform:rotate(var(--planet-tilt,14deg)) scale(1.13);box-shadow:inset -3px -5px 9px #0e1636cc,0 0 17px 1px var(--planet1)}
+.space-map-live .planet[aria-pressed=true]>i{outline:2px solid #fff;outline-offset:4px}
+.space-map-live.space-motion-off .map-stars,.space-map-live.space-motion-off .map-nebula,.space-map-live.space-motion-off .planet>i::before{animation:none}
+.space-map-live.space-motion-off .planet>i::before{opacity:0}
+.space-map-live.space-motion-off .map-parallax,.space-map-live.space-motion-off .planet>i{transition:none}
+@media(max-width:460px){
+ .space-map-live .planet{min-width:45px;min-height:44px;padding:.13rem .18rem;gap:.28rem}
+ .space-map-live .planet>span{padding:.11rem .21rem;font-size:.66rem}
+ .space-map-live .planet>i{width:28px;height:28px}
+ .space-map-live .map-console-tag{top:.48rem;left:.41rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .space-map-live .map-stars,.space-map-live .map-nebula,.space-map-live .planet>i::before{animation:none!important}
+ .space-map-live .planet>i::before{opacity:0}
+ .space-map-live .map-parallax,.space-map-live .planet>i{transition:none!important;transform:none!important}
+}

@@ -23,3 +23,21 @@ h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.08}h1{font-weight:860;letter-spacing:
 .signal-log{list-style:none;padding:0;margin:.3rem 0 0;display:grid;gap:.2rem}.signal-log li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.38rem .70rem;padding:.25rem .32rem;background:#211f40;border-radius:5px;align-items:center;font-size:.82rem}.signal-log li strong{overflow-wrap:anywhere}.signal-log time{color:var(--purple)}.log-first{margin:0 0 .58rem}
 .crew .shift{display:grid;gap:.10rem;border-top:1px solid var(--line);padding-top:.35rem;margin-top:.3rem;font-size:.84rem;line-height:1.32;color:var(--muted)}.crew .shift>strong{color:var(--ink)}
 @media(max-width:460px){.evidence{padding:.47rem}.window-list{grid-template-columns:repeat(2,minmax(0,1fr))}.signal-log li{gap:.30rem;font-size:.76rem}}
+
+/* Calendar: keep both explicitly named months in view without compressing touch targets on phones. */
+.calendar-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.calendar-panel{min-width:0;border:1px solid var(--line,#424664);border-radius:14px;padding:10px;background:rgba(16,19,43,.45)}
+.calendar-panel h4{margin:0 0 8px;text-align:center;font-size:1rem;color:#f3ecff}
+.calendar-panel .calendar{padding:0;gap:4px}
+.calendar-panel .calendar button,.calendar-panel .calendar .week{min-width:0}
+.calendar-panel .calendar button{min-height:40px;padding:4px 0}
+.calnav{justify-content:space-between}
+.date-evidence{margin-top:14px}
+.date-evidence h4{margin-bottom:8px}
+.signal-fragments{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.signal-fragments li{display:grid;grid-template-columns:5.75rem 1fr;gap:9px;align-items:start;padding:8px 0;border-top:1px solid var(--line,#424664);line-height:1.35}
+.signal-fragments li strong{color:var(--mint,#adf7e8)}
+.shift-pair{display:grid;gap:7px;align-self:stretch;width:100%}
+.shift-pair .shift{margin:0}
+@media(max-width:930px){.board{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.calendar-pair{grid-template-columns:minmax(0,1fr)}.calendar-panel .calendar button{min-height:44px}}
