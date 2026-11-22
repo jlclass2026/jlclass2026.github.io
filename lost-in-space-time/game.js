@@ -18,8 +18,8 @@ const crew=[
  ['vela','Ranger Vela','Ranger','She scouts the outer stations','✶']
 ];
 const cases=[
- {id:'sunshift',file:'CASE 01 / DAY SHIFT',title:'The silent beacon',brief:'A rescue transmission went out during a test. Find its time and date, then use the shape in the calendar evidence to tell the listening stations apart.',month:10,year:2026,
- clues:['The test started at 2:00 pm. The rescue signal came 35 minutes later. Set the mission clock to the signal time.','The receiver schedules overlap. Find every station listening at your signal time. Don’t choose between them yet.','The test was two days after Thursday 12 November. Work out the date and tap it on the calendar. Find the entry at your signal time.','Match the shape in that entry to a listening station. Then find the crew member on duty at that station, on that date and at that time.'],
+ {id:'sunshift',file:'CASE 01 / DAY SHIFT',title:'The silent beacon',brief:'A rescue transmission interrupted a routine battery test.',month:10,year:2026,
+ clues:['A battery test ran on Tuesday 10 November. Tests repeat every second day. The signal was logged during the second test after that.','The power-up began at 1:25 pm and lasted 45 minutes. The signal went out at the end of the 25-minute test that followed.'],
  receivers:[['aurora',830,860],['comet',845,880],['beacon',870,895],['sable',885,905],['ember',895,920],['prism',865,900]],
  logs:[
   ['2026-11-12',850,'A long rectangular frame crossed the camera view.','comet'],
@@ -31,42 +31,35 @@ const cases=[
   ['2026-11-15',850,'The signal came from a long, straight docking frame.','comet'],
   ['2026-11-15',875,'A tall point with flat, shining faces filled the view.','prism']
  ],
- shifts:[
-  ['mira','comet','2026-11-12',850],['mira','comet','2026-11-14',875],
-  ['jax','beacon','2026-11-14',875],['jax','comet','2026-11-15',850],
-  ['tali','comet','2026-11-13',875],['tali','sable','2026-11-13',900],
-  ['bo','beacon','2026-11-12',875],['bo','aurora','2026-11-14',850],
-  ['nix','prism','2026-11-15',875],['nix','ember','2026-11-15',910],
-  ['vela','aurora','2026-11-13',850],['vela','prism','2026-11-14',875]
+ schedules:[
+  ['mira','comet',[5,6],825,25,15,25,'aurora'],['jax','beacon',[6],830,30,10,30,'comet'],
+  ['tali','aurora',[5,6],805,35,5,15,'comet'],['bo','beacon',[4,0],840,25,5,20,'aurora'],
+  ['nix','prism',[6,0],840,25,5,25,'beacon'],['vela','comet',[4,0],810,20,10,20,'aurora']
  ],
- answer:{map:'beacon',clock:875,calendar:'2026-11-14',roster:'jax'},
- explain:'2:00 pm plus 35 minutes is 2:35 pm. Comet Dock, Beacon Ring and Prism Spire were all listening. Two days after Thursday 12 November is Saturday 14 November. Only the 2:35 pm clue on that date describes an open centre in a round structure, so it points to Beacon Ring. Engineer Jax was on duty there then.'},
- {id:'midnight',file:'CASE 02 / MIDNIGHT SHIFT',title:'A message across midnight',brief:'The rescue signal was sent when a countdown ended. Follow it across midnight and match the recorded shape to a listening station.',month:10,year:2026,
- clues:['The countdown began at 11:45 pm and lasted 30 minutes. Find when the rescue signal went out.','More than one receiver was listening then. The listening schedules can cross midnight.','The countdown started on Monday 30 November. On which date did it finish? Tap the finish date and read the entry at your signal time.','The shape in the entry identifies a listening station. Match that station, date and time to the crew roster.'],
+ event:{reference:'2026-11-10',days:4,start:805,parts:[45,25]},
+ explain:'Two test cycles of two days take us from Tuesday 10 November to Saturday 14 November. The 45-minute power-up ended at 2:10 pm and the 25-minute test ended at 2:35 pm. The 2:35 pm entry points to the round station with an open centre. Jax’s Saturday second duty at Beacon Ring ran from 2:30 pm to 3:00 pm.'},
+ {id:'midnight',file:'CASE 02 / MIDNIGHT SHIFT',title:'A message across midnight',brief:'A relay recorded a rescue transmission during the night shift.',month:10,year:2026,
+ clues:['The diagnostic run began two nights after Saturday 28 November.','Diagnostics began at 11:20 pm and ran for 45 minutes. The rescue signal went out after a further 10-minute countdown.'],
  receivers:[['aurora',1395,1425],['comet',1425,8],['beacon',0,20],['sable',10,25],['ember',25,40],['prism',12,35]],
  logs:[
   ['2026-11-29',5,'Stars were visible through the open middle of a circular structure.','beacon'],
   ['2026-11-29',15,'A slim crystal rose to a point, with light glinting off its flat sides.','prism'],
-  ['2026-11-30',5,'A rectangular frame stretched across a bright tail.','comet'],
+  ['2026-11-30',5,'A distant light shone through the open centre of a round structure.','beacon'],
   ['2026-11-30',15,'The receiver was on a sliver of dark rock, curved on one side.','sable'],
   ['2026-12-01',5,'A large circular structure was open right through the middle.','beacon'],
   ['2026-12-01',15,'The camera recorded a dark, rocky sliver with two curved tips.','sable'],
-  ['2026-12-02',5,'The long rectangular frame reached out in front of a bright tail.','comet'],
+  ['2026-12-02',5,'The image showed one circular structure, with an empty centre.','beacon'],
   ['2026-12-02',15,'A star was visible through a single open circle.','beacon']
  ],
- shifts:[
-  ['mira','sable','2026-11-30',15],['mira','ember','2026-12-02',35],
-  ['jax','prism','2026-11-29',15],['jax','sable','2026-12-01',20],
-  ['tali','sable','2026-12-01',15],['tali','comet','2026-12-02',5],
-  ['bo','comet','2026-11-30',5],['bo','beacon','2026-12-02',15],
-  ['nix','beacon','2026-11-29',5],['nix','prism','2026-12-01',15],
-  ['vela','beacon','2026-12-01',5],['vela','beacon','2026-12-01',15]
+ schedules:[
+  ['mira','sable',[0],1395,35,15,25,'aurora'],['jax','prism',[6],1405,30,10,25,'comet'],
+  ['tali','sable',[1],1400,35,15,25,'ember'],['bo','beacon',[1,2],1410,20,20,25,'sable'],
+  ['nix','prism',[1],1405,30,15,25,'ember'],['vela','beacon',[6,0,1,2],1405,20,15,10,'comet']
  ],
- answer:{map:'sable',clock:15,calendar:'2026-12-01',roster:'tali'},
- explain:'Starting at 11:45 pm, 15 minutes takes you to midnight. Another 15 minutes takes you to 12:15 am on Tuesday 1 December. Beacon Ring, Sable Moon and Prism Spire were all listening. The 12:15 am clue on 1 December describes a rocky crescent, so it points to Sable Moon. Scout Tali was on duty there then.'}
+ event:{reference:'2026-11-28',days:2,start:1400,parts:[45,10]},
+ explain:'Two nights after Saturday 28 November is Monday 30 November. The diagnostics ended at 12:05 am and the countdown ended at 12:15 am on Tuesday 1 December. The rocky crescent in that entry is Sable Moon. Tali’s Monday shift had a second duty block from 12:10 am to 12:35 am on Tuesday.'}
 ];
 const tabNames={map:'Where',clock:'Time',calendar:'Date',roster:'Who'};
-const help={map:'use the calendar entry to tell the listening receivers apart',clock:'count the elapsed minutes and check am or pm',calendar:'work out the date, then open its signal entries',roster:'match station, date and time on the duty record'};
 const gate=one('#gate'),play=one('#play'),instrument=one('#instrument'),summary=one('#summary'),feedback=one('#feedback');
 let mission=cases[0], tab='map', pick={}, saveClock=480, attempted=false, year=mission.year, month=mission.month;
 const pad=n=>String(n).padStart(2,'0');
@@ -77,7 +70,7 @@ const planetName=id=>station(id)?.[1]||id;
 const windowEnd=n=>timeLabel(n%1440);
 const attr=(on)=>' aria-pressed="'+Boolean(on)+'"';
 const values={map:()=>planets.find(x=>x[0]===pick.map)?.[1],clock:()=>pick.clock===undefined?null:timeLabel(pick.clock),calendar:()=>pick.calendar?dateLabel(pick.calendar):null,roster:()=>crew.find(x=>x[0]===pick.roster)?.[1]};
-const head=(title,sub)=>'<div class="instrument-head"><h3>'+title+'</h3><p>'+sub+'</p></div>';
+const head=title=>'<div class="instrument-head"><h3>'+title+'</h3></div>';
 async function digest(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,'0')).join('');}
 one('#gate-form').addEventListener('submit',async e=>{
  e.preventDefault();const p=one('#pin'),error=one('#gate-error');
@@ -99,14 +92,14 @@ const starField=Array.from({length:60},(_,i)=>'<circle cx="'+((i*233+41)%989)+'"
 function renderMap(){
  const lines=[[0,1],[0,2],[1,2],[1,5],[2,3],[2,4],[2,5],[3,4],[4,5]].map(([i,j])=>'<path d="M '+planets[i][2]*10+' '+planets[i][3]*5.6+' L '+planets[j][2]*10+' '+planets[j][3]*5.6+'" fill="none" stroke="#bbdcff" stroke-width="4" stroke-dasharray="9 9" opacity=".55"/>').join('');
  const windows=mission.receivers.map(([id,start,end])=>'<button type="button" class="window-record" data-planet="'+id+'"'+attr(pick.map===id)+'><strong>'+planetName(id)+'</strong><span>'+windowEnd(start)+' to '+windowEnd(end)+(end<start?' (next day)':'')+'</span><small class="station-shape">'+station(id)[6]+'</small></button>').join('');
- return head('Star map','Which receivers were listening at your signal time? Use the calendar evidence to choose one.')+'<div class="map"><svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">'+starField+lines+'</svg>'+planets.map(([id,name,x,y,c1,c2,shape])=>'<button type="button" class="planet" data-planet="'+id+'"'+attr(pick.map===id)+' aria-label="'+name+': '+shape+'" style="left:'+x+'%;top:'+y+'%;--planet1:'+c1+';--planet2:'+c2+'"><i aria-hidden="true"></i><img class="station-art" src="assets/'+id+'.webp" alt=""><span>'+name+'</span></button>').join('')+'</div><div class="evidence"><h4>Receiver listening schedules</h4><p>A receiver starts listening at the first time and stops at the second. More than one receiver can be listening at the same time.</p><div class="window-list">'+windows+'</div></div>';
+ return head('Star map')+'<div class="map"><svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">'+starField+lines+'</svg>'+planets.map(([id,name,x,y,c1,c2,shape])=>'<button type="button" class="planet" data-planet="'+id+'"'+attr(pick.map===id)+' aria-label="'+name+': '+shape+'" style="left:'+x+'%;top:'+y+'%;--planet1:'+c1+';--planet2:'+c2+'"><i aria-hidden="true"></i><img class="station-art" src="assets/'+id+'.webp" alt=""><span>'+name+'</span></button>').join('')+'</div><div class="evidence"><h4>Receiver listening schedules</h4><p>Receivers come online at the first time and go offline at the second.</p><div class="window-list">'+windows+'</div></div>';
 }
 function renderClock(){
  const direction=(tick,rad)=>[Math.sin(tick*Math.PI/30)*rad,-Math.cos(tick*Math.PI/30)*rad];
  const marks=Array.from({length:60},(_,i)=>{const [x,y]=direction(i,i%5===0?95:101),[a,b]=direction(i,108);return '<line x1="'+x+'" y1="'+y+'" x2="'+a+'" y2="'+b+'" stroke="'+(i%5===0?'#d1c3f7':'#52557b')+'" stroke-width="'+(i%5===0?2:1)+'"/>';}).join('');
  const nums=Array.from({length:12},(_,i)=>{const [x,y]=direction((i+1)*5,80);return '<text x="'+x+'" y="'+y+'">'+(i+1)+'</text>';}).join('');
  const [hx,hy]=direction((saveClock%720)/12,50),[mx,my]=direction(saveClock%60,71);const [time,mer]=timeLabel(saveClock).split(' ');
- return head('Mission clock','Set the clock, then use that time.')+'<div class="clockwork"><svg class="dial" viewBox="-119 -119 238 238" role="img" aria-label="Analogue clock showing '+timeLabel(saveClock)+'"><circle r="114" fill="#151930" stroke="#6f6595" stroke-width="2"/>'+marks+nums+'<line class="hour" x2="'+hx+'" y2="'+hy+'"/><line class="minute" x2="'+mx+'" y2="'+my+'"/><circle r="5" fill="#fff"/></svg><div class="clockcontrols"><p class="clockread" aria-live="polite">'+time+' <small>'+mer+'</small></p><div class="buttonrow"><button data-offset="-60">−1 hour</button><button data-offset="60">+1 hour</button><button data-offset="-5">−5 min</button><button data-offset="5">+5 min</button></div><button class="meridiem" data-offset="720">Switch am / pm</button><button class="primary" data-settime>Use this time</button></div></div>';
+ return head('Mission clock')+'<div class="clockwork"><svg class="dial" viewBox="-119 -119 238 238" role="img" aria-label="Analogue clock showing '+timeLabel(saveClock)+'"><circle r="114" fill="#151930" stroke="#6f6595" stroke-width="2"/>'+marks+nums+'<line class="hour" x2="'+hx+'" y2="'+hy+'"/><line class="minute" x2="'+mx+'" y2="'+my+'"/><circle r="5" fill="#fff"/></svg><div class="clockcontrols"><p class="clockread" aria-live="polite">'+time+' <small>'+mer+'</small></p><div class="buttonrow"><button data-offset="-60">−1 hour</button><button data-offset="60">+1 hour</button><button data-offset="-5">−5 min</button><button data-offset="5">+5 min</button></div><button class="meridiem" data-offset="720">Switch am / pm</button><button class="primary" data-settime>Use this time</button></div></div>';
 }
 function calendarPanel(d){
  const y=d.getUTCFullYear(),m=d.getUTCMonth();
@@ -121,22 +114,51 @@ function calendarPanel(d){
 function renderCalendar(){
  const selected=pick.calendar;
  const logs=mission.logs.filter(([date])=>date===selected);
- const fragment=!selected?'<p>Tap the date you worked out to open its signal log.</p>':logs.length?
+ const fragment=!selected?'<p>No date selected.</p>':logs.length?
   '<ul class="signal-fragments">'+logs.map(([,t,clue])=>'<li><strong>'+timeLabel(t)+'</strong><span>'+clue+'</span></li>').join('')+'</ul>':
-  '<p>No signal entry was recorded on this date. Recheck the date clue in the case file.</p>';
- return head('Calendar','Work out the date from the case file. Tap that date to see what the receiver recorded.')+
+  '<p>No signal entry was recorded on this date.</p>';
+ return head('Calendar')+
  '<div class="calnav"><button data-month="-1" aria-label="Show the previous month">Previous month</button><button data-month="1" aria-label="Show the next month">Next month</button></div>'+
  '<div class="calendar-pair">'+calendarPanel(new Date(Date.UTC(year,month,1)))+calendarPanel(new Date(Date.UTC(year,month+1,1)))+'</div>'+
  '<div class="evidence date-evidence" id="date-evidence"><h4>'+(selected?'Signal log · '+dateLabel(selected):'Signal log')+'</h4>'+fragment+'</div>';
 }
+const weekShort=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAY_MS=86400000;
+function onDuty(caseFile,stationId,date,minute){
+ const at=new Date(date+'T00:00:00Z'), answer=[];
+ caseFile.schedules.forEach(([id,station,days,start,first,rest,second,firstStation])=>{
+  for(const back of [0,1]){
+   const day=new Date(+at-back*DAY_MS).getUTCDay();
+   if(!days.includes(day))continue;
+   const relative=minute+back*1440, secondStart=start+first+rest;
+   if((firstStation===stationId&&relative>=start&&relative<start+first)||(station===stationId&&relative>=secondStart&&relative<secondStart+second)){answer.push(id);break;}
+  }
+ });
+ return answer;
+}
+function caseAnswer(caseFile){
+ const event=caseFile.event, elapsed=event.start+event.parts.reduce((sum,x)=>sum+x,0);
+ const date=new Date(+new Date(event.reference+'T00:00:00Z')+(event.days+Math.floor(elapsed/1440))*DAY_MS).toISOString().slice(0,10);
+ const minute=elapsed%1440;
+ const records=caseFile.logs.filter(([d,t])=>d===date&&t===minute);
+ if(records.length!==1)return null;
+ const station=records[0][3], r=caseFile.receivers.find(row=>row[0]===station);
+ if(!r)return null;
+ const [,a,b]=r;
+ if(!(a<b?minute>=a&&minute<b:minute>=a||minute<b))return null;
+ const roster=onDuty(caseFile,station,date,minute);
+ return roster.length!==1?null:{map:station,clock:minute,calendar:date,roster:roster[0]};
+}
 function renderRoster(){
- return head('Crew roster','Shifts change from day to day. Each crew member has two records: match the station, date and time.')+'<div class="roster">'+crew.map(([id,name,role,detail,icon])=>{
-  const rows=mission.shifts.filter(row=>row[0]===id);
-  return '<button type="button" class="crew" data-crew="'+id+'"'+attr(pick.roster===id)+'><span class="portrait-wrap"><span class="crew-icon" aria-hidden="true">'+icon+'</span><img class="crew-portrait" src="assets/'+id+'.webp" alt=""></span><strong>'+name+'</strong><small title="'+detail+'">'+role+'</small><span class="shift-pair">'+rows.map(([,station,date,t])=>'<span class="shift"><strong>'+planetName(station)+'</strong><span>'+dateLabel(date)+' · '+timeLabel(t)+'</span></span>').join('')+'</span></button>';
+ return head('Crew roster')+'<p class="roster-key">Days shown are when shifts begin. Break time is off duty.</p><div class="roster">'+crew.map(([id,name,role,detail,icon])=>{
+  const [,station,days,start,first,rest,second,firstStation]=mission.schedules.find(row=>row[0]===id);
+  const repeat=days.map(n=>weekShort[n]).join(' / ');
+  return '<button type="button" class="crew" data-crew="'+id+'"'+attr(pick.roster===id)+'><span class="portrait-wrap"><span class="crew-icon" aria-hidden="true">'+icon+'</span><img class="crew-portrait" src="assets/'+id+'.webp" alt=""></span><strong>'+name+'</strong><small title="'+detail+'">'+role+'</small><span class="shift-pair"><span class="shift roster-days"><strong>'+repeat+' · '+timeLabel(start)+'</strong></span><span class="shift roster-duty"><span><strong>'+planetName(firstStation)+'</strong> '+first+' min</span><span>Break '+rest+' min</span><span><strong>'+planetName(station)+'</strong> '+second+' min</span></span></span></button>';
  }).join('')+'</div>';
 }
 function drawSummary(){
- summary.innerHTML=Object.keys(tabNames).map(k=>{const v=values[k]();return '<button data-jump="'+k+'" class="'+(attempted&&v?(pick[k]===mission.answer[k]?'pass':'check'):v?'ready':'')+'"><span>'+tabNames[k]+(attempted&&v?(pick[k]===mission.answer[k]?' · correct':' · check'):'')+'</span><strong>'+(v??'Not set')+'</strong></button>';}).join('');
+ const answer=attempted?caseAnswer(mission):null;
+ summary.innerHTML=Object.keys(tabNames).map(k=>{const v=values[k]();return '<button data-jump="'+k+'" class="'+(answer&&v?(pick[k]===answer[k]?'pass':'check'):v?'ready':'')+'"><span>'+tabNames[k]+(answer&&v?(pick[k]===answer[k]?' · correct':' · check'):'')+'</span><strong>'+(v??'Not set')+'</strong></button>';}).join('');
 }
 function render(){
  many('[data-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tab===tab)));
@@ -155,14 +177,17 @@ play.addEventListener('click',e=>{
  if(b.hasAttribute('data-settime')){record('clock',saveClock);one('[data-settime]').focus({preventScroll:true});return;}
  if(b.dataset.month){const d=new Date(Date.UTC(year,month+Number(b.dataset.month),1));year=d.getUTCFullYear();month=d.getUTCMonth();render();one('[data-month="'+b.dataset.month+'"]').focus({preventScroll:true});return;}
  if(b.hasAttribute('data-next')){choose(cases[(cases.indexOf(mission)+1)%cases.length]);one('#case').focus();return;}
- if(b.id==='submit')check();
+ if(b.id==='submit'){const state=check();if(state)play.dispatchEvent(new CustomEvent('rescue:transmit',{detail:{state}}));}
 });
 function check(){
  const keys=Object.keys(tabNames),missing=keys.filter(k=>pick[k]===undefined);
- if(missing.length){feedback.textContent='Set '+missing.map(k=>tabNames[k].toLowerCase()).join(', ')+' before sending your signal.';return;}
- attempted=true;drawSummary();const wrong=keys.filter(k=>pick[k]!==mission.answer[k]);
- if(wrong.length){feedback.textContent=(4-wrong.length)+' of 4 coordinates correct. Recheck '+wrong.map(k=>tabNames[k].toLowerCase()+': '+help[k]).join('; ')+'.';feedback.className='feedback';return;}
+ if(missing.length){feedback.textContent='Transmission incomplete. '+missing.length+' coordinates not entered.';return 'incomplete';}
+ const answer=caseAnswer(mission);
+ if(!answer){feedback.textContent='Transmission unavailable.';return 'retry';}
+ attempted=true;drawSummary();const wrong=keys.filter(k=>pick[k]!==answer[k]);
+ if(wrong.length){feedback.textContent=(4-wrong.length)+' of 4 coordinates correct.';feedback.className='feedback';return 'retry';}
  feedback.className='feedback success';feedback.innerHTML='✦ Rescue complete. All four coordinates match.<div class="answer-reason">'+mission.explain+'</div><button type="button" class="primary" data-next>Load '+(cases.indexOf(mission)===0?'next case':'first case')+'</button>';
+ return 'success';
 }
 try{if(sessionStorage.getItem('lostSpaceClassOpen')==='1')unlock();}catch{}
 })();

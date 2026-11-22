@@ -187,3 +187,47 @@
   linear-gradient(to bottom,transparent,black 8%,black 92%,transparent);
  mask-composite:intersect;
 }
+
+/* Deep-black chart under luminous station silhouettes. The nebula belongs
+   behind the main command deck, not behind the map's station art. */
+.map.space-map-live{
+ background:#03050b;
+ border-color:#0b1831;
+ box-shadow:0 8px 22px #06214d42,inset 0 0 50px #000;
+}
+.space-map-live::before{opacity:.06}
+.space-map-live::after{background:none;box-shadow:inset 0 0 24px #000}
+.space-map-live .map-nebula{opacity:.11}
+.space-map-live .map-flare{opacity:.12}
+.space-map-live>svg path{stroke:#8daedb;opacity:.38;stroke-width:2}
+.space-map-live>svg circle{opacity:.46}
+.space-map-live .map-parallax--far{opacity:.51}
+.space-map-live .planet{
+ mix-blend-mode:screen;
+ background:none!important;
+ gap:.28rem;
+ padding:.2rem .3rem;
+}
+.space-map-live .planet>.station-art{
+ width:clamp(67px,9vw,146px);height:clamp(58px,12.7vh,130px);
+ mask-image:none;-webkit-mask-image:none;
+ filter:contrast(1.18) brightness(1.67) saturate(1.08);
+}
+.space-map-live .planet:is(:hover,:focus-visible,[aria-pressed=true])>.station-art{
+ filter:contrast(1.18) brightness(1.93) saturate(1.12);
+}
+.space-map-live .planet>span{
+ color:#fff;background:#0a111e;border-color:#506c8f;
+ font-size:clamp(.73rem,1.12vw,1rem);padding:.21rem .4rem;
+}
+.space-map-live .planet[aria-pressed=true]>span{
+ color:#c1fdff;border:2px solid #75f3fd;outline:0;background:#152b3a;
+}
+@media(max-width:600px){
+ .space-map-live .planet{padding:.14rem .18rem;min-width:43px}
+ .space-map-live .planet>.station-art{width:clamp(55px,16vw,96px);height:clamp(53px,14vw,82px)}
+ .space-map-live .planet>span{font-size:clamp(.65rem,2vw,.85rem);padding:.12rem .21rem}
+}
+@media(min-width:961px) and (max-height:850px){
+ .space-map-live .planet>.station-art{height:clamp(58px,10.3vh,88px)}
+}

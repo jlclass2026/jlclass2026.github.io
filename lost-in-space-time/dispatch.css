@@ -1,0 +1,43 @@
+/* Rescue console: locked, transmitted, and confirmed are deliberately
+   different states. Motion is decorative; labels and result text carry state. */
+.dispatch{isolation:isolate;position:relative;overflow:hidden}
+.dispatch::after{
+ position:absolute;z-index:-1;content:"";inset:0;pointer-events:none;opacity:0;
+ background:linear-gradient(103deg,transparent 16%,#7bdbff9c 43%,#f4fffdce 50%,#91ffe696 55%,transparent 78%);
+}
+.dispatch[data-signal-state=retry]::after,.dispatch[data-signal-state=incomplete]::after{
+ background:linear-gradient(103deg,transparent 16%,#ffc20852 43%,#ffe997b5 50%,#ffda5b6b 55%,transparent 78%)
+}
+.dispatch.signal-fired::after{animation:transmit-sweep .87s cubic-bezier(.16,.72,.27,1) both}
+@keyframes transmit-sweep{
+ 0%{transform:translateX(-115%);opacity:0}
+ 27%{opacity:.85}
+ 76%{opacity:.62}
+ 100%{transform:translateX(115%);opacity:0}
+}
+.dispatch #submit{
+ position:relative;isolation:isolate;overflow:hidden;
+ transition:transform .2s ease,box-shadow .2s ease;
+}
+.dispatch #submit::after{
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+ background:linear-gradient(115deg,transparent 22%,#f8ffffba 50%,transparent 73%);
+ transform:translateX(-130%);
+}
+.dispatch #submit:is(:hover,:focus-visible){box-shadow:0 0 0 3px #60dbed7d,0 7px 18px #075b7b59}
+.dispatch #submit:active{transform:scale(.96)}
+.dispatch.signal-fired #submit::after{animation:button-relay .65s ease-out both}
+@keyframes button-relay{to{transform:translateX(140%)}}
+.dispatch .summary button{position:relative}
+.dispatch .summary button:is(.ready,.pass)::after{
+ content:"";position:absolute;right:.48rem;top:.49rem;width:.42rem;height:.42rem;
+ border-radius:50%;background:#21868d;box-shadow:0 0 0 2px #7ce8db80;
+}
+.dispatch .summary button.pass::after{background:#14834d;box-shadow:0 0 0 2px #72db9b90}
+.dispatch .summary button.fresh-lock::after{background:#00a5ac;box-shadow:0 0 0 3px #67efedad}
+.dispatch:has(.feedback.success){border-color:#409a77}
+.dispatch:has(.feedback.success) .feedback{font-weight:650}
+@media(prefers-reduced-motion:reduce){
+ .dispatch::after,.dispatch #submit::after{animation:none!important}
+ .dispatch #submit{transition:none;transform:none!important}
+}
