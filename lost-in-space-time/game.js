@@ -13,22 +13,30 @@ const crew=[
  ['bo','Medic Bo','Medic','Looks after injured crew','✚']
 ];
 const cases=[
- {id:'sunshift',file:'CASE 01 / DAY SHIFT',title:'The silent beacon',brief:'The rescue pager picked up four broken messages. Use them together to find the missing crew member.',month:10,year:2026,
- clues:['The signal came from the only place on the dotted flight path that has both “Aurora” and “Sable Moon” as its direct neighbours.','Our last check-in was on Friday 13 November. Send the rescue ship the very next day.','The report was sent 15 minutes after 2 o’clock in the afternoon.','The missing crew member is the one who can fix a broken radio.'],
- answer:{map:'beacon',clock:855,calendar:'2026-11-14',roster:'jax'},
- explain:'Beacon Ring touches both places on the map. The day after Friday 13 November is Saturday 14 November. Fifteen minutes after 2 pm is 2:15 pm, and fixing radios is Engineer Jax’s job.'},
- {id:'midnight',file:'CASE 02 / MIDNIGHT SHIFT',title:'A message across midnight',brief:'The ship’s night log is damaged. Rebuild the message and watch what happens when the clock passes midnight.',month:10,year:2026,
- clues:['Only one stop is directly connected to both Beacon Ring and Ember Port on the dotted flight path.','The countdown began on Monday 30 November. Hit the calendar’s Next button if the rescue falls in a new month.','The countdown began at 11:45 pm and lasted 30 minutes. Send the rescue ship when the countdown ends.','The missing crew member drew the map, but does not pilot the ship.'],
+ {id:'sunshift',file:'CASE 01 / DAY SHIFT',title:'The silent beacon',brief:'A rescue message has been scrambled. The same signal appears in the receiver schedule, the signal log and the crew’s duty records. Follow it through all three.',month:10,year:2026,
+ clues:['The recorder started at 2:00 pm. The signal came 35 minutes later. Set the mission clock to the signal time.','Only one receiver was listening at that time. Compare the station schedules on the star map.','The calendar’s signal log gives the date. Match both the station and the signal time.','Several people worked that day. Check the roster for the person on duty at that station, on that date, at that time.'],
+ receivers:[['aurora',840,855],['comet',855,870],['beacon',870,880],['sable',880,895],['ember',895,910]],
+ logs:[['beacon',855,'2026-11-12'],['comet',875,'2026-11-13'],['beacon',875,'2026-11-14'],['sable',885,'2026-11-15']],
+ shifts:[['tali','beacon','2026-11-13',875],['jax','beacon','2026-11-14',875],['mira','aurora','2026-11-14',875],['bo','beacon','2026-11-14',855]],
+ answer:{map:'beacon',clock:875,calendar:'2026-11-14',roster:'jax'},
+ explain:'2:00 pm plus 35 minutes is 2:35 pm. Beacon Ring was the only receiver listening at 2:35. Its 2:35 log is dated Saturday 14 November, and Engineer Jax was on duty at that station, date and time.'},
+ {id:'midnight',file:'CASE 02 / MIDNIGHT SHIFT',title:'A message across midnight',brief:'A countdown started late on Monday. It sent a signal when it ended, but the ship log has the wrong day pencilled in.',month:10,year:2026,
+ clues:['The countdown began at 11:45 pm and lasted 30 minutes. Find when the signal went out.','Choose the receiver that was listening at the signal time. Read the schedules in order across midnight.','The countdown started on Monday 30 November. The signal log contains a duplicate the previous day. Use the date when the countdown finished.','Use the correct station, date and time to identify the officer on duty.'],
+ receivers:[['aurora',1395,1425],['comet',1425,1440],['beacon',0,10],['sable',10,25],['ember',25,40]],
+ logs:[['sable',15,'2026-11-30'],['beacon',5,'2026-12-01'],['sable',15,'2026-12-01'],['ember',30,'2026-12-01']],
+ shifts:[['mira','sable','2026-11-30',15],['tali','sable','2026-12-01',15],['bo','beacon','2026-12-01',15],['jax','sable','2026-12-01',20]],
  answer:{map:'sable',clock:15,calendar:'2026-12-01',roster:'tali'},
- explain:'Sable Moon touches Beacon Ring and Ember Port. After 15 minutes it is midnight, and after 15 more it is 12:15 am on Tuesday 1 December. Scout Tali is the mapper.'}
+ explain:'Starting at 11:45 pm, 15 minutes takes you to midnight. Another 15 minutes takes you to 12:15 am on Tuesday 1 December. Sable Moon was listening then. Scout Tali was on duty at that station, date and time.'}
 ];
 const tabNames={map:'Where',clock:'Time',calendar:'Date',roster:'Who'};
-const help={map:'follow the dotted paths between neighbours',clock:'count the minutes and check am or pm',calendar:'check the next day or month',roster:'match the job to the clue'};
+const help={map:'compare the signal time with the listening schedules',clock:'count the elapsed minutes and check am or pm',calendar:'match the signal log and check the day',roster:'match station, date and time on the duty record'};
 const gate=one('#gate'),play=one('#play'),instrument=one('#instrument'),summary=one('#summary'),feedback=one('#feedback');
 let mission=cases[0], tab='map', pick={}, saveClock=480, attempted=false, year=mission.year, month=mission.month;
 const pad=n=>String(n).padStart(2,'0');
 const timeLabel=n=>((Math.floor(n/60)%12)||12)+':'+pad(n%60)+' '+(n>=720?'pm':'am');
 const dateLabel=s=>new Intl.DateTimeFormat('en-AU',{timeZone:'UTC',weekday:'short',day:'numeric',month:'short'}).format(new Date(s+'T00:00:00Z'));
+const planetName=id=>planets.find(x=>x[0]===id)?.[1]||id;
+const windowEnd=n=>timeLabel(n%1440);
 const attr=(on)=>' aria-pressed="'+Boolean(on)+'"';
 const values={map:()=>planets.find(x=>x[0]===pick.map)?.[1],clock:()=>pick.clock===undefined?null:timeLabel(pick.clock),calendar:()=>pick.calendar?dateLabel(pick.calendar):null,roster:()=>crew.find(x=>x[0]===pick.roster)?.[1]};
 const head=(title,sub)=>'<div class="instrument-head"><h3>'+title+'</h3><p>'+sub+'</p></div>';
@@ -52,7 +60,8 @@ function choose(c){
 const starField=Array.from({length:60},(_,i)=>'<circle cx="'+((i*233+41)%989)+'" cy="'+((i*131+91)%555)+'" r="'+((i%4)*.49+.45)+'" fill="'+(i%5===0?'#b8f6ff':'#fff')+'" opacity="'+(.2+i%8*.09)+'"/>').join('');
 function renderMap(){
  const lines=[[0,1],[0,2],[1,2],[2,3],[3,4]].map(([i,j])=>'<path d="M '+planets[i][2]*10+' '+planets[i][3]*5.6+' L '+planets[j][2]*10+' '+planets[j][3]*5.6+'" fill="none" stroke="#bbdcff" stroke-width="4" stroke-dasharray="9 9" opacity=".55"/>').join('');
- return head('Star map','Tap the missing crew’s location.')+'<div class="map"><svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">'+starField+lines+'</svg>'+planets.map(([id,name,x,y,c1,c2])=>'<button class="planet" data-planet="'+id+'"'+attr(pick.map===id)+' style="left:'+x+'%;top:'+y+'%;--planet1:'+c1+';--planet2:'+c2+'"><i></i><span>'+name+'</span></button>').join('')+'</div>';
+ const windows=mission.receivers.map(([id,start,end])=>'<button type="button" class="window-record" data-planet="'+id+'"'+attr(pick.map===id)+'><strong>'+planetName(id)+'</strong><span>'+windowEnd(start)+' to '+windowEnd(end)+'</span></button>').join('');
+ return head('Star map','Which receiver was listening when your signal went out?')+'<div class="map"><svg viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">'+starField+lines+'</svg>'+planets.map(([id,name,x,y,c1,c2])=>'<button class="planet" data-planet="'+id+'"'+attr(pick.map===id)+' style="left:'+x+'%;top:'+y+'%;--planet1:'+c1+';--planet2:'+c2+'"><i></i><span>'+name+'</span></button>').join('')+'</div><div class="evidence"><h4>Receiver listening schedules</h4><p>A receiver starts listening at the first time and stops at the second.</p><div class="window-list">'+windows+'</div></div>';
 }
 function renderClock(){
  const direction=(tick,rad)=>[Math.sin(tick*Math.PI/30)*rad,-Math.cos(tick*Math.PI/30)*rad];
@@ -65,9 +74,15 @@ function renderCalendar(){
  const d=new Date(Date.UTC(year,month,1)), name=new Intl.DateTimeFormat('en-AU',{timeZone:'UTC',year:'numeric',month:'long'}).format(d);
  const blank=(d.getUTCDay()+6)%7,n=new Date(Date.UTC(year,month+1,0)).getUTCDate();
  const days=Array.from({length:n},(_,i)=>{const id=year+'-'+pad(month+1)+'-'+pad(i+1);return '<button data-date="'+id+'"'+attr(pick.calendar===id)+' aria-label="'+dateLabel(id)+'">'+(i+1)+'</button>';}).join('');
- return head('Calendar','Choose the rescue date.')+'<div class="calnav"><button data-month="-1">Previous</button><strong aria-live="polite">'+name+'</strong><button data-month="1">Next</button></div><div class="calendar">'+['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>'<span class="week">'+d+'</span>').join('')+'<span aria-hidden="true"></span>'.repeat(blank)+days+'</div>';
+ const logs=mission.logs.map(([station,t,date])=>'<li><strong>'+planetName(station)+'</strong><span>'+timeLabel(t)+'</span><time datetime="'+date+'">'+dateLabel(date)+'</time></li>').join('');
+ return head('Calendar','Use the signal log to choose the rescue date.')+'<div class="evidence log-first"><h4>Signal log</h4><ul class="signal-log">'+logs+'</ul></div><div class="calnav"><button data-month="-1">Previous</button><strong aria-live="polite">'+name+'</strong><button data-month="1">Next</button></div><div class="calendar">'+['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>'<span class="week">'+d+'</span>').join('')+'<span aria-hidden="true"></span>'.repeat(blank)+days+'</div>';
 }
-function renderRoster(){return head('Crew roster','Find the person who fits the clue.')+'<div class="roster">'+crew.map(([id,name,role,detail,icon])=>'<button class="crew" data-crew="'+id+'"'+attr(pick.roster===id)+'><span aria-hidden="true">'+icon+'</span><strong>'+name+'</strong><small>'+role+' · '+detail+'</small></button>').join('')+'</div>';}
+function renderRoster(){
+ return head('Crew roster','Match all three fields to choose the person on duty.')+'<div class="roster">'+crew.map(([id,name,role,detail,icon])=>{
+  const [,station,date,t]=mission.shifts.find(row=>row[0]===id);
+  return '<button class="crew" data-crew="'+id+'"'+attr(pick.roster===id)+'><span aria-hidden="true">'+icon+'</span><strong>'+name+'</strong><small>'+role+'</small><span class="shift"><strong>'+planetName(station)+'</strong><span>'+dateLabel(date)+' · '+timeLabel(t)+'</span></span></button>';
+ }).join('')+'</div>';
+}
 function drawSummary(){
  summary.innerHTML=Object.keys(tabNames).map(k=>{const v=values[k]();return '<button data-jump="'+k+'" class="'+(attempted&&v?(pick[k]===mission.answer[k]?'pass':'check'):v?'ready':'')+'"><span>'+tabNames[k]+(attempted&&v?(pick[k]===mission.answer[k]?' · correct':' · check'):'')+'</span><strong>'+(v??'Not set')+'</strong></button>';}).join('');
 }
@@ -81,7 +96,7 @@ function record(k,v){pick[k]=v;attempted=false;feedback.replaceChildren();feedba
 play.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.tab||b.dataset.jump){move(b.dataset.tab||b.dataset.jump);return;}
- if(b.dataset.planet){record('map',b.dataset.planet);one('[data-planet="'+b.dataset.planet+'"]').focus({preventScroll:true});return;}
+ if(b.dataset.planet){record('map',b.dataset.planet);one((b.classList.contains('window-record')?'.window-record':'.planet')+'[data-planet="'+b.dataset.planet+'"]').focus({preventScroll:true});return;}
  if(b.dataset.crew){record('roster',b.dataset.crew);one('[data-crew="'+b.dataset.crew+'"]').focus({preventScroll:true});return;}
  if(b.dataset.date){record('calendar',b.dataset.date);one('[data-date="'+b.dataset.date+'"]').focus({preventScroll:true});return;}
  if(b.dataset.offset){saveClock=(saveClock+Number(b.dataset.offset)+1440)%1440;render();one('[data-offset="'+b.dataset.offset+'"]').focus({preventScroll:true});return;}
