@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#121126">
+<title>Lost in Space &amp; Time</title>
+<link rel="stylesheet" href="game.css"><script defer src="game.js"></script>
+</head>
+<body>
+<main id="gate" class="gate">
+ <div class="gate-orbit" aria-hidden="true"><span>✧</span><i></i></div>
+ <a class="return" href="/#class-games">Class Games</a><div class="kicker">STAR RESCUE UNIT</div><h1>Lost in <em>Space<br>&amp; Time</em></h1>
+ <p>A missing transmission. Four coordinates. One chance to bring the crew home.</p>
+ <form id="gate-form"><label for="pin">Enter class PIN</label><div><input id="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" required><button class="primary">Enter mission control</button></div><p id="gate-error" role="alert"></p></form>
+</main>
+<main id="play" class="mission" hidden>
+ <header class="top"><div><a class="return" href="/#class-games">Class Games</a><p class="kicker">STAR RESCUE UNIT</p><h1>Lost in <em>Space &amp; Time</em></h1></div>
+ <div class="mission-select"><label for="case">Case file</label><select id="case"></select></div></header>
+ <div class="board">
+  <section class="brief shell" aria-labelledby="case-title"><p class="kicker" id="case-code"></p><h2 id="case-title"></h2><p id="case-brief"></p><ol id="clues" class="clues"></ol></section>
+  <section class="station shell" aria-label="Rescue instruments">
+   <nav aria-label="Rescue instruments"><button data-tab="map" aria-pressed="true">✧ <span>Star map</span></button><button data-tab="clock" aria-pressed="false">◷ <span>Clock</span></button><button data-tab="calendar" aria-pressed="false">▦ <span>Calendar</span></button><button data-tab="roster" aria-pressed="false">♙ <span>Roster</span></button></nav>
+   <div id="instrument"></div>
+  </section>
+ </div>
+ <section class="dispatch shell" aria-label="Rescue signal"><div class="dispatch-head"><div><p class="kicker">RESCUE SIGNAL</p><h2>Lock in your answers</h2></div><button id="submit" type="button" class="primary">Transmit answers</button></div><div id="summary" class="summary"></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div></section>
+</main>
+</body></html>
