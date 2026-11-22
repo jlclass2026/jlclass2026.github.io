@@ -177,3 +177,13 @@
  .space-map-live .planet>.station-art{width:clamp(41px,14vw,62px);height:50px}
  .space-map-live .planet>span{font-size:.64rem;padding:.1rem .24rem}
 }
+
+/* Feather the outer pixels of the square station art, not the central silhouette. */
+.space-map-live .planet>.station-art{
+ -webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent),
+  linear-gradient(to bottom,transparent,black 8%,black 92%,transparent);
+ -webkit-mask-composite:source-in;
+ mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent),
+  linear-gradient(to bottom,transparent,black 8%,black 92%,transparent);
+ mask-composite:intersect;
+}
