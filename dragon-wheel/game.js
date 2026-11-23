@@ -90,16 +90,20 @@ function init(){
  $('timer').addEventListener('click',()=>{if(started===null){started=performance.now();interval=setInterval(clock,250);$('timer').textContent='Pause timer';}else{elapsed+=performance.now()-started;started=null;clearInterval(interval);$('timer').textContent='Resume timer';}clock();});
  time.addEventListener('dblclick',()=>{elapsed=0;if(started!==null)started=performance.now();clock();});
  const mode=()=>document.querySelector('#model input[name="mode"]:checked').value;
- function updateLabel(){$('target-label').textContent=mode()==='share'?'Number of nurseries':'Eggs in each nursery';}
- $('model').addEventListener('change',updateLabel);
- $('sync').addEventListener('click',()=>{$('target').value=divisor.value;render(true);});
+ function updateLabel(){
+  const share=mode()==='share', n=integer($('target').value,1,100);
+  $('target-label').textContent=share?'Number of nurseries':'Eggs in each nursery';
+  $('spread').textContent=n===null?(share?'Share the eggs':'Group the eggs'):share?'Share into '+n+(n===1?' nursery':' nurseries'):'Put '+n+(n===1?' egg':' eggs')+' in each nursery';
+ }
+ $('model').addEventListener('change',updateLabel);$('target').addEventListener('input',updateLabel);
+ $('sync').addEventListener('click',()=>{$('target').value=divisor.value;updateLabel();render(true);});
  function egg(i){const e=make('span','egg');const v=i%20;e.style.setProperty('--ax',(v%5)*25+'%');e.style.setProperty('--ay',Math.floor(v/5)*100/3+'%');e.style.setProperty('--turn',([-8,5,-3,9,1][Math.floor(i/20)])+'deg');e.style.setProperty('--hue',Math.floor(i/20)*12+'deg');e.style.setProperty('--delay',Math.min(i,39)*16+'ms');e.setAttribute('aria-hidden','true');return e;}
  function render(animate){
   const d=divide($('eggs').value,$('target').value,mode());if(!d)return;
   const out=$('nurseries');out.replaceChildren();out.dataset.layout=d.nurseries>=8?'many':'few';out.parentElement.scrollTop=0;out.classList.toggle('spreading',animate);
   let index=0;const qty=(n,s,p)=>n+' '+(n===1?s:p);
   for(let i=0;i<d.nurseries;i++){
-   const bowl=make('article','bowl');bowl.append(make('h3','','Nursery '+(i+1)),make('p','count',qty(d.each,'egg','eggs')));
+   const bowl=make('article','bowl');const label=make('div','bowl-label');label.append(make('h3','','Nursery '+(i+1)),make('p','count',qty(d.each,'egg','eggs')));bowl.append(label);
    const tray=make('div','egg-row');for(let j=0;j<d.each;j++)tray.append(egg(index++));bowl.append(tray);out.append(bowl);
   }
   const rest=$('remainder-eggs');rest.replaceChildren();for(let r=0;r<d.remainder;r++)rest.append(egg(index++));
@@ -107,5 +111,5 @@ function init(){
   $('model-status').textContent=d.total+' ÷ '+d.divisor+' = '+d.quotient+(d.remainder?' remainder '+d.remainder:'')+' · '+qty(d.nurseries,'nursery','nurseries')+', '+qty(d.each,'egg','eggs')+' each. '+(d.remainder?qty(d.remainder,'egg','eggs')+' left over.':'No eggs left over.');
  }
  $('model').addEventListener('submit',e=>{e.preventDefault();render(true);});
- render(false);
+ updateLabel();render(false);
 }
