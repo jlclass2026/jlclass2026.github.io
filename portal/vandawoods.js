@@ -117,66 +117,28 @@
   const dialog = document.createElement('dialog');
   dialog.className = 'patch-dialog';
   dialog.setAttribute('aria-labelledby', 'patch-title');
-  dialog.innerHTML = '<h2 id="patch-title">Update</h2><p>Choose your file, then enter the teacher PIN.</p><label for="patch-file">File</label><select id="patch-file"><optgroup label="Classroom"><option value="vandawoods-division-wheels">Vandawoods: Division Wheels (A4 worksheet)</option><option value="room6-expectations">Room 6 classroom expectations</option></optgroup><optgroup label="Dark Side of the Moon"><option value="lunar-wallpaper">The Lunar Fortress (desktop background)</option><option value="moonquake-portrait">Moonquake (portrait)</option><option value="moonquake-video">Dark Side of the Moon (video)</option></optgroup><optgroup label="Previous downloads"><option value="santa-village">Santa’s Village Squishy World</option><option value="dream-nightmare">Dream &amp; Nightmare motion patch</option><option value="cold-task">Persuasive cold task: holiday destination</option><option value="health">Year 3 Health test</option></optgroup></select><label for="patch-pin">PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Download</button></div>';
+  dialog.innerHTML = '<h2 id="patch-title">Update</h2><p>Squishy Market Import</p><label for="patch-pin">Teacher PIN</label><input id="patch-pin" type="password" autocomplete="off" spellcheck="false"><p id="patch-status" role="status" aria-live="polite"></p><div class="patch-actions"><button type="button" class="patch-cancel">Cancel</button><button type="button" class="patch-download">Show file location</button></div>';
   document.body.append(dialog);
   const input = dialog.querySelector('input');
   const status = dialog.querySelector('#patch-status');
   const download = dialog.querySelector('.patch-download');
-  let downloading = false;
   function close() { dialog.close(); }
-  function reset() { input.value = ''; status.textContent = ''; downloading = false; download.disabled = false; }
+  function reset() { input.value = ''; status.textContent = ''; }
   trigger.addEventListener('click', () => { reset(); dialog.showModal(); input.focus(); });
   dialog.querySelector('.patch-cancel').addEventListener('click', close);
   dialog.addEventListener('close', () => { reset(); if (document.body.dataset.view === 'class-games') trigger.focus(); });
   addEventListener('hashchange', () => { if (dialog.open) close(); });
   dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) close(); } });
   function startDownload() {
-    if (downloading) return;
     if (input.value !== 'Hello12') { status.textContent = 'That PIN did not match. Try again.'; input.select(); input.focus(); return; }
-    downloading = true; download.disabled = true; input.value = '';
-    const selection = dialog.querySelector('#patch-file').value;
-    const lunarAssets = {
-      'santa-village': ['/patches/santa-village-squishy-world-20261123.zip', 'New World - Santa’s Village Squishy World Patch.zip'],
-      'vandawoods-division-wheels': ['/patches/vandawoods-division-wheels-20261123.pdf', 'Vandawoods - Division Wheels.pdf'],
-      'lunar-wallpaper': ['/patches/lunar-fortress-20261119.jpg', 'Moonquake - The Lunar Fortress.jpg'],
-      'moonquake-portrait': ['/patches/moonquake-20261119.jpg', 'Moonquake - Portrait.jpg'],
-      'room6-expectations': ['/patches/room6-vandawoods-expectations-20261119.png', 'Room 6 - Vandawoods Classroom Expectations.png'],
-      'moonquake-video': ['/patches/dark-side-of-the-moon-20261119.mp4', 'Dark Side of the Moon.mp4'],
-    };
-    if (Object.hasOwn(lunarAssets, selection)) {
-      const [href, filename] = lunarAssets[selection];
-      const link = document.createElement('a');
-      link.href = href; link.download = filename;
-      document.body.append(link); link.click(); link.remove();
-      status.textContent = 'Download requested. Check your Downloads folder.';
-      downloading = false; download.disabled = false;
-      return;
-    }
-    if (selection === 'dream-nightmare') {
-      const link = document.createElement('a');
-      link.href = '/patches/dream-nightmare-motion-20261119.zip';
-      link.download = 'New World - Dream and Nightmare Motion Patch.zip';
-      document.body.append(link); link.click(); link.remove();
-      status.textContent = 'Download requested. Unzip the patch and open the updater.';
-      downloading = false; download.disabled = false;
-      return;
-    }
-    if (dialog.querySelector('#patch-file').value === 'cold-task') {
-      const prompt = 'Cold task: The best holiday destination\n\nYour family is deciding where to go for their next holiday. Where do you think they should go?\n\nWrite a persuasive text to convince your family to choose your destination. Give reasons and examples to explain why it would be a great place to visit.\n';
-      const link = document.createElement('a');
-      link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(prompt);
-      link.download = 'Year 3 Persuasive Cold Task - Holiday Destination.txt';
-      document.body.append(link); link.click(); link.remove();
-      status.textContent = prompt;
-      status.style.whiteSpace = 'pre-wrap';
-      downloading = false; download.disabled = false;
-      return;
-    }
+    input.value = '';
     const link = document.createElement('a');
-    link.href = '/patches/latest-patch.zip?v=20261118-health-dinner-2';
-    link.download = 'Year 3 Health Test.zip';
-    document.body.append(link); link.click(); link.remove();
-    status.textContent = 'Download requested. Check your Downloads folder. The ZIP contains the two-page Year 3 Health Food Choices test.';
+    link.href = 'https://chatgpt.com/';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = 'Open ChatGPT';
+    status.replaceChildren('Download the JSON from your private ChatGPT conversation, then import it in New World’s Squishy Market. ', link);
+    link.focus();
   }
   download.addEventListener('click', startDownload);
   input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); startDownload(); } });
