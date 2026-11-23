@@ -3,16 +3,10 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#111b43">
 <title>Lost in Space &amp; Time</title>
-<link rel="stylesheet" href="game.css?v=6"><link rel="stylesheet" href="star-map.css?v=6"><link rel="stylesheet" href="dispatch.css?v=6"><script defer src="game.js?v=6"></script><script defer src="star-map.js?v=6"></script><script defer src="dispatch.js?v=6"></script>
+<link rel="stylesheet" href="game.css?v=6"><link rel="stylesheet" href="star-map.css?v=6"><link rel="stylesheet" href="dispatch.css?v=6"><script defer src="game.js?v=7-open"></script><script defer src="star-map.js?v=6"></script><script defer src="dispatch.js?v=6"></script>
 </head>
 <body>
-<main id="gate" class="gate">
- <div class="gate-orbit" aria-hidden="true"><span>✧</span><i></i></div>
- <a class="return" href="/#class-games">Class Games</a><div class="kicker">STAR RESCUE UNIT</div><h1>Lost in <em>Space<br>&amp; Time</em></h1>
- <p>A missing transmission. Four coordinates. One chance to bring the crew home.</p>
- <form id="gate-form"><label for="pin">Enter class PIN</label><div><input id="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" required><button class="primary">Enter mission control</button></div><p id="gate-error" role="alert"></p></form>
-</main>
-<main id="play" class="mission" hidden>
+<main id="play" class="mission">
  <header class="top"><div class="mission-lockup"><a class="return" href="/#class-games" aria-label="Back to Class Games">Class Games</a><div><p class="kicker">STAR RESCUE UNIT</p><h1>Lost in <em>Space &amp; Time</em></h1></div></div>
  <div class="mission-select"><label for="case">Case file</label><select id="case"></select></div></header>
  <div class="board">

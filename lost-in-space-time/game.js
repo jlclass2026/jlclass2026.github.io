@@ -60,7 +60,7 @@ const cases=[
  explain:'Two nights after Saturday 28 November is Monday 30 November. The diagnostics ended at 12:05 am and the countdown ended at 12:15 am on Tuesday 1 December. The rocky crescent in that entry is Sable Moon. Tali’s Monday shift had a second duty block from 12:10 am to 12:35 am on Tuesday.'}
 ];
 const tabNames={map:'Where',clock:'Time',calendar:'Date',roster:'Who'};
-const gate=one('#gate'),play=one('#play'),instrument=one('#instrument'),summary=one('#summary'),feedback=one('#feedback');
+const play=one('#play'),instrument=one('#instrument'),summary=one('#summary'),feedback=one('#feedback');
 let mission=cases[0], tab='map', pick={}, saveClock=480, attempted=false, year=mission.year, month=mission.month;
 const pad=n=>String(n).padStart(2,'0');
 const timeLabel=n=>((Math.floor(n/60)%12)||12)+':'+pad(n%60)+' '+(n>=720?'pm':'am');
@@ -71,15 +71,6 @@ const windowEnd=n=>timeLabel(n%1440);
 const attr=(on)=>' aria-pressed="'+Boolean(on)+'"';
 const values={map:()=>planets.find(x=>x[0]===pick.map)?.[1],clock:()=>pick.clock===undefined?null:timeLabel(pick.clock),calendar:()=>pick.calendar?dateLabel(pick.calendar):null,roster:()=>crew.find(x=>x[0]===pick.roster)?.[1]};
 const head=title=>'<div class="instrument-head"><h3>'+title+'</h3></div>';
-async function digest(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,'0')).join('');}
-one('#gate-form').addEventListener('submit',async e=>{
- e.preventDefault();const p=one('#pin'),error=one('#gate-error');
- try{if(await digest(p.value.trim())!=='3ea87a56da3844b420ec2925ae922bc731ec16a4fc44dcbeafdad49b0e61d39c'){error.textContent='That PIN didn’t match. Try again.';p.select();return;}}
- catch{error.textContent='Open the game on the class site to enter the PIN.';return;}
- try{sessionStorage.setItem('lostSpaceClassOpen','1');}catch{}
- unlock();
-});
-function unlock(){gate.hidden=true;play.hidden=false;choose(cases[0]);one('#case').focus();}
 one('#case').innerHTML=cases.map(c=>'<option value="'+c.id+'">'+c.title+'</option>').join('');
 one('#case').addEventListener('change',e=>choose(cases.find(c=>c.id===e.target.value)));
 function choose(c){
@@ -189,5 +180,5 @@ function check(){
  feedback.className='feedback success';feedback.innerHTML='✦ Rescue complete. All four coordinates match.<div class="answer-reason">'+mission.explain+'</div><button type="button" class="primary" data-next>Load '+(cases.indexOf(mission)===0?'next case':'first case')+'</button>';
  return 'success';
 }
-try{if(sessionStorage.getItem('lostSpaceClassOpen')==='1')unlock();}catch{}
+choose(cases[0]);
 })();
