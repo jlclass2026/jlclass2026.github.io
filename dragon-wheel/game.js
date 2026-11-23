@@ -15,7 +15,26 @@ function checkWedge(total,divisor,answer){
  return a===d.quotient?'correct':'incorrect';
 }
 if(typeof module!=='undefined')module.exports={divide,checkWedge};
-if(typeof document!=='undefined')init();
+if(typeof document!=='undefined'){init();gate();}
+function gate(){
+ const form=document.getElementById('gate-form');
+ if(!form)return;
+ const pin=document.getElementById('class-pin'), error=document.getElementById('gate-error');
+ const open=()=>{document.getElementById('class-gate').hidden=true;document.getElementById('game').hidden=false;document.getElementById('game-title').focus();};
+ try{if(sessionStorage.getItem('dragonWheelClassOpen')==='1'){open();return;}}catch{}
+ form.addEventListener('submit',async e=>{
+  e.preventDefault();error.textContent='';
+  const value=pin.value.trim();
+  if(!/^\d{4}$/.test(value)){error.textContent='Enter the four-digit class PIN.';pin.select();return;}
+  try{
+   const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
+   const hash=Array.from(new Uint8Array(bytes),x=>x.toString(16).padStart(2,'0')).join('');
+   if(hash!=='afbfb89027a4dae87c6033eaa07896e93f3f1ddc2214ca43658982e8aa74b4d4'){error.textContent='That PIN didn’t match. Try again.';pin.select();return;}
+  }catch{error.textContent='Open the game from the Class Games site.';return;}
+  try{sessionStorage.setItem('dragonWheelClassOpen','1');}catch{}
+  pin.value='';open();
+ });
+}
 function init(){
  const $=id=>document.getElementById(id), divisor=$('divisor'),wheel=$('wheel'),time=$('time');
  const make=(tag,cls,txt)=>Object.assign(document.createElement(tag),{className:cls,textContent:txt||''});
@@ -50,7 +69,7 @@ function init(){
   const d=+divisor.value, max=Math.floor(100/d);
   if(fresh){const choices=Array.from({length:max},(_,i)=>i+1);for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}seed=choices.slice(0,6);}
   rows.forEach(([x,a],i)=>{x.value=d*Math.min(seed[i],max);a.value='';});
-  centreValue.textContent='÷ '+d;resetFeedback();
+  centreValue.textContent=d;resetFeedback();
  }
  regenerate(false);
  wheel.addEventListener('input',resetFeedback);
@@ -77,14 +96,14 @@ function init(){
  function egg(i){const e=make('span','egg');const v=i%20;e.style.setProperty('--ax',(v%5)*25+'%');e.style.setProperty('--ay',Math.floor(v/5)*100/3+'%');e.style.setProperty('--turn',([-8,5,-3,9,1][Math.floor(i/20)])+'deg');e.style.setProperty('--hue',Math.floor(i/20)*12+'deg');e.style.setProperty('--delay',Math.min(i,39)*16+'ms');e.setAttribute('aria-hidden','true');return e;}
  function render(animate){
   const d=divide($('eggs').value,$('target').value,mode());if(!d)return;
-  const out=$('nurseries');out.replaceChildren();out.classList.toggle('spreading',animate);
+  const out=$('nurseries');out.replaceChildren();out.dataset.layout=d.nurseries>=8?'many':'few';out.parentElement.scrollTop=0;out.classList.toggle('spreading',animate);
   let index=0;const qty=(n,s,p)=>n+' '+(n===1?s:p);
   for(let i=0;i<d.nurseries;i++){
    const bowl=make('article','bowl');bowl.append(make('h3','','Nursery '+(i+1)),make('p','count',qty(d.each,'egg','eggs')));
    const tray=make('div','egg-row');for(let j=0;j<d.each;j++)tray.append(egg(index++));bowl.append(tray);out.append(bowl);
   }
   const rest=$('remainder-eggs');rest.replaceChildren();for(let r=0;r<d.remainder;r++)rest.append(egg(index++));
-  $('leftover').hidden=d.remainder===0;
+  $('leftover').hidden=d.remainder===0;$('leftover').classList.toggle('spreading',animate);
   $('model-status').textContent=d.total+' ÷ '+d.divisor+' = '+d.quotient+(d.remainder?' remainder '+d.remainder:'')+' · '+qty(d.nurseries,'nursery','nurseries')+', '+qty(d.each,'egg','eggs')+' each. '+(d.remainder?qty(d.remainder,'egg','eggs')+' left over.':'No eggs left over.');
  }
  $('model').addEventListener('submit',e=>{e.preventDefault();render(true);});
