@@ -7,8 +7,8 @@
 @media(min-width:1000px){.lane[data-op=product] .tiles{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:570px){#pop img{width:49px}#pop .quip{top:-15px;left:auto;right:-4px;font-size:.62rem}.labels span{max-width:36px}}
 </style></head><body>
-<aside class="gate" id="class-gate"><a href="/#class-games">← Class Games</a><p class="kicker">VANDAWOODS FIELD GAMES</p><h1>Dicefall Ruins</h1><form id="class-pin-form"><label>Enter class PIN<input type="password" inputmode="numeric" id="class-pin" autocomplete="off" required maxlength="4"></label><button class="primary" type="submit">Enter</button><p id="gate-error" role="alert"></p></form></aside>
-<div id="game-shell" hidden><header><a class="brand" href="/#class-games">DINO BYTES <b>✷</b> CLASS GAMES</a><nav aria-label="Game tools"><button id="how">How to play</button><button id="lab-open">Dice Lab</button><button id="reset">New game</button></nav></header>
+
+<div id="game-shell"><header><a class="brand" href="/#class-games">DINO BYTES <b>✷</b> CLASS GAMES</a><nav aria-label="Game tools"><button id="how">How to play</button><button id="lab-open">Dice Lab</button><button id="reset">New game</button></nav></header>
 <main><div class="intro"><div><p class="kicker">A VANDAWOODS DICE GAME</p><h1 id="game-title" tabindex="-1">Dicefall Ruins</h1></div><div id="round" class="round"></div></div>
 <section class="desk" aria-label="Round controls"><div class="players" id="players"><div class="player teal" id="player0"><label for="name0">Player 1</label><input id="name0" maxlength="22" value="Amber" autocomplete="off"><span id="score0">0 points</span></div><div class="player plum" id="player1"><label for="name1">Player 2</label><input id="name1" maxlength="22" value="Orchid" autocomplete="off"><span id="score1">0 points</span></div></div>
 <div class="dice"><div class="die" id="die0">?</div><div class="die" id="die1">?</div><div id="pop" aria-hidden="true"></div></div>
@@ -243,23 +243,5 @@ $('do-reset').addEventListener('click',()=>{
 });
 render();
 
-(()=>{
- const form=document.getElementById('class-pin-form');
- if(!form)return;
- const pin=document.getElementById('class-pin'),error=document.getElementById('gate-error');
- const open=()=>{document.getElementById('class-gate').hidden=true;document.getElementById('game-shell').hidden=false;document.getElementById('game-title').focus();};
- try{if(sessionStorage.getItem('dicefallRuinsClassOpen')==='1'){open();return;}}catch{}
- form.addEventListener('submit',async e=>{
-  e.preventDefault();error.textContent='';
-  const value=pin.value.trim();
-  if(!/^\d{4}$/.test(value)){error.textContent='Enter the four-digit class PIN.';pin.select();return;}
-  try{
-   const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
-   const hash=Array.from(new Uint8Array(bytes),v=>v.toString(16).padStart(2,'0')).join('');
-   if(hash!=='afbfb89027a4dae87c6033eaa07896e93f3f1ddc2214ca43658982e8aa74b4d4'){error.textContent='That PIN didn’t match. Try again.';pin.select();return;}
-  }catch{error.textContent='Open the game from the Class Games site.';return;}
-  try{sessionStorage.setItem('dicefallRuinsClassOpen','1');}catch{}
-  pin.value='';open();
- });
-})();
+
 </script></body></html>
