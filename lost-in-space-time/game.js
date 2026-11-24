@@ -57,7 +57,8 @@ const cases=[
   ['nix','prism',[1],1405,30,15,25,'ember'],['vela','beacon',[6,0,1,2],1405,20,15,10,'comet']
  ],
  event:{reference:'2026-11-28',days:2,start:1400,parts:[45,10]},
- explain:'Two nights after Saturday 28 November is Monday 30 November. The diagnostics ended at 12:05 am and the countdown ended at 12:15 am on Tuesday 1 December. The rocky crescent in that entry is Sable Moon. Tali’s Monday shift had a second duty block from 12:10 am to 12:35 am on Tuesday.'}
+ explain:'Two nights after Saturday 28 November is Monday 30 November. The diagnostics ended at 12:05 am and the countdown ended at 12:15 am on Tuesday 1 December. The rocky crescent in that entry is Sable Moon. Tali’s Monday shift had a second duty block from 12:10 am to 12:35 am on Tuesday.'},
+ {"id":"newyear","file":"CASE 03 / YEAR TURN","title":"The New Year distress call","brief":"A supply drone lost its heat shield and sent a distress call. The rescue team needs four coordinates.","art":"assets/case-3-distress-drone.webp","month":11,"year":2026,"clues":["The crew ran a safety check on Sunday 27 December. They run one every second day. The drone sent its call during the second check after that.","The signal scan began at 11:40 pm and ran for 25 minutes. A 20-minute emergency countdown began as soon as the scan finished. The call went out when the countdown reached zero."],"receivers":[["aurora",1420,10],["comet",1425,35],["beacon",0,20],["sable",5,30],["ember",15,45],["prism",30,55]],"logs":[["2026-12-30",5,"Stars shone through the centre of a huge ring.","beacon"],["2026-12-30",25,"A straight gantry crossed the view as a streak of light passed behind it.","comet"],["2026-12-31",5,"A dark crescent of rock filled the camera view.","sable"],["2026-12-31",25,"The camera saw a sliver of dark rock with two curved tips.","sable"],["2027-01-01",5,"A star was visible through the middle of a giant open circle.","beacon"],["2027-01-01",25,"The camera saw an orange building with six sides and a row of refinery pipes.","ember"],["2027-01-01",45,"A tall pointed crystal shone as the camera turned.","prism"],["2027-01-02",5,"A narrow tower had three prongs against the stars.","aurora"],["2027-01-02",25,"One long, straight docking frame stretched across the view.","comet"]],"schedules":[["mira","ember",[4],1415,40,20,25,"sable"],["jax","prism",[4],1420,30,15,30,"comet"],["tali","comet",[4,5],1415,40,10,30,"sable"],["bo","sable",[3,4],1415,30,20,40,"aurora"],["nix","ember",[4],1425,20,10,30,"beacon"],["vela","ember",[5],1420,25,10,30,"prism"]],"event":{"reference":"2026-12-27","days":4,"start":1420,"parts":[25,20]},"explain":"The next checks were Tuesday 29 December and Thursday 31 December. The scan crossed midnight, finishing at 12:05 am. The countdown then ended at 12:25 am on Friday 1 January 2027. The six-sided orange refinery in that log is Ember Port. Nix’s Thursday shift continued into Friday: their second duty was at Ember Port from 12:15 am to 12:45 am."}
 ];
 const tabNames={map:'Where',clock:'Time',calendar:'Date',roster:'Who'};
 const play=one('#play'),instrument=one('#instrument'),summary=one('#summary'),feedback=one('#feedback');
@@ -77,6 +78,13 @@ function choose(c){
  mission=c; tab='map'; pick={}; attempted=false; saveClock=c.id==='midnight'?1410:720; year=c.year; month=c.month;
  one('#case').value=c.id;one('#case-code').textContent=c.file;one('#case-title').textContent=c.title;one('#case-brief').textContent=c.brief;
  one('#clues').innerHTML=c.clues.map(x=>'<li><span>'+x+'</span></li>').join('');
+ const oldArt=one('.case-file-art');if(oldArt)oldArt.remove();
+ if(c.art){
+  const art=document.createElement('img');art.className='case-file-art';art.src=c.art;art.alt='';
+  art.width=780;art.height=326;
+  Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'10px',margin:'0.8rem 0'});
+  one('#case-brief').after(art);
+ }
  feedback.replaceChildren();feedback.className='feedback';render();
 }
 const starField=Array.from({length:60},(_,i)=>'<circle cx="'+((i*233+41)%989)+'" cy="'+((i*131+91)%555)+'" r="'+((i%4)*.49+.45)+'" fill="'+(i%5===0?'#b8f6ff':'#fff')+'" opacity="'+(.2+i%8*.09)+'"/>').join('');
@@ -177,7 +185,7 @@ function check(){
  if(!answer){feedback.textContent='Transmission unavailable.';return 'retry';}
  attempted=true;drawSummary();const wrong=keys.filter(k=>pick[k]!==answer[k]);
  if(wrong.length){feedback.textContent=(4-wrong.length)+' of 4 coordinates correct.';feedback.className='feedback';return 'retry';}
- feedback.className='feedback success';feedback.innerHTML='✦ Rescue complete. All four coordinates match.<div class="answer-reason">'+mission.explain+'</div><button type="button" class="primary" data-next>Load '+(cases.indexOf(mission)===0?'next case':'first case')+'</button>';
+ feedback.className='feedback success';feedback.innerHTML='✦ Rescue complete. All four coordinates match.<div class="answer-reason">'+mission.explain+'</div><button type="button" class="primary" data-next>Load '+(cases.indexOf(mission)<cases.length-1?'next case':'first case')+'</button>';
  return 'success';
 }
 choose(cases[0]);
