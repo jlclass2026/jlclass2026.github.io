@@ -166,9 +166,16 @@
     combined.style.textDecoration = 'underline';
     const latest = document.createElement('p');
     latest.append(combined, document.createElement('br'), 'Use the game HTML created by v1.61.');
-    status.replaceChildren(latest, version, marketInfo);
+    const latest163 = document.createElement('a');
+    latest163.href = '/patches/new-world-v1.63.zip';
+    latest163.download = 'New World v1.63.zip';
+    latest163.textContent = 'New World v1.63';
+    latest163.style.textDecoration = 'underline';
+    const release163 = document.createElement('p');
+    release163.append(latest163);
+    status.replaceChildren(release163, latest, version, marketInfo);
     gate.hidden = true;
     unlocked.hidden = false;
-    combined.focus();
+    latest163.focus();
   });
 })();
