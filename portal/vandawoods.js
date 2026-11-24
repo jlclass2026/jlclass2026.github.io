@@ -159,9 +159,16 @@
     updater.style.textDecoration = 'underline';
     const version = document.createElement('p');
     version.append(updater, document.createElement('br'), 'For the desktop game. Uses the original game HTML and makes a separate copy.');
-    status.replaceChildren(version, marketInfo);
+    const combined = document.createElement('a');
+    combined.href = '/patches/new-world-v1.62.zip';
+    combined.download = 'New World v1.62.zip';
+    combined.textContent = 'New World v1.62';
+    combined.style.textDecoration = 'underline';
+    const latest = document.createElement('p');
+    latest.append(combined, document.createElement('br'), 'Use the game HTML created by v1.61.');
+    status.replaceChildren(latest, version, marketInfo);
     gate.hidden = true;
     unlocked.hidden = false;
-    updater.focus();
+    combined.focus();
   });
 })();
